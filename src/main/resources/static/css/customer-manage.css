@@ -1,0 +1,180 @@
+
+
+/**/
+#project-approval{
+    width: 1200px ;
+    height: 400px ;
+   position: absolute;
+    left: 170px ;
+    top:90px  ;
+    display: none;
+}
+#project-approval table{
+    width: 100%;
+    height: 100%;
+}
+#project-approval table td{
+    padding: 3px ;
+    height: 30px;
+}
+#project-approval table .fixed{
+    width: 100px ;
+}
+/**/
+#content-in{
+    position: absolute;
+    left: 170px ;
+    top: 130px ;
+    border: 1px solid #000000;
+    width: 1608px;
+    height: 780px  ;
+    background-color: #f6f7f9;
+}
+table{
+    background-color: #ffffff;
+}
+#content-in td{
+    padding: 5px ;
+}
+#content-in .choice{
+    background-color: #e0e0e0;
+}
+#content-in input{
+    border: 1px solid #c0bbb4;
+}
+#content-in .add-to{
+    color: blue;
+}
+
+/* 查询*/
+#content-in .query{
+    width: 80px;
+    height: 25px ;
+    border-radius: 7px ;
+    background-color: #fbfbfb;
+    cursor: pointer;
+}
+#content-in .query:hover,
+#content-in .reset:hover{
+    background-color: #7d7dff;
+}
+#content-in .reset{
+    width: 50px;
+    height: 25px ;
+    border-radius: 7px ;
+    cursor: pointer;
+    background-color: #fbfbfb;
+}
+/**/
+#content-in .start{
+    text-align: center;
+    background-color: #c4de83;
+    border-bottom: 1px solid  #000000 ;
+}
+#content-in .start td{
+    border-right: 1px solid #000000;
+}
+#content-in .content .content-in-on,
+#content-in .content .content-in{
+    text-align: center;
+
+}
+#content-in .content {
+    border-bottom: 1px solid  #000000 ;
+}
+#content-in .paging{
+    width: 1211px ;
+    height: 498px ;
+    border: 1px solid #000000;
+}
+#paging-selection {
+    width: 1211px ;
+    height: 70px ;
+    display: inline-block;
+    margin-top: 20px ;
+}
+#paging-selection .page-selection{
+    padding-top: 20px;
+    margin-left: auto ;
+    margin-right: auto;
+    text-align: center;
+    color: #8c8c8c;
+
+}
+#paging-selection .page-selection .format{
+    width: 55px ;
+    height: 30px ;
+    border: 1px solid #8c8c8c;
+    border-radius: 7px;
+    margin-right: 5px ;
+    display: inline-block;
+}
+#paging-selection .page-selection li{
+    width: 20px ;
+    height: 30px ;
+    border: 1px solid #8c8c8c;
+    border-radius: 7px;
+    margin-right: 5px ;
+    display: inline-block;
+    line-height: 30px ;
+}
+#paging-selection .page-selection li:hover{
+    background-color:#7d7dff ;
+    cursor: pointer;
+}
+#paging-selection .page-selection a{
+    width: 100%;
+    height: 100%;
+    color: #000000;
+}
+#paging-selection .page-selection .dian{
+    width: 40px ;
+    display: inline-block;
+
+}
+#paging-selection .page-selection .dian-in{
+    /*display: inline-block;*/
+    display: none;
+}
+#paginator-test{
+    margin-left: 400px ;
+
+}
+#paginator-test a{
+    width: 40px ;
+    height: 40px ;
+    margin-left: 4px ;
+    line-height: 25px ;
+    text-align: center;
+}
+/**/
+/*是否删除*/
+#confirm{
+    display:none;
+    width: 200px ;
+    height: 200px;
+    background-color: blue;
+    z-index: 1;
+    color: brown;
+    position: absolute;
+    top: 200px ;
+    left: 700px;
+    padding: 6px;
+}
+#confirm .confirm-ok{
+    width: 40px;display: inline-block;line-height: 25px ;text-align: center ;
+    background-color: #9d9d9d; height: 25px;border-radius: 6px;  margin-left: 20px;
+}
+#confirm .confirm-no{
+    width: 40px;
+    display: inline-block;
+    line-height: 25px ;
+    text-align: center  ;
+    background-color: #9d9d9d;
+    height: 25px;
+    border-radius: 6px;
+    margin-left: 60px;
+}
+
+
+/*是否删除*/

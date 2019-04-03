@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.MenuMapper">
+    <select id="getMenuListByUserid" resultType="sysmenu">
+        SELECT *
+        FROM `sys_menu`
+        WHERE `id` IN (SELECT menu FROM `sys_authority` WHERE userid = #{userid})
+    </select>
+
+    <select id="getMenuList" resultType="sysmenu">
+        select * from sys_menu`
+        <trim prefix="where" prefixOverrides="and">
+            <if test="id!=0">
+                id=#{id}
+            </if>
+        </trim>
+    </select>
+
+    <insert id="add">
+        INSERT INTO `sys_menu`
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="code!=null">
+                code,
+            </if>
+            <if test="pcode!=null">
+                pcode,
+            </if>
+            <if test="name!=null">
+                `name`,
+            </if>
+            <if test="url!=null">
+                url,
+            </if>
+            <if test="levels!=null">
+                levels,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="code!=null">
+                #{code},
+            </if>
+            <if test="pcode!=null">
+                #{pcode},
+            </if>
+            <if test="name!=null">
+                #{name},
+            </if>
+            <if test="url!=null">
+                #{url},
+            </if>
+            <if test="levels!=null">
+                #{levels},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateById">
+        update `sys_menu`
+        <set>
+            <if test="code!=null">
+                code=#{code},
+            </if>
+            <if test="pcode!=null">
+                pcode= #{pcode},
+            </if>
+            <if test="name!=null">
+                `name`=#{name},
+            </if>
+            <if test="url!=null">
+                url=#{url},
+            </if>
+            <if test="levels!=null">
+                levels=#{levels},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <delete id="deleteById">
+        delete
+        from `sys_menu`
+        where id ={id}
+    </delete>
+</mapper>

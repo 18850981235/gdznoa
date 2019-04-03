@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.AuthorityMapper">
+    <insert id="add">
+        INSERT INTO `sys_authority`(`userid`,`menu`) VALUES(#{userid},#{menuid})
+    </insert>
+
+    <delete id="deleteByUserId">
+        delete from `sys_authority` where userid=#{userid}
+    </delete>
+
+    <select id="getMenuIdByUserId" resultType="sysauthority">
+        select * from `sys_authority` where userid=#{userid}
+    </select>
+</mapper>

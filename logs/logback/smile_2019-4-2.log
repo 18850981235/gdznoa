@@ -1,0 +1,330 @@
+2019-4-2 15:45:12 restartedMain INFO Starting OaApplication on PC201811231606 with PID 3924 (D:\oa\target\classes started by Administrator in D:\oa)
+2019-4-2 15:45:12 restartedMain DEBUG Running with Spring Boot v2.1.3.RELEASE, Spring v5.1.5.RELEASE
+2019-4-2 15:45:12 restartedMain INFO No active profile set, falling back to default profiles: default
+2019-4-2 15:45:15 restartedMain DEBUG Driver class com.mysql.cj.jdbc.Driver found in Thread context class loader org.springframework.boot.devtools.restart.classloader.RestartClassLoader@716f3f1b
+2019-4-2 15:45:16 restartedMain INFO Started OaApplication in 4.213 seconds (JVM running for 4.894)
+2019-4-2 15:45:31 http-nio-8080-exec-3 DEBUG HikariPool-1 - configuration:
+2019-4-2 15:45:31 http-nio-8080-exec-3 DEBUG allowPoolSuspension.............false
+2019-4-2 15:45:31 http-nio-8080-exec-3 DEBUG autoCommit......................true
+2019-4-2 15:45:31 http-nio-8080-exec-3 DEBUG catalog.........................none
+2019-4-2 15:45:31 http-nio-8080-exec-3 DEBUG connectionInitSql...............none
+2019-4-2 15:45:31 http-nio-8080-exec-3 DEBUG connectionTestQuery.............none
+2019-4-2 15:45:31 http-nio-8080-exec-3 DEBUG connectionTimeout...............30000
+2019-4-2 15:45:31 http-nio-8080-exec-3 DEBUG dataSource......................none
+2019-4-2 15:45:31 http-nio-8080-exec-3 DEBUG dataSourceClassName.............none
+2019-4-2 15:45:31 http-nio-8080-exec-3 DEBUG dataSourceJNDI..................none
+2019-4-2 15:45:31 http-nio-8080-exec-3 DEBUG dataSourceProperties............{password=<masked>}
+2019-4-2 15:45:31 http-nio-8080-exec-3 DEBUG driverClassName................."com.mysql.cj.jdbc.Driver"
+2019-4-2 15:45:31 http-nio-8080-exec-3 DEBUG healthCheckProperties...........{}
+2019-4-2 15:45:31 http-nio-8080-exec-3 DEBUG healthCheckRegistry.............none
+2019-4-2 15:45:31 http-nio-8080-exec-3 DEBUG idleTimeout.....................600000
+2019-4-2 15:45:31 http-nio-8080-exec-3 DEBUG initializationFailTimeout.......1
+2019-4-2 15:45:31 http-nio-8080-exec-3 DEBUG isolateInternalQueries..........false
+2019-4-2 15:45:31 http-nio-8080-exec-3 DEBUG jdbcUrl.........................jdbc:mysql://127.0.0.1:3306/oa?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&serverTimezone=GMT%2B8
+2019-4-2 15:45:31 http-nio-8080-exec-3 DEBUG leakDetectionThreshold..........0
+2019-4-2 15:45:31 http-nio-8080-exec-3 DEBUG maxLifetime.....................1800000
+2019-4-2 15:45:31 http-nio-8080-exec-3 DEBUG maximumPoolSize.................10
+2019-4-2 15:45:31 http-nio-8080-exec-3 DEBUG metricRegistry..................none
+2019-4-2 15:45:31 http-nio-8080-exec-3 DEBUG metricsTrackerFactory...........none
+2019-4-2 15:45:31 http-nio-8080-exec-3 DEBUG minimumIdle.....................10
+2019-4-2 15:45:31 http-nio-8080-exec-3 DEBUG password........................<masked>
+2019-4-2 15:45:31 http-nio-8080-exec-3 DEBUG poolName........................"HikariPool-1"
+2019-4-2 15:45:31 http-nio-8080-exec-3 DEBUG readOnly........................false
+2019-4-2 15:45:31 http-nio-8080-exec-3 DEBUG registerMbeans..................false
+2019-4-2 15:45:31 http-nio-8080-exec-3 DEBUG scheduledExecutor...............none
+2019-4-2 15:45:31 http-nio-8080-exec-3 DEBUG schema..........................none
+2019-4-2 15:45:31 http-nio-8080-exec-3 DEBUG threadFactory...................internal
+2019-4-2 15:45:31 http-nio-8080-exec-3 DEBUG transactionIsolation............default
+2019-4-2 15:45:31 http-nio-8080-exec-3 DEBUG username........................"root"
+2019-4-2 15:45:31 http-nio-8080-exec-3 DEBUG validationTimeout...............5000
+2019-4-2 15:45:31 http-nio-8080-exec-3 INFO HikariPool-1 - Starting...
+2019-4-2 15:45:31 http-nio-8080-exec-3 DEBUG HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6a2472f0
+2019-4-2 15:45:31 http-nio-8080-exec-3 INFO HikariPool-1 - Start completed.
+2019-4-2 15:45:31 http-nio-8080-exec-3 DEBUG ==>  Preparing: SELECT `sys_user`.`id`, `sys_user`.`name`, `account`, `password`, `sex`, `phone`, `email`, `companyid`, `deptid`, `roleid`, `sys_company`.`name` AS company, `sys_dept`.`name` AS dept, `sys_role`.`name` AS role, `createtime` FROM `sys_user`, `sys_company`, `sys_dept`, `sys_role` WHERE `sys_user`.`companyid` = `sys_company`.`id` AND `sys_user`.`deptid` = `sys_dept`.`id` AND `sys_role`.`id` = `sys_user`.`roleid` AND `account` = ? 
+2019-4-2 15:45:31 http-nio-8080-exec-3 DEBUG ==> Parameters: 18850981235(String)
+2019-4-2 15:45:31 http-nio-8080-exec-3 DEBUG <==      Total: 1
+2019-4-2 15:45:31 HikariPool-1 housekeeper DEBUG HikariPool-1 - Pool stats (total=1, active=0, idle=1, waiting=0)
+2019-4-2 15:45:31 HikariPool-1 connection adder DEBUG HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@35492397
+2019-4-2 15:45:31 HikariPool-1 connection adder DEBUG HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@747429ac
+2019-4-2 15:45:31 HikariPool-1 connection adder DEBUG HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@454a5eee
+2019-4-2 15:45:31 HikariPool-1 connection adder DEBUG HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@145bd6e3
+2019-4-2 15:45:31 HikariPool-1 connection adder DEBUG HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@2689fba5
+2019-4-2 15:45:31 HikariPool-1 connection adder DEBUG HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@10152e11
+2019-4-2 15:45:31 HikariPool-1 connection adder DEBUG HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@11195ed8
+2019-4-2 15:45:31 HikariPool-1 connection adder DEBUG HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@62bc82cb
+2019-4-2 15:45:31 HikariPool-1 connection adder DEBUG HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@76489619
+2019-4-2 15:45:31 HikariPool-1 connection adder DEBUG HikariPool-1 - After adding stats (total=10, active=0, idle=10, waiting=0)
+2019-4-2 15:45:31 http-nio-8080-exec-4 DEBUG ==>  Preparing: select * from sys_menu` 
+2019-4-2 15:45:31 http-nio-8080-exec-4 DEBUG ==> Parameters: 
+2019-4-2 15:45:31 http-nio-8080-exec-4 DEBUG <==      Total: 91
+2019-4-2 15:45:31 http-nio-8080-exec-4 DEBUG ==>  Preparing: select * from `sys_authority` where userid=? 
+2019-4-2 15:45:31 http-nio-8080-exec-4 DEBUG ==> Parameters: 1(Integer)
+2019-4-2 15:45:31 http-nio-8080-exec-4 DEBUG <==      Total: 91
+2019-4-2 15:45:42 http-nio-8080-exec-7 DEBUG ==>  Preparing: SELECT * FROM `sys_dept` 
+2019-4-2 15:45:42 http-nio-8080-exec-7 DEBUG ==> Parameters: 
+2019-4-2 15:45:42 http-nio-8080-exec-7 DEBUG ====>  Preparing: SELECT `id`,`name`,`deptid` FROM `sys_user` WHERE `deptid` = ? 
+2019-4-2 15:45:42 http-nio-8080-exec-7 DEBUG ====> Parameters: 1(Integer)
+2019-4-2 15:45:42 http-nio-8080-exec-7 DEBUG <====      Total: 2
+2019-4-2 15:45:42 http-nio-8080-exec-7 DEBUG ====>  Preparing: SELECT `id`,`name`,`deptid` FROM `sys_user` WHERE `deptid` = ? 
+2019-4-2 15:45:42 http-nio-8080-exec-7 DEBUG ====> Parameters: 2(Integer)
+2019-4-2 15:45:42 http-nio-8080-exec-7 DEBUG <====      Total: 1
+2019-4-2 15:45:42 http-nio-8080-exec-7 DEBUG ====>  Preparing: SELECT `id`,`name`,`deptid` FROM `sys_user` WHERE `deptid` = ? 
+2019-4-2 15:45:42 http-nio-8080-exec-7 DEBUG ====> Parameters: 3(Integer)
+2019-4-2 15:45:42 http-nio-8080-exec-7 DEBUG <====      Total: 1
+2019-4-2 15:45:42 http-nio-8080-exec-7 DEBUG ====>  Preparing: SELECT `id`,`name`,`deptid` FROM `sys_user` WHERE `deptid` = ? 
+2019-4-2 15:45:42 http-nio-8080-exec-7 DEBUG ====> Parameters: 4(Integer)
+2019-4-2 15:45:42 http-nio-8080-exec-8 DEBUG ==>  Preparing: select count(*) from bd_client 
+2019-4-2 15:45:42 http-nio-8080-exec-8 DEBUG ==> Parameters: 
+2019-4-2 15:45:42 http-nio-8080-exec-7 DEBUG <====      Total: 1
+2019-4-2 15:45:42 http-nio-8080-exec-7 DEBUG ====>  Preparing: SELECT `id`,`name`,`deptid` FROM `sys_user` WHERE `deptid` = ? 
+2019-4-2 15:45:42 http-nio-8080-exec-7 DEBUG ====> Parameters: 5(Integer)
+2019-4-2 15:45:42 http-nio-8080-exec-7 DEBUG <====      Total: 1
+2019-4-2 15:45:42 http-nio-8080-exec-8 DEBUG <==      Total: 1
+2019-4-2 15:45:42 http-nio-8080-exec-7 DEBUG ====>  Preparing: SELECT `id`,`name`,`deptid` FROM `sys_user` WHERE `deptid` = ? 
+2019-4-2 15:45:42 http-nio-8080-exec-7 DEBUG ====> Parameters: 6(Integer)
+2019-4-2 15:45:42 http-nio-8080-exec-8 DEBUG ==>  Preparing: select * from bd_client ORDER BY `id` DESC LIMIT ?,? 
+2019-4-2 15:45:42 http-nio-8080-exec-8 DEBUG ==> Parameters: 0(Integer), 10(Integer)
+2019-4-2 15:45:42 http-nio-8080-exec-7 DEBUG <====      Total: 6
+2019-4-2 15:45:42 http-nio-8080-exec-7 DEBUG ====>  Preparing: SELECT `id`,`name`,`deptid` FROM `sys_user` WHERE `deptid` = ? 
+2019-4-2 15:45:42 http-nio-8080-exec-7 DEBUG ====> Parameters: 7(Integer)
+2019-4-2 15:45:42 http-nio-8080-exec-7 DEBUG <====      Total: 0
+2019-4-2 15:45:42 http-nio-8080-exec-8 DEBUG ====>  Preparing: SELECT * FROM `sys_dept` where id=? 
+2019-4-2 15:45:42 http-nio-8080-exec-7 DEBUG <==      Total: 7
+2019-4-2 15:45:42 http-nio-8080-exec-8 DEBUG ====> Parameters: 3(Integer)
+2019-4-2 15:45:42 http-nio-8080-exec-8 DEBUG <====      Total: 1
+2019-4-2 15:45:42 http-nio-8080-exec-8 DEBUG ====>  Preparing: SELECT `sys_user`.`id`, `sys_user`.`name`, `account`, `password`, `sex`, `phone`, `email`, `companyid`, `deptid`, `roleid`, `sys_company`.`name` AS company, `sys_dept`.`name` AS dept, `sys_role`.`name` AS role, `createtime` FROM `sys_user`, `sys_company`, `sys_dept`, `sys_role` WHERE `sys_user`.`companyid` = `sys_company`.`id` AND `sys_user`.`deptid` = `sys_dept`.`id` AND `sys_role`.`id` = `sys_user`.`roleid` AND `sys_user`.`id` = ? 
+2019-4-2 15:45:42 http-nio-8080-exec-8 DEBUG ====> Parameters: 13(Integer)
+2019-4-2 15:45:42 http-nio-8080-exec-8 DEBUG <====      Total: 1
+2019-4-2 15:45:42 http-nio-8080-exec-8 DEBUG ====>  Preparing: SELECT `bd_client_contacts`.*,`bd_client`.`name` AS clientname FROM `bd_client_contacts`, `bd_client` WHERE `bd_client`.`id` = `bd_client_contacts`.`clientid` and clientid = ? 
+2019-4-2 15:45:42 http-nio-8080-exec-8 DEBUG ====> Parameters: 16(Integer)
+2019-4-2 15:45:42 http-nio-8080-exec-8 DEBUG <====      Total: 0
+2019-4-2 15:45:42 http-nio-8080-exec-8 DEBUG ====>  Preparing: SELECT `sys_user`.`id`, `sys_user`.`name`, `account`, `password`, `sex`, `phone`, `email`, `companyid`, `deptid`, `roleid`, `sys_company`.`name` AS company, `sys_dept`.`name` AS dept, `sys_role`.`name` AS role, `createtime` FROM `sys_user`, `sys_company`, `sys_dept`, `sys_role` WHERE `sys_user`.`companyid` = `sys_company`.`id` AND `sys_user`.`deptid` = `sys_dept`.`id` AND `sys_role`.`id` = `sys_user`.`roleid` AND `sys_user`.`id` = ? 
+2019-4-2 15:45:42 http-nio-8080-exec-8 DEBUG ====> Parameters: 12(Integer)
+2019-4-2 15:45:42 http-nio-8080-exec-8 DEBUG <====      Total: 1
+2019-4-2 15:45:42 http-nio-8080-exec-8 DEBUG ====>  Preparing: SELECT `bd_client_contacts`.*,`bd_client`.`name` AS clientname FROM `bd_client_contacts`, `bd_client` WHERE `bd_client`.`id` = `bd_client_contacts`.`clientid` and clientid = ? 
+2019-4-2 15:45:42 http-nio-8080-exec-8 DEBUG ====> Parameters: 15(Integer)
+2019-4-2 15:45:42 http-nio-8080-exec-8 DEBUG <====      Total: 0
+2019-4-2 15:45:42 http-nio-8080-exec-8 DEBUG ====>  Preparing: SELECT * FROM `sys_dept` where id=? 
+2019-4-2 15:45:42 http-nio-8080-exec-8 DEBUG ====> Parameters: 6(Integer)
+2019-4-2 15:45:42 http-nio-8080-exec-8 DEBUG <====      Total: 1
+2019-4-2 15:45:42 http-nio-8080-exec-8 DEBUG ====>  Preparing: SELECT `sys_user`.`id`, `sys_user`.`name`, `account`, `password`, `sex`, `phone`, `email`, `companyid`, `deptid`, `roleid`, `sys_company`.`name` AS company, `sys_dept`.`name` AS dept, `sys_role`.`name` AS role, `createtime` FROM `sys_user`, `sys_company`, `sys_dept`, `sys_role` WHERE `sys_user`.`companyid` = `sys_company`.`id` AND `sys_user`.`deptid` = `sys_dept`.`id` AND `sys_role`.`id` = `sys_user`.`roleid` AND `sys_user`.`id` = ? 
+2019-4-2 15:45:42 http-nio-8080-exec-8 DEBUG ====> Parameters: 11(Integer)
+2019-4-2 15:45:42 http-nio-8080-exec-9 DEBUG ==>  Preparing: select * from sys_menu` 
+2019-4-2 15:45:42 http-nio-8080-exec-9 DEBUG ==> Parameters: 
+2019-4-2 15:45:42 http-nio-8080-exec-8 DEBUG <====      Total: 1
+2019-4-2 15:45:42 http-nio-8080-exec-8 DEBUG ====>  Preparing: SELECT `bd_client_contacts`.*,`bd_client`.`name` AS clientname FROM `bd_client_contacts`, `bd_client` WHERE `bd_client`.`id` = `bd_client_contacts`.`clientid` and clientid = ? 
+2019-4-2 15:45:42 http-nio-8080-exec-8 DEBUG ====> Parameters: 14(Integer)
+2019-4-2 15:45:42 http-nio-8080-exec-8 DEBUG <====      Total: 4
+2019-4-2 15:45:42 http-nio-8080-exec-8 DEBUG ====>  Preparing: SELECT `bd_client_contacts`.*,`bd_client`.`name` AS clientname FROM `bd_client_contacts`, `bd_client` WHERE `bd_client`.`id` = `bd_client_contacts`.`clientid` and clientid = ? 
+2019-4-2 15:45:42 http-nio-8080-exec-8 DEBUG ====> Parameters: 13(Integer)
+2019-4-2 15:45:42 http-nio-8080-exec-9 DEBUG <==      Total: 91
+2019-4-2 15:45:42 http-nio-8080-exec-8 DEBUG <====      Total: 0
+2019-4-2 15:45:42 http-nio-8080-exec-8 DEBUG ====>  Preparing: SELECT * FROM `sys_dept` where id=? 
+2019-4-2 15:45:42 http-nio-8080-exec-8 DEBUG ====> Parameters: 2(Integer)
+2019-4-2 15:45:42 http-nio-8080-exec-9 DEBUG ==>  Preparing: select * from `sys_authority` where userid=? 
+2019-4-2 15:45:42 http-nio-8080-exec-9 DEBUG ==> Parameters: 1(Integer)
+2019-4-2 15:45:42 http-nio-8080-exec-8 DEBUG <====      Total: 1
+2019-4-2 15:45:42 http-nio-8080-exec-8 DEBUG ====>  Preparing: SELECT `bd_client_contacts`.*,`bd_client`.`name` AS clientname FROM `bd_client_contacts`, `bd_client` WHERE `bd_client`.`id` = `bd_client_contacts`.`clientid` and clientid = ? 
+2019-4-2 15:45:42 http-nio-8080-exec-8 DEBUG ====> Parameters: 11(Integer)
+2019-4-2 15:45:42 http-nio-8080-exec-8 DEBUG <====      Total: 0
+2019-4-2 15:45:42 http-nio-8080-exec-8 DEBUG ====>  Preparing: SELECT * FROM `sys_dept` where id=? 
+2019-4-2 15:45:42 http-nio-8080-exec-8 DEBUG ====> Parameters: 1(Integer)
+2019-4-2 15:45:42 http-nio-8080-exec-8 DEBUG <====      Total: 1
+2019-4-2 15:45:42 http-nio-8080-exec-8 DEBUG ====>  Preparing: SELECT `sys_user`.`id`, `sys_user`.`name`, `account`, `password`, `sex`, `phone`, `email`, `companyid`, `deptid`, `roleid`, `sys_company`.`name` AS company, `sys_dept`.`name` AS dept, `sys_role`.`name` AS role, `createtime` FROM `sys_user`, `sys_company`, `sys_dept`, `sys_role` WHERE `sys_user`.`companyid` = `sys_company`.`id` AND `sys_user`.`deptid` = `sys_dept`.`id` AND `sys_role`.`id` = `sys_user`.`roleid` AND `sys_user`.`id` = ? 
+2019-4-2 15:45:42 http-nio-8080-exec-8 DEBUG ====> Parameters: 8(Integer)
+2019-4-2 15:45:42 http-nio-8080-exec-8 DEBUG <====      Total: 1
+2019-4-2 15:45:42 http-nio-8080-exec-9 DEBUG <==      Total: 91
+2019-4-2 15:45:42 http-nio-8080-exec-8 DEBUG ====>  Preparing: SELECT `bd_client_contacts`.*,`bd_client`.`name` AS clientname FROM `bd_client_contacts`, `bd_client` WHERE `bd_client`.`id` = `bd_client_contacts`.`clientid` and clientid = ? 
+2019-4-2 15:45:42 http-nio-8080-exec-8 DEBUG ====> Parameters: 10(Integer)
+2019-4-2 15:45:42 http-nio-8080-exec-8 DEBUG <====      Total: 1
+2019-4-2 15:45:42 http-nio-8080-exec-8 DEBUG ====>  Preparing: SELECT * FROM `sys_dept` where id=? 
+2019-4-2 15:45:42 http-nio-8080-exec-8 DEBUG ====> Parameters: 5(Integer)
+2019-4-2 15:45:42 http-nio-8080-exec-8 DEBUG <====      Total: 1
+2019-4-2 15:45:42 http-nio-8080-exec-8 DEBUG ====>  Preparing: SELECT `sys_user`.`id`, `sys_user`.`name`, `account`, `password`, `sex`, `phone`, `email`, `companyid`, `deptid`, `roleid`, `sys_company`.`name` AS company, `sys_dept`.`name` AS dept, `sys_role`.`name` AS role, `createtime` FROM `sys_user`, `sys_company`, `sys_dept`, `sys_role` WHERE `sys_user`.`companyid` = `sys_company`.`id` AND `sys_user`.`deptid` = `sys_dept`.`id` AND `sys_role`.`id` = `sys_user`.`roleid` AND `sys_user`.`id` = ? 
+2019-4-2 15:45:42 http-nio-8080-exec-8 DEBUG ====> Parameters: 1(Integer)
+2019-4-2 15:45:42 http-nio-8080-exec-8 DEBUG <====      Total: 1
+2019-4-2 15:45:42 http-nio-8080-exec-8 DEBUG ====>  Preparing: SELECT `bd_client_contacts`.*,`bd_client`.`name` AS clientname FROM `bd_client_contacts`, `bd_client` WHERE `bd_client`.`id` = `bd_client_contacts`.`clientid` and clientid = ? 
+2019-4-2 15:45:42 http-nio-8080-exec-8 DEBUG ====> Parameters: 8(Integer)
+2019-4-2 15:45:42 http-nio-8080-exec-8 DEBUG <====      Total: 3
+2019-4-2 15:45:42 http-nio-8080-exec-8 DEBUG ====>  Preparing: SELECT * FROM `sys_dept` where id=? 
+2019-4-2 15:45:42 http-nio-8080-exec-8 DEBUG ====> Parameters: 7(Integer)
+2019-4-2 15:45:42 http-nio-8080-exec-8 DEBUG <====      Total: 1
+2019-4-2 15:45:42 http-nio-8080-exec-8 DEBUG ====>  Preparing: SELECT `bd_client_contacts`.*,`bd_client`.`name` AS clientname FROM `bd_client_contacts`, `bd_client` WHERE `bd_client`.`id` = `bd_client_contacts`.`clientid` and clientid = ? 
+2019-4-2 15:45:42 http-nio-8080-exec-8 DEBUG ====> Parameters: 3(Integer)
+2019-4-2 15:45:42 http-nio-8080-exec-8 DEBUG <====      Total: 0
+2019-4-2 15:45:42 http-nio-8080-exec-8 DEBUG ====>  Preparing: SELECT `sys_user`.`id`, `sys_user`.`name`, `account`, `password`, `sex`, `phone`, `email`, `companyid`, `deptid`, `roleid`, `sys_company`.`name` AS company, `sys_dept`.`name` AS dept, `sys_role`.`name` AS role, `createtime` FROM `sys_user`, `sys_company`, `sys_dept`, `sys_role` WHERE `sys_user`.`companyid` = `sys_company`.`id` AND `sys_user`.`deptid` = `sys_dept`.`id` AND `sys_role`.`id` = `sys_user`.`roleid` AND `sys_user`.`id` = ? 
+2019-4-2 15:45:42 http-nio-8080-exec-8 DEBUG ====> Parameters: 10(Integer)
+2019-4-2 15:45:42 http-nio-8080-exec-8 DEBUG <====      Total: 1
+2019-4-2 15:45:42 http-nio-8080-exec-8 DEBUG ====>  Preparing: SELECT `bd_client_contacts`.*,`bd_client`.`name` AS clientname FROM `bd_client_contacts`, `bd_client` WHERE `bd_client`.`id` = `bd_client_contacts`.`clientid` and clientid = ? 
+2019-4-2 15:45:42 http-nio-8080-exec-8 DEBUG ====> Parameters: 2(Integer)
+2019-4-2 15:45:42 http-nio-8080-exec-8 DEBUG <====      Total: 0
+2019-4-2 15:45:42 http-nio-8080-exec-8 DEBUG <==      Total: 9
+2019-4-2 15:45:42 http-nio-8080-exec-10 DEBUG ==>  Preparing: select DISTINCT address from bd_client 
+2019-4-2 15:45:42 http-nio-8080-exec-10 DEBUG ==> Parameters: 
+2019-4-2 15:45:42 http-nio-8080-exec-10 DEBUG <==      Total: 3
+2019-4-2 15:45:42 http-nio-8080-exec-1 DEBUG ==>  Preparing: select count(*) from bd_client 
+2019-4-2 15:45:42 http-nio-8080-exec-1 DEBUG ==> Parameters: 
+2019-4-2 15:45:42 http-nio-8080-exec-1 DEBUG <==      Total: 1
+2019-4-2 15:45:42 http-nio-8080-exec-1 DEBUG ==>  Preparing: select * from bd_client ORDER BY `id` DESC LIMIT ?,? 
+2019-4-2 15:45:42 http-nio-8080-exec-1 DEBUG ==> Parameters: 0(Integer), 10(Integer)
+2019-4-2 15:45:42 http-nio-8080-exec-1 DEBUG ====>  Preparing: SELECT * FROM `sys_dept` where id=? 
+2019-4-2 15:45:42 http-nio-8080-exec-1 DEBUG ====> Parameters: 3(Integer)
+2019-4-2 15:45:42 http-nio-8080-exec-1 DEBUG <====      Total: 1
+2019-4-2 15:45:42 http-nio-8080-exec-1 DEBUG ====>  Preparing: SELECT `sys_user`.`id`, `sys_user`.`name`, `account`, `password`, `sex`, `phone`, `email`, `companyid`, `deptid`, `roleid`, `sys_company`.`name` AS company, `sys_dept`.`name` AS dept, `sys_role`.`name` AS role, `createtime` FROM `sys_user`, `sys_company`, `sys_dept`, `sys_role` WHERE `sys_user`.`companyid` = `sys_company`.`id` AND `sys_user`.`deptid` = `sys_dept`.`id` AND `sys_role`.`id` = `sys_user`.`roleid` AND `sys_user`.`id` = ? 
+2019-4-2 15:45:42 http-nio-8080-exec-1 DEBUG ====> Parameters: 13(Integer)
+2019-4-2 15:45:42 http-nio-8080-exec-1 DEBUG <====      Total: 1
+2019-4-2 15:45:42 http-nio-8080-exec-1 DEBUG ====>  Preparing: SELECT `bd_client_contacts`.*,`bd_client`.`name` AS clientname FROM `bd_client_contacts`, `bd_client` WHERE `bd_client`.`id` = `bd_client_contacts`.`clientid` and clientid = ? 
+2019-4-2 15:45:42 http-nio-8080-exec-1 DEBUG ====> Parameters: 16(Integer)
+2019-4-2 15:45:42 http-nio-8080-exec-1 DEBUG <====      Total: 0
+2019-4-2 15:45:42 http-nio-8080-exec-1 DEBUG ====>  Preparing: SELECT `sys_user`.`id`, `sys_user`.`name`, `account`, `password`, `sex`, `phone`, `email`, `companyid`, `deptid`, `roleid`, `sys_company`.`name` AS company, `sys_dept`.`name` AS dept, `sys_role`.`name` AS role, `createtime` FROM `sys_user`, `sys_company`, `sys_dept`, `sys_role` WHERE `sys_user`.`companyid` = `sys_company`.`id` AND `sys_user`.`deptid` = `sys_dept`.`id` AND `sys_role`.`id` = `sys_user`.`roleid` AND `sys_user`.`id` = ? 
+2019-4-2 15:45:42 http-nio-8080-exec-1 DEBUG ====> Parameters: 12(Integer)
+2019-4-2 15:45:42 http-nio-8080-exec-1 DEBUG <====      Total: 1
+2019-4-2 15:45:42 http-nio-8080-exec-1 DEBUG ====>  Preparing: SELECT `bd_client_contacts`.*,`bd_client`.`name` AS clientname FROM `bd_client_contacts`, `bd_client` WHERE `bd_client`.`id` = `bd_client_contacts`.`clientid` and clientid = ? 
+2019-4-2 15:45:42 http-nio-8080-exec-1 DEBUG ====> Parameters: 15(Integer)
+2019-4-2 15:45:42 http-nio-8080-exec-1 DEBUG <====      Total: 0
+2019-4-2 15:45:42 http-nio-8080-exec-1 DEBUG ====>  Preparing: SELECT * FROM `sys_dept` where id=? 
+2019-4-2 15:45:42 http-nio-8080-exec-1 DEBUG ====> Parameters: 6(Integer)
+2019-4-2 15:45:42 http-nio-8080-exec-1 DEBUG <====      Total: 1
+2019-4-2 15:45:42 http-nio-8080-exec-1 DEBUG ====>  Preparing: SELECT `sys_user`.`id`, `sys_user`.`name`, `account`, `password`, `sex`, `phone`, `email`, `companyid`, `deptid`, `roleid`, `sys_company`.`name` AS company, `sys_dept`.`name` AS dept, `sys_role`.`name` AS role, `createtime` FROM `sys_user`, `sys_company`, `sys_dept`, `sys_role` WHERE `sys_user`.`companyid` = `sys_company`.`id` AND `sys_user`.`deptid` = `sys_dept`.`id` AND `sys_role`.`id` = `sys_user`.`roleid` AND `sys_user`.`id` = ? 
+2019-4-2 15:45:42 http-nio-8080-exec-1 DEBUG ====> Parameters: 11(Integer)
+2019-4-2 15:45:42 http-nio-8080-exec-1 DEBUG <====      Total: 1
+2019-4-2 15:45:42 http-nio-8080-exec-1 DEBUG ====>  Preparing: SELECT `bd_client_contacts`.*,`bd_client`.`name` AS clientname FROM `bd_client_contacts`, `bd_client` WHERE `bd_client`.`id` = `bd_client_contacts`.`clientid` and clientid = ? 
+2019-4-2 15:45:42 http-nio-8080-exec-1 DEBUG ====> Parameters: 14(Integer)
+2019-4-2 15:45:42 http-nio-8080-exec-1 DEBUG <====      Total: 4
+2019-4-2 15:45:42 http-nio-8080-exec-1 DEBUG ====>  Preparing: SELECT `bd_client_contacts`.*,`bd_client`.`name` AS clientname FROM `bd_client_contacts`, `bd_client` WHERE `bd_client`.`id` = `bd_client_contacts`.`clientid` and clientid = ? 
+2019-4-2 15:45:42 http-nio-8080-exec-1 DEBUG ====> Parameters: 13(Integer)
+2019-4-2 15:45:42 http-nio-8080-exec-1 DEBUG <====      Total: 0
+2019-4-2 15:45:42 http-nio-8080-exec-1 DEBUG ====>  Preparing: SELECT * FROM `sys_dept` where id=? 
+2019-4-2 15:45:42 http-nio-8080-exec-1 DEBUG ====> Parameters: 2(Integer)
+2019-4-2 15:45:42 http-nio-8080-exec-1 DEBUG <====      Total: 1
+2019-4-2 15:45:42 http-nio-8080-exec-1 DEBUG ====>  Preparing: SELECT `bd_client_contacts`.*,`bd_client`.`name` AS clientname FROM `bd_client_contacts`, `bd_client` WHERE `bd_client`.`id` = `bd_client_contacts`.`clientid` and clientid = ? 
+2019-4-2 15:45:42 http-nio-8080-exec-1 DEBUG ====> Parameters: 11(Integer)
+2019-4-2 15:45:42 http-nio-8080-exec-1 DEBUG <====      Total: 0
+2019-4-2 15:45:42 http-nio-8080-exec-1 DEBUG ====>  Preparing: SELECT * FROM `sys_dept` where id=? 
+2019-4-2 15:45:42 http-nio-8080-exec-1 DEBUG ====> Parameters: 1(Integer)
+2019-4-2 15:45:42 http-nio-8080-exec-1 DEBUG <====      Total: 1
+2019-4-2 15:45:42 http-nio-8080-exec-1 DEBUG ====>  Preparing: SELECT `sys_user`.`id`, `sys_user`.`name`, `account`, `password`, `sex`, `phone`, `email`, `companyid`, `deptid`, `roleid`, `sys_company`.`name` AS company, `sys_dept`.`name` AS dept, `sys_role`.`name` AS role, `createtime` FROM `sys_user`, `sys_company`, `sys_dept`, `sys_role` WHERE `sys_user`.`companyid` = `sys_company`.`id` AND `sys_user`.`deptid` = `sys_dept`.`id` AND `sys_role`.`id` = `sys_user`.`roleid` AND `sys_user`.`id` = ? 
+2019-4-2 15:45:42 http-nio-8080-exec-1 DEBUG ====> Parameters: 8(Integer)
+2019-4-2 15:45:42 http-nio-8080-exec-1 DEBUG <====      Total: 1
+2019-4-2 15:45:42 http-nio-8080-exec-1 DEBUG ====>  Preparing: SELECT `bd_client_contacts`.*,`bd_client`.`name` AS clientname FROM `bd_client_contacts`, `bd_client` WHERE `bd_client`.`id` = `bd_client_contacts`.`clientid` and clientid = ? 
+2019-4-2 15:45:42 http-nio-8080-exec-1 DEBUG ====> Parameters: 10(Integer)
+2019-4-2 15:45:42 http-nio-8080-exec-1 DEBUG <====      Total: 1
+2019-4-2 15:45:42 http-nio-8080-exec-1 DEBUG ====>  Preparing: SELECT * FROM `sys_dept` where id=? 
+2019-4-2 15:45:42 http-nio-8080-exec-1 DEBUG ====> Parameters: 5(Integer)
+2019-4-2 15:45:42 http-nio-8080-exec-1 DEBUG <====      Total: 1
+2019-4-2 15:45:42 http-nio-8080-exec-1 DEBUG ====>  Preparing: SELECT `sys_user`.`id`, `sys_user`.`name`, `account`, `password`, `sex`, `phone`, `email`, `companyid`, `deptid`, `roleid`, `sys_company`.`name` AS company, `sys_dept`.`name` AS dept, `sys_role`.`name` AS role, `createtime` FROM `sys_user`, `sys_company`, `sys_dept`, `sys_role` WHERE `sys_user`.`companyid` = `sys_company`.`id` AND `sys_user`.`deptid` = `sys_dept`.`id` AND `sys_role`.`id` = `sys_user`.`roleid` AND `sys_user`.`id` = ? 
+2019-4-2 15:45:42 http-nio-8080-exec-1 DEBUG ====> Parameters: 1(Integer)
+2019-4-2 15:45:42 http-nio-8080-exec-1 DEBUG <====      Total: 1
+2019-4-2 15:45:42 http-nio-8080-exec-1 DEBUG ====>  Preparing: SELECT `bd_client_contacts`.*,`bd_client`.`name` AS clientname FROM `bd_client_contacts`, `bd_client` WHERE `bd_client`.`id` = `bd_client_contacts`.`clientid` and clientid = ? 
+2019-4-2 15:45:42 http-nio-8080-exec-1 DEBUG ====> Parameters: 8(Integer)
+2019-4-2 15:45:42 http-nio-8080-exec-1 DEBUG <====      Total: 3
+2019-4-2 15:45:42 http-nio-8080-exec-1 DEBUG ====>  Preparing: SELECT * FROM `sys_dept` where id=? 
+2019-4-2 15:45:42 http-nio-8080-exec-1 DEBUG ====> Parameters: 7(Integer)
+2019-4-2 15:45:42 http-nio-8080-exec-1 DEBUG <====      Total: 1
+2019-4-2 15:45:42 http-nio-8080-exec-1 DEBUG ====>  Preparing: SELECT `bd_client_contacts`.*,`bd_client`.`name` AS clientname FROM `bd_client_contacts`, `bd_client` WHERE `bd_client`.`id` = `bd_client_contacts`.`clientid` and clientid = ? 
+2019-4-2 15:45:42 http-nio-8080-exec-1 DEBUG ====> Parameters: 3(Integer)
+2019-4-2 15:45:42 http-nio-8080-exec-1 DEBUG <====      Total: 0
+2019-4-2 15:45:42 http-nio-8080-exec-1 DEBUG ====>  Preparing: SELECT `sys_user`.`id`, `sys_user`.`name`, `account`, `password`, `sex`, `phone`, `email`, `companyid`, `deptid`, `roleid`, `sys_company`.`name` AS company, `sys_dept`.`name` AS dept, `sys_role`.`name` AS role, `createtime` FROM `sys_user`, `sys_company`, `sys_dept`, `sys_role` WHERE `sys_user`.`companyid` = `sys_company`.`id` AND `sys_user`.`deptid` = `sys_dept`.`id` AND `sys_role`.`id` = `sys_user`.`roleid` AND `sys_user`.`id` = ? 
+2019-4-2 15:45:42 http-nio-8080-exec-1 DEBUG ====> Parameters: 10(Integer)
+2019-4-2 15:45:42 http-nio-8080-exec-1 DEBUG <====      Total: 1
+2019-4-2 15:45:42 http-nio-8080-exec-1 DEBUG ====>  Preparing: SELECT `bd_client_contacts`.*,`bd_client`.`name` AS clientname FROM `bd_client_contacts`, `bd_client` WHERE `bd_client`.`id` = `bd_client_contacts`.`clientid` and clientid = ? 
+2019-4-2 15:45:42 http-nio-8080-exec-1 DEBUG ====> Parameters: 2(Integer)
+2019-4-2 15:45:42 http-nio-8080-exec-1 DEBUG <====      Total: 0
+2019-4-2 15:45:42 http-nio-8080-exec-1 DEBUG <==      Total: 9
+2019-4-2 15:45:42 http-nio-8080-exec-2 DEBUG ==>  Preparing: select count(*) from bd_client 
+2019-4-2 15:45:42 http-nio-8080-exec-2 DEBUG ==> Parameters: 
+2019-4-2 15:45:42 http-nio-8080-exec-2 DEBUG <==      Total: 1
+2019-4-2 15:45:42 http-nio-8080-exec-2 DEBUG ==>  Preparing: select * from bd_client ORDER BY `id` DESC LIMIT ?,? 
+2019-4-2 15:45:42 http-nio-8080-exec-2 DEBUG ==> Parameters: 0(Integer), 10(Integer)
+2019-4-2 15:45:42 http-nio-8080-exec-2 DEBUG ====>  Preparing: SELECT * FROM `sys_dept` where id=? 
+2019-4-2 15:45:42 http-nio-8080-exec-2 DEBUG ====> Parameters: 3(Integer)
+2019-4-2 15:45:42 http-nio-8080-exec-2 DEBUG <====      Total: 1
+2019-4-2 15:45:42 http-nio-8080-exec-2 DEBUG ====>  Preparing: SELECT `sys_user`.`id`, `sys_user`.`name`, `account`, `password`, `sex`, `phone`, `email`, `companyid`, `deptid`, `roleid`, `sys_company`.`name` AS company, `sys_dept`.`name` AS dept, `sys_role`.`name` AS role, `createtime` FROM `sys_user`, `sys_company`, `sys_dept`, `sys_role` WHERE `sys_user`.`companyid` = `sys_company`.`id` AND `sys_user`.`deptid` = `sys_dept`.`id` AND `sys_role`.`id` = `sys_user`.`roleid` AND `sys_user`.`id` = ? 
+2019-4-2 15:45:42 http-nio-8080-exec-2 DEBUG ====> Parameters: 13(Integer)
+2019-4-2 15:45:42 http-nio-8080-exec-2 DEBUG <====      Total: 1
+2019-4-2 15:45:42 http-nio-8080-exec-2 DEBUG ====>  Preparing: SELECT `bd_client_contacts`.*,`bd_client`.`name` AS clientname FROM `bd_client_contacts`, `bd_client` WHERE `bd_client`.`id` = `bd_client_contacts`.`clientid` and clientid = ? 
+2019-4-2 15:45:42 http-nio-8080-exec-2 DEBUG ====> Parameters: 16(Integer)
+2019-4-2 15:45:42 http-nio-8080-exec-2 DEBUG <====      Total: 0
+2019-4-2 15:45:42 http-nio-8080-exec-2 DEBUG ====>  Preparing: SELECT `sys_user`.`id`, `sys_user`.`name`, `account`, `password`, `sex`, `phone`, `email`, `companyid`, `deptid`, `roleid`, `sys_company`.`name` AS company, `sys_dept`.`name` AS dept, `sys_role`.`name` AS role, `createtime` FROM `sys_user`, `sys_company`, `sys_dept`, `sys_role` WHERE `sys_user`.`companyid` = `sys_company`.`id` AND `sys_user`.`deptid` = `sys_dept`.`id` AND `sys_role`.`id` = `sys_user`.`roleid` AND `sys_user`.`id` = ? 
+2019-4-2 15:45:42 http-nio-8080-exec-2 DEBUG ====> Parameters: 12(Integer)
+2019-4-2 15:45:42 http-nio-8080-exec-2 DEBUG <====      Total: 1
+2019-4-2 15:45:42 http-nio-8080-exec-2 DEBUG ====>  Preparing: SELECT `bd_client_contacts`.*,`bd_client`.`name` AS clientname FROM `bd_client_contacts`, `bd_client` WHERE `bd_client`.`id` = `bd_client_contacts`.`clientid` and clientid = ? 
+2019-4-2 15:45:42 http-nio-8080-exec-2 DEBUG ====> Parameters: 15(Integer)
+2019-4-2 15:45:42 http-nio-8080-exec-2 DEBUG <====      Total: 0
+2019-4-2 15:45:42 http-nio-8080-exec-2 DEBUG ====>  Preparing: SELECT * FROM `sys_dept` where id=? 
+2019-4-2 15:45:42 http-nio-8080-exec-2 DEBUG ====> Parameters: 6(Integer)
+2019-4-2 15:45:42 http-nio-8080-exec-2 DEBUG <====      Total: 1
+2019-4-2 15:45:42 http-nio-8080-exec-2 DEBUG ====>  Preparing: SELECT `sys_user`.`id`, `sys_user`.`name`, `account`, `password`, `sex`, `phone`, `email`, `companyid`, `deptid`, `roleid`, `sys_company`.`name` AS company, `sys_dept`.`name` AS dept, `sys_role`.`name` AS role, `createtime` FROM `sys_user`, `sys_company`, `sys_dept`, `sys_role` WHERE `sys_user`.`companyid` = `sys_company`.`id` AND `sys_user`.`deptid` = `sys_dept`.`id` AND `sys_role`.`id` = `sys_user`.`roleid` AND `sys_user`.`id` = ? 
+2019-4-2 15:45:42 http-nio-8080-exec-2 DEBUG ====> Parameters: 11(Integer)
+2019-4-2 15:45:42 http-nio-8080-exec-2 DEBUG <====      Total: 1
+2019-4-2 15:45:42 http-nio-8080-exec-2 DEBUG ====>  Preparing: SELECT `bd_client_contacts`.*,`bd_client`.`name` AS clientname FROM `bd_client_contacts`, `bd_client` WHERE `bd_client`.`id` = `bd_client_contacts`.`clientid` and clientid = ? 
+2019-4-2 15:45:42 http-nio-8080-exec-2 DEBUG ====> Parameters: 14(Integer)
+2019-4-2 15:45:42 http-nio-8080-exec-2 DEBUG <====      Total: 4
+2019-4-2 15:45:42 http-nio-8080-exec-2 DEBUG ====>  Preparing: SELECT `bd_client_contacts`.*,`bd_client`.`name` AS clientname FROM `bd_client_contacts`, `bd_client` WHERE `bd_client`.`id` = `bd_client_contacts`.`clientid` and clientid = ? 
+2019-4-2 15:45:42 http-nio-8080-exec-2 DEBUG ====> Parameters: 13(Integer)
+2019-4-2 15:45:42 http-nio-8080-exec-2 DEBUG <====      Total: 0
+2019-4-2 15:45:42 http-nio-8080-exec-2 DEBUG ====>  Preparing: SELECT * FROM `sys_dept` where id=? 
+2019-4-2 15:45:42 http-nio-8080-exec-2 DEBUG ====> Parameters: 2(Integer)
+2019-4-2 15:45:42 http-nio-8080-exec-2 DEBUG <====      Total: 1
+2019-4-2 15:45:42 http-nio-8080-exec-2 DEBUG ====>  Preparing: SELECT `bd_client_contacts`.*,`bd_client`.`name` AS clientname FROM `bd_client_contacts`, `bd_client` WHERE `bd_client`.`id` = `bd_client_contacts`.`clientid` and clientid = ? 
+2019-4-2 15:45:42 http-nio-8080-exec-2 DEBUG ====> Parameters: 11(Integer)
+2019-4-2 15:45:42 http-nio-8080-exec-2 DEBUG <====      Total: 0
+2019-4-2 15:45:42 http-nio-8080-exec-2 DEBUG ====>  Preparing: SELECT * FROM `sys_dept` where id=? 
+2019-4-2 15:45:42 http-nio-8080-exec-2 DEBUG ====> Parameters: 1(Integer)
+2019-4-2 15:45:42 http-nio-8080-exec-2 DEBUG <====      Total: 1
+2019-4-2 15:45:42 http-nio-8080-exec-2 DEBUG ====>  Preparing: SELECT `sys_user`.`id`, `sys_user`.`name`, `account`, `password`, `sex`, `phone`, `email`, `companyid`, `deptid`, `roleid`, `sys_company`.`name` AS company, `sys_dept`.`name` AS dept, `sys_role`.`name` AS role, `createtime` FROM `sys_user`, `sys_company`, `sys_dept`, `sys_role` WHERE `sys_user`.`companyid` = `sys_company`.`id` AND `sys_user`.`deptid` = `sys_dept`.`id` AND `sys_role`.`id` = `sys_user`.`roleid` AND `sys_user`.`id` = ? 
+2019-4-2 15:45:42 http-nio-8080-exec-2 DEBUG ====> Parameters: 8(Integer)
+2019-4-2 15:45:42 http-nio-8080-exec-2 DEBUG <====      Total: 1
+2019-4-2 15:45:42 http-nio-8080-exec-2 DEBUG ====>  Preparing: SELECT `bd_client_contacts`.*,`bd_client`.`name` AS clientname FROM `bd_client_contacts`, `bd_client` WHERE `bd_client`.`id` = `bd_client_contacts`.`clientid` and clientid = ? 
+2019-4-2 15:45:42 http-nio-8080-exec-2 DEBUG ====> Parameters: 10(Integer)
+2019-4-2 15:45:42 http-nio-8080-exec-2 DEBUG <====      Total: 1
+2019-4-2 15:45:42 http-nio-8080-exec-2 DEBUG ====>  Preparing: SELECT * FROM `sys_dept` where id=? 
+2019-4-2 15:45:42 http-nio-8080-exec-2 DEBUG ====> Parameters: 5(Integer)
+2019-4-2 15:45:42 http-nio-8080-exec-2 DEBUG <====      Total: 1
+2019-4-2 15:45:42 http-nio-8080-exec-2 DEBUG ====>  Preparing: SELECT `sys_user`.`id`, `sys_user`.`name`, `account`, `password`, `sex`, `phone`, `email`, `companyid`, `deptid`, `roleid`, `sys_company`.`name` AS company, `sys_dept`.`name` AS dept, `sys_role`.`name` AS role, `createtime` FROM `sys_user`, `sys_company`, `sys_dept`, `sys_role` WHERE `sys_user`.`companyid` = `sys_company`.`id` AND `sys_user`.`deptid` = `sys_dept`.`id` AND `sys_role`.`id` = `sys_user`.`roleid` AND `sys_user`.`id` = ? 
+2019-4-2 15:45:42 http-nio-8080-exec-2 DEBUG ====> Parameters: 1(Integer)
+2019-4-2 15:45:42 http-nio-8080-exec-2 DEBUG <====      Total: 1
+2019-4-2 15:45:42 http-nio-8080-exec-2 DEBUG ====>  Preparing: SELECT `bd_client_contacts`.*,`bd_client`.`name` AS clientname FROM `bd_client_contacts`, `bd_client` WHERE `bd_client`.`id` = `bd_client_contacts`.`clientid` and clientid = ? 
+2019-4-2 15:45:42 http-nio-8080-exec-2 DEBUG ====> Parameters: 8(Integer)
+2019-4-2 15:45:42 http-nio-8080-exec-2 DEBUG <====      Total: 3
+2019-4-2 15:45:42 http-nio-8080-exec-2 DEBUG ====>  Preparing: SELECT * FROM `sys_dept` where id=? 
+2019-4-2 15:45:42 http-nio-8080-exec-2 DEBUG ====> Parameters: 7(Integer)
+2019-4-2 15:45:42 http-nio-8080-exec-2 DEBUG <====      Total: 1
+2019-4-2 15:45:42 http-nio-8080-exec-2 DEBUG ====>  Preparing: SELECT `bd_client_contacts`.*,`bd_client`.`name` AS clientname FROM `bd_client_contacts`, `bd_client` WHERE `bd_client`.`id` = `bd_client_contacts`.`clientid` and clientid = ? 
+2019-4-2 15:45:42 http-nio-8080-exec-2 DEBUG ====> Parameters: 3(Integer)
+2019-4-2 15:45:42 http-nio-8080-exec-2 DEBUG <====      Total: 0
+2019-4-2 15:45:42 http-nio-8080-exec-2 DEBUG ====>  Preparing: SELECT `sys_user`.`id`, `sys_user`.`name`, `account`, `password`, `sex`, `phone`, `email`, `companyid`, `deptid`, `roleid`, `sys_company`.`name` AS company, `sys_dept`.`name` AS dept, `sys_role`.`name` AS role, `createtime` FROM `sys_user`, `sys_company`, `sys_dept`, `sys_role` WHERE `sys_user`.`companyid` = `sys_company`.`id` AND `sys_user`.`deptid` = `sys_dept`.`id` AND `sys_role`.`id` = `sys_user`.`roleid` AND `sys_user`.`id` = ? 
+2019-4-2 15:45:42 http-nio-8080-exec-2 DEBUG ====> Parameters: 10(Integer)
+2019-4-2 15:45:42 http-nio-8080-exec-2 DEBUG <====      Total: 1
+2019-4-2 15:45:42 http-nio-8080-exec-2 DEBUG ====>  Preparing: SELECT `bd_client_contacts`.*,`bd_client`.`name` AS clientname FROM `bd_client_contacts`, `bd_client` WHERE `bd_client`.`id` = `bd_client_contacts`.`clientid` and clientid = ? 
+2019-4-2 15:45:42 http-nio-8080-exec-2 DEBUG ====> Parameters: 2(Integer)
+2019-4-2 15:45:42 http-nio-8080-exec-2 DEBUG <====      Total: 0
+2019-4-2 15:45:42 http-nio-8080-exec-2 DEBUG <==      Total: 9
+2019-4-2 15:46:01 HikariPool-1 housekeeper DEBUG HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2019-4-2 15:46:01 http-nio-8080-exec-3 DEBUG ==>  Preparing: select count(*) from bd_client where address=? 
+2019-4-2 15:46:01 http-nio-8080-exec-3 DEBUG ==> Parameters: 福建省(String)
+2019-4-2 15:46:01 http-nio-8080-exec-3 DEBUG <==      Total: 1
+2019-4-2 15:46:01 http-nio-8080-exec-3 DEBUG ==>  Preparing: select * from bd_client where address=? ORDER BY `id` DESC LIMIT ?,? 
+2019-4-2 15:46:01 http-nio-8080-exec-3 DEBUG ==> Parameters: 福建省(String), 0(Integer), 10(Integer)
+2019-4-2 15:46:01 http-nio-8080-exec-3 DEBUG ====>  Preparing: SELECT * FROM `sys_dept` where id=? 
+2019-4-2 15:46:01 http-nio-8080-exec-3 DEBUG ====> Parameters: 7(Integer)
+2019-4-2 15:46:01 http-nio-8080-exec-3 DEBUG <====      Total: 1
+2019-4-2 15:46:01 http-nio-8080-exec-3 DEBUG ====>  Preparing: SELECT `sys_user`.`id`, `sys_user`.`name`, `account`, `password`, `sex`, `phone`, `email`, `companyid`, `deptid`, `roleid`, `sys_company`.`name` AS company, `sys_dept`.`name` AS dept, `sys_role`.`name` AS role, `createtime` FROM `sys_user`, `sys_company`, `sys_dept`, `sys_role` WHERE `sys_user`.`companyid` = `sys_company`.`id` AND `sys_user`.`deptid` = `sys_dept`.`id` AND `sys_role`.`id` = `sys_user`.`roleid` AND `sys_user`.`id` = ? 
+2019-4-2 15:46:01 http-nio-8080-exec-3 DEBUG ====> Parameters: 8(Integer)
+2019-4-2 15:46:01 http-nio-8080-exec-3 DEBUG <====      Total: 1
+2019-4-2 15:46:01 http-nio-8080-exec-3 DEBUG ====>  Preparing: SELECT `bd_client_contacts`.*,`bd_client`.`name` AS clientname FROM `bd_client_contacts`, `bd_client` WHERE `bd_client`.`id` = `bd_client_contacts`.`clientid` and clientid = ? 
+2019-4-2 15:46:01 http-nio-8080-exec-3 DEBUG ====> Parameters: 3(Integer)
+2019-4-2 15:46:01 http-nio-8080-exec-3 DEBUG <====      Total: 0
+2019-4-2 15:46:01 http-nio-8080-exec-3 DEBUG ====>  Preparing: SELECT * FROM `sys_dept` where id=? 
+2019-4-2 15:46:01 http-nio-8080-exec-3 DEBUG ====> Parameters: 2(Integer)
+2019-4-2 15:46:01 http-nio-8080-exec-3 DEBUG <====      Total: 1
+2019-4-2 15:46:01 http-nio-8080-exec-3 DEBUG ====>  Preparing: SELECT `sys_user`.`id`, `sys_user`.`name`, `account`, `password`, `sex`, `phone`, `email`, `companyid`, `deptid`, `roleid`, `sys_company`.`name` AS company, `sys_dept`.`name` AS dept, `sys_role`.`name` AS role, `createtime` FROM `sys_user`, `sys_company`, `sys_dept`, `sys_role` WHERE `sys_user`.`companyid` = `sys_company`.`id` AND `sys_user`.`deptid` = `sys_dept`.`id` AND `sys_role`.`id` = `sys_user`.`roleid` AND `sys_user`.`id` = ? 
+2019-4-2 15:46:01 http-nio-8080-exec-3 DEBUG ====> Parameters: 10(Integer)
+2019-4-2 15:46:01 http-nio-8080-exec-3 DEBUG <====      Total: 1
+2019-4-2 15:46:01 http-nio-8080-exec-3 DEBUG ====>  Preparing: SELECT `bd_client_contacts`.*,`bd_client`.`name` AS clientname FROM `bd_client_contacts`, `bd_client` WHERE `bd_client`.`id` = `bd_client_contacts`.`clientid` and clientid = ? 
+2019-4-2 15:46:01 http-nio-8080-exec-3 DEBUG ====> Parameters: 2(Integer)
+2019-4-2 15:46:01 http-nio-8080-exec-3 DEBUG <====      Total: 0
+2019-4-2 15:46:01 http-nio-8080-exec-3 DEBUG <==      Total: 2
+2019-4-2 15:46:31 HikariPool-1 housekeeper DEBUG HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2019-4-2 15:47:01 HikariPool-1 housekeeper DEBUG HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2019-4-2 15:47:31 HikariPool-1 housekeeper DEBUG HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)

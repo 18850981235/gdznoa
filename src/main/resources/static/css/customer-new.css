@@ -1,0 +1,43 @@
+
+#new{
+    position: absolute;
+    left: 600px ;
+    top: 130px ;
+    border: 1px solid #000000;
+    display: inline-block;
+    height: 600px  ;
+    background-color: #f6f7f9;
+}
+#new td{
+    padding-left: 3px ;
+    font-size: 10px ;
+    text-align: center;
+
+}
+#new td .add-to{
+    color: blue;
+}
+#new #ok,
+#no{
+    width: 60px;
+    height: 30px ;
+    border: 1px solid #36434e;
+    border-radius:15px  ;
+    display: inline-block;
+    float: left;
+    line-height: 30px;
+    text-align: center;
+    background-color: #ffffff;
+}
+#new #ok{
+    margin-left:250px  ;
+    margin-top: 10px ;
+}
+#new #no{
+    margin-left: 50px ;
+    margin-top: 10px ;
+}
+#new #ok:hover,
+#no:hover{
+    background-color: #787dff;
+}

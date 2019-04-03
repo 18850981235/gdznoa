@@ -1,0 +1,12 @@
+
+#new{
+    position: absolute;
+    left: 600px ;
+    top: 130px ;
+    border: 1px solid #000000;
+    display: inline-block;
+    background-color: #ffffff;
+}
+#new td{
+    padding-left: 5px ;
+}

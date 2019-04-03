@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.BdClientContactsMapper">
+    <resultMap id="" type="BdClientContacts">
+
+    </resultMap>
+    <insert id="add">
+        insert into bd_client_contacts
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="clientid != 0">
+                clientid,
+            </if>
+            <if test="name != null">
+                `name`,
+            </if>
+            <if test="role != null">
+                role,
+            </if>
+            <if test="phone != null">
+                phone,
+            </if>
+            <if test="mobile != null">
+                mobile,
+            </if>
+            <if test="wechat != null">
+                wechat,
+            </if>
+            <if test="email != null">
+                email,
+            </if>
+            <if test="content != null">
+                content,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="clientid != 0">
+                #{clientid},
+            </if>
+            <if test="name != null">
+                #{name},
+            </if>
+            <if test="role != null">
+                #{role},
+            </if>
+            <if test="phone != null">
+                #{phone},
+            </if>
+            <if test="mobile != null">
+                #{mobile},
+            </if>
+            <if test="wechat != null">
+                #{wechat},
+            </if>
+            <if test="email != null">
+                #{email},
+            </if>
+            <if test="content != null">
+                #{content},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateById">
+        update bd_client_contacts
+        <set>
+            <if test="clientid != 0">
+                clientid = #{clientid},
+            </if>
+            <if test="name != null">
+                `name` = #{name},
+            </if>
+            <if test="role != null">
+                role = #{role},
+            </if>
+            <if test="phone != null">
+                phone = #{phone},
+            </if>
+            <if test="mobile != null">
+                mobile = #{mobile},
+            </if>
+            <if test="wechat != null">
+                wechat = #{wechat},
+            </if>
+            <if test="email != null">
+                email = #{email},
+            </if>
+            <if test="content != null">
+                content = #{content},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <select id="getContactsList" resultType="BdClientContacts">
+        SELECT `bd_client_contacts`.* ,`bd_client`.`name` AS clientname
+        FROM `bd_client_contacts`,`bd_client`
+        <trim prefix="where" prefixOverrides="and">
+            `bd_client`.`id`=`bd_client_contacts`.`clientid`
+            <if test="clientname != null">
+                and `bd_client`.`name` like CONCAT('%',#{clientname},'%')
+            </if>
+            <if test="name != null">
+                and `bd_client_contacts`.`name` like CONCAT('%',#{name},'%')
+            </if>
+        </trim>
+        <if test="pageSize!=0">
+            LIMIT #{pageIndex},#{pageSize}
+        </if>
+    </select>
+
+    <select id="getCount" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM `bd_client_contacts`,`bd_client`
+        <trim prefix="where" prefixOverrides="and">
+            `bd_client`.`id`=`bd_client_contacts`.`clientid`
+            <if test="clientname != null">
+                and `bd_client`.`name` like CONCAT('%',#{clientname},'%')
+            </if>
+            <if test="name != null">
+                and `bd_client_contacts`.`name` like CONCAT('%',#{name},'%')
+            </if>
+        </trim>
+    </select>
+
+    <select id="getContactsById" resultType="BdClientContacts">
+        SELECT `bd_client_contacts`.*,`bd_client`.`name` AS clientname
+        FROM `bd_client_contacts`,
+             `bd_client`
+        WHERE
+            `bd_client`.`id` = `bd_client_contacts`.`clientid`
+          and
+            `bd_client_contacts`.id=#{id}
+    </select>
+    <select id="getContactsByClientid" resultType="BdClientContacts">
+        SELECT `bd_client_contacts`.*,`bd_client`.`name` AS clientname
+        FROM `bd_client_contacts`,
+             `bd_client`
+        WHERE
+            `bd_client`.`id` = `bd_client_contacts`.`clientid`
+          and clientid = #{clientid}
+    </select>
+
+    <delete id="deleteByClientid">
+        delete
+        from bd_client_contacts
+        where `clientid` = #{clientid}
+    </delete>
+    <select id="getContactsByClientidCount" resultType="java.lang.Integer">
+        select count(1)
+        from bd_client_contacts
+        where `clientid` = #{clientid}
+    </select>
+</mapper>

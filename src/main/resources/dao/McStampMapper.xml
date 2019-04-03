@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.McStampMapper">
+    <resultMap id="BaseResultMap" type="com.beans.McStamp">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="deptid" property="deptid" jdbcType="INTEGER"/>
+        <result column="createtime" property="createtime" jdbcType="TIMESTAMP"/>
+        <result column="userid" property="userid" jdbcType="INTEGER"/>
+        <result column="phone" property="phone" jdbcType="VARCHAR"/>
+        <result column="content" property="content" jdbcType="VARCHAR"/>
+        <result column="file_num" property="fileNum" jdbcType="INTEGER"/>
+        <result column="stamp_type" property="stampType" jdbcType="VARCHAR"/>
+        <result column="consignee" property="consignee" jdbcType="VARCHAR"/>
+        <result column="consignee_address" property="consigneeAddress" jdbcType="VARCHAR"/>
+        <result column="consignee_phone" property="consigneePhone" jdbcType="VARCHAR"/>
+        <result column="accessory" property="accessory" jdbcType="VARCHAR"/>
+        <result column="processid" property="processid" jdbcType="INTEGER"/>
+        <result column="process_userid" property="processUserid" jdbcType="INTEGER"/>
+        <result column="process_state" property="processState" jdbcType="VARCHAR"/>
+        <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP"/>
+        <association property="dept" javaType="sysdept" column="deptid"
+                     select="com.dao.DeptMapper.getListById">
+        </association>
+        <association property="user" javaType="sysuser" column="userid"
+                     select="com.dao.UserMapper.getByID">
+        </association>
+        <association property="process" javaType="SysApprovalProcess" column="processid"
+                     select="com.dao.ApprovalProcessMapper.getProcessById">
+        </association>
+        <association property="processUser" javaType="sysuser" column="process_userid"
+                     select="com.dao.UserMapper.getByID">
+        </association>
+    </resultMap>
+    <select id="getList">
+        SELECT * FROM `mc_stamp`
+        <!--<trim prefix="where" prefixOverrides="and">
+            <if test="name != null">
+                and `name` like CONCAT('%',#{name},'%')
+            </if>
+            <if test="deptid != 0">
+                and deptid=#{deptid}
+            </if>
+            <if test="unitType != null">
+                and unit_type=#{unitType}
+            </if>
+            <if test="userid != 0">
+                and userid=#{userid}
+            </if>
+        </trim>
+        <if test="pageIndex!=0 and pageSize!=0">
+            LIMIT #{pageIndex},#{pageSize}
+        </if>-->
+    </select>
+    <select id="getCount">
+    </select>
+    <select id="getListById" resultMap="BaseResultMap">
+        SELECT *
+        FROM `mc_stamp`
+        WHERE id = #{id}
+    </select>
+    <insert id="add">
+        insert into mc_stamp
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="deptid != null">
+                deptid,
+            </if>
+            <if test="createtime != null">
+                createtime,
+            </if>
+            <if test="userid != null">
+                userid,
+            </if>
+            <if test="phone != null">
+                phone,
+            </if>
+            <if test="content != null">
+                content,
+            </if>
+            <if test="fileNum != null">
+                file_num,
+            </if>
+            <if test="stampType != null">
+                stamp_type,
+            </if>
+            <if test="consignee != null">
+                consignee,
+            </if>
+            <if test="consigneeAddress != null">
+                consignee_address,
+            </if>
+            <if test="consigneePhone != null">
+                consignee_phone,
+            </if>
+            <if test="accessory != null">
+                accessory,
+            </if>
+            <if test="processid != null">
+                processid,
+            </if>
+            <if test="processUserid != null">
+                process_userid,
+            </if>
+            <if test="processState != null">
+                process_state,
+            </if>
+            <if test="updatetime != null">
+                updatetime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id},
+            </if>
+            <if test="deptid != null">
+                #{deptid},
+            </if>
+            <if test="createtime != null">
+                #{createtime},
+            </if>
+            <if test="userid != null">
+                #{userid},
+            </if>
+            <if test="phone != null">
+                #{phone},
+            </if>
+            <if test="content != null">
+                #{content},
+            </if>
+            <if test="fileNum != null">
+                #{fileNum},
+            </if>
+            <if test="stampType != null">
+                #{stampType},
+            </if>
+            <if test="consignee != null">
+                #{consignee},
+            </if>
+            <if test="consigneeAddress != null">
+                #{consigneeAddress},
+            </if>
+            <if test="consigneePhone != null">
+                #{consigneePhone},
+            </if>
+            <if test="accessory != null">
+                #{accessory},
+            </if>
+            <if test="processid != null">
+                #{processid},
+            </if>
+            <if test="processUserid != null">
+                #{processUserid},
+            </if>
+            <if test="processState != null">
+                #{processState},
+            </if>
+            <if test="updatetime != null">
+                #{updatetime},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateById">
+        update mc_stamp
+        <set>
+            <if test="deptid != 0">
+                deptid = #{deptid},
+            </if>
+            <if test="createtime != null">
+                createtime = #{createtime},
+            </if>
+            <if test="userid != 0">
+                userid = #{userid},
+            </if>
+            <if test="phone != null">
+                phone = #{phone},
+            </if>
+            <if test="content != null">
+                content = #{content},
+            </if>
+            <if test="fileNum != 0">
+                file_num = #{fileNum},
+            </if>
+            <if test="stampType != null">
+                stamp_type = #{stampType},
+            </if>
+            <if test="consignee != null">
+                consignee = #{consignee},
+            </if>
+            <if test="consigneeAddress != null">
+                consignee_address = #{consigneeAddress},
+            </if>
+            <if test="consigneePhone != null">
+                consignee_phone = #{consigneePhone},
+            </if>
+            <if test="accessory != null">
+                accessory = #{accessory},
+            </if>
+            <if test="processid != 0">
+                processid = #{processid},
+            </if>
+            <if test="processUserid != null">
+                process_userid = #{processUserid},
+            </if>
+            <if test="processState != null">
+                process_state = #{processState},
+            </if>
+            <if test="updatetime != null">
+                updatetime = #{updatetime},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+    <delete id="deleteById">
+        delete
+        from mc_stamp
+        where id = #{id}
+    </delete>
+</mapper>

@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.UserMapper">
+    <select id="getByAccount" resultType="sysuser" parameterType="String">
+        SELECT `sys_user`.`id`,
+               `sys_user`.`name`,
+               `account`,
+               `password`,
+               `sex`,
+               `phone`,
+               `email`,
+               `companyid`,
+               `deptid`,
+               `roleid`,
+               `sys_company`.`name` AS company,
+               `sys_dept`.`name`    AS dept,
+               `sys_role`.`name`    AS role,
+               `createtime`
+        FROM `sys_user`,
+             `sys_company`,
+             `sys_dept`,
+             `sys_role`
+        WHERE `sys_user`.`companyid` = `sys_company`.`id`
+          AND `sys_user`.`deptid` = `sys_dept`.`id`
+          AND `sys_role`.`id` = `sys_user`.`roleid`
+          AND `account` = #{account}
+    </select>
+
+    <select id="isAccount" resultType="int">
+        select count(1)
+        FROM `sys_user`
+        where `account` = #{mobile}
+    </select>
+
+    <insert id="register">
+        INSERT INTO `sys_user`(`name`, `account`, `password`, `phone`, `createtime`)
+        VALUES (#{name}, #{mobile}, #{password}, #{mobile}, NOW())
+    </insert>
+
+    <select id="getByID" resultType="sysuser" parameterType="int">
+        SELECT `sys_user`.`id`,
+               `sys_user`.`name`,
+               `account`,
+               `password`,
+               `sex`,
+               `phone`,
+               `email`,
+               `companyid`,
+               `deptid`,
+               `roleid`,
+               `sys_company`.`name` AS company,
+               `sys_dept`.`name`    AS dept,
+               `sys_role`.`name`    AS role,
+               `createtime`
+        FROM `sys_user`,
+             `sys_company`,
+             `sys_dept`,
+             `sys_role`
+        WHERE `sys_user`.`companyid` = `sys_company`.`id`
+          AND `sys_user`.`deptid` = `sys_dept`.`id`
+          AND `sys_role`.`id` = `sys_user`.`roleid`
+          AND `sys_user`.`id` = #{id}
+    </select>
+
+    <select id="getUserList" resultType="sysuser">
+        SELECT `sys_user`.`id`,
+        `sys_user`.`name`,
+        `account`,
+        `password`,
+        `sex`,
+        `phone`,
+        `email`,
+        `companyid`,
+        `deptid`,
+        `roleid`,
+        `sys_company`.`name` AS company,
+        `sys_dept`.`name` AS dept,
+        `sys_role`.`name` AS role,
+        `createtime`
+        FROM `sys_user`,
+        `sys_company`,
+        `sys_dept`,
+        `sys_role`
+        WHERE `sys_user`.`companyid` = `sys_company`.`id`
+        AND `sys_user`.`deptid` =`sys_dept`.`id`
+        AND `sys_role`.`id` = `sys_user`.`roleid`
+        <if test="name!=null">
+            and name like CONCAT('%',#{name},'%')
+        </if>
+        <if test="companyid!=0">
+            and `sys_user`.`companyid`=#{companyid}
+        </if>
+        <if test="deptid!=0">
+            and `sys_user`.`deptid`=#{deptid}
+        </if>
+        <if test="companyid!=0">
+            and `sys_user`.`roleid`=#{roleid}
+        </if>
+        ORDER BY `createtime` DESC
+        <if test="pageIndex!=0 and pageSize!=0">
+            LIMIT #{pageIndex},#{pageSize}
+        </if>
+
+    </select>
+
+    <select id="getUserCount" resultType="int">
+        select count(1) FROM `sys_user`
+        <trim prefix="where" prefixOverrides="and">
+            <if test="name!=null">
+                and `name` like CONCAT('%',#{name},'%')
+            </if>
+            <if test="companyid!=0">
+                and `sys_user`.`companyid`=#{companyid}
+            </if>
+            <if test="deptid!=0">
+                and `sys_user`.`deptid`=#{deptid}
+            </if>
+            <if test="companyid!=0">
+                and `sys_user`.`roleid`=#{roleid}
+            </if>
+        </trim>
+    </select>
+
+    <delete id="deleteByID">
+        DELETE
+        FROM `sys_user`
+        WHERE `id` = #{id}
+    </delete>
+
+    <update id="updateByID" parameterType="sysuser">
+        UPDATE `sys_user`
+        <set>
+            <if test="name!=null">
+                `name`= #{name},
+            </if>
+            <if test="sex!=null">
+                `sex`=#{sex},
+            </if>
+            <if test="phone!=null">
+                `phone`=#{phone},
+            </if>
+            <if test="email!=null">
+                `email`=#{email},
+            </if>
+            <if test="companyid!=0">
+                `companyid`=#{companyid},
+            </if>
+            <if test="deptid!=0">
+                `deptid`=#{deptid},
+            </if>
+            <if test="roleid!=0">
+                `roleid`=#{roleid},
+            </if>
+        </set>
+        WHERE `id` = #{id}
+    </update>
+
+    <insert id="add">
+        INSERT INTO `sys_user`
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name!=null">
+                `name`,
+            </if>
+            <if test="account!=null">
+                `account`,
+            </if>
+            <if test="password!=null">
+                `password`,
+            </if>
+            <if test="sex!=null">
+                `sex`,
+            </if>
+            <if test="phone!=null">
+                `phone`,
+            </if>
+            <if test="email!=null">
+                `email`,
+            </if>
+            <if test="companyid!=0">
+                `companyid`,
+            </if>
+            <if test="deptid!=0">
+                `deptid`,
+            </if>
+            <if test="roleid!=0">
+                `roleid`,
+            </if>
+            `createtime`
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name!=null">
+                #{name},
+            </if>
+            <if test="account!=null">
+                #{account},
+            </if>
+            <if test="password!=null">
+                #{password},
+            </if>
+            <if test="sex!=null">
+                #{sex},
+            </if>
+            <if test="phone!=null">
+                #{phone},
+            </if>
+            <if test="email!=null">
+                #{email},
+            </if>
+            <if test="companyid!=0">
+                #{companyid},
+            </if>
+            <if test="deptid!=0">
+                #{deptid},
+            </if>
+            <if test="roleid!=0">
+                #{roleid},
+            </if>
+            NOW()
+        </trim>
+    </insert>
+
+    <update id="updatePassWord" >
+        UPDATE `sys_user`
+        set
+            `password`=#{`password`}
+        where `account` = #{account}
+    </update>
+
+    <select id="isCountClassify" resultType="int">
+        select count(1) from `sys_user`
+        <trim prefix="where" prefixOverrides="and">
+            <if test="companyid!=0">
+               and companyid=#{companyid}
+            </if>
+            <if test="deptid!=0">
+              and  deptid=#{deptid}
+            </if>
+            <if test="roleid!=0">
+               and roleid=#{roleid}
+            </if>
+        </trim>
+    </select>
+
+    <select id="getUserByIn" parameterType="String" resultType="sysuser">
+        select `name`,id from `sys_user` where id in(${examine})
+        ORDER BY INSTR(#{examine},id);
+    </select>
+</mapper>

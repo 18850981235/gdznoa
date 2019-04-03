@@ -1,0 +1,28 @@
+debug: true
+spring:
+  devtools:
+    restart:
+      enabled: true
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/oa?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&serverTimezone=GMT%2B8
+    username: root
+    password: 123456
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
+    static-path-pattern: /**
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+      enabled: true
+# Mybatis
+mybatis:
+  #实体类所做包
+  type-aliases-package: com.beans
+  #mapper.xml所在位置
+  mapperLocations: classpath:dao/*.xml
+logging:
+  level:
+    com.dao: DEBUG
