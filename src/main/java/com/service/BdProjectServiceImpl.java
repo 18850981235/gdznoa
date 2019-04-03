@@ -42,6 +42,7 @@ public class BdProjectServiceImpl implements BdProjectService {
      */
     @Override
     public int add(BdProject project, HttpServletRequest request) {
+
         int num = 0;
         try {
             SysApprovalProcess process = approvalProcessMapper.getProcessById(1);
