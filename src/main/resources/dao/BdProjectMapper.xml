@@ -28,16 +28,16 @@
         <result column="process_userid" property="processUserid" jdbcType="INTEGER"/>
         <result column="process_state" property="processState" jdbcType="VARCHAR"/>
         <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP"/>
-        <association property="processUser" javaType="sysuser" column="process_userid"
+        <association property="processUser" javaType="com.beans.SysUser" column="process_userid"
                      select="com.dao.UserMapper.getByID">
         </association>
-        <association property="principalUser" javaType="sysuser" column="principal"
+        <association property="principalUser" javaType="com.beans.SysUser" column="principal"
                      select="com.dao.UserMapper.getByID">
         </association>
-        <association property="process" javaType="SysApprovalProcess" column="processid"
+        <association property="process" javaType="com.beans.SysApprovalProcess" column="processid"
                      select="com.dao.ApprovalProcessMapper.getProcessById">
         </association>
-        <association property="client" javaType="BdClient" column="clientid"
+        <association property="client" javaType="com.beans.BdClient" column="clientid"
                      select="com.dao.BdClientMapper.getClientById">
         </association>
     </resultMap>
@@ -293,7 +293,6 @@
         select *
         from `bd_project`
         <trim prefix="where" prefixOverrides="and">
-            (`principal`=#{userid} OR `examine` LIKE CONCAT('%',#{userid},'%'))
             <if test="name != null">
                 and `name` like CONCAT('%',#{name},'%')
             </if>
@@ -314,9 +313,6 @@
             </if>
         </trim>
         ORDER BY `createtime` DESC
-        <if test="pageSize!=0">
-            LIMIT #{pageIndex},#{pageSize}
-        </if>
     </select>
     <select id="getCount" resultType="int">
         select count(1)
@@ -343,7 +339,7 @@
             </if>
         </trim>
     </select>
-    <select id="getByProcessUser">
+    <select id="getByProcessUser" resultMap="BaseResultMap">
         SELECT *
         FROM `bd_project`
         WHERE `process_userid` = #{processUserId}

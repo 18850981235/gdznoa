@@ -17,23 +17,23 @@
     <result column="processid" property="processid" jdbcType="INTEGER" />
     <result column="process_userid" property="processUserid" jdbcType="INTEGER" />
     <result column="process_state" property="processState" jdbcType="VARCHAR" />
-    <association property="dept" javaType="sysdept" column="deptid"
+    <association property="dept" javaType="com.beans.SysDept" column="deptid"
                  select="com.dao.DeptMapper.getListById">
     </association>
-    <association property="user" javaType="sysuser" column="userid"
+    <association property="user" javaType="com.beans.SysUser" column="userid"
                  select="com.dao.UserMapper.getByID">
     </association>
     <!--<association property="project" javaType="BdProject" column="projectid"
                  select="">
     </association>-->
-    <association property="process" javaType="SysApprovalProcess" column="processid"
+    <association property="process" javaType="com.beans.SysApprovalProcess" column="processid"
                  select="com.dao.ApprovalProcessMapper.getProcessById">
     </association>
-    <association property="processUser" javaType="sysuser" column="process_userid"
+    <association property="processUser" javaType="com.beans.SysUser" column="process_userid"
                  select="com.dao.UserMapper.getByID">
     </association>
   </resultMap>
-  <insert id="add" parameterType="McMaterials" >
+  <insert id="add" parameterType="com.beans.McMaterials" >
     insert into mc_materials
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="deptid != 0" >
@@ -125,7 +125,7 @@
     </trim>
   </insert>
 
-  <update id="updateById" parameterType="McMaterials" >
+  <update id="updateById" parameterType="com.beans.McMaterials" >
     update mc_materials
     <set >
       <if test="deptid != 0" >
@@ -174,10 +174,5 @@
     where id = #{id}
   </update>
 
-  <select id="getList">
 
-  </select>
-  <select id="getListCount">
-
-  </select>
 </mapper>

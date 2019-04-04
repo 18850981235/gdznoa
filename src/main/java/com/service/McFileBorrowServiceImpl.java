@@ -28,6 +28,11 @@ public class McFileBorrowServiceImpl implements McFileBorrowService{
     @Resource
     private McFileBorrowMapper mcFileBorrowMapper;
 
+    /**
+     * 按人员id查询菜单  id为0是返回全部
+     * @param detailed 添加文件借用审批详情
+     * @return 是否添加成功
+     */
     @Override
     public int addProjectApproval(SysApprovalDetailed detailed) {
         detailed.setApprovalName("商务原文件借用");
@@ -67,6 +72,12 @@ public class McFileBorrowServiceImpl implements McFileBorrowService{
         }
     }
 
+
+    /**
+     * 添加文件借用申请
+     * @param  fileBorrow  文件借用实体类
+     * @return 是否添加成功
+     */
     @Override
     public int add(McFileBorrow fileBorrow) {
         int num = 0;

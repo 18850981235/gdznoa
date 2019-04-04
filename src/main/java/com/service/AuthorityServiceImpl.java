@@ -20,6 +20,12 @@ public class AuthorityServiceImpl implements AuthorityService {
     @Resource()
     private AuthorityMapper authorityMapper;
 
+    /**
+     * 给用户添加权限
+     * @param arr 权限id的数组
+     * @param userid 用户id
+     * @return 是否添加成功
+     */
     @Override
     public boolean add(int[] arr, int userid) {
         try {
@@ -34,6 +40,12 @@ public class AuthorityServiceImpl implements AuthorityService {
         return true;
     }
 
+    /**
+     * 修改用户权限
+     * @param arr 权限id的数组
+     * @param userid 用户id
+     * @return 是否添加成功
+     */
     @Override
     public boolean updateAuthority(int userid, int[] arr) {
         try {
@@ -49,10 +61,14 @@ public class AuthorityServiceImpl implements AuthorityService {
         return true;
     }
 
+    /**
+     * 查询用户权限
+     * @param userid 用户id
+     * @return 权限集合
+     */
     @Override
     public List<SysAuthority> getMenuIdByUserId(int userid) {
         return authorityMapper.getMenuIdByUserId(userid);
     }
-
 
 }

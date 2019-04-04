@@ -19,20 +19,20 @@
         <result column="process_userid" property="processUserid" jdbcType="INTEGER"/>
         <result column="process_state" property="processState" jdbcType="VARCHAR"/>
         <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP"/>
-        <association property="dept" javaType="sysdept" column="deptid"
+        <association property="dept" javaType="com.beans.SysDept" column="deptid"
                      select="com.dao.DeptMapper.getListById">
         </association>
-        <association property="user" javaType="sysuser" column="userid"
+        <association property="user" javaType="com.beans.SysUser" column="userid"
                      select="com.dao.UserMapper.getByID">
         </association>
-        <association property="process" javaType="SysApprovalProcess" column="processid"
+        <association property="process" javaType="com.beans.SysApprovalProcess" column="processid"
                      select="com.dao.ApprovalProcessMapper.getProcessById">
         </association>
-        <association property="processUser" javaType="sysuser" column="process_userid"
+        <association property="processUser" javaType="com.beans.SysUser" column="process_userid"
                      select="com.dao.UserMapper.getByID">
         </association>
     </resultMap>
-    <select id="getListById">
+    <select id="getListById" resultMap="BaseResultMap">
         select *
         from mc_file_borrow
         where id = #{id}

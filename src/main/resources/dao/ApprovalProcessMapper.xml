@@ -6,11 +6,10 @@
         set usersid=#{usersid}
         where id = #{id}
     </update>
-
-    <select id="getProcessList">
+    <select id="getProcessList" resultType="com.beans.SysApprovalProcess">
         select * from `sys_approval_process`
     </select>
-    <select id="getProcessById" resultType="SysApprovalProcess">
+    <select id="getProcessById" resultType="com.beans.SysApprovalProcess">
         select * from `sys_approval_process` where id=#{id}
     </select>
 </mapper>

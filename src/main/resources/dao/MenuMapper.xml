@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.dao.MenuMapper">
-    <select id="getMenuListByUserid" resultType="sysmenu">
+    <select id="getMenuListByUserid" resultType="com.beans.SysMenu">
         SELECT *
         FROM `sys_menu`
         WHERE `id` IN (SELECT menu FROM `sys_authority` WHERE userid = #{userid})
     </select>
 
-    <select id="getMenuList" resultType="sysmenu">
-        select * from sys_menu`
+    <select id="getMenuList" resultType="com.beans.SysMenu">
+        select * from `sys_menu`
         <trim prefix="where" prefixOverrides="and">
             <if test="id!=0">
                 id=#{id}

@@ -9,7 +9,7 @@
         delete from `sys_authority` where userid=#{userid}
     </delete>
 
-    <select id="getMenuIdByUserId" resultType="sysauthority">
+    <select id="getMenuIdByUserId" resultType="com.beans.SysAuthority">
         select * from `sys_authority` where userid=#{userid}
     </select>
 </mapper>

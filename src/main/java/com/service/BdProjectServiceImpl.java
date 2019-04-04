@@ -6,17 +6,16 @@ import com.dao.ApprovalProcessMapper;
 import com.dao.BdProjectMapper;
 import com.dao.UserMapper;
 import com.util.FileUtils;
+import com.util.ListSortUtil;
 import com.util.Page;
+import org.bouncycastle.crypto.engines.AESLightEngine;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author 李鹏熠
@@ -122,17 +121,45 @@ public class BdProjectServiceImpl implements BdProjectService {
                                        String code, String status,
                                        Date start, Date end, int pageIndex) {
         Map<String, Object> map = new HashMap<>();
+        List<BdProject> afterSortArrays=null;
         Page page = new Page();
         try {
             if (pageIndex == 0) {
                 pageIndex = 1;
             }
+
             page.setPageSize(10);
-            page.setTotalCount(bdProjectMapper.getCount(userid, name, type, code, status, start, end));
+
+
             page.setCurrentPageNo(pageIndex);
-            List<BdProject> list = bdProjectMapper.getList(userid, name, type, code, status, start, end, (page.getCurrentPageNo() - 1) * page.getPageSize(), page.getPageSize());
+            List<BdProject> listAll = bdProjectMapper.getList(name, type, code, status, start, end);
+            List<BdProject> list=new ArrayList<>();
+            for(BdProject project: listAll){
+                if (project.getPrincipal()==userid){
+                    list.add(project);
+                }
+            }
+            for(BdProject project: listAll){
+                String[] userArr = project.getExamine().split(",");
+                for (int i = 0; i < userArr.length; i++) {
+                    if (userArr[i].equals(String.valueOf(userid))) {
+                        list.add(project);
+                        break;
+                    }
+                }
+            }
+            page.setTotalCount(list.size());
+            //list.subList((pageIndex-1)*10,(pageIndex-1)*10+10);
+            if (list!=null){
+                if (list.size()>=pageIndex*10){
+                    list.subList((pageIndex-1)*10,(pageIndex-1)*10+10);
+                }else {
+                    list.subList((pageIndex-1)*10,(pageIndex-1)*10+list.size()%10);
+                }
+                afterSortArrays = ListSortUtil.sort(list,"createtime","desc");
+            }
             map.put("page", page);
-            map.put("list", list);
+            map.put("list", afterSortArrays);
         } catch (Exception e) {
             e.printStackTrace();
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();

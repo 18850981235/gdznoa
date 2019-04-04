@@ -19,11 +19,21 @@ public class ApprovalProcessServiceImpl implements ApprovalProcessService {
     private ApprovalProcessMapper approvalProcessMapper;
 
 
+    /**
+     * 查询所有审批流程
+     * @return 权限集合
+     */
     @Override
     public List<SysApprovalProcess> getProcessList() {
         return approvalProcessMapper.getProcessList();
     }
 
+    /**
+     * 修改审批流程
+     * @param usersid 审批人员id(多个)
+     * @param id 审批流程id
+     * @return 是否修改成功
+     */
     @Override
     public int updateProcessById(String usersid, int id) {
         return approvalProcessMapper.updateProcessById(usersid,id);

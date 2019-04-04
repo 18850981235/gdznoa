@@ -27,6 +27,12 @@ public class McStampServiceImpl implements McStampService {
     @Resource
     private ApprovalDetailedMapper approvalDetailedMapper;
 
+
+    /**
+     * 添加盖章审批详情
+     * @param detailed  审批详情实体类
+     * @return 是否添加成功
+     */
     @Override
     public int addProjectApproval(SysApprovalDetailed detailed) {
         detailed.setApprovalName("商务盖章");
@@ -65,6 +71,11 @@ public class McStampServiceImpl implements McStampService {
         }
     }
 
+    /**
+     * 添加盖章申请
+     * @param  stamp 盖章实体类
+     * @return 是否添加成功
+     */
     @Override
     public int add(McStamp stamp) {
         int num = 0;

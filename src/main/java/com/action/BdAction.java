@@ -64,6 +64,7 @@ public class BdAction {
         return JSONObject.toJSONString(bdClientService.getList(name, address, unitType, userid, pageIndex),
                 SerializerFeature.DisableCircularReferenceDetect);
     }
+
     @RequestMapping(value = "/client/getAddres", produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String getAddres() {
@@ -188,7 +189,6 @@ public class BdAction {
         if (status == null || status == "") {
             status = null;
         }
-
         int userid =(int) session.getAttribute("userId");
         return JSONObject.toJSONString(bdProjectService.getlist(userid, name, type, code, status, start, end, pageIndex)
                 , SerializerFeature.DisableCircularReferenceDetect);

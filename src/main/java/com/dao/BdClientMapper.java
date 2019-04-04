@@ -15,12 +15,17 @@ public interface BdClientMapper {
     //按id修改客户信息
     int updateById(BdClient client);
     //按条件筛选客户总数
-    int getCount(@Param("name") String name, @Param("address") String address,
-                 @Param("unitType") String unitType, @Param("userid") int userid);
+    int getCount(@Param("name") String name,
+                 @Param("address") String address,
+                 @Param("unitType") String unitType,
+                 @Param("userid") int userid);
     //按条件筛选客户信息集合
-    List<BdClient> getClientList(@Param("name") String name, @Param("address") String address,
-                                 @Param("unitType") String unitType, @Param("userid") int userid,
-                                 @Param("pageIndex") int pageIndex, @Param("pageSize") int pageSize);
+    List<BdClient> getClientList(@Param("name") String name,
+                                 @Param("address") String address,
+                                 @Param("unitType") String unitType,
+                                 @Param("userid") int userid,
+                                 @Param("pageIndex") int pageIndex,
+                                 @Param("pageSize") int pageSize);
     //按id删除客户信息
     int deleteById(@Param("id") int id);
     //用查询具体的客户信息

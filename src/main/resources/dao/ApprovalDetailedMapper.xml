@@ -9,11 +9,11 @@
         <result column="state" property="state" jdbcType="VARCHAR"/>
         <result column="approval_date" property="approvalDate" jdbcType="TIMESTAMP"/>
         <result column="opinion" property="opinion" jdbcType="VARCHAR"/>
-        <association property="user" javaType="sysuser" column="approval_user"
+        <association property="user" javaType="com.beans.SysUser" column="approval_user"
                      select="com.dao.UserMapper.getByID">
         </association>
     </resultMap>
-    <insert id="add" parameterType="SysApprovalDetailed">
+    <insert id="add" parameterType="com.beans.SysApprovalDetailed">
         insert into sys_approval_detailed
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="approvalName != null">

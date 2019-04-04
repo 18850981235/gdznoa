@@ -17,8 +17,10 @@ public interface BdClientContactsMapper {
     //用id修改客户人员信息
     int updateById(BdClientContacts contacts);
     //通过条件筛选客户人员信息
-    List<BdClientContacts> getContactsList(@Param("name") String name, @Param("clientname") String clientname,
-                                           @Param("pageIndex") int pageIndex, @Param("pageSize") int pageSize);
+    List<BdClientContacts> getContactsList(@Param("name") String name,
+                                           @Param("clientname") String clientname,
+                                           @Param("pageIndex") int pageIndex,
+                                           @Param("pageSize") int pageSize);
     //通过条件筛选客户信息人员总数
     int getCount(@Param("name") String name, @Param("clientname") String clientname);
     //用id查询具体的客户人员信息

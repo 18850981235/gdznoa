@@ -19,12 +19,16 @@ public interface UserMapper {
 
     //用条件查询用户列表
     List<SysUser> getUserList(@Param("name") String name,
-                              @Param("companyid") int companyid, @Param("deptid") int deptid,
-                              @Param("roleid") int roleid, @Param("pageIndex") int pageIndex, @Param("pageSize") int pageSize);
+                              @Param("companyid") int companyid,
+                              @Param("deptid") int deptid,
+                              @Param("roleid") int roleid,
+                              @Param("pageIndex") int pageIndex,
+                              @Param("pageSize") int pageSize);
 
     //查询用户人数
     int getUserCount(@Param("name") String name,
-                     @Param("companyid") int companyid, @Param("deptid") int deptid,
+                     @Param("companyid") int companyid,
+                     @Param("deptid") int deptid,
                      @Param("roleid") int roleid);
 
     //用id删除员工
@@ -41,7 +45,8 @@ public interface UserMapper {
     //按账号修改密码
     int updatePassWord(@Param("account") String mobile, @Param("password") String password);
     //按公司或部门或职位查询有无员工
-    int isCountClassify(@Param("companyid") int companyid, @Param("deptid") int deptid,
+    int isCountClassify(@Param("companyid") int companyid,
+                        @Param("deptid") int deptid,
                         @Param("roleid") int roleid);
 
     List<SysUser> getUserByIn(@Param("examine") String examine);

@@ -3,7 +3,7 @@
 <mapper namespace="com.dao.BdClientMapper">
 
 
-    <resultMap id="BaseResultMap" type="BdClient">
+    <resultMap id="BaseResultMap" type="com.beans.BdClient">
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="code" property="code" jdbcType="VARCHAR"/>
         <result column="deptid" property="deptid" jdbcType="INTEGER"/>
@@ -18,18 +18,18 @@
         <result column="bankaccount" property="bankaccount" jdbcType="VARCHAR"/>
         <result column="bankname" property="bankname" jdbcType="VARCHAR"/>
         <result column="bankaddress" property="bankaddress" jdbcType="VARCHAR"/>
-        <association property="dept" javaType="sysdept" column="deptid"
+        <association property="dept" javaType="com.beans.SysDept" column="deptid"
                      select="com.dao.DeptMapper.getListById">
         </association>
-        <association property="user" javaType="sysuser" column="userid"
+        <association property="user" javaType="com.beans.SysUser" column="userid"
                      select="com.dao.UserMapper.getByID">
         </association>
-        <collection property="contacts" javaType="java.util.ArrayList" ofType="BdClientContacts"
+        <collection property="contacts" javaType="java.util.ArrayList" ofType="com.beans.BdClientContacts"
                     column="id" select="com.dao.BdClientContactsMapper.getContactsByClientid">
         </collection>
     </resultMap>
 
-    <insert id="add" parameterType="BdClient">
+    <insert id="add" parameterType="com.beans.BdClient">
         insert into bd_client
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="code != null">
@@ -115,7 +115,7 @@
         </trim>
     </insert>
 
-    <update id="updateById" parameterType="BdClient">
+    <update id="updateById" parameterType="com.beans.BdClient">
         update bd_client
         <set>
             <if test="code != null">
@@ -219,7 +219,7 @@
         select DISTINCT address  from bd_client
     </select>
 
-    <select id="getClientName" resultType="BdClient">
+    <select id="getClientName" resultType="com.beans.BdClient">
         select id,`name` from bd_client
     </select>
 </mapper>
