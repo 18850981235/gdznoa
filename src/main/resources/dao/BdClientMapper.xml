@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.dao.BdClientMapper">
+<mapper namespace="com.dao.bd.BdClientMapper">
 
 
     <resultMap id="BaseResultMap" type="com.beans.BdClient">
@@ -19,13 +19,13 @@
         <result column="bankname" property="bankname" jdbcType="VARCHAR"/>
         <result column="bankaddress" property="bankaddress" jdbcType="VARCHAR"/>
         <association property="dept" javaType="com.beans.SysDept" column="deptid"
-                     select="com.dao.DeptMapper.getListById">
+                     select="com.dao.sys.DeptMapper.getListById">
         </association>
         <association property="user" javaType="com.beans.SysUser" column="userid"
-                     select="com.dao.UserMapper.getByID">
+                     select="com.dao.sys.UserMapper.getByID">
         </association>
         <collection property="contacts" javaType="java.util.ArrayList" ofType="com.beans.BdClientContacts"
-                    column="id" select="com.dao.BdClientContactsMapper.getContactsByClientid">
+                    column="id" select="com.dao.bd.BdClientContactsMapper.getContactsByClientid">
         </collection>
     </resultMap>
 

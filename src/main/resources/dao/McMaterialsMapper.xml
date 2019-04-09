@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.dao.McMaterialsMapper" >
+<mapper namespace="com.dao.mc.McMaterialsMapper" >
   <resultMap id="BaseResultMap" type="com.beans.McMaterials" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="deptid" property="deptid" jdbcType="INTEGER" />
@@ -18,19 +18,19 @@
     <result column="process_userid" property="processUserid" jdbcType="INTEGER" />
     <result column="process_state" property="processState" jdbcType="VARCHAR" />
     <association property="dept" javaType="com.beans.SysDept" column="deptid"
-                 select="com.dao.DeptMapper.getListById">
+                 select="com.dao.sys.DeptMapper.getListById">
     </association>
     <association property="user" javaType="com.beans.SysUser" column="userid"
-                 select="com.dao.UserMapper.getByID">
+                 select="com.dao.sys.UserMapper.getByID">
     </association>
     <!--<association property="project" javaType="BdProject" column="projectid"
                  select="">
     </association>-->
     <association property="process" javaType="com.beans.SysApprovalProcess" column="processid"
-                 select="com.dao.ApprovalProcessMapper.getProcessById">
+                 select="com.dao.sys.ApprovalProcessMapper.getProcessById">
     </association>
     <association property="processUser" javaType="com.beans.SysUser" column="process_userid"
-                 select="com.dao.UserMapper.getByID">
+                 select="com.dao.sys.UserMapper.getByID">
     </association>
   </resultMap>
   <insert id="add" parameterType="com.beans.McMaterials" >

@@ -159,8 +159,8 @@
 
     });
     //点击显示隐藏  --选择负责人
-    $(document).ready(function() {
-        $('body').on('click','.click',function(){
+    // $(document).ready(function() {
+        $(document).on('click','.click',function(){
             if($(this).siblings('ul').css('display')=='none'){
                 $(this).siblings('ul').slideDown(100).children('li');
                 //判断成功后隐藏
@@ -169,13 +169,13 @@
                 }
             }
         })
-    });
+    // });
 
     //负责人点击事件
     // $(document).ready(function () {
     //
     // })
-    $(document).ready(function () {
+    // $(document).ready(function () {
 
         $(".close-in").click(function () {
             $("#choice").hide();
@@ -193,7 +193,8 @@
             $("#choice2").show();
         });
 
-        $(".upload").click(function () {
+        // $(".upload").click(function () {
+            $("body").on("click"," .upload",function () {
             console.log(8);
             var name=$(this).find(".name-block").text();
             var id=$(this).find(".name-none").text();
@@ -210,13 +211,12 @@
             $(".Eliminate-no-1").val(id1);
         });
 
-        $("body").on("click"," .upload-noe",function () {
+        $(document).on("click"," .upload-noe",function () {
             var c2,f2,d2,d1;
             var name2=$(this).find(".name-block").text();
             var id2=$(this).find(".name-none").text();
             d2=$(".eliminate-2").val();
             d1=$(".eliminate-no-2").val();
-
             if(d2==""){
                 $(".eliminate-2").val(name2);
                 $(".eliminate-no-2").val(id2);
@@ -237,6 +237,6 @@
             }
 
         })
-    })
+    // })
 
 })()

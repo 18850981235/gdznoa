@@ -22,11 +22,17 @@ public class McPersonnelDispatched {
   private int projectid;
   private String demand;
   private int userid;
-  private String evectionTime;
+  private Date evectionTime;
   private double evectionCost;
   private String accessory;
   private int processid;
   private int processUserid;
   private String processState;
+
+  private SysDept dept;
+  private SysUser user;
+  private String projectName;
+  private SysApprovalProcess process;
+  private SysUser processUser;
 
 }
