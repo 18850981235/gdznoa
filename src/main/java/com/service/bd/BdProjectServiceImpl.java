@@ -128,8 +128,6 @@ public class BdProjectServiceImpl implements BdProjectService {
             }
 
             page.setPageSize(10);
-
-
             page.setCurrentPageNo(pageIndex);
             List<BdProject> listAll = bdProjectMapper.getList(name, type, code, status, start, end);
             List<BdProject> list=new ArrayList<>();

@@ -64,7 +64,7 @@
                 <a class="retrieve">忘记密码</a>
             </div>
         </div>
-        <p class="bottom">福建省广电智能系统集成工贸有限公司@股权所有</p>
+        <p class="bottom">福建省广电智能系统集成工贸有限公司@股份所有</p>
     </div>
 </div>
 </body>
@@ -80,5 +80,4 @@
         }
         return flag;
     }
-
 </script>

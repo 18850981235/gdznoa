@@ -36,4 +36,10 @@ public class UtilAciton {
     public String getDeptUsers(){
         return JSONObject.toJSONString(deptService.getDeptUsers(),SerializerFeature.DisableCircularReferenceDetect);
     }
+
+    @RequestMapping(value = "/getDept",produces = "text/html;charset=UTF-8")
+    @ResponseBody
+    public String getDept(){
+        return JSONObject.toJSONString(deptService.getDeptList(0),SerializerFeature.DisableCircularReferenceDetect);
+    }
 }

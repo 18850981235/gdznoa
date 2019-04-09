@@ -31,27 +31,48 @@
                      select="com.dao.sys.UserMapper.getByID">
         </association>
     </resultMap>
-    <select id="getList">
+    <select id="getList" resultMap="BaseResultMap">
         SELECT * FROM `mc_stamp`
-        <!--<trim prefix="where" prefixOverrides="and">
-            <if test="name != null">
-                and `name` like CONCAT('%',#{name},'%')
+        <trim prefix="where" prefixOverrides="and">
+            <if test="stampType != null">
+                and stamp_type` like CONCAT('%',#{stampType},'%')
             </if>
             <if test="deptid != 0">
                 and deptid=#{deptid}
             </if>
-            <if test="unitType != null">
-                and unit_type=#{unitType}
+            <if test="userid != 0">
+                and userid=#{userid}
+            </if>
+            <if test="start != null">
+                and `createtime` &gt;= #{start}
+            </if>
+            <if test="end != null">
+                and `createtime` &lt;= #{end}
+            </if>
+        </trim>
+        <if test="pageSize!=0">
+            LIMIT #{pageIndex},#{pageSize}
+        </if>
+    </select>
+    <select id="getCount" resultType="int">
+        SELECT  count(1) FROM `mc_stamp`
+        <trim prefix="where" prefixOverrides="and">
+            <if test="stampType != null">
+                and stamp_type` like CONCAT('%',#{stampType},'%')
+            </if>
+            <if test="deptid != 0">
+                and deptid=#{deptid}
             </if>
             <if test="userid != 0">
                 and userid=#{userid}
             </if>
+            <if test="start != null">
+                and `createtime` &gt;= #{start}
+            </if>
+            <if test="end != null">
+                and `createtime` &lt;= #{end}
+            </if>
         </trim>
-        <if test="pageIndex!=0 and pageSize!=0">
-            LIMIT #{pageIndex},#{pageSize}
-        </if>-->
-    </select>
-    <select id="getCount">
     </select>
     <select id="getListById" resultMap="BaseResultMap">
         SELECT *

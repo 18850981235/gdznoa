@@ -3,15 +3,19 @@ package com.service.mc;
 import com.beans.McStamp;
 import com.beans.SysApprovalDetailed;
 import com.beans.SysApprovalProcess;
+import com.dao.mc.McStampMapper;
 import com.dao.sys.ApprovalDetailedMapper;
 import com.dao.sys.ApprovalProcessMapper;
-import com.dao.mc.McStampMapper;
+import com.util.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import javax.annotation.Resource;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author 李鹏熠
@@ -92,4 +96,24 @@ public class McStampServiceImpl implements McStampService {
         return num;
     }
 
+    @Override
+    public Map<String, Object> getList(String stampType, int deptid, int userid, Date start, Date end,int pageIndex) {
+        Map<String, Object> map=new HashMap<>();
+        Page page=new Page();
+        try {
+            if (pageIndex == 0) {
+                pageIndex = 1;
+            }
+            page.setPageSize(10);
+            page.setTotalCount(mcStampMapper.getCount(stampType,deptid,userid,start,end));
+            page.setCurrentPageNo(pageIndex);
+            List<McStamp> list=mcStampMapper.getList(stampType,deptid,userid,start,end,(page.getCurrentPageNo()-1)*page.getPageSize(),page.getPageSize());
+            map.put("page",page);
+            map.put("list",list);
+        } catch (Exception e) {
+            e.printStackTrace();
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+        }
+        return map;
+    }
 }
