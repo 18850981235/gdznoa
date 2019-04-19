@@ -18,6 +18,4 @@ public class BdClientContacts {
   private String email;
   private String content;
   private String clientname;
-
-
 }

@@ -53,5 +53,4 @@ public class BdProject {
   @DateTimeFormat(pattern = "yyyy-MM-dd")
   private Date updatetime;
 
-
 }

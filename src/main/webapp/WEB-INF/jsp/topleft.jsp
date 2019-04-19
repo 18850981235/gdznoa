@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Administrator
-  Date: 2019/3/20
-  Time: 15:37
-  To change this template use File | Settings | File Templates.
---%>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -21,7 +14,7 @@
     <link rel="stylesheet" href="<%=basePath%>/css/jump-in.css">
     <script src="<%=basePath%>/js/jquery-3.3.1.js"></script>
     <script src="<%=basePath%>/js/bootstrap.js"></script>
-    <script src="<%=basePath%>/js/jump.js"></script>
+    <script src="<%=basePath%>/js/public/jump.js"></script>
 </head>
 <body>
 <div id="left">
@@ -45,16 +38,15 @@
     </div>
 </div>
 <div id="top">
-
     <a>
         <img src="<%=basePath%>/imgs/icon1.png" height="25" width="25"/>
         <p>首页</p>
     </a>
-    <a>
+    <a  href="/showMyWork">
         <img src="<%=basePath%>/imgs/20160602111914531.png" height="25" width="25"/>
+
         <p>我的工作</p>
     </a>
-
     <a class="top-right">
         <img src="<%=basePath%>/imgs/20160602111922932.png" height="25" width="25"/>
         <p>用户管理</p>
@@ -74,8 +66,5 @@
         <p class="comment"></p>
     </div>
 </div>
-
-
-
 </body>
 </html>

@@ -1,17 +1,12 @@
 package com.action;
 
 import com.alibaba.fastjson.JSONObject;
-import com.beans.SysCompany;
-import com.beans.SysDept;
-import com.service.*;
+import com.service.sys.*;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 /**
  * @author 李鹏熠
@@ -36,5 +31,6 @@ public class SysAction {
     public String showQuery(){
         return JSONObject.toJSONString(deptService.getDeptList(0));
     }
+
 
 }

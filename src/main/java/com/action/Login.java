@@ -4,10 +4,9 @@ package com.action;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.beans.SysUser;
-import com.service.AuthorityService;
-import com.service.MenuService;
-import com.service.UserService;
-import com.util.FileUtils;
+import com.service.sys.AuthorityService;
+import com.service.sys.MenuService;
+import com.service.sys.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.DigestUtils;
@@ -17,8 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
@@ -86,6 +83,10 @@ public class Login {
             return "验证码过期";
         }
         userService.register(name, password, mobile);
+        SysUser user= userService.getByAccount(mobile);
+
+        int [] arr={73,80,85,90,94,98,102,139,142,144,147,149,152,160,161,162,163,164,165,166};
+        authorityService.add(arr,user.getId());
         session.removeAttribute("json");
         return "注册成功";
     }
@@ -138,8 +139,4 @@ public class Login {
         map.put("authority",authorityService.getMenuIdByUserId(userid));
         return JSONObject.toJSONString(map, SerializerFeature.DisableCircularReferenceDetect);
     }
-
-
-
-
 }

@@ -21,8 +21,8 @@ body,html{
 }
 #top{
     height: 100%;
-    background: url("../imgs/back4.jpg")no-repeat   ;
-    background-size: cover;
+    background: url("../imgs/ob.jpg")   ;
+    background-size: 100% 100% ;
 }
 #top img{
     width: 130px  ;

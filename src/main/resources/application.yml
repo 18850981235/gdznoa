@@ -1,12 +1,12 @@
-debug: true
 spring:
   devtools:
     restart:
-      enabled: true
+      enabled: true #热部署
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/oa?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&serverTimezone=GMT%2B8
+    url: jdbc:mysql://127.0.0.1:3306/oa?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8&allowMultiQueries=true
     username: root
     password: 123456
+
   mvc:
     view:
       prefix: /WEB-INF/jsp/

@@ -29,5 +29,10 @@ public class McDatumCost {
   private int processUserid;
   private String processState;
 
+  private SysDept dept;
+  private SysUser user;
+  private SysApprovalProcess process;
+  private SysUser processUser;
+  private String projectName;
 
 }

@@ -1,183 +1,229 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.dao.McMaterialsMapper" >
-  <resultMap id="BaseResultMap" type="com.beans.McMaterials" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="deptid" property="deptid" jdbcType="INTEGER" />
-    <result column="userid" property="userid" jdbcType="INTEGER" />
-    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
-    <result column="projectid" property="projectid" jdbcType="INTEGER" />
-    <result column="content" property="content" jdbcType="VARCHAR" />
-    <result column="offer_tpye" property="offerTpye" jdbcType="VARCHAR" />
-    <result column="purpose" property="purpose" jdbcType="VARCHAR" />
-    <result column="consignee" property="consignee" jdbcType="VARCHAR" />
-    <result column="consignee_address" property="consigneeAddress" jdbcType="VARCHAR" />
-    <result column="consignee_phone" property="consigneePhone" jdbcType="VARCHAR" />
-    <result column="accessory" property="accessory" jdbcType="VARCHAR" />
-    <result column="processid" property="processid" jdbcType="INTEGER" />
-    <result column="process_userid" property="processUserid" jdbcType="INTEGER" />
-    <result column="process_state" property="processState" jdbcType="VARCHAR" />
-    <association property="dept" javaType="sysdept" column="deptid"
-                 select="com.dao.DeptMapper.getListById">
-    </association>
-    <association property="user" javaType="sysuser" column="userid"
-                 select="com.dao.UserMapper.getByID">
-    </association>
-    <!--<association property="project" javaType="BdProject" column="projectid"
-                 select="">
-    </association>-->
-    <association property="process" javaType="SysApprovalProcess" column="processid"
-                 select="com.dao.ApprovalProcessMapper.getProcessById">
-    </association>
-    <association property="processUser" javaType="sysuser" column="process_userid"
-                 select="com.dao.UserMapper.getByID">
-    </association>
-  </resultMap>
-  <insert id="add" parameterType="McMaterials" >
-    insert into mc_materials
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="deptid != 0" >
-        deptid,
-      </if>
-      <if test="userid != 0" >
-        userid,
-      </if>
-      <if test="createtime != null" >
-        createtime,
-      </if>
-      <if test="projectid != 0" >
-        projectid,
-      </if>
-      <if test="content != null" >
-        content,
-      </if>
-      <if test="offerTpye != null" >
-        offer_tpye,
-      </if>
-      <if test="purpose != null" >
-        purpose,
-      </if>
-      <if test="consignee != null" >
-        consignee,
-      </if>
-      <if test="consigneeAddress != null" >
-        consignee_address,
-      </if>
-      <if test="consigneePhone != null" >
-        consignee_phone,
-      </if>
-      <if test="accessory != null" >
-        accessory,
-      </if>
-      <if test="processid != 0" >
-        processid,
-      </if>
-      <if test="processUserid != 0" >
-        process_userid,
-      </if>
-      <if test="processState != null" >
-        process_state,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="deptid != null" >
-        #{deptid},
-      </if>
-      <if test="userid != 0" >
-        #{userid},
-      </if>
-      <if test="createtime != null" >
-        #{createtime},
-      </if>
-      <if test="projectid != null" >
-        #{projectid},
-      </if>
-      <if test="content != null" >
-        #{content},
-      </if>
-      <if test="offerTpye != null" >
-        #{offerTpye},
-      </if>
-      <if test="purpose != null" >
-        #{purpose},
-      </if>
-      <if test="consignee != null" >
-        #{consignee},
-      </if>
-      <if test="consigneeAddress != null" >
-        #{consigneeAddress},
-      </if>
-      <if test="consigneePhone != null" >
-        #{consigneePhone},
-      </if>
-      <if test="accessory != null" >
-        #{accessory},
-      </if>
-      <if test="processid != null" >
-        #{processid},
-      </if>
-      <if test="processUserid != null" >
-        #{processUserid},
-      </if>
-      <if test="processState != null" >
-        #{processState},
-      </if>
-    </trim>
-  </insert>
+<mapper namespace="com.dao.mc.McMaterialsMapper">
+    <resultMap id="BaseResultMap" type="com.beans.McMaterials">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="deptid" property="deptid" jdbcType="INTEGER"/>
+        <result column="userid" property="userid" jdbcType="INTEGER"/>
+        <result column="createtime" property="createtime" jdbcType="TIMESTAMP"/>
+        <result column="projectid" property="projectid" jdbcType="INTEGER"/>
+        <result column="content" property="content" jdbcType="VARCHAR"/>
+        <result column="offer_tpye" property="offerTpye" jdbcType="VARCHAR"/>
+        <result column="purpose" property="purpose" jdbcType="VARCHAR"/>
+        <result column="consignee" property="consignee" jdbcType="VARCHAR"/>
+        <result column="consignee_address" property="consigneeAddress" jdbcType="VARCHAR"/>
+        <result column="consignee_phone" property="consigneePhone" jdbcType="VARCHAR"/>
+        <result column="accessory" property="accessory" jdbcType="VARCHAR"/>
+        <result column="processid" property="processid" jdbcType="INTEGER"/>
+        <result column="process_userid" property="processUserid" jdbcType="INTEGER"/>
+        <result column="process_state" property="processState" jdbcType="VARCHAR"/>
+        <result column="projectName" property="projectName" jdbcType="VARCHAR"/>
+        <association property="dept" javaType="com.beans.SysDept" column="deptid"
+                     select="com.dao.sys.DeptMapper.getListById">
+        </association>
+        <association property="user" javaType="com.beans.SysUser" column="userid"
+                     select="com.dao.sys.UserMapper.getByID">
+        </association>
+        <!--<association property="project" javaType="BdProject" column="projectid"
+                     select="">
+        </association>-->
+        <association property="process" javaType="com.beans.SysApprovalProcess" column="processid"
+                     select="com.dao.sys.ApprovalProcessMapper.getProcessById">
+        </association>
+        <association property="processUser" javaType="com.beans.SysUser" column="process_userid"
+                     select="com.dao.sys.UserMapper.getByID">
+        </association>
+    </resultMap>
+    <insert id="add" parameterType="com.beans.McMaterials">
+        insert into mc_materials
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="deptid != 0">
+                deptid,
+            </if>
+            <if test="userid != 0">
+                userid,
+            </if>
+            <if test="createtime != null">
+                createtime,
+            </if>
+            <if test="projectid != 0">
+                projectid,
+            </if>
+            <if test="content != null">
+                content,
+            </if>
+            <if test="offerTpye != null">
+                offer_tpye,
+            </if>
+            <if test="purpose != null">
+                purpose,
+            </if>
+            <if test="consignee != null">
+                consignee,
+            </if>
+            <if test="consigneeAddress != null">
+                consignee_address,
+            </if>
+            <if test="consigneePhone != null">
+                consignee_phone,
+            </if>
+            <if test="accessory != null">
+                accessory,
+            </if>
+            <if test="processid != 0">
+                processid,
+            </if>
+            <if test="processUserid != 0">
+                process_userid,
+            </if>
+            <if test="processState != null">
+                process_state,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="deptid != null">
+                #{deptid},
+            </if>
+            <if test="userid != 0">
+                #{userid},
+            </if>
+            <if test="createtime != null">
+                #{createtime},
+            </if>
+            <if test="projectid != 0">
+                #{projectid},
+            </if>
+            <if test="content != null">
+                #{content},
+            </if>
+            <if test="offerTpye != null">
+                #{offerTpye},
+            </if>
+            <if test="purpose != null">
+                #{purpose},
+            </if>
+            <if test="consignee != null">
+                #{consignee},
+            </if>
+            <if test="consigneeAddress != null">
+                #{consigneeAddress},
+            </if>
+            <if test="consigneePhone != null">
+                #{consigneePhone},
+            </if>
+            <if test="accessory != null">
+                #{accessory},
+            </if>
+            <if test="processid != null">
+                #{processid},
+            </if>
+            <if test="processUserid != null">
+                #{processUserid},
+            </if>
+            <if test="processState != null">
+                #{processState},
+            </if>
+        </trim>
+    </insert>
 
-  <update id="updateById" parameterType="McMaterials" >
-    update mc_materials
-    <set >
-      <if test="deptid != 0" >
-        deptid = #{deptid},
-      </if>
-      <if test="userid != 0" >
-        userid=#{userid},
-      </if>
-      <if test="createtime != null" >
-        createtime = #{createtime},
-      </if>
-      <if test="projectid != 0" >
-        projectid = #{projectid},
-      </if>
-      <if test="content != null" >
-        content = #{content},
-      </if>
-      <if test="offerTpye != null" >
-        offer_tpye = #{offerTpye},
-      </if>
-      <if test="purpose != null" >
-        purpose = #{purpose},
-      </if>
-      <if test="consignee != null" >
-        consignee = #{consignee},
-      </if>
-      <if test="consigneeAddress != null" >
-        consignee_address = #{consigneeAddress},
-      </if>
-      <if test="consigneePhone != null" >
-        consignee_phone = #{consigneePhone},
-      </if>
-      <if test="accessory != null" >
-        accessory = #{accessory},
-      </if>
-      <if test="processid != 0" >
-        processid = #{processid},
-      </if>
-      <if test="processUserid != 0" >
-        process_userid = #{processUserid},
-      </if>
-      <if test="processState != null" >
-        process_state = #{processState},
-      </if>
-    </set>
-    where id = #{id}
-  </update>
+    <update id="updateById" parameterType="com.beans.McMaterials">
+        update mc_materials
+        <set>
+            <if test="deptid != 0">
+                deptid = #{deptid},
+            </if>
+            <if test="userid != 0">
+                userid=#{userid},
+            </if>
+            <if test="createtime != null">
+                createtime = #{createtime},
+            </if>
+            <if test="projectid != 0">
+                projectid = #{projectid},
+            </if>
+            <if test="content != null">
+                content = #{content},
+            </if>
+            <if test="offerTpye != null">
+                offer_tpye = #{offerTpye},
+            </if>
+            <if test="purpose != null">
+                purpose = #{purpose},
+            </if>
+            <if test="consignee != null">
+                consignee = #{consignee},
+            </if>
+            <if test="consigneeAddress != null">
+                consignee_address = #{consigneeAddress},
+            </if>
+            <if test="consigneePhone != null">
+                consignee_phone = #{consigneePhone},
+            </if>
+            <if test="accessory != null">
+                accessory = #{accessory},
+            </if>
+            <if test="processid != 0">
+                processid = #{processid},
+            </if>
+            <if test="processUserid != 0">
+                process_userid = #{processUserid},
+            </if>
+            <if test="processState != null">
+                process_state = #{processState},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
 
-  <select id="getList">
+    <select id="getListById" resultMap="BaseResultMap">
+        SELECT *,`bd_project`.`abbreviation` AS projectName
+        FROM mc_materials,`bd_project`
+        WHERE  `projectid`=`bd_project`.`id` AND  `mc_materials`.id=#{id}
+    </select>
 
-  </select>
-  <select id="getListCount">
+    <select id="getList" resultMap="BaseResultMap">
+        SELECT * from mc_materials
+        <trim prefix="where" prefixOverrides="and">
+            <if test="userid != 0">
+                and userid=#{userid}
+            </if>
+            <if test="deptid != 0">
+                and deptid=#{deptid}
+            </if>
+            <if test="offerTpye != null">
+                and offer_tpye=#{offerTpye}
+            </if>
+            <if test="start != null">
+                and `createtime` &gt;= #{start}
+            </if>
+            <if test="end != null">
+                and `createtime` &lt;= #{end}
+            </if>
+        </trim>
+        <if test="pageSize!=0">
+            LIMIT #{pageIndex},#{pageSize}
+        </if>
 
-  </select>
+    </select>
+
+    <select id="getCount" resultType="int">
+        SELECT count(1) from mc_materials
+        <trim prefix="where" prefixOverrides="and">
+            <if test="userid != 0">
+                and userid=#{userid}
+            </if>
+            <if test="deptid != 0">
+                and deptid=#{deptid}
+            </if>
+            <if test="offerTpye != null">
+                and offer_tpye=#{offerTpye}
+            </if>
+            <if test="start != null">
+                and `createtime` &gt;= #{start}
+            </if>
+            <if test="end != null">
+                and `createtime` &lt;= #{end}
+            </if>
+        </trim>
+    </select>
 </mapper>

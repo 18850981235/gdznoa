@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.dao.BdClientContactsMapper">
-    <resultMap id="" type="BdClientContacts">
+<mapper namespace="com.dao.bd.BdClientContactsMapper">
 
-    </resultMap>
     <insert id="add">
         insert into bd_client_contacts
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -91,7 +89,7 @@
         where id=#{id}
     </update>
 
-    <select id="getContactsList" resultType="BdClientContacts">
+    <select id="getContactsList" resultType="com.beans.BdClientContacts">
         SELECT `bd_client_contacts`.* ,`bd_client`.`name` AS clientname
         FROM `bd_client_contacts`,`bd_client`
         <trim prefix="where" prefixOverrides="and">
@@ -122,7 +120,7 @@
         </trim>
     </select>
 
-    <select id="getContactsById" resultType="BdClientContacts">
+    <select id="getContactsById" resultType="com.beans.BdClientContacts">
         SELECT `bd_client_contacts`.*,`bd_client`.`name` AS clientname
         FROM `bd_client_contacts`,
              `bd_client`
@@ -131,7 +129,7 @@
           and
             `bd_client_contacts`.id=#{id}
     </select>
-    <select id="getContactsByClientid" resultType="BdClientContacts">
+    <select id="getContactsByClientid" resultType="com.beans.BdClientContacts">
         SELECT `bd_client_contacts`.*,`bd_client`.`name` AS clientname
         FROM `bd_client_contacts`,
              `bd_client`

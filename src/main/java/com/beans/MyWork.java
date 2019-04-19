@@ -1,7 +1,9 @@
 package com.beans;
 
+import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
-
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -15,6 +17,9 @@ public class MyWork {
     private int id;
     private SysApprovalProcess process;
     private SysUser user;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JSONField(format = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date createtime;
     private SysUser processUser;
 

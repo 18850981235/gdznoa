@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.dao.McFileBorrowMapper">
+<mapper namespace="com.dao.mc.McFileBorrowMapper">
     <resultMap id="BaseResultMap" type="com.beans.McFileBorrow">
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="deptid" property="deptid" jdbcType="INTEGER"/>
@@ -19,20 +19,20 @@
         <result column="process_userid" property="processUserid" jdbcType="INTEGER"/>
         <result column="process_state" property="processState" jdbcType="VARCHAR"/>
         <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP"/>
-        <association property="dept" javaType="sysdept" column="deptid"
-                     select="com.dao.DeptMapper.getListById">
+        <association property="dept" javaType="com.beans.SysDept" column="deptid"
+                     select="com.dao.sys.DeptMapper.getListById">
         </association>
-        <association property="user" javaType="sysuser" column="userid"
-                     select="com.dao.UserMapper.getByID">
+        <association property="user" javaType="com.beans.SysUser" column="userid"
+                     select="com.dao.sys.UserMapper.getByID">
         </association>
-        <association property="process" javaType="SysApprovalProcess" column="processid"
-                     select="com.dao.ApprovalProcessMapper.getProcessById">
+        <association property="process" javaType="com.beans.SysApprovalProcess" column="processid"
+                     select="com.dao.sys.ApprovalProcessMapper.getProcessById">
         </association>
-        <association property="processUser" javaType="sysuser" column="process_userid"
-                     select="com.dao.UserMapper.getByID">
+        <association property="processUser" javaType="com.beans.SysUser" column="process_userid"
+                     select="com.dao.sys.UserMapper.getByID">
         </association>
     </resultMap>
-    <select id="getListById">
+    <select id="getListById" resultMap="BaseResultMap">
         select *
         from mc_file_borrow
         where id = #{id}
@@ -194,4 +194,49 @@
             </if>
         </trim>
     </insert>
+    <select id="getList" resultMap="BaseResultMap">
+        select *
+        from mc_file_borrow
+        <trim prefix="where" prefixOverrides="and">
+            <if test="userid != 0">
+                and  userid=#{userid}
+            </if>
+            <if test="deptid != 0">
+                and  deptid=#{deptid}
+            </if>
+            <if test="name != null">
+                and `name` like CONCAT('%',#{name},'%')
+            </if>
+            <if test="start != null">
+                and `createtime` &gt;= #{start}
+            </if>
+            <if test="end != null">
+                and `createtime` &lt;= #{end}
+            </if>
+        </trim>
+        <if test="pageSize!=0">
+            LIMIT #{pageIndex},#{pageSize}
+        </if>
+    </select>
+    <select id="getCount" resultType="int">
+        select count(1)
+        from mc_file_borrow
+        <trim prefix="where" prefixOverrides="and">
+            <if test="userid != 0">
+                and  userid=#{userid}
+            </if>
+            <if test="deptid != 0">
+                and  deptid=#{deptid}
+            </if>
+            <if test="name != null">
+                and `name` like CONCAT('%',#{name},'%')
+            </if>
+            <if test="start != null">
+                and `createtime` &gt;= #{start}
+            </if>
+            <if test="end != null">
+                and `createtime` &lt;= #{end}
+            </if>
+        </trim>
+    </select>
 </mapper>

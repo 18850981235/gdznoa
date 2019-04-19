@@ -1,0 +1,44 @@
+#content-in{
+    width: 91%;
+    height: 80% ;
+    position: absolute;
+    left: 9% ;
+    top: 130px ;
+    display: inline-block;
+    /*background-color: #f6f7f9;*/
+    overflow-y:auto;
+    overflow-x:auto;
+}
+#center{
+    position: absolute;
+    top: 10px ;
+    left: calc(50% - 300px);
+}
+table{
+    background-color: #ffffff;
+}
+#content-in th{
+    height: 45px ;
+    text-align: center;
+    background-color: #efefef;
+}
+#content-in td{
+    padding: 5px ;
+}
+#content-in .choice{
+    background-color: #e0e0e0;
+}
+#content-in input{
+    border: 1px solid #c0bbb4;
+}
+#content-in .add-to{
+    color: blue;
+}
+@media screen and (max-width: 1340px) {
+    #content-in{
+        width: 1276px ;
+        position: absolute;
+        left: 126px ;
+        top:130px;
+    }
+}

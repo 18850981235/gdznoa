@@ -20,18 +20,20 @@
     <link rel="stylesheet" href="<%=basePath%>/css/bootstrap.css">
     <link rel="stylesheet" href="<%=basePath%>/icon-font/iconfont.css">
     <link rel="stylesheet" href="<%=basePath%>/css/jump-in.css">
-    <link rel="stylesheet" href="<%=basePath%>/css/jump-project-apply.css">
+    <link rel="stylesheet" href="<%=basePath%>/css/bd/project/projectAdd.css">
     <script src="<%=basePath%>/js/jquery-3.3.1.js"></script>
     <script src="<%=basePath%>/js/bootstrap.js"></script>
-    <script src="<%=basePath%>/js/jump.js"></script>
-    <script src="<%=basePath%>/js/jump-no.js"></script>
+    <script src="<%=basePath%>/js/public/jump.js"></script>
+    <script src="<%=basePath%>/js/public/responsible.js"></script>
+    <script src="<%=basePath%>/js/public/see.js"></script>
+    <script src="<%=basePath%>/js/public/company.js"></script>
+    <script src="<%=basePath%>/js/bd/project/projectPadute.js"></script>
 </head>
 <body>
-
 <jsp:include page="../../in-topleft.jsp"/>
 <div id="page">
     <!---->
-    <a class="page-left ">项目立项</a>
+    <a class="page-left ">立项修改</a>
 </div>
 <div id="choice" style="display: none">
     <p class="title">
@@ -42,7 +44,7 @@
         <li style="display:none;">
             <a href="#" class="click"></a>
             <ul class="name" style="display: none">
-                <li>
+                <li class="co">
                     <a class="upload" href="">
                         <span class="name-block"></span>
                         <span class="name-none" style="display: none"></span>
@@ -55,16 +57,17 @@
         <a class="close-in" >返回</a >
     </div>
 </div>
+
 <div id="choice1" style="display: none">
     <p class="title">
         <img src="<%=basePath%>/imgs/root.png" height="40" width="40"/>
         福建省广电智能系统集成工贸有限公司
     </p>
     <ul class="name1" >
-        <li>
+        <li class="co1">
             <a class="upload1" href="">
-                <span class="name-block"></span>
-                <span class="name-none" style="display: none"></span>
+                <span class="name-block1"></span>
+                <span class="name-none1" style="display: none"></span>
             </a>
         </li>
     </ul>
@@ -79,13 +82,13 @@
         福建省广电智能系统集成工贸有限公司
     </p>
     <ul class="yiji-no2">
-        <li style="display:block;">
+        <li style="display:none;">
             <a href="#" class="click"></a>
-            <ul class="name" style="display: none">
+            <ul class="name2" style="display: none">
                 <li>
                     <a class="upload-noe" href="">
-                        <span class="name-block"></span>
-                        <span class="name-none" style="display: none"></span>
+                        <span class="name-block2"></span>
+                        <span class="name-none2" style="display: none"></span>
                     </a>
                 </li>
             </ul>
@@ -97,143 +100,14 @@
 </div>
 <!---->
 <div id="content-in">
-    <form method="post" action="/bd/project/addProject" enctype="multipart/form-data">
-        <table border="1">
-            <tr style="height: 30px ">
-                <td style="width: 150px ">项目编号:</td>
-                <td style="width: 300px "><input required name="code" value="${project.project.code}"></td>
-                <td style="width: 150px ">项目简称</td>
-                <td style="width: 300px "><input required name="abbreviation" value="${project.project.abbreviation}"></td>
-            </tr>
-            <tr style="height: 30px ">
-                <td>项目名称:</td>
-                <td colspan="3"><input required name="name" value="${project.project.name}"></td>
-            </tr>
-            <tr >
-                <td>项目负责人:</td>
-                <td >
-                    <textarea class="Eliminate" readonly>${project.project.principalUser.name}</textarea>
-                    <input style="display: none" class="Eliminate-no"  name="principal" value="${project.project.principalUser.id}">
-                    <a target="_blank " class="add-to">添加</a>
-                    <a class="clear-to" >
-                        <input value="清空" class="input"  onClick="" type="button">
-                    </a>
-                </td>
-                <td>项目地点：</td>
-                <td><input name="site" value="${project.project.site}" ></td>
-            </tr>
-            <tr style="height: 30px ">
-                <td>项目类别:</td>
-                <td colspan="3">
-                    <select  style="height: 25px " required name="type">
+    <div id="center">
 
-                        <option value="">请选择</option>
-                        <option <c:if test="${project.project.type=='政府公建项目'}">selected</c:if> value="政府公建项目">政府公建项目</option>
-                        <option <c:if test="${project.project.type=='国有企业项目'}">selected</c:if> value="国有企业项目" >国有企业项目</option>
-                        <option <c:if test="${project.project.type=='民营企业项目'}">selected</c:if> value="民营企业项目">民营企业项目</option>
-                        <option <c:if test="${project.project.type=='地产类项'}">selected</c:if> value="地产类项">地产类项目</option>
-                        <option <c:if test="${project.project.type=='政府BT型项目'}">selected</c:if> value="政府BT型项目">政府BT型项目</option>
-                        <option <c:if test="${project.project.type=='国企BT型项目'}">selected</c:if> value="国企BT型项目">国企BT型项目</option>
-                        <option <c:if test="${project.project.type=='其他类型项目'}">selected</c:if> value="其他类型项目">其他类型项目</option>
-                    </select>
-                </td>
-            </tr>
-            <tr style="height: 30px ">
-                <td>项目阶段:</td>
-                <td>
-                    <select style="height: 25px " name="stage">
-                        <option value="">请选择</option>
-                        <option <c:if test="${project.project.stage=='前期业务阶段'}">selecte</c:if> value="政府公建项目" >前期业务阶段</option>
-                        <option <c:if test="${project.project.stage=='签约施工阶段'}">selecte</c:if> value="国有企业项目" >签约施工阶段</option>
-                        <option <c:if test="${project.project.stage=='售后服务阶段'}">selecte</c:if> value="民营企业项目" >售后服务阶段</option>
-                        <option <c:if test="${project.project.stage=='合约完成结束'}">selecte</c:if> value="地产类项" >合约完成结束</option>
-                        <option <c:if test="${project.project.stage=='未中标终止'}">selecte</c:if> value="政府BT型项目" >未中标终止</option>
-                    </select>
-                </td>
-                <td>项目预算金额：</td>
-                <td><input  name="budget" value="${project.project.budget}"></td>
-            </tr>
-            <tr style="height: 30px ">
-                <td>项目招标方式：</td>
-                <td>
-                    <select style="height: 25px " name="biddingType">
-                        <option value="">请选择</option>
+        <form action="/bd/project/update.html" method="post">
 
-                        <option value="公开招标" <c:if test="${project.project.biddingType=='公开招标'}">selecte</c:if>>公开招标</option>
-                        <option value="邀请招标" <c:if test="${project.project.biddingType=='邀请招标'}">selecte</c:if>>邀请招标</option>
-                        <option value="涉密招标" <c:if test="${project.project.biddingType=='涉密招标'}">selecte</c:if>>涉密招标</option>
-                    </select>
-                </td>
-                <td>预计项目投标时间：</td>
-                <td><input name="biddate" type="date" value="${project.project.biddate}"></td>
-            </tr>
-            <tr style="height: 30px ">
-                <td>项目单位名称</td>
-                <td>
-                    <textarea class="Eliminate-1" readonly required>${project.project.client.name}</textarea>
-                    <input style="display: none" class="Eliminate-no-1"  name="clientid" value="${project.project.client.id}" >
-                    <a target="_blank "  class="add-to1">添加</a>
-                    <a class="clear-to1" >
-                        <input value="清空" class="input1"  onClick="" type="button">
-                    </a>
-                </td>
-                <td>项目合作方式：</td>
-                <td>
-                    <select style="height: 25px " required name="cooperationType">
-                        <option value="">请选择</option>
-                        <option value="公司自主项目" <c:if test="${project.project.cooperationType=='公司自主项目'}">selecte</c:if>>公司自主项目</option>
-                        <option value="合作项目" <c:if test="${project.project.cooperationType=='合作项目'}">selecte</c:if>>合作项目</option>
-                    </select>
-                    <span>(*)</span>
-                </td>
-            </tr>
-            <tr style="height: 30px " >
-                <td>合作单位：</td>
-                <td><input name="cooperationUnit" value="${project.project.cooperationUnit}"></td>
-                <td>合作伙伴姓名：</td>
-                <td><input name="cooperationName" value="${project.project.cooperationName}"></td>
-            </tr>
-            <tr style="height: 30px ">
-                <td>职务：</td>
-                <td><input name="cooperationRole" value="${project.project.cooperationRole}"></td>
-                <td>联系方式：</td>
-                <td><input name="cooperationPhone" value="${project.project.cooperationPhone}"></td>
-            </tr>
-            <tr style="height: 30px ">
-                <td>项目立项时间：</td>
-                <td colspan="3"><input  type="date" name="createtime" value="${project.project.createtime}"></td>
-            </tr>
-            <tr style="height: 30px ">
-                <td>项目查看者：</td>
-                <td colspan="3" >
-                    <textarea class="eliminate-2"  readonly required></textarea>
-                    <input style="display: none" class="eliminate-no-2" name="examine">
-                    <a target="_blank "  class="add-to2">添加</a>
-                    <a class="clear-to2" >
-                        <input value="清空" class="input2"  onClick="" type="button">
-                    </a>
-                </td>
-            </tr>
-            <tr style="height: 30px ">
-                <td>项目描述：</td>
-                <td colspan="3">
-                    <textarea name="content">${project.project.content} </textarea>
-                </td>
-            </tr>
-            <tr style="height: 30px ">
-                <td>添加附件：</td>
-                <td colspan="3">
-                    ${project.project.accessory}
-                </td>
-            </tr>
-            <tr>
-                <td colspan="4" style="height:40px ; text-align: center">
-                    <input type="submit" value="保存" style="background-color: #f6f7f9">
-                    <a href="" style="">返回</a>
-                </td>
-            </tr>
-        </table>
-    </form>
-</div>
+            <input id="ok" type="submit" value="保存" style="margin-left: 350px ">
+            <a href="" id="no" style="">返回</a>
+        </form>
+        </div>
+    </div>
 </body>
 </html>

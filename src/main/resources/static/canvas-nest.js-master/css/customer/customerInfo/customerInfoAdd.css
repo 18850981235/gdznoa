@@ -1,0 +1,36 @@
+
+#new{
+    width: 91%;
+    height: 80% ;
+    position: absolute;
+    left: 9% ;
+    top: 130px ;
+    display: inline-block;
+    /*background-color: #f6f7f9;*/
+    overflow-y:auto;
+    overflow-x:auto;
+}
+#new td{
+    padding-left: 3px ;
+    font-size: 10px ;
+    text-align: center;
+}
+#new td .add-to{
+    color: blue;
+}
+
+#center{
+    display: inline-block;
+    position: inherit;
+    top: 10px ;
+    left: calc(50% - 390px);
+}
+
+@media screen and (max-width: 1340px) {
+    #new{
+        width: 1276px ;
+        position: absolute;
+        left: 126px ;
+        top:130px;
+    }
+}

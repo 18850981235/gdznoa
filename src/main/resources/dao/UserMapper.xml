@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.dao.UserMapper">
-    <select id="getByAccount" resultType="sysuser" parameterType="String">
+<mapper namespace="com.dao.sys.UserMapper">
+    <select id="getByAccount" resultType="com.beans.SysUser" parameterType="String">
         SELECT `sys_user`.`id`,
                `sys_user`.`name`,
                `account`,
@@ -37,7 +37,7 @@
         VALUES (#{name}, #{mobile}, #{password}, #{mobile}, NOW())
     </insert>
 
-    <select id="getByID" resultType="sysuser" parameterType="int">
+    <select id="getByID" resultType="com.beans.SysUser" parameterType="int">
         SELECT `sys_user`.`id`,
                `sys_user`.`name`,
                `account`,
@@ -62,7 +62,7 @@
           AND `sys_user`.`id` = #{id}
     </select>
 
-    <select id="getUserList" resultType="sysuser">
+    <select id="getUserList" resultType="com.beans.SysUser">
         SELECT `sys_user`.`id`,
         `sys_user`.`name`,
         `account`,
@@ -97,7 +97,7 @@
             and `sys_user`.`roleid`=#{roleid}
         </if>
         ORDER BY `createtime` DESC
-        <if test="pageIndex!=0 and pageSize!=0">
+        <if test="pageIndex!=null and pageSize!=0">
             LIMIT #{pageIndex},#{pageSize}
         </if>
 
@@ -127,7 +127,7 @@
         WHERE `id` = #{id}
     </delete>
 
-    <update id="updateByID" parameterType="sysuser">
+    <update id="updateByID" parameterType="com.beans.SysUser">
         UPDATE `sys_user`
         <set>
             <if test="name!=null">
@@ -241,7 +241,7 @@
         </trim>
     </select>
 
-    <select id="getUserByIn" parameterType="String" resultType="sysuser">
+    <select id="getUserByIn" parameterType="String" resultType="com.beans.SysUser">
         select `name`,id from `sys_user` where id in(${examine})
         ORDER BY INSTR(#{examine},id);
     </select>
