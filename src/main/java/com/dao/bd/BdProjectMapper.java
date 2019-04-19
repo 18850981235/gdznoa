@@ -37,4 +37,5 @@ public interface BdProjectMapper {
     //按审批人员查询
     List<BdProject> getByProcessUser(@Param("processUserId") int processUserId);
 
+    List<BdProject> getProjectName();
 }

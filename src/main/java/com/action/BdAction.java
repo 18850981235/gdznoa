@@ -5,6 +5,7 @@ import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.beans.BdClient;
 import com.beans.BdClientContacts;
 import com.beans.BdProject;
+import com.beans.SysApprovalDetailed;
 import com.service.bd.BdClientContactsService;
 import com.service.bd.BdClientService;
 import com.service.bd.BdProjectService;
@@ -34,6 +35,7 @@ public class BdAction {
     private BdClientContactsService bdClientContactsService;
     @Resource(name = "bdProjectService")
     private BdProjectService bdProjectService;
+
     @InitBinder
     public void initBinder(WebDataBinder binder) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -117,8 +119,7 @@ public class BdAction {
     }
 
     @RequestMapping(value = "/client_contacts/add")
-    public String showclientContactsAdd(Model model) {
-        model.addAttribute("clientName", bdClientService.getClientName());
+    public String showclientContactsAdd() {
         return "/bd/clientContacts/clientContactsAdd";
     }
 
@@ -176,39 +177,69 @@ public class BdAction {
     @ResponseBody
     public String ProjectList(@RequestParam(required = false) String name, @RequestParam(required = false) String type,
                               @RequestParam(required = false) String code, @RequestParam(required = false) String status,
-                              @RequestParam(required = false) Date start, @RequestParam(required = false ) Date end,
+                              @RequestParam(required = false) Date start, @RequestParam(required = false) Date end,
                               @RequestParam(required = false, defaultValue = "0") int pageIndex, HttpSession session) {
         if (name == null || name == "") {
             name = null;
         }
         if (type == null || type == "") {
             type = null;
-        }if (code == null || code == "") {
+        }
+        if (code == null || code == "") {
             code = null;
         }
         if (status == null || status == "") {
             status = null;
         }
-        int userid =(int) session.getAttribute("userId");
+        int userid = (int) session.getAttribute("userId");
         return JSONObject.toJSONString(bdProjectService.getlist(userid, name, type, code, status, start, end, pageIndex)
                 , SerializerFeature.DisableCircularReferenceDetect);
     }
 
     @RequestMapping("/project/add")
-    public String showProjectAdd(){
+    public String showProjectAdd() {
         return "/bd/project/projectAdd";
     }
 
     @RequestMapping("/project/addProject")
-    public String projectAdd(BdProject project,HttpServletRequest httpServletRequest){
-        bdProjectService.add(project,httpServletRequest);
+    public String projectAdd(BdProject project, HttpServletRequest httpServletRequest) {
+        bdProjectService.add(project, httpServletRequest);
         return "redirect:/bd/project/query";
     }
 
     @RequestMapping("/project/update")
-    public String showProjectupdate(@RequestParam int id,Model model){
-        model.addAttribute("project", bdProjectService.getProjectById(id));
+    public String showProjectUpdate(@RequestParam int id, Model model) {
         return "/bd/project/projectUpdate";
+    }
+
+    @RequestMapping(value = "/project/update.html")
+    public String projectUpdate(BdProject project) {
+        bdProjectService.update(project);
+        return "redirect:/bd/project/query";
+    }
+
+    @RequestMapping(value = "/project/update.json", produces = "text/html;charset=UTF-8")
+    @ResponseBody
+    public String projectUpdateJson(@RequestParam int id) {
+        return JSONObject.toJSONString(bdProjectService.getProjectById(id)
+                , SerializerFeature.DisableCircularReferenceDetect);
+    }
+
+    @RequestMapping("/project/particular")
+    public String showProjectParticular() {
+        return "/bd/project/projectParticular";
+    }
+
+    @RequestMapping("/project/particular.html")
+    @ResponseBody
+    public String projectParticular(@RequestParam int id) {
+        return JSONObject.toJSONString(bdProjectService.getProjectById(id),
+                SerializerFeature.DisableCircularReferenceDetect);
+    }
+    @RequestMapping("/project/approvalDetailed")
+    public String projectParticular(SysApprovalDetailed approvalDetailed) {
+        bdProjectService.addProjectApproval(approvalDetailed);
+        return "redirect:/showMyWork";
     }
 
 }

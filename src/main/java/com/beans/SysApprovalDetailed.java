@@ -14,14 +14,14 @@ public class SysApprovalDetailed {
 
   private int id;
   private String approvalName;
-  private int approvalId;
+  private int approvalId;//id号
   private int approvalUser;
-  private String state;
+  private String state;//通过不通过
   @JsonFormat(pattern = "yyyy-MM-dd")
   @JSONField(format = "yyyy-MM-dd")
   @DateTimeFormat(pattern = "yyyy-MM-dd")
   private Date approvalDate;
-  private String opinion;
+  private String opinion;//审批内容
   private SysUser user;
 
 

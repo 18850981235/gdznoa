@@ -10,5 +10,6 @@ public class SysApprovalProcess {
   private int id;
   private String name;
   private String usersid;
+  private String url;
 
 }

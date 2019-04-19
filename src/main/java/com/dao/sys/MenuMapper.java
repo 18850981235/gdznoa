@@ -21,6 +21,9 @@ public interface MenuMapper {
         int updateById(SysMenu menu);
         //用id删除菜单信息
         int deleteById(@Param("id") int id);
-        //获取所有菜单信息
-        List<SysMenu> getMenuList(@Param("id") int id);
+        //用id查询菜单信息
+        List<SysMenu> getMenuListById(@Param("id") int id);
+        //查询所有菜单集合
+        List<SysMenu> getMenuList(@Param("pageIndex") int pageIndex,
+                                  @Param("pageSize") int pageSize);
 }

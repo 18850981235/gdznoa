@@ -5,6 +5,7 @@ import com.beans.SysApprovalDetailed;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -19,4 +20,7 @@ public interface BdProjectService {
                                 Date start, Date end, int pageIndex);
     Map<String,Object>  getProjectById(int id);
     int update(BdProject project);
+
+    List<BdProject> getProjectName();
+
 }

@@ -1,17 +1,17 @@
 package com.service.mc;
 
-import com.beans.McStamp;
-import com.beans.SysApprovalDetailed;
-import com.beans.SysApprovalProcess;
+import com.beans.*;
 import com.dao.mc.McStampMapper;
 import com.dao.sys.ApprovalDetailedMapper;
 import com.dao.sys.ApprovalProcessMapper;
+import com.util.FileUtils;
 import com.util.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -33,7 +33,7 @@ public class McStampServiceImpl implements McStampService {
 
 
     /**
-     * 添加盖章审批详情
+     * 添加盖章审批详情 修改盖章下一个审批人审批状态
      * @param detailed  审批详情实体类
      * @return 是否添加成功
      */
@@ -81,10 +81,15 @@ public class McStampServiceImpl implements McStampService {
      * @return 是否添加成功
      */
     @Override
-    public int add(McStamp stamp) {
+    public int add(McStamp stamp, HttpServletRequest request) {
         int num = 0;
         try {
+
             SysApprovalProcess process = approvalProcessMapper.getProcessById(12);
+            String accessory= FileUtils.uploadFile(request,"file");
+            if (accessory!=null&&!accessory.equals("")){
+                stamp.setAccessory(accessory);
+            }
             String[] arr = process.getUsersid().split(",");
             stamp.setProcessid(12);
             stamp.setProcessUserid(Integer.parseInt(arr[0]));
@@ -109,6 +114,31 @@ public class McStampServiceImpl implements McStampService {
             page.setCurrentPageNo(pageIndex);
             List<McStamp> list=mcStampMapper.getList(stampType,deptid,userid,start,end,(page.getCurrentPageNo()-1)*page.getPageSize(),page.getPageSize());
             map.put("page",page);
+            map.put("list",list);
+        } catch (Exception e) {
+            e.printStackTrace();
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+        }
+        return map;
+    }
+
+    @Override
+    public int update(McStamp stamp) {
+        return mcStampMapper.updateById(stamp);
+    }
+
+    @Override
+    public McStamp getListById(int id) {
+        return mcStampMapper.getListById(id);
+    }
+
+    @Override
+    public Map<String, Object> getParticular1ById(int id) {
+        Map<String, Object> map = new HashMap<>();
+        try {
+            McStamp mcStamp = mcStampMapper.getListById(id);
+            List<SysApprovalDetailed> list = approvalDetailedMapper.getListByapprovalId(id, "商务盖章");
+            map.put("mcStamp",mcStamp);
             map.put("list",list);
         } catch (Exception e) {
             e.printStackTrace();

@@ -97,7 +97,7 @@
             and `sys_user`.`roleid`=#{roleid}
         </if>
         ORDER BY `createtime` DESC
-        <if test="pageIndex!=0 and pageSize!=0">
+        <if test="pageIndex!=null and pageSize!=0">
             LIMIT #{pageIndex},#{pageSize}
         </if>
 

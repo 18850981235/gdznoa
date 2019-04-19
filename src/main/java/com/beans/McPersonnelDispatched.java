@@ -21,6 +21,9 @@ public class McPersonnelDispatched {
   private int projectid;
   private String demand;
   private int userid;
+  @JsonFormat(pattern = "yyyy-MM-dd")
+  @JSONField(format = "yyyy-MM-dd")
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
   private Date evectionTime;
   private double evectionCost;
   private String accessory;

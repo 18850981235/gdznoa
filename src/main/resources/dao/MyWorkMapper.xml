@@ -16,8 +16,92 @@
     </resultMap>
     <select id="getList" resultMap="BaseResultMap">
         DROP TABLE IF EXISTS tmp_table;
-        CREATE TEMPORARY TABLE tmp_table  SELECT `id`,`userid`,`processid`,`process_userid`,`createtime` FROM `mc_stamp` where `process_state`='进行中' and process_userid=#{userid};
-        INSERT INTO tmp_table  SELECT `id`,`principal` as userid,`processid`,`process_userid`,`createtime` FROM  `bd_project`where `process_state`='进行中'  and process_userid=#{userid};
-        SELECT * FROM tmp_table;
+        CREATE TEMPORARY TABLE tmp_table
+        <!--商务盖章申请-->
+        SELECT `id`,`userid`,`processid`,`process_userid`,`createtime`
+        FROM `mc_stamp`
+        where `process_state` = '进行中'
+          and process_userid = #{userid};
+        <!--项目立项申请-->
+        INSERT INTO tmp_table
+        SELECT `id`,`principal` as userid,`processid`,`process_userid`,`createtime`
+        FROM `bd_project`
+        where `process_state` = '进行中'
+          and process_userid = #{userid};
+        <!--原文件借用申请-->
+        INSERT INTO tmp_table
+        SELECT `id`,`userid`,`processid`,`process_userid`,`createtime`
+        FROM mc_file_borrow
+        where `process_state` = '进行中'
+          and process_userid = #{userid};
+        <!--人员派遣申请-->
+        INSERT INTO tmp_table
+        SELECT `id`,`userid`,`processid`,`process_userid`,`createtime`
+        FROM mc_personnel_dispatched
+        where `process_state` = '进行中'
+          and process_userid = #{userid};
+        <!--商务材料申请-->
+        INSERT INTO tmp_table
+        SELECT `id`,`userid`,`processid`,`process_userid`,`createtime`
+        FROM mc_materials
+        where `process_state` = '进行中'
+        and process_userid = #{userid};
+        <!--资料费申请-->
+        INSERT INTO tmp_table
+        SELECT `id`,`userid`,`processid`,`process_userid`,`createtime`
+        FROM `mc_datum_cost`
+        where `process_state` = '进行中'
+        and process_userid = #{userid};
+        <!--资质证书申请-->
+        INSERT INTO tmp_table
+        SELECT `id`,`userid`,`processid`,`process_userid`,`createtime`
+        FROM `mc_qualification_certificate`
+        where `process_state` = '进行中'
+        and process_userid = #{userid};
+        <!--注册备案申请-->
+        INSERT INTO tmp_table
+        SELECT `id`,`principal` as userid,`processid`,`process_userid`,`createtime`
+        FROM `mc_register_records`
+        where `process_state` = '进行中'
+        and process_userid = #{userid};
+
+        SELECT *
+        FROM tmp_table
+        <trim prefix="where" prefixOverrides="and">
+            <if test="id != 0">
+                and  id=#{id}
+            </if>
+            <if test="processid != 0">
+                and  processid=#{processid}
+            </if>
+            <if test="start != null">
+                and `createtime` &gt;= #{start}
+            </if>
+            <if test="end != null">
+                and `createtime` &lt;= #{end}
+            </if>
+        </trim>
+        ORDER BY `createtime`
+        <if test="pageSize!=0">
+            LIMIT #{pageIndex},#{pageSize}
+        </if>
+    </select>
+    <select id="getCount" resultType="int">
+        SELECT count(1)
+        FROM tmp_table
+        <trim prefix="where" prefixOverrides="and">
+            <if test="id != 0">
+                and  id=#{id}
+            </if>
+            <if test="processid != 0">
+                and  processid=#{processid}
+            </if>
+            <if test="start != null">
+                and `createtime` &gt;= #{start}
+            </if>
+            <if test="end != null">
+                and `createtime` &lt;= #{end}
+            </if>
+        </trim>
     </select>
 </mapper>

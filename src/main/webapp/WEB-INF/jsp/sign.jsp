@@ -29,7 +29,6 @@
 <body>
 <div id="on">
     <div id="on-in">
-
         <div class="on-time">
             <img class="logo" src="<%=basePath%>/imgs/logo.png" />
             <input id="time">
@@ -44,13 +43,12 @@
                     <span>${user.company}</span>
                     <a href="/page/quit">退出</a>
                 </form>
-
             </div>
         </div>
         <div class="content">
             <ul>
                 <li>
-                    <a href="" class="modular colour-1">
+                    <a href="/bd/project/query" class="modular colour-1">
                         <span class="iconfont icon-yewushouli size"></span>
                         <p class="name">项目报备</p>
                     </a>
@@ -94,7 +92,7 @@
             </ul>
             <ul>
                 <li>
-                    <a href="" class="modular colour-8">
+                    <a href="/bd/client/query" class="modular colour-8">
                         <span class="iconfont icon-kehuziliao size"></span>
                         <p class="name">客户CRM</p>
                     </a>
@@ -114,8 +112,6 @@
                         <span class="iconfont icon-fl-gongcheng size"></span>
                         <p class="name">工程管理</p>
                     </a>
-
-
                 </li>
             </ul>
             <ul>

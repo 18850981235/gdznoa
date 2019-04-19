@@ -83,6 +83,10 @@ public class Login {
             return "验证码过期";
         }
         userService.register(name, password, mobile);
+        SysUser user= userService.getByAccount(mobile);
+
+        int [] arr={73,80,85,90,94,98,102,139,142,144,147,149,152,160,161,162,163,164,165,166};
+        authorityService.add(arr,user.getId());
         session.removeAttribute("json");
         return "注册成功";
     }
@@ -135,8 +139,4 @@ public class Login {
         map.put("authority",authorityService.getMenuIdByUserId(userid));
         return JSONObject.toJSONString(map, SerializerFeature.DisableCircularReferenceDetect);
     }
-
-
-
-
 }

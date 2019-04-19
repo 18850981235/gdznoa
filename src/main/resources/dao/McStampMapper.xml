@@ -4,7 +4,6 @@
     <resultMap id="BaseResultMap" type="com.beans.McStamp">
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="deptid" property="deptid" jdbcType="INTEGER"/>
-        <result column="createtime" property="createtime" jdbcType="TIMESTAMP"/>
         <result column="userid" property="userid" jdbcType="INTEGER"/>
         <result column="phone" property="phone" jdbcType="VARCHAR"/>
         <result column="content" property="content" jdbcType="VARCHAR"/>
@@ -35,7 +34,7 @@
         SELECT * FROM `mc_stamp`
         <trim prefix="where" prefixOverrides="and">
             <if test="stampType != null">
-                and stamp_type` like CONCAT('%',#{stampType},'%')
+                and `stamp_type` like CONCAT('%',#{stampType},'%')
             </if>
             <if test="deptid != 0">
                 and deptid=#{deptid}
@@ -58,7 +57,7 @@
         SELECT  count(1) FROM `mc_stamp`
         <trim prefix="where" prefixOverrides="and">
             <if test="stampType != null">
-                and stamp_type` like CONCAT('%',#{stampType},'%')
+                and `stamp_type` like CONCAT('%',#{stampType},'%')
             </if>
             <if test="deptid != 0">
                 and deptid=#{deptid}

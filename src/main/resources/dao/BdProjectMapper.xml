@@ -291,13 +291,14 @@
     </delete>
     <select id="getList" resultMap="BaseResultMap">
         select *
-        from `bd_project`
+        from `bd_project`,`bd_client`
         <trim prefix="where" prefixOverrides="and">
+            `bd_client`.`id`=`clientid`
             <if test="name != null">
                 and `name` like CONCAT('%',#{name},'%')
             </if>
             <if test="type != null">
-                and `type`=#{type}
+                and unit_type=#{type}
             </if>
             <if test="code != null">
                 and `code`=#{code}
@@ -343,5 +344,8 @@
         SELECT *
         FROM `bd_project`
         WHERE `process_userid` = #{processUserId}
+    </select>
+    <select id="getProjectName" resultType="com.beans.BdProject">
+        select id,`abbreviation` from bd_project
     </select>
 </mapper>

@@ -28,7 +28,7 @@
 </div>
 <div id="top">
 
-    <a>
+    <a href="">
         <img src="<%=basePath%>/imgs/icon1.png" height="25" width="25"/>
         <p>首页</p>
     </a>

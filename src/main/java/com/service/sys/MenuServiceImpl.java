@@ -29,6 +29,7 @@ public class MenuServiceImpl  implements MenuService{
      */
     @Override
     public List<SysMenu> getMenuList(int id) {
-        return menuMapper.getMenuList(id);
+        return menuMapper.getMenuListById(id);
     }
+
 }

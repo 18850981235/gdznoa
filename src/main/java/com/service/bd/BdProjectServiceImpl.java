@@ -179,6 +179,7 @@ public class BdProjectServiceImpl implements BdProjectService {
             map.put("project",project);
             map.put("list",list);
             map.put("users",users);
+
         } catch (Exception e) {
             e.printStackTrace();
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
@@ -195,5 +196,11 @@ public class BdProjectServiceImpl implements BdProjectService {
     public int update(BdProject project) {
         return bdProjectMapper.updateById(project);
     }
+
+    @Override
+    public List<BdProject> getProjectName() {
+        return bdProjectMapper.getProjectName();
+    }
+
 
 }
