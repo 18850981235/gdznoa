@@ -45,7 +45,7 @@ public class McFileBorrowServiceImpl implements McFileBorrowService{
         try {
             approvalDetailedMapper.add(detailed);
             McFileBorrow fb_update = new McFileBorrow();
-            if (detailed.getState() == "通过") {
+            if (detailed.getState() .equals("通过")) {
                 String state = "进行中";
                 int processUserid = 0;
                 McFileBorrow fb=  mcFileBorrowMapper.getListById(detailed.getApprovalId());
@@ -95,6 +95,7 @@ public class McFileBorrowServiceImpl implements McFileBorrowService{
             String[] arr = process.getUsersid().split(",");
             fileBorrow.setProcessid(7);
             fileBorrow.setProcessUserid(Integer.parseInt(arr[0]));
+            fileBorrow.setProcessState("进行中");
             num = mcFileBorrowMapper.add(fileBorrow);
         } catch (Exception e) {
             e.printStackTrace();

@@ -36,6 +36,11 @@ public class McAction {
     private McStampService mcStampService;
     @Resource(name = "mcDatumCostService")
     private McDatumCostService mcDatumCostService;
+
+    @Resource(name = "mcQualificationService")
+    private McQualificationService mcQualificationService;
+    @Resource(name = "mcRegisterService")
+    private McRegisterService mcregisterservice;
     @InitBinder
     public void initBinder(WebDataBinder binder) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -105,7 +110,10 @@ public class McAction {
                 SerializerFeature.DisableCircularReferenceDetect);
     }
     @RequestMapping("/stamp/approvalDetailed")
-    public String stampParticular(SysApprovalDetailed approvalDetailed) {
+    public String stampParticular(SysApprovalDetailed approvalDetailed,HttpSession session) {
+        int userid=(int) session.getAttribute("userId");
+        approvalDetailed.setApprovalUser(userid);
+        approvalDetailed.setApprovalDate(new Date());
         mcStampService.addProjectApproval(approvalDetailed);
         return "redirect:/showMyWork";
     }
@@ -175,7 +183,10 @@ public class McAction {
                 SerializerFeature.DisableCircularReferenceDetect);
     }
     @RequestMapping("/borrow/approvalDetailed")
-    public String borrowParticular(SysApprovalDetailed approvalDetailed) {
+    public String borrowParticular(SysApprovalDetailed approvalDetailed,HttpSession session) {
+        int userid=(int) session.getAttribute("userId");
+        approvalDetailed.setApprovalUser(userid);
+        approvalDetailed.setApprovalDate(new Date());
         mcFileBorrowService.addProjectApproval(approvalDetailed);
         return "redirect:/showMyWork";
     }
@@ -242,7 +253,10 @@ public class McAction {
     }
 
     @RequestMapping("/materials/approvalDetailed")
-    public String materialsParticular(SysApprovalDetailed approvalDetailed) {
+    public String materialsParticular(SysApprovalDetailed approvalDetailed,HttpSession session) {
+        int userid=(int) session.getAttribute("userId");
+        approvalDetailed.setApprovalUser(userid);
+        approvalDetailed.setApprovalDate(new Date());
         mcMaterialsSevice.addProjectApproval(approvalDetailed);
         return "redirect:/showMyWork";
     }
@@ -314,7 +328,10 @@ public class McAction {
         return "redirect:/mc/dispatched/query";
     }
     @RequestMapping("/dispatched/approvalDetailed")
-    public String dispatchedParticular(SysApprovalDetailed approvalDetailed) {
+    public String dispatchedParticular(SysApprovalDetailed approvalDetailed,HttpSession session) {
+        int userid=(int) session.getAttribute("userId");
+        approvalDetailed.setApprovalUser(userid);
+        approvalDetailed.setApprovalDate(new Date());
         mcPersonnelDispatchedService.addProjectApproval(approvalDetailed);
         return "redirect:/showMyWork";
     }
@@ -322,7 +339,7 @@ public class McAction {
     //资料费
     @RequestMapping("/datum/query")
     public String showDatum(){
-        return "/mc/";
+        return "/mc/mcCost/mcCostList";
     }
     @RequestMapping(value = "/datum/query.html", produces = "text/html;charset=UTF-8")
     @ResponseBody
@@ -342,7 +359,7 @@ public class McAction {
     }
     @RequestMapping("/datum/add")
     public String showAddDatum(){
-        return "/mc//Add";
+        return "/mc/mcCost/mcCostAdd";
     }
 
     @RequestMapping("/datum/add.html")
@@ -353,7 +370,7 @@ public class McAction {
     }
     @RequestMapping("/datum/update")
     public String showUpdateDatum(){
-        return "/mc//Padute";
+        return "/mc/mcCost/mcCostPadute";
     }
 
     @RequestMapping(value = "/datum/update.json", produces = "text/html;charset=UTF-8")
@@ -371,7 +388,7 @@ public class McAction {
 
     @RequestMapping("/datum/particular")
     public String particulaDatum(){
-        return "/mc//Particular";
+        return "/mc/mcCost/mcCostParticular";
     }
 
     @RequestMapping(value = "/datum/particular.json", produces = "text/html;charset=UTF-8")
@@ -387,9 +404,183 @@ public class McAction {
     }
 
     @RequestMapping("/datum/approvalDetailed")
-    public String datumParticular(SysApprovalDetailed approvalDetailed) {
+    public String datumParticular(SysApprovalDetailed approvalDetailed,HttpSession session) {
+        int userid=(int) session.getAttribute("userId");
+        approvalDetailed.setApprovalUser(userid);
+        approvalDetailed.setApprovalDate(new Date());
         mcDatumCostService.addProjectApproval(approvalDetailed);
         return "redirect:/showMyWork";
     }
 
+
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~注册备案~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    //跳转到添加界面
+    @RequestMapping("/register/add")
+    public String addRegisterPage() {
+        return "mc/mcRegister/mcRegisterAdd";
+    }
+
+    //添加注册备案
+    @RequestMapping(value = "/register/addImpl")
+    public String  addRegister(McRegisterRecords mcRegisterRecords, HttpServletRequest request){
+        int sum;
+        sum=  mcregisterservice.addregister(mcRegisterRecords,request);
+        if(sum>0){
+            return "mc/mcRegister/mcRegisterList";
+
+        }else{
+            return "mc/mcRegister/mcRegisterAdd";
+        }
+    };
+
+    //跳转到更改界面
+    @RequestMapping("/register/update")
+    public String updateRegisterPage() {
+        return "mc/mcRegister/mcRegisterPadute";
+    }
+
+    //根据ID查询
+    @RequestMapping(value = "/register/query.json",produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public String Query(@RequestParam int id)
+    {
+        return JSONObject.toJSONString(mcregisterservice.querybyid(id)
+                , SerializerFeature.DisableCircularReferenceDetect);
+    };
+    //更改备案信息
+    @RequestMapping(value = "/register/updateImpl")
+    public String  updateRegister(McRegisterRecords mcRegisterRecords){
+        int sum;
+        sum= mcregisterservice.updateregist(mcRegisterRecords);
+        if(sum>0){
+            return "mc/mcRegister/mcRegisterList";
+        }else{
+            return "mc/mcRegister/mcRegisterPadute";
+        }
+    };
+    //跳转到详情界面
+    @RequestMapping("/register/detail")
+    public String detailRegisterPage() {
+        return "mc/mcRegister/mcRegisterParticular";
+    }
+    //根据ID查询详情
+    @RequestMapping(value = "/register/querydetailsbyid.json",produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public String Querydetailsbyid(@RequestParam int id)
+    {
+        return JSONObject.toJSONString(mcregisterservice.querydetailbyid(id),
+                SerializerFeature.DisableCircularReferenceDetect);
+    };
+
+    //根据ID删除某条备案信息
+    @RequestMapping(value = "/register/deleteImpl",produces = "application/json; charset=utf-8")
+    public String   deleteRegister(@RequestParam int id){
+        int sum= mcregisterservice.delete(id);
+        if(sum>0){
+            return "mc/mcRegister/mcRegisterList";
+        }else{
+            return "mc/mcRegister/mcRegisterList";
+        }
+    };
+    //跳转到模糊查询界面
+    @RequestMapping("/register/query")
+    public String queryRegisterPage() {
+        return "mc/mcRegister/mcRegisterList";
+    }
+    //模糊搜索备案信息
+    @RequestMapping(value = "/register/querybynametype.json",produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public String querybynametype(@RequestParam(required = false, defaultValue = "0") int deptid,@RequestParam(required = false) String Name, @RequestParam(required = false) String Type,@RequestParam(required = false, defaultValue = "0") int pageIndex) {
+
+        if (Name == null || Name == "") {
+            Name = null;
+        }
+        if (Type == null || Type == "") {
+            Type = null;
+        }
+
+        return JSONObject.toJSONString(mcregisterservice.querybyrecords(deptid,Name, Type, pageIndex),
+                SerializerFeature.DisableCircularReferenceDetect);
+    }
+
+    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~资质证书~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+    //跳转到资历证书增加界面
+    @RequestMapping("/qualification/add")
+    public String addQualificationPage() {
+        return "mc/mcCertificate/mcCertificateAdd";
+    }
+    //资质证书添加
+    @RequestMapping(value = "/qualification/addImpl")
+    public String  addqualification(McQualificationCertificate mcQualificationCertificate,HttpServletRequest reques){
+        int sum;
+        sum= mcQualificationService.addQualificationCertificate(mcQualificationCertificate, reques);
+        if(sum>0){
+            return"mc/mcCertificate/mcCertificateList";
+        }else{
+            return"mc/mcCertificate/mcCertificateAdd";
+        }
+    };
+    //跳转到资历证书更改界面
+    @RequestMapping("/qualification/update")
+    public String updateQualificationPage() {
+        return "mc/mcCertificate/mcCertificatePadute";
+    }
+
+    //根据ID查询
+    @RequestMapping(value = "/qualification/querybyid.json")
+    @ResponseBody
+    public  String   querybyid(@RequestParam int  id){
+        return JSONObject.toJSONString(mcQualificationService.querybyid(id),
+                SerializerFeature.DisableCircularReferenceDetect);
+    };
+    //资质正式信息更改
+    @RequestMapping(value = "/qualification/updateImpl",produces =  "application/json; charset=utf-8")
+    public String updatequalification(McQualificationCertificate mcQualificationCertificate){
+        int sum;
+        sum= mcQualificationService.updateMcQualification(mcQualificationCertificate);
+        if(sum>0){
+            return "mc/mcCertificate/mcCertificateList";
+        }else{
+            return "mc/mcCertificate/mcCertificatePadute";
+        }
+    };
+    //跳转到资历证书详情界面
+    @RequestMapping("/qualification/detail")
+    public String detailQualificationPage() {
+        return "mc/mcCertificate/meCertificateParticular";
+    }
+    //根据ID查询详情
+    @RequestMapping(value = "/qualification/querydetailbyid.json",produces =  "application/json; charset=utf-8")
+    @ResponseBody
+    public  String   querydetailbyid(@RequestParam int  id){
+        return JSONObject.toJSONString(mcQualificationService.querydetailbyid(id)
+                , SerializerFeature.DisableCircularReferenceDetect);
+    };
+    //跳转到资历证书详情界面
+    @RequestMapping("/qualification/query")
+    public String allQualificationPage() {
+        return "mc/mcCertificate/mcCertificateList";
+    }
+    //模糊查询资历证书
+    @RequestMapping(value = "/qualification/querybytypename.json",produces =  "application/json; charset=utf-8")
+    @ResponseBody
+    public String querybytypename(@RequestParam(required = false, defaultValue = "0") int  deptid, @RequestParam(required = false) String Type,@RequestParam(required = false) String Name, @RequestParam(required = false, defaultValue = "0") int pageIndex) {
+        if (Name == null || Name == "") {
+            Name = null;
+        }
+        if (Type == null || Type == "") {
+            Type = null;
+        }
+
+        return JSONObject.toJSONString(mcQualificationService.querybytypename(deptid,Name, Type, pageIndex),
+                SerializerFeature.DisableCircularReferenceDetect);
+    };
+    //删除资质证书
+    @RequestMapping(value = "/qualification/delete",produces =  "application/json; charset=utf-8")
+    public String  deleteQualification(@RequestParam int id){
+        int sum = mcQualificationService.delete(id);
+        return "mc/mcCertificate/meCertificateParticular.";
+
+    };
 }

@@ -65,7 +65,7 @@
 
     </style>
 </head>
-<body <%--onload="checkForm()"--%>>
+<body onload="checkForm()">
 <input name="message" value="${login}" hidden="hidden">
 <div id="github-iframe"></div>
 <div id="logo"><img src="<%=basePath%>/imgs/logo.png"></div>
@@ -101,7 +101,7 @@
                 <input value="登陆"  type="submit" class="ok"  style="background-color:#0067b8 " disabled="disabled" >
             </form>
             <div class="jump">
-                <a>注册账号</a>
+                <a href="/page/register">注册账号</a>
                 <a class="retrieve">忘记密码</a>
             </div>
         </div>
@@ -113,7 +113,7 @@
 
 <script type="text/javascript" color="255,255,255" pointColor="255,255,255" opacity='40' zIndex="-2" count="500" src="<%=basePath%>/canvas-nest.js-master/dist/canvas-nest.js"></script>
 <script type="text/javascript" src="<%=basePath%>/canvas-nest.js-master/dist/canvas-nest.umd.js"></script>
-<%--<script type="text/javascript">
+<script type="text/javascript">
     var cn = new CanvasNest(document.getElementById('area-render'), {
         color: '255,0,255',
         count: 5,
@@ -130,7 +130,6 @@
         }
         return flag;
     }
-
-</script>--%>
+</script>
 </body>
 </html>

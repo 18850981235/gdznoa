@@ -237,7 +237,10 @@ public class BdAction {
                 SerializerFeature.DisableCircularReferenceDetect);
     }
     @RequestMapping("/project/approvalDetailed")
-    public String projectParticular(SysApprovalDetailed approvalDetailed) {
+    public String projectParticular(SysApprovalDetailed approvalDetailed,HttpSession session) {
+        int userid=(int) session.getAttribute("userId");
+        approvalDetailed.setApprovalUser(userid);
+        approvalDetailed.setApprovalDate(new Date());
         bdProjectService.addProjectApproval(approvalDetailed);
         return "redirect:/showMyWork";
     }

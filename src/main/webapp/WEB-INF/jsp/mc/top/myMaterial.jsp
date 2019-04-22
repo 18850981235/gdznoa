@@ -38,50 +38,10 @@
 </div>
 <div id="content-in">
     <div id="center">
-        <form id="Approval">
-            <!--<table border="1">-->
-            <!--<tr style="text-align: center;height: 45px ">-->
-            <!--<td colspan="4" style="width: 900px;background-color: #efefef "><b>商务材料详情</b><input style="display: none" name="id"></td>-->
-            <!--</tr>-->
-            <!--<tr style="height: 45px ">-->
-            <!--<td style="width:150px ;background-color: #efefef;">申请部门</td>-->
-            <!--<td style="width:300px ;"></td>-->
-            <!--<td style="width:150px ;;background-color: #efefef">申请日期</td>-->
-            <!--<td style="width:300px ;"></td>-->
-            <!--</tr>-->
-            <!--<tr  style="height: 45px ">-->
-            <!--<td style="width:150px ;background-color: #efefef;">提供方式</td>-->
-            <!--<td style="width:300px ;"></td>-->
-            <!--<td style="width:150px ;background-color: #efefef;">收件人</td>-->
-            <!--<td style="width:300px ;"></td>-->
-            <!--</tr>-->
-            <!--<tr style="height: 45px ">-->
-            <!--<td style="width:150px ;background-color: #efefef;">收件人电话</td>-->
-            <!--<td colspan="3" ></td>-->
-            <!--</tr>-->
-            <!--<tr style="height: 45px ">-->
-            <!--<td style="width:150px ;background-color: #efefef;">收件地址</td>-->
-            <!--<td colspan="3" ></td>-->
-            <!--</tr>-->
-            <!--<tr style="height: 45px ">-->
-            <!--<td style="width:150px ;background-color: #efefef;">申请商务资料的内容及要求</td>-->
-            <!--<td colspan="3" ></td>-->
-            <!--</tr>-->
-            <!--<tr style="height: 45px ">-->
-            <!--<td style="width:150px ;background-color: #efefef;">资料用途说明</td>-->
-            <!--<td colspan="3" ></td>-->
-            <!--</tr>-->
-            <!--<tr style="height: 45px ">-->
-            <!--<td style="width:150px ;background-color: #efefef;">附件</td>-->
-            <!--<td colspan="3" ></td>-->
-            <!--</tr>-->
-
-            <!--</table>-->
-
+        <form id="div">
 
         </form>
-        <input id="ok" type="submit" value="保存" style="margin-left: 350px ">
-        <a href="" id="no" style="margin-left: 15px ">返回</a>
+
     </div>
 </div>
 </body>

@@ -47,7 +47,7 @@ public class BdClientServiceImpl implements BdClientService {
             if (pageIndex == 0) {
                 pageIndex = 1;
             }
-            page.setPageSize(3);
+            page.setPageSize(10);
             page.setTotalCount(bdClientMapper.getCount(name, address , unitType, userid));
             page.setCurrentPageNo(pageIndex);
             List<BdClient> list=bdClientMapper.getClientList(name, address,

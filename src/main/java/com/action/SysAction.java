@@ -21,8 +21,6 @@ public class SysAction {
     private MenuService menuService;
     @Resource(name = "authorityService")
     private AuthorityService authorityService;
-    @Resource(name = "companyService")
-    private CompanyService companyService;
     @Resource(name = "deptService")
     private DeptService deptService;
 

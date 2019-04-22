@@ -43,7 +43,6 @@ public class MyWork {
                          @RequestParam(required = false, defaultValue = "0") int pageIndex,
                          HttpSession session) {
         int userid = (int) session.getAttribute("userId");
-        //int userid=6;
         return JSONObject.toJSONString(myWorkService.getList(userid, processid, id, start, end, pageIndex),
                 SerializerFeature.DisableCircularReferenceDetect);
     }
@@ -79,5 +78,10 @@ public class MyWork {
     @RequestMapping("/mc/stamp/approval")
     public String showMyStamp() {
         return "/mc/top/myStamp";
+    }
+
+    @RequestMapping("/mc/datum/approval")
+    public String showMyCost() {
+        return "/mc/top/myCost";
     }
 }

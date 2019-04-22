@@ -12,7 +12,6 @@ import java.util.Date;
 
 @Data
 public class McQualificationCertificate {
-
   private int id;
   private int deptid;
   private int userid;
@@ -25,6 +24,7 @@ public class McQualificationCertificate {
   @JSONField(format = "yyyy-MM-dd")
   @DateTimeFormat(pattern = "yyyy-MM-dd")
   private Date annualTime;
+  private int security;
   private int annualPrincipal;
   private String file;
   private String watermark;
@@ -32,9 +32,8 @@ public class McQualificationCertificate {
   private int processid;
   private int processUserid;
   private String processState;
-  @JsonFormat(pattern = "yyyy-MM-dd")
-  @JSONField(format = "yyyy-MM-dd")
-  @DateTimeFormat(pattern = "yyyy-MM-dd")
-  private Date createtime;
+  private String deptName;
+  private SysUser user;
+  private SysApprovalProcess process;
 
 }

@@ -47,7 +47,7 @@ public class McMaterialsSeviceImpl implements McMaterialsSevice {
         try {
             approvalDetailedMapper.add(detailed);
             McMaterials mr_update = new McMaterials();
-            if (detailed.getState() == "通过") {
+            if (detailed.getState().equals("通过")) {
                 String state = "进行中";
                 int processUserid = 0;
                 McMaterials fb=  mcMaterialsMapper.getListById(detailed.getApprovalId());
@@ -89,6 +89,7 @@ public class McMaterialsSeviceImpl implements McMaterialsSevice {
             String[] arr = process.getUsersid().split(",");
             mcMaterials.setProcessid(8);
             mcMaterials.setProcessUserid(Integer.parseInt(arr[0]));
+            mcMaterials.setProcessState("进行中");
             num = mcMaterialsMapper.add(mcMaterials);
         } catch (Exception e) {
             e.printStackTrace();

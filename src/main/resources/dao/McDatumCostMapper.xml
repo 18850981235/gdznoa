@@ -105,13 +105,13 @@
     <update id="updateById">
         update mc_datum_cost
         <set >
-            <if test="deptid != null" >
+            <if test="deptid != 0" >
                 deptid = #{deptid},
             </if>
             <if test="createtime != null" >
                 createtime = #{createtime},
             </if>
-            <if test="userid != null" >
+            <if test="userid != 0" >
                 userid = #{userid},
             </if>
             <if test="projectid != null" >
