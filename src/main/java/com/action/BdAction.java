@@ -191,7 +191,8 @@ public class BdAction {
         if (status == null || status == "") {
             status = null;
         }
-        int userid = (int) session.getAttribute("userId");
+        //int userid = (int) session.getAttribute("userId");
+        int  userid=1;
         return JSONObject.toJSONString(bdProjectService.getlist(userid, name, type, code, status, start, end, pageIndex)
                 , SerializerFeature.DisableCircularReferenceDetect);
     }

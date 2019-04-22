@@ -140,7 +140,8 @@ public class Login {
         Map<String,Object> map=new HashMap<>();
         map.put("menuList", menuService.getMenuList(0));
 //        map.put("authority",authorityService.getMenuIdByUserId(user.getId()));
-        int userid=(int)session.getAttribute("userId");
+        //int userid=(int)session.getAttribute("userId");
+        int userid=1;
         map.put("authority",authorityService.getMenuIdByUserId(userid));
         return JSONObject.toJSONString(map, SerializerFeature.DisableCircularReferenceDetect);
     }
