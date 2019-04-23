@@ -2,12 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>404错误</title>
-</head>
+    <title>404报错</title>
+</head><style>
+    html,body{
+        height: 100%;
+        width: 100%;
+        background: url("/imgs/404.jpg")no-repeat center ;
+        background-size: 100% 100%;
+        position: relative;
+    }
+    div{
+        width:100px ;
+        height: 40px ;
+        font-size: 25px ;
+        background-color: #4d4aff;
+        border-radius: 4px ;
+        position: absolute;
+        left: 46%;
+        top: 85%;
+    }
+</style>
 <body>
-<p>路径走丢了</p>
-<form action="/404/sign" method="post">
-    <input type="submit" value="返回首页">
-</form>
+<div><a href="/page/index">返回主页</a></div>
 </body>
+
 </html>

@@ -71,7 +71,7 @@ public class BdProjectServiceImpl implements BdProjectService {
         try {
             approvalDetailedMapper.add(detailed);
             BdProject project_update = new BdProject();
-            if (detailed.getState() == "通过") {
+            if (detailed.getState().equals("通过") ) {
                 String state = "进行中";
                 int processUserid = 0;
                 BdProject project = bdProjectMapper.getListById(detailed.getApprovalId());

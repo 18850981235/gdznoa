@@ -191,7 +191,8 @@ public class BdAction {
         if (status == null || status == "") {
             status = null;
         }
-        int userid = (int) session.getAttribute("userId");
+        //int userid = (int) session.getAttribute("userId");
+        int  userid=1;
         return JSONObject.toJSONString(bdProjectService.getlist(userid, name, type, code, status, start, end, pageIndex)
                 , SerializerFeature.DisableCircularReferenceDetect);
     }
@@ -237,7 +238,10 @@ public class BdAction {
                 SerializerFeature.DisableCircularReferenceDetect);
     }
     @RequestMapping("/project/approvalDetailed")
-    public String projectParticular(SysApprovalDetailed approvalDetailed) {
+    public String projectParticular(SysApprovalDetailed approvalDetailed,HttpSession session) {
+        int userid=(int) session.getAttribute("userId");
+        approvalDetailed.setApprovalUser(userid);
+        approvalDetailed.setApprovalDate(new Date());
         bdProjectService.addProjectApproval(approvalDetailed);
         return "redirect:/showMyWork";
     }

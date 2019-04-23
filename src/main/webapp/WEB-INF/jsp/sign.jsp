@@ -12,6 +12,7 @@
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path;
 %>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -24,25 +25,26 @@
     <script src="<%=basePath%>/js/sign.js"></script>
 
 
-
 </head>
 <body>
 <div id="on">
     <div id="on-in">
+
         <div class="on-time">
             <img class="logo" src="<%=basePath%>/imgs/logo.png" />
             <input id="time">
-            <div class="day-time">
+            <div id="day-time">
                 <input id="day">
                 <input id="daytime">
             </div>
             <div class="user">
                 <img src="<%=basePath%>/imgs/user.png" />
                 <form class="user-left">
-                    <span>${user.name}</span>
                     <span>${user.company}</span>
-                    <a href="/page/quit">退出</a>
+                    <span>${user.name}</span>
+                    <a href="">退出</a>
                 </form>
+
             </div>
         </div>
         <div class="content">
@@ -50,7 +52,7 @@
                 <li>
                     <a href="/bd/project/query" class="modular colour-1">
                         <span class="iconfont icon-yewushouli size"></span>
-                        <p class="name">项目报备</p>
+                        <p class="name" >项目报备</p>
                     </a>
                 </li>
                 <li>
@@ -78,9 +80,9 @@
                     </a>
                 </li>
                 <li>
-                    <a href="" class="modular colour-6">
+                    <a href="/mc/stamp/query" class="modular colour-6">
                         <span class="iconfont icon-shangwu size"></span>
-                        <p class="name">商务投标</p>
+                        <p class="name" >商务管理</p>
                     </a>
                 </li>
                 <li>
@@ -94,13 +96,13 @@
                 <li>
                     <a href="/bd/client/query" class="modular colour-8">
                         <span class="iconfont icon-kehuziliao size"></span>
-                        <p class="name">客户CRM</p>
+                        <p class="name" >客户CRM</p>
                     </a>
                 </li>
                 <li>
                     <a href="" class="modular1 colour-9">
                         <span class="iconfont icon-fapiaoguanli size"></span>
-                        <p class="name1">外管</p>
+                        <p class="name2">跨区涉税申请</p>
                     </a>
                     <a href="" class="modular1 colour-10">
                         <span class="iconfont icon-fuwu-active size"></span>
@@ -117,7 +119,7 @@
             <ul>
                 <li>
                     <a href="" class="modular2 colour-12">
-                        <span class="iconfont "></span>
+                        <p class="iconfont1" style="">信息发布</p>
                     </a>
                 </li>
             </ul>

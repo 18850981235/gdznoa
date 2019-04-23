@@ -9,9 +9,10 @@ $.ajax({
     // url:"http://192.168.1.191:8080/util/getClient",
     success:function (data) {
 
-
+        var path= window.location.pathname+"Detailed";
             var html="";
             // html+='<ul class="name" >';
+        html+='<form method="post" action='+path+'>';
              html += '<table border="1">';
         html += '<tr style="height: 40px ">';
         html += '<td colspan="4" style="width: 750px;background-color: #eeeeee;text-align: center "><b>审批</b></td>';
@@ -33,7 +34,10 @@ $.ajax({
         html += '<textarea style="width:700px ;height: 50px  " name="opinion"></textarea>';
         html += '</td>';
         html += '</tr>';
-
+        html += '</table >';
+        html += ' <input id="ok" type="submit" value="保存" style="margin-left: 350px ">';
+        html += ' <a href="" id="no" style="margin-left: 15px ">返回</a>';
+        html+='</form>';
             $("#Approval").append(html);//append() 方法在被选元素的结尾插入指定内容。//prepend()方法在被选元素的开头插入指定内容
 
     }

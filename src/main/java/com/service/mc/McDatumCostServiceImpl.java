@@ -40,7 +40,7 @@ public class McDatumCostServiceImpl implements McDatumCostService {
         try {
             approvalDetailedMapper.add(detailed);
             McDatumCost fb_update = new McDatumCost();
-            if (detailed.getState() == "通过") {
+            if (detailed.getState().equals("通过")) {
                 String state = "进行中";
                 int processUserid = 0;
                 McDatumCost fb=  mcDatumCostMapper.getListById(detailed.getApprovalId());
@@ -83,6 +83,7 @@ public class McDatumCostServiceImpl implements McDatumCostService {
             String[] arr = process.getUsersid().split(",");
             mcDatumCost.setProcessid(6);
             mcDatumCost.setProcessUserid(Integer.parseInt(arr[0]));
+            mcDatumCost.setProcessState("进行中");
             num = mcDatumCostMapper.add(mcDatumCost);
         } catch (Exception e) {
             e.printStackTrace();

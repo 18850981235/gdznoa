@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.mc.McRegisterMapper">
+    <resultMap id="BaseResultMap" type="com.beans.McRegisterRecords" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="deptid" property="deptid" jdbcType="INTEGER" />
+        <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+        <result column="userid" property="principal" jdbcType="INTEGER" />
+        <result column="principal" property="phone" jdbcType="VARCHAR" />
+        <result column="records_type" property="recordsType" jdbcType="VARCHAR" />
+        <result column="records_name" property="recordsName" jdbcType="VARCHAR" />
+        <result column="records_state" property="recordsState" jdbcType="VARCHAR" />
+        <result column="ca_borrow" property="caBorrow" jdbcType="VARCHAR" />
+        <result column="annual_principal" property="annualPrincipal" jdbcType="INTEGER" />
+        <result column="manager" property="manager" jdbcType="INTEGER" />
+        <result column="accessory" property="accessory" jdbcType="VARCHAR" />
+        <result column="processid" property="processid" jdbcType="INTEGER" />
+        <result column="process_userid" property="processUserid" jdbcType="INTEGER" />
+        <result column="process_state" property="processState" jdbcType="VARCHAR" />
+        <result column="deptName" property="deptName" jdbcType="VARCHAR" />
+        <collection property="user" column="principal"
+                    select="com.dao.sys.UserMapper.getByID">
+        </collection>
+        <collection property="process" javaType="SysApprovalProcess" column="processid"
+                    select="com.dao.sys.ApprovalProcessMapper.getProcessById">
+        </collection>
+    </resultMap>
+    <insert id="add" >
+        insert into mc_register_records
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="deptid != 0" >
+                deptid,
+            </if>
+            <if test="createtime != null" >
+                createtime,
+            </if>
+            <if test="principal != 0" >
+                principal,
+            </if>
+            <if test="phone != null" >
+                phone,
+            </if>
+            <if test="recordsType != null" >
+                records_type,
+            </if>
+            <if test="recordsName != null" >
+                records_name,
+            </if>
+            <if test="recordsState != null" >
+                records_state,
+            </if>
+            <if test="caBorrow != null" >
+                ca_borrow,
+            </if>
+            <if test="annualPrincipal != 0" >
+                annual_principal,
+            </if>
+            <if test="manager != 0" >
+                manager,
+            </if>
+            <if test="accessory != null" >
+                accessory,
+            </if>
+            <if test="processid != 0" >
+                processid,
+            </if>
+            <if test="processUserid != 0" >
+                process_userid,
+            </if>
+            <if test="processState != null" >
+                process_state,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="deptid != 0" >
+                #{deptid},
+            </if>
+            <if test="createtime != null" >
+                #{createtime},
+            </if>
+            <if test="principal != 0" >
+                #{principal},
+            </if>
+            <if test="phone != null" >
+                #{phone},
+            </if>
+            <if test="recordsType != null" >
+                #{recordsType},
+            </if>
+            <if test="recordsName != null" >
+                #{recordsName},
+            </if>
+            <if test="recordsState != null" >
+                #{recordsState},
+            </if>
+            <if test="caBorrow != null" >
+                #{caBorrow},
+            </if>
+            <if test="annualPrincipal != 0" >
+                #{annualPrincipal},
+            </if>
+            <if test="manager != 0" >
+                #{manager},
+            </if>
+            <if test="accessory != null" >
+                #{accessory},
+            </if>
+            <if test="processid != 0" >
+                #{processid},
+            </if>
+            <if test="processUserid != 0" >
+                #{processUserid},
+            </if>
+            <if test="processState != null" >
+                #{processState},
+            </if>
+        </trim>
+    </insert>
+
+
+    <update id="update">
+        update mc_register_records
+        <set>
+            <if test="deptid != 0">
+                deptid = #{deptid},
+            </if>
+            <if test="createtime != null">
+                createtime = #{createtime},
+            </if>
+            <if test="principal != 0">
+                principal = #{principal},
+            </if>
+            <if test="phone != null">
+                phone = #{phone},
+            </if>
+            <if test="recordsType != null">
+                records_type = #{recordsType},
+            </if>
+            <if test="recordsName != null">
+                records_name = #{recordsName},
+            </if>
+            <if test="recordsState != null">
+                records_state = #{recordsState},
+            </if>
+            <if test="caBorrow != null">
+                ca_borrow = #{caBorrow},
+            </if>
+            <if test="annualPrincipal != 0">
+                annual_principal = #{annualPrincipal},
+            </if>
+            <if test="manager != 0">
+                manager = #{manager},
+            </if>
+            <if test="accessory != null">
+                accessory = #{accessory},
+            </if>
+            <if test="processid != 0">
+                processid = #{processid},
+            </if>
+            <if test="processUserid != null">
+                process_userid = #{processUserid},
+            </if>
+            <if test="processState != null">
+                process_state = #{processState},
+            </if>
+
+        </set>
+        where id=#{id}
+    </update>
+
+    <select id="querybyid"  resultMap="BaseResultMap">
+        SELECT `mc_register_records`.*,`sys_dept`.`name` as deptName  FROM `mc_register_records`,`sys_dept`
+        where `mc_register_records`.`id` = #{id} and `mc_register_records`.`deptid`=`sys_dept`.id
+    </select>
+    <delete id="delete">
+        delete
+        from mc_register_records
+        where id = #{id}
+
+    </delete>
+
+    <select id="querybynameatype"   resultMap="BaseResultMap">
+    select `mc_register_records`.*,`sys_dept`.`name`as deptName
+    from `mc_register_records`,`sys_dept`
+    <trim prefix="where" prefixOverrides="and">
+        `mc_register_records`.`deptid`=`sys_dept`.id
+        <if test="name != null">
+            and `mc_register_records`.`records_name` like CONCAT('%',#{name},'%')
+        </if>
+        <if test="type != null">
+            and `mc_register_records`.`records_type` like CONCAT('%',#{type},'%')
+        </if>
+        <if test="id !=0"> and `deptid`=#{id}</if>
+    </trim>
+
+        <if test="pageSize!=0">
+            LIMIT #{pageIndex},#{pageSize}
+        </if>
+    </select>
+    <select id="querybycount" resultType="java.lang.Integer">
+            SELECT count(*)
+            FROM mc_register_records
+            <trim prefix="where" prefixOverrides="and">
+                <if test="name != null">
+                    and `records_name` like CONCAT('%',#{name},'%')
+                </if>
+                <if test="type != null">
+                    and `records_type` like CONCAT('%',#{type},'%')
+                </if>
+                <if test="id !=0"> and `deptid`=#{id}</if>
+            </trim>
+    </select>
+
+</mapper>

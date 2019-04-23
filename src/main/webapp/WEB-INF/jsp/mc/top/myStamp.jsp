@@ -37,11 +37,10 @@
 </div>
 <div id="content-in">
     <div id="center">
-        <form id="Approval">
+        <div id="Approval">
 
-        </form>
-        <input id="ok"  type="submit" value="确定" style="margin-left:400px ">
-        <a href="#" id="no" style="color: #333">取消</a>
+        </div>
+
     </div>
 </div>
 </body>

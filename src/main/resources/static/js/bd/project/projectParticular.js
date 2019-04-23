@@ -39,7 +39,7 @@ function w() {
                 html += '<td>项目类别：</td>';
                 html += '<td>' + project1.type + '</td>';
                 html += '<td>项目立项时间：</td>';
-                html += '<td>' + project1.biddate + '</td>';
+                html += '<td>' + project1.createtime + '</td>';
                 html += '</tr>';
                 html += '<tr>';
                 html += '<td>项目阶段：</td>';
@@ -51,7 +51,7 @@ function w() {
                 html += '<td>项目招标方式：</td>';
                 html += '<td>' + project1.biddingType + '</td>';
                 html += '<td>预计项目投标时间：</td>';
-                html += '<td>' + project1.updatetime + '</td>';
+                html += '<td>' + project1.biddate + '</td>';
                 html += '</tr>';
                 html += '<tr>';
                 html += '<td>项目单位名称：</td>';

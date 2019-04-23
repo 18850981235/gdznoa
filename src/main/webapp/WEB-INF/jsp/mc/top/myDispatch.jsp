@@ -60,43 +60,11 @@
 <div id="content-in">
     <div id="center">
 
-        <!--<table border="1">-->
-        <!--<tr style="height: 40px ;background-color: #efefef">-->
-        <!--<td colspan="4" style="text-align: center"><b>人员派遣详情</b><input style="display: none" name="id"></td>-->
-        <!--</tr>-->
-        <!--<tr style="height:40px;">-->
-        <!--<td style="width:150px ;;background-color: #efefef">项目名</td>-->
-        <!--<td style="width:300px ;"></td>-->
-        <!--<td style="width:150px ;background-color: #efefef;">申请部门</td>-->
-        <!--<td style="width:300px ;"></td>-->
-        <!--</tr>-->
-        <!--<tr  style="height:40px;">-->
-        <!--<td style="width:150px ;background-color: #efefef;">申请人派遣要求</td>-->
-        <!--<td colspan="3"></td>-->
-        <!--</tr>-->
-        <!--<tr style="height:40px;">-->
-        <!--<td style="width:150px ;background-color: #efefef;">预计出差时间</td>-->
-        <!--<td ></td>-->
-        <!--<td style="width:150px ;background-color: #efefef;">人员出场费用</td>-->
-        <!--<td ></td>-->
-        <!--</tr>-->
-        <!--<tr style="height:40px;">-->
-        <!--<td style="width:150px ;background-color: #efefef;">附件</td>-->
-        <!--<td colspan="3">-->
-        <!--&lt;!&ndash;<form  action="http://192.168.1.191:8080/util/fileDown" style="width: 700px ">&ndash;&gt;-->
-        <!--&lt;!&ndash;<input style="width: 700px " name="file" >&ndash;&gt;-->
-        <!--&lt;!&ndash;<input style="background-color: transparent"  type="submit" >&ndash;&gt;-->
-        <!--&lt;!&ndash;</form>&ndash;&gt;-->
-        <!--</td>-->
-        <!--</tr>-->
-
-        <!--</table>-->
-        <form id="Approval">
+        <div id="Approval">
 
 
-        </form>
-        <input id="ok"  type="submit" value="确定" style="margin-left:400px ">
-        <a href="#" id="no" style="color: #333">取消</a>
+        </div>
+
     </div>
 </div>
 </body>

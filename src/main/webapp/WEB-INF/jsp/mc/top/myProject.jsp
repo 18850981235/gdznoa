@@ -61,111 +61,11 @@
 <!---->
 <div id="content-in">
     <div id="center">
-        <!--<table border="1" >-->
-        <!--&lt;!&ndash;<tr>&ndash;&gt;-->
-        <!--&lt;!&ndash;<td colspan="4" style="text-align: center">&ndash;&gt;-->
-        <!--&lt;!&ndash;<b>项目详细</b>&ndash;&gt;-->
-        <!--&lt;!&ndash;</td>&ndash;&gt;-->
 
-        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
-        <!--&lt;!&ndash;<tr>&ndash;&gt;-->
-        <!--&lt;!&ndash;<td style="width:150px ">项目编号：</td>&ndash;&gt;-->
-        <!--&lt;!&ndash;<td style="width:300px "></td>&ndash;&gt;-->
-        <!--&lt;!&ndash;<td style="width:150px ">项目简称：</td>&ndash;&gt;-->
-        <!--&lt;!&ndash;<td style="width:300px "></td>&ndash;&gt;-->
-        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
-        <!--&lt;!&ndash;<tr>&ndash;&gt;-->
-        <!--&lt;!&ndash;<td>项目名称：</td>&ndash;&gt;-->
-        <!--&lt;!&ndash;<td colspan="3"></td>&ndash;&gt;-->
-        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
-        <!--&lt;!&ndash;<tr>&ndash;&gt;-->
-        <!--&lt;!&ndash;<td>项目负责人：</td>&ndash;&gt;-->
-        <!--&lt;!&ndash;<td></td>&ndash;&gt;-->
-        <!--&lt;!&ndash;<td>项目地点：</td>&ndash;&gt;-->
-        <!--&lt;!&ndash;<td></td>&ndash;&gt;-->
-        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
-        <!--&lt;!&ndash;<tr>&ndash;&gt;-->
-        <!--&lt;!&ndash;<td>项目类别：</td>&ndash;&gt;-->
-        <!--&lt;!&ndash;<td></td>&ndash;&gt;-->
-        <!--&lt;!&ndash;<td>项目立项时间：</td>&ndash;&gt;-->
-        <!--&lt;!&ndash;<td></td>&ndash;&gt;-->
-        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
-        <!--&lt;!&ndash;<tr>&ndash;&gt;-->
-        <!--&lt;!&ndash;<td>项目阶段：</td>&ndash;&gt;-->
-        <!--&lt;!&ndash;<td></td>&ndash;&gt;-->
-        <!--&lt;!&ndash;<td>项目预算金额：</td>&ndash;&gt;-->
-        <!--&lt;!&ndash;<td></td>&ndash;&gt;-->
-        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
-        <!--&lt;!&ndash;<tr>&ndash;&gt;-->
-        <!--&lt;!&ndash;<td>项目招标方式：</td>&ndash;&gt;-->
-        <!--&lt;!&ndash;<td></td>&ndash;&gt;-->
-        <!--&lt;!&ndash;<td>预计项目投标时间：</td>&ndash;&gt;-->
-        <!--&lt;!&ndash;<td></td>&ndash;&gt;-->
-        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
-        <!--&lt;!&ndash;<tr>&ndash;&gt;-->
-        <!--&lt;!&ndash;<td>项目单位名称：</td>&ndash;&gt;-->
-        <!--&lt;!&ndash;<td></td>&ndash;&gt;-->
-        <!--&lt;!&ndash;<td>项目合作方式：</td>&ndash;&gt;-->
-        <!--&lt;!&ndash;<td></td>&ndash;&gt;-->
-        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
-        <!--&lt;!&ndash;<tr>&ndash;&gt;-->
-        <!--&lt;!&ndash;<td>合作单位：</td>&ndash;&gt;-->
-        <!--&lt;!&ndash;<td></td>&ndash;&gt;-->
-        <!--&lt;!&ndash;<td>合作伙伴姓名：</td>&ndash;&gt;-->
-        <!--&lt;!&ndash;<td></td>&ndash;&gt;-->
-        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
-        <!--&lt;!&ndash;<tr>&ndash;&gt;-->
-        <!--&lt;!&ndash;<td>职务：</td>&ndash;&gt;-->
-        <!--&lt;!&ndash;<td></td>&ndash;&gt;-->
-        <!--&lt;!&ndash;<td>联系方式：</td>&ndash;&gt;-->
-        <!--&lt;!&ndash;<td></td>&ndash;&gt;-->
-        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
-        <!--&lt;!&ndash;<tr>&ndash;&gt;-->
-        <!--&lt;!&ndash;<td>项目查看者：</td>&ndash;&gt;-->
-        <!--&lt;!&ndash;<td colspan="3"></td>&ndash;&gt;-->
-        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
-        <!--&lt;!&ndash;<tr>&ndash;&gt;-->
-        <!--&lt;!&ndash;<td>批注领导：</td>&ndash;&gt;-->
-        <!--&lt;!&ndash;<td colspan="3"></td>&ndash;&gt;-->
-        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
-        <!--&lt;!&ndash;<tr>&ndash;&gt;-->
-        <!--&lt;!&ndash;<td>项目描述：</td>&ndash;&gt;-->
-        <!--&lt;!&ndash;<td colspan="3"></td>&ndash;&gt;-->
-        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
-        <!--&lt;!&ndash;<tr>&ndash;&gt;-->
-        <!--&lt;!&ndash;<td>附件文档：</td>&ndash;&gt;-->
-        <!--&lt;!&ndash;<td colspan="3"></td>&ndash;&gt;-->
-        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
-        <!--&lt;!&ndash;<tr >&ndash;&gt;-->
-        <!--&lt;!&ndash;<td>审批结果：</td>&ndash;&gt;-->
-        <!--&lt;!&ndash;<td colspan="3">&ndash;&gt;-->
-        <!--&lt;!&ndash;<span></span>&ndash;&gt;-->
-        <!--&lt;!&ndash;<span></span>&ndash;&gt;-->
-        <!--&lt;!&ndash;<span></span>&ndash;&gt;-->
-        <!--&lt;!&ndash;<span></span>&ndash;&gt;-->
-        <!--&lt;!&ndash;</td>&ndash;&gt;-->
-        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+        <div id="Approval">
 
-        <!--</table>-->
-        <!--<table class="approval " >-->
-        <!--<tr style="height: 40px " >-->
-        <!--<td colspan="4" style="text-align: center;width: 900px ">-->
-        <!--<b>审批流程</b>-->
-        <!--</td>-->
-        <!--</tr>-->
-        <!--<tr style="text-align: center;background-color: #0099ff">-->
-        <!--<td style="width: 250px  ">名称</td>-->
-        <!--<td style="width: 250px  ">时间</td>-->
-        <!--<td style="width: 200px  ">审批意见</td>-->
-        <!--<td style="width: 200px  ">审核状态</td>-->
-        <!--</tr>-->
+        </div>
 
-        <!--</table>-->
-        <form id="Approval">
-
-        </form>
-        <input id="ok" type="submit" value="保存" style="margin-left: 350px ">
-        <a href="" id="no" style="margin-left: 15px ">返回</a>
     </div>
 
 </div>

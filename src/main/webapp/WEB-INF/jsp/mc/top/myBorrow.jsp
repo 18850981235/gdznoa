@@ -60,12 +60,11 @@
 <div id="content-in">
     <div id="center">
 
-        <form id="Approval">
+        <div id="Approval">
 
 
-        </form>
-        <input id="ok" type="submit" value="保存" style="margin-left: 350px ">
-        <a href="#" id="no" style="color: #333;margin-left: 150px ">返回</a>
+        </div>
+
     </div>
 </div>
 </body>

@@ -9,19 +9,15 @@
                `sex`,
                `phone`,
                `email`,
-               `companyid`,
                `deptid`,
                `roleid`,
-               `sys_company`.`name` AS company,
                `sys_dept`.`name`    AS dept,
                `sys_role`.`name`    AS role,
                `createtime`
         FROM `sys_user`,
-             `sys_company`,
              `sys_dept`,
              `sys_role`
-        WHERE `sys_user`.`companyid` = `sys_company`.`id`
-          AND `sys_user`.`deptid` = `sys_dept`.`id`
+        WHERE `sys_user`.`deptid` = `sys_dept`.`id`
           AND `sys_role`.`id` = `sys_user`.`roleid`
           AND `account` = #{account}
     </select>
@@ -45,19 +41,15 @@
                `sex`,
                `phone`,
                `email`,
-               `companyid`,
                `deptid`,
                `roleid`,
-               `sys_company`.`name` AS company,
                `sys_dept`.`name`    AS dept,
                `sys_role`.`name`    AS role,
                `createtime`
         FROM `sys_user`,
-             `sys_company`,
              `sys_dept`,
              `sys_role`
-        WHERE `sys_user`.`companyid` = `sys_company`.`id`
-          AND `sys_user`.`deptid` = `sys_dept`.`id`
+        WHERE `sys_user`.`deptid` = `sys_dept`.`id`
           AND `sys_role`.`id` = `sys_user`.`roleid`
           AND `sys_user`.`id` = #{id}
     </select>
@@ -70,7 +62,6 @@
         `sex`,
         `phone`,
         `email`,
-        `companyid`,
         `deptid`,
         `roleid`,
         `sys_company`.`name` AS company,
@@ -78,29 +69,23 @@
         `sys_role`.`name` AS role,
         `createtime`
         FROM `sys_user`,
-        `sys_company`,
         `sys_dept`,
         `sys_role`
-        WHERE `sys_user`.`companyid` = `sys_company`.`id`
-        AND `sys_user`.`deptid` =`sys_dept`.`id`
+        WHERE `sys_user`.`deptid` =`sys_dept`.`id`
         AND `sys_role`.`id` = `sys_user`.`roleid`
         <if test="name!=null">
             and name like CONCAT('%',#{name},'%')
         </if>
-        <if test="companyid!=0">
-            and `sys_user`.`companyid`=#{companyid}
-        </if>
         <if test="deptid!=0">
             and `sys_user`.`deptid`=#{deptid}
         </if>
-        <if test="companyid!=0">
+        <if test="roleid!=0">
             and `sys_user`.`roleid`=#{roleid}
         </if>
         ORDER BY `createtime` DESC
         <if test="pageIndex!=null and pageSize!=0">
             LIMIT #{pageIndex},#{pageSize}
         </if>
-
     </select>
 
     <select id="getUserCount" resultType="int">
@@ -109,13 +94,10 @@
             <if test="name!=null">
                 and `name` like CONCAT('%',#{name},'%')
             </if>
-            <if test="companyid!=0">
-                and `sys_user`.`companyid`=#{companyid}
-            </if>
             <if test="deptid!=0">
                 and `sys_user`.`deptid`=#{deptid}
             </if>
-            <if test="companyid!=0">
+            <if test="roleid!=0">
                 and `sys_user`.`roleid`=#{roleid}
             </if>
         </trim>
@@ -141,9 +123,6 @@
             </if>
             <if test="email!=null">
                 `email`=#{email},
-            </if>
-            <if test="companyid!=0">
-                `companyid`=#{companyid},
             </if>
             <if test="deptid!=0">
                 `deptid`=#{deptid},
@@ -176,9 +155,6 @@
             <if test="email!=null">
                 `email`,
             </if>
-            <if test="companyid!=0">
-                `companyid`,
-            </if>
             <if test="deptid!=0">
                 `deptid`,
             </if>
@@ -206,9 +182,6 @@
             <if test="email!=null">
                 #{email},
             </if>
-            <if test="companyid!=0">
-                #{companyid},
-            </if>
             <if test="deptid!=0">
                 #{deptid},
             </if>
@@ -218,20 +191,15 @@
             NOW()
         </trim>
     </insert>
-
     <update id="updatePassWord" >
         UPDATE `sys_user`
         set
             `password`=#{`password`}
         where `account` = #{account}
     </update>
-
     <select id="isCountClassify" resultType="int">
         select count(1) from `sys_user`
         <trim prefix="where" prefixOverrides="and">
-            <if test="companyid!=0">
-               and companyid=#{companyid}
-            </if>
             <if test="deptid!=0">
               and  deptid=#{deptid}
             </if>

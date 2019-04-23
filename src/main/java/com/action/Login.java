@@ -36,6 +36,11 @@ public class Login {
         return "index";
     }
 
+    @RequestMapping("/sign")
+    public String sign() {
+        return "sign";
+    }
+
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(@RequestParam String account,
                         @RequestParam String password,
@@ -85,8 +90,8 @@ public class Login {
         userService.register(name, password, mobile);
         SysUser user= userService.getByAccount(mobile);
 
-        int [] arr={73,80,85,90,94,98,102,139,142,144,147,149,152,160,161,162,163,164,165,166};
-        authorityService.add(arr,user.getId());
+        /*int [] arr={73,80,85,90,94,98,102,139,142,144,147,149,152,160,161,162,163,164,165,166};
+        authorityService.add(arr,user.getId());*/
         session.removeAttribute("json");
         return "注册成功";
     }
@@ -135,8 +140,10 @@ public class Login {
         Map<String,Object> map=new HashMap<>();
         map.put("menuList", menuService.getMenuList(0));
 //        map.put("authority",authorityService.getMenuIdByUserId(user.getId()));
-        int userid=(int)session.getAttribute("userId");
+        //int userid=(int)session.getAttribute("userId");
+        int userid=1;
         map.put("authority",authorityService.getMenuIdByUserId(userid));
         return JSONObject.toJSONString(map, SerializerFeature.DisableCircularReferenceDetect);
     }
+
 }

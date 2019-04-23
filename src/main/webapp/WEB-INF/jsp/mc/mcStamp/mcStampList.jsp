@@ -99,7 +99,7 @@
             </table>
 
         </div>
-        <div id="paginator-test" style="margin-left: 600px "></div>
+        <div id="paginator-test" ></div>
 
     </div>
 
