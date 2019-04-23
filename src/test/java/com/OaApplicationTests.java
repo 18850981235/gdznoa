@@ -19,11 +19,11 @@ public class OaApplicationTests {
 
     @Test
     public void contextLoads() {
-        int []arr=new  int [38];
+        int []arr=new  int [42];
         for (int i=0;i<arr.length;i++){
             arr[i]=i+1;
         }
-        authorityService.add(arr,1);
-    }
+        authorityService.add(arr,31);
+         }
 
-}
+         }

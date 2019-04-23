@@ -76,7 +76,7 @@
     </div>
     <input id="time">
     <div id="weather">
-        <p>${user.company}</p>
+        <p>${user.dept}</p>
         <span>${user.name}</span>
         <p class="comment"></p>
     </div>
