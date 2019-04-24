@@ -5,10 +5,12 @@
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="deptid" property="deptid" jdbcType="INTEGER"/>
         <result column="userid" property="userid" jdbcType="INTEGER"/>
+        <result column="projectid" property="projectid" jdbcType="INTEGER"/>
         <result column="phone" property="phone" jdbcType="VARCHAR"/>
         <result column="content" property="content" jdbcType="VARCHAR"/>
         <result column="file_num" property="fileNum" jdbcType="INTEGER"/>
         <result column="stamp_type" property="stampType" jdbcType="VARCHAR"/>
+        <result column="purpose" property="purpose" jdbcType="VARCHAR"/>
         <result column="consignee" property="consignee" jdbcType="VARCHAR"/>
         <result column="consignee_address" property="consigneeAddress" jdbcType="VARCHAR"/>
         <result column="consignee_phone" property="consigneePhone" jdbcType="VARCHAR"/>
@@ -16,7 +18,11 @@
         <result column="processid" property="processid" jdbcType="INTEGER"/>
         <result column="process_userid" property="processUserid" jdbcType="INTEGER"/>
         <result column="process_state" property="processState" jdbcType="VARCHAR"/>
-        <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP"/>
+        <result column="expressage_name" property="expressageName" jdbcType="VARCHAR"/>
+        <result column="expressage_waybill" property="expressageWaybill" jdbcType="VARCHAR"/>
+        <association property="project" javaType="com.beans.BdProject" column="projectid"
+        select="com.dao.bd.BdProjectMapper.getProjectById">
+        </association>
         <association property="dept" javaType="com.beans.SysDept" column="deptid"
                      select="com.dao.sys.DeptMapper.getListById">
         </association>
@@ -126,8 +132,11 @@
             <if test="processState != null">
                 process_state,
             </if>
-            <if test="updatetime != null">
-                updatetime,
+            <if test="projectid != 0">
+                projectid,
+            </if>
+            <if test="purpose != null">
+                purpose,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -176,8 +185,11 @@
             <if test="processState != null">
                 #{processState},
             </if>
-            <if test="updatetime != null">
-                #{updatetime},
+            <if test="projectid != 0">
+                #{projectid},
+            </if>
+            <if test="purpose != null">
+                #{purpose},
             </if>
         </trim>
     </insert>
@@ -228,6 +240,18 @@
             </if>
             <if test="updatetime != null">
                 updatetime = #{updatetime},
+            </if>
+            <if test="projectid != 0">
+                #{projectid},
+            </if>
+            <if test="purpose != null">
+                #{purpose},
+            </if>
+            <if test="expressageName != null">
+                #{expressage_name},
+            </if>
+            <if test="expressageWaybill != null">
+                #{expressage_waybill},
             </if>
         </set>
         where id=#{id}

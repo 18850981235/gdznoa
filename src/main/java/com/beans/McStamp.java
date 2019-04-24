@@ -31,10 +31,12 @@ public class McStamp {
   private int processid;
   private int processUserid;
   private String processState;
-  @JsonFormat(pattern = "yyyy-MM-dd")
-  @JSONField(format = "yyyy-MM-dd")
-  @DateTimeFormat(pattern = "yyyy-MM-dd")
-  private Date updatetime;
+  private int projectid;
+  private String purpose;
+  private String expressageName;
+  private String expressageWaybill;
+
+  private BdProject project;
   private SysDept dept;
   private SysUser user;
   private SysApprovalProcess process;

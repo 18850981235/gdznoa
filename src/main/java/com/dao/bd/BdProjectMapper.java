@@ -18,12 +18,15 @@ public interface BdProjectMapper {
     //新增立项信息
     int add(BdProject project);
     //按条件查询全部信息
-    List<BdProject> getList(@Param("name") String name,
+    List<BdProject> getList(@Param("userid") int userid,
+                            @Param("name") String name,
                             @Param("type") String type,
                             @Param("code") String code,
                             @Param("status") String status,
                             @Param("start") Date start,
-                            @Param("end") Date end);
+                            @Param("end") Date end,
+                            @Param("pageIndex") int pageIndex,
+                            @Param("pageSize") int pageSize);
 
     //按条件统计数量
     int getCount(@Param("userid") int userid,
@@ -38,4 +41,7 @@ public interface BdProjectMapper {
     List<BdProject> getByProcessUser(@Param("processUserId") int processUserId);
 
     List<BdProject> getProjectName();
+
+    BdProject getProjectById(@Param("id") int id);
+
 }

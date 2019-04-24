@@ -1,9 +1,12 @@
 package com.service.mc;
 
-import com.beans.*;
+import com.beans.McStamp;
+import com.beans.SysApprovalDetailed;
+import com.beans.SysApprovalProcess;
 import com.dao.mc.McStampMapper;
 import com.dao.sys.ApprovalDetailedMapper;
 import com.dao.sys.ApprovalProcessMapper;
+import com.dao.sys.UserMapper;
 import com.util.FileUtils;
 import com.util.Page;
 import org.springframework.stereotype.Service;
@@ -30,11 +33,14 @@ public class McStampServiceImpl implements McStampService {
     private ApprovalProcessMapper approvalProcessMapper;
     @Resource
     private ApprovalDetailedMapper approvalDetailedMapper;
+    @Resource
+    private UserMapper userMapper;
 
 
     /**
      * 添加盖章审批详情 修改盖章下一个审批人审批状态
-     * @param detailed  审批详情实体类
+     *
+     * @param detailed 审批详情实体类
      * @return 是否添加成功
      */
     @Override
@@ -47,10 +53,13 @@ public class McStampServiceImpl implements McStampService {
                 String state = "进行中";
                 int processUserid = 0;
                 McStamp stamp = mcStampMapper.getListById(detailed.getApprovalId());
+
                 String users = stamp.getProcess().getUsersid();
                 String[] userArr = users.split(",");
                 for (int i = 0; i < userArr.length; i++) {
-                    if (userArr[i].equals(String.valueOf(stamp.getProcessUserid()))) {
+                    if (i == 2) {
+                        processUserid = userMapper.DeptroleUser(stamp.getDeptid()).get(0).getId();
+                    } else if (userArr[i].equals(String.valueOf(stamp.getProcessUserid()))) {
                         if (i != userArr.length - 1) {
                             processUserid = Integer.parseInt(userArr[i + 1]);
                         } else {
@@ -59,11 +68,9 @@ public class McStampServiceImpl implements McStampService {
                     }
                 }
                 stamp_update.setProcessUserid(processUserid);
-                stamp_update.setUpdatetime(new Date());
                 stamp_update.setProcessState(state);
                 stamp_update.setId(detailed.getApprovalId());
             } else {
-                stamp_update.setUpdatetime(new Date());
                 stamp_update.setProcessState(detailed.getState());
                 stamp_update.setId(detailed.getApprovalId());
             }
@@ -77,7 +84,8 @@ public class McStampServiceImpl implements McStampService {
 
     /**
      * 添加盖章申请
-     * @param  stamp 盖章实体类
+     *
+     * @param stamp 盖章实体类
      * @return 是否添加成功
      */
     @Override
@@ -86,8 +94,8 @@ public class McStampServiceImpl implements McStampService {
         try {
 
             SysApprovalProcess process = approvalProcessMapper.getProcessById(12);
-            String accessory= FileUtils.uploadFile(request,"file");
-            if (accessory!=null&&!accessory.equals("")){
+            String accessory = FileUtils.uploadFile(request, "file");
+            if (accessory != null && !accessory.equals("")) {
                 stamp.setAccessory(accessory);
             }
             String[] arr = process.getUsersid().split(",");
@@ -103,19 +111,19 @@ public class McStampServiceImpl implements McStampService {
     }
 
     @Override
-    public Map<String, Object> getList(String stampType, int deptid, int userid, Date start, Date end,int pageIndex) {
-        Map<String, Object> map=new HashMap<>();
-        Page page=new Page();
+    public Map<String, Object> getList(String stampType, int deptid, int userid, Date start, Date end, int pageIndex) {
+        Map<String, Object> map = new HashMap<>();
+        Page page = new Page();
         try {
             if (pageIndex == 0) {
                 pageIndex = 1;
             }
             page.setPageSize(10);
-            page.setTotalCount(mcStampMapper.getCount(stampType,deptid,userid,start,end));
+            page.setTotalCount(mcStampMapper.getCount(stampType, deptid, userid, start, end));
             page.setCurrentPageNo(pageIndex);
-            List<McStamp> list=mcStampMapper.getList(stampType,deptid,userid,start,end,(page.getCurrentPageNo()-1)*page.getPageSize(),page.getPageSize());
-            map.put("page",page);
-            map.put("list",list);
+            List<McStamp> list = mcStampMapper.getList(stampType, deptid, userid, start, end, (page.getCurrentPageNo() - 1) * page.getPageSize(), page.getPageSize());
+            map.put("page", page);
+            map.put("list", list);
         } catch (Exception e) {
             e.printStackTrace();
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
@@ -139,8 +147,8 @@ public class McStampServiceImpl implements McStampService {
         try {
             McStamp mcStamp = mcStampMapper.getListById(id);
             List<SysApprovalDetailed> list = approvalDetailedMapper.getListByapprovalId(id, "商务盖章");
-            map.put("mcStamp",mcStamp);
-            map.put("list",list);
+            map.put("mcStamp", mcStamp);
+            map.put("list", list);
         } catch (Exception e) {
             e.printStackTrace();
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();

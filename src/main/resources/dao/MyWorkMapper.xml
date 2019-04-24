@@ -24,7 +24,7 @@
           and process_userid = #{userid};
         <!--项目立项申请-->
         INSERT INTO tmp_table
-        SELECT `id`,`principal` as userid,`processid`,`process_userid`,`createtime`
+        SELECT `id`, `userid`,`processid`,`process_userid`,`createtime`
         FROM `bd_project`
         where `process_state` = '进行中'
           and process_userid = #{userid};
