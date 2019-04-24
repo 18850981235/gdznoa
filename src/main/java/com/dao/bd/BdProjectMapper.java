@@ -27,6 +27,7 @@ public interface BdProjectMapper {
                             @Param("end") Date end,
                             @Param("pageIndex") int pageIndex,
                             @Param("pageSize") int pageSize);
+
     //按条件统计数量
     int getCount(@Param("userid") int userid,
                  @Param("name") String name,
@@ -40,4 +41,7 @@ public interface BdProjectMapper {
     List<BdProject> getByProcessUser(@Param("processUserId") int processUserId);
 
     List<BdProject> getProjectName();
+
+    BdProject getProjectById(@Param("id") int id);
+
 }

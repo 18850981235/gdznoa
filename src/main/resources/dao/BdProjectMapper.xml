@@ -101,7 +101,7 @@
             <if test="userid != 0" >
                 userid,
             </if>
-            <!--<if test="processid != null" >
+            <if test="processid != null" >
                 processid,
             </if>
             <if test="processUserid != null" >
@@ -109,7 +109,7 @@
             </if>
             <if test="processState != null" >
                 process_state,
-            </if>-->
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides="," >
             <if test="code != null" >
@@ -235,7 +235,7 @@
             <if test="userid != 0" >
                 userid = #{userid},
             </if>
-            <!--<if test="processid != null" >
+            <if test="processid != null" >
                 processid = #{processid},
             </if>
             <if test="processUserid != null" >
@@ -243,7 +243,7 @@
             </if>
             <if test="processState != null" >
                 process_state = #{processState},
-            </if>-->
+            </if>
         </set>
         where id=#{id}
     </update>
@@ -317,5 +317,8 @@
     </select>
     <select id="getProjectName" resultType="com.beans.BdProject">
         select id,`abbreviation` from bd_project
+    </select>
+    <select id="getProjectById" resultType="com.beans.BdProject">
+        select id,`abbreviation` from bd_project where id=#{id}
     </select>
 </mapper>

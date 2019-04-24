@@ -1,7 +1,6 @@
 package com.dao.sys;
 
 import com.beans.SysDept;
-import com.beans.SysRole;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

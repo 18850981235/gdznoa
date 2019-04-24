@@ -213,4 +213,10 @@
         select `name`,id from `sys_user` where id in(${examine})
         ORDER BY INSTR(#{examine},id);
     </select>
+
+    <select id="DeptroleUser" resultType="com.beans.SysUser">
+        select id from `sys_user` where
+            deptid=#{deptid}
+            and roleid=2
+    </select>
 </mapper>
