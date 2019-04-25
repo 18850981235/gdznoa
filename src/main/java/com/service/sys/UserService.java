@@ -2,7 +2,6 @@ package com.service.sys;
 
 import com.alibaba.fastjson.JSONObject;
 import com.beans.SysUser;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -17,4 +16,5 @@ public interface UserService {
     int isCountClassify(Integer companyid, Integer deptid, Integer roleid);
     List<SysUser> getUserList(String name, Integer companyid, Integer deptid,
                               Integer roleid, int pageIndex, int pageSize);
+    List<SysUser> areaManagerUser();
 }

@@ -77,16 +77,16 @@ public class BdProjectServiceImpl implements BdProjectService {
         try {
             approvalDetailedMapper.add(detailed);
             BdProject project_update = new BdProject();
+            String state = "进行中";
+            int processUserid = 0;
+            BdProject project = bdProjectMapper.getListById(detailed.getApprovalId());
             if (detailed.getState().equals("通过")) {
-                String state = "进行中";
-                int processUserid = 0;
-                BdProject project = bdProjectMapper.getListById(detailed.getApprovalId());
                 String users = project.getProcess().getUsersid();
                 String[] userArr = users.split(",");
+                boolean flag=true;
                 for (int i = 0; i < userArr.length; i++) {
-                    if (i == 0) {
-                        processUserid = Integer.parseInt(userArr[i + 1]);
-                    } else if (userArr[i].equals(String.valueOf(project.getProcessUserid()))) {
+                    if (userArr[i].equals(String.valueOf(project.getProcessUserid()))) {
+                        flag=false;
                         if (i != userArr.length - 1) {
                             processUserid = Integer.parseInt(userArr[i + 1]);
                         } else {
@@ -94,11 +94,28 @@ public class BdProjectServiceImpl implements BdProjectService {
                         }
                     }
                 }
+                if (flag){
+                    processUserid = Integer.parseInt(userArr[1]);
+                }
                 project_update.setProcessUserid(processUserid);
                 project_update.setProcessState(state);
                 project_update.setId(detailed.getApprovalId());
             } else {
-                project_update.setProcessState(detailed.getState());
+                String users = project.getProcess().getUsersid();
+                String[] userArr = users.split(",");
+                for (int i = 0; i < userArr.length; i++) {
+                    if (userArr[i].equals(String.valueOf(project.getProcessUserid()))) {
+
+                        if(userArr[1].equals(String.valueOf(project.getProcessUserid()))){
+                            processUserid = project.getAreaManager();
+                            break;
+                        }
+                        if (i != 0) {
+                            processUserid = Integer.parseInt(userArr[i - 1]);
+                        }
+                    }
+                }
+                project_update.setProcessUserid(processUserid);
                 project_update.setId(detailed.getApprovalId());
             }
             return bdProjectMapper.updateById(project_update);
@@ -157,7 +174,6 @@ public class BdProjectServiceImpl implements BdProjectService {
         try {
             BdProject project = bdProjectMapper.getListById(id);
             List<SysApprovalDetailed> list = approvalDetailedMapper.getListByapprovalId(id, "项目立项");
-            //List<SysUser> users=userMapper.getUserByIn(project.getExamine());
             map.put("project", project);
             map.put("list", list);
             // map.put("users",users);

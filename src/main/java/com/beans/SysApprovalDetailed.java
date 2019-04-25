@@ -22,6 +22,7 @@ public class SysApprovalDetailed {
   @DateTimeFormat(pattern = "yyyy-MM-dd")
   private Date approvalDate;
   private String opinion;//审批内容
+
   private SysUser user;
 
 

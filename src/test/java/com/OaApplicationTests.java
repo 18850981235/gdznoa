@@ -1,7 +1,7 @@
 package com;
 
-import com.alibaba.fastjson.JSONObject;
-import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.beans.SysApprovalDetailed;
+import com.service.bd.BdProjectService;
 import com.service.mc.McStampService;
 import com.service.sys.AuthorityService;
 import org.junit.Test;
@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
+import java.util.Date;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -19,6 +20,9 @@ public class OaApplicationTests {
     private AuthorityService authorityService;
     @Resource(name = "mcStampService")
     private McStampService mcStampService;
+    @Resource(name = "bdProjectService")
+    private BdProjectService bdProjectService;
+
 
     @Test
     public void contextLoads() {
@@ -30,8 +34,25 @@ public class OaApplicationTests {
     }
 
     @Test
-    public void stampList(){
-        System.out.println(JSONObject.toJSONString(mcStampService.getList(null,0,0,null,null,0),
-                SerializerFeature.DisableCircularReferenceDetect));
+    public void approval(){
+        SysApprovalDetailed a=new SysApprovalDetailed();
+        a.setApprovalName("项目立项");
+        a.setApprovalId(1);
+        a.setApprovalUser(32);
+        a.setState("通过");
+        a.setApprovalDate(new Date());
+        a.setOpinion("通过");
+        bdProjectService.addProjectApproval(a);
     }
+    @Test
+    public void approval2(){
+        SysApprovalDetailed a=new SysApprovalDetailed();
+        a.setApprovalId(3);
+        a.setApprovalUser(15);
+        a.setState("通过");
+        a.setApprovalDate(new Date());
+        a.setOpinion("通过");
+        mcStampService.addProjectApproval(a);
+    }
+
 }

@@ -15,10 +15,7 @@ import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author 李鹏熠
@@ -49,17 +46,23 @@ public class McStampServiceImpl implements McStampService {
         try {
             approvalDetailedMapper.add(detailed);
             McStamp stamp_update = new McStamp();
+            int processUserid = 0;
+            McStamp stamp = mcStampMapper.getListById(detailed.getApprovalId());
+            String state = "进行中";
+            String users = stamp.getProcess().getUsersid();
+            String[] userArr = users.split(",");
             if (detailed.getState().equals("通过")) {
-                String state = "进行中";
-                int processUserid = 0;
-                McStamp stamp = mcStampMapper.getListById(detailed.getApprovalId());
-
-                String users = stamp.getProcess().getUsersid();
-                String[] userArr = users.split(",");
+                boolean flag=true;
                 for (int i = 0; i < userArr.length; i++) {
-                    if (i == 2) {
-                        processUserid = userMapper.DeptroleUser(stamp.getDeptid()).get(0).getId();
-                    } else if (userArr[i].equals(String.valueOf(stamp.getProcessUserid()))) {
+                    if (userArr[i].equals(String.valueOf(stamp.getProcessUserid()))) {
+                        flag=false;
+                        if(userArr[1].equals(String.valueOf(stamp.getProcessUserid()))){
+                            if(stamp.getDept().getName().contains("公司")){
+                                processUserid = userMapper.DeptroleUser(stamp.getDeptid()).get(0).getId();
+                                break;
+                            }else {
+                            }
+                        }
                         if (i != userArr.length - 1) {
                             processUserid = Integer.parseInt(userArr[i + 1]);
                         } else {
@@ -67,11 +70,35 @@ public class McStampServiceImpl implements McStampService {
                         }
                     }
                 }
+                if(flag){
+                    processUserid = Integer.parseInt(userArr[3]);
+                }
                 stamp_update.setProcessUserid(processUserid);
                 stamp_update.setProcessState(state);
                 stamp_update.setId(detailed.getApprovalId());
             } else {
-                stamp_update.setProcessState(detailed.getState());
+
+                boolean flag=true;
+                for (int i = 0; i < userArr.length; i++) {
+                    if (userArr[i].equals(String.valueOf(stamp.getProcessUserid()))) {
+                        flag=false;
+                        if(userArr[3].equals(String.valueOf(stamp.getProcessUserid()))){
+                            if(stamp.getDept().getName().contains("公司")){
+                                processUserid = userMapper.DeptroleUser(stamp.getDeptid()).get(0).getId();
+                                break;
+                            }else {
+
+                            }
+                        }
+                        if (i != 0) {
+                            processUserid = Integer.parseInt(userArr[i -1 ]);
+                        }
+                    }
+                }
+                if(flag){
+                    processUserid = Integer.parseInt(userArr[1]);
+                }
+                stamp_update.setProcessUserid(processUserid);
                 stamp_update.setId(detailed.getApprovalId());
             }
             return mcStampMapper.updateById(stamp_update);

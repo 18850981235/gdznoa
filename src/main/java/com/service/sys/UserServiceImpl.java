@@ -109,4 +109,8 @@ public class UserServiceImpl implements UserService {
     public List<SysUser> getUserList(String name, Integer companyid, Integer deptid, Integer roleid, int pageIndex, int pageSize) {
         return userMapper.getUserList(name,companyid,deptid,roleid,pageIndex,pageSize);
     }
+    @Override
+    public List<SysUser> areaManagerUser() {
+        return userMapper.areaManagerUser("区域负责人");
+    }
 }

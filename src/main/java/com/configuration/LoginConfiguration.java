@@ -23,15 +23,18 @@ public class LoginConfiguration implements WebMvcConfigurer {
         return new SecurityInterceptor();
     }
 
+
+
     public void addInterceptors(InterceptorRegistry registry) {
         InterceptorRegistration addInterceptor = registry.addInterceptor(getSecurityInterceptor());
+        //拦截所有路径
+        addInterceptor.addPathPatterns("/**");
         //排除的路径
         addInterceptor.excludePathPatterns("/error");
         addInterceptor.excludePathPatterns("/page/**");
         addInterceptor.excludePathPatterns("/findByAdminAndPassword");
-        addInterceptor.excludePathPatterns("/static/**");
-        //拦截所有路径
-        addInterceptor.addPathPatterns("/**");
+        //addInterceptor.excludePathPatterns("/static/**");
+
     }
 
     private class SecurityInterceptor extends HandlerInterceptorAdapter {

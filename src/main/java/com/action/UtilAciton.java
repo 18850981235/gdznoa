@@ -6,6 +6,7 @@ import com.service.bd.BdClientService;
 import com.service.bd.BdProjectService;
 import com.service.sys.ApprovalProcessService;
 import com.service.sys.DeptService;
+import com.service.sys.UserService;
 import com.util.FileUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,6 +34,8 @@ public class UtilAciton {
     private BdProjectService bdProjectService;
     @Resource(name = "approvalProcessService")
     private ApprovalProcessService approvalProcessService;
+    @Resource(name = "userService")
+    private UserService userService;
 
     @RequestMapping("/foundUser")
     @ResponseBody
@@ -74,5 +77,11 @@ public class UtilAciton {
     @ResponseBody
     public String getApprovalProcess(){
         return JSONObject.toJSONString(approvalProcessService.getProcessList(),SerializerFeature.DisableCircularReferenceDetect);
+    }
+
+    @RequestMapping(value = "/areaManagerUser",produces = "text/html;charset=UTF-8")
+    @ResponseBody
+    public String getAreaManagerUser(){
+        return JSONObject.toJSONString(userService.areaManagerUser());
     }
 }

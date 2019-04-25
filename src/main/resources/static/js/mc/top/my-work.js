@@ -26,6 +26,7 @@ function lo(z) {
                 html += '<td style="width: 200px ">'+obj1.processUser.name+'</td>';
                 html += '<td style="width: 200px ">'+obj1.createtime+'</td>';
 
+
                 // html += '<td style="width: 60px ">' + (index1+1) + '</td>';
                 // html += '<td style="width: 100px ">' + obj1.dept.name + '</td>';
                 // html += '<td style="width: 100px ">' + obj1.createtime + '</td>';
