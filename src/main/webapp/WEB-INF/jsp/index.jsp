@@ -81,7 +81,7 @@
                     </div>
                     <input placeholder="请输入用户名" name="account" value="${account}">
                     <c:if test="${error=='没有该账号'}">
-                        <span class="co"> * 没有该账号</span>
+                        <span style="color: red"> * 没有该账号</span>
                     </c:if>
                 </div>
                 <div class="conduct">
@@ -90,7 +90,7 @@
                     </div>
                     <input placeholder="请输入密码"  style="color: #000000" type="password"  name="password" value="123456">
                     <c:if test="${error=='密码错误'}">
-                        <span class="co1">*密码错误</span>
+                        <span style="color: red">*密码错误</span>
                     </c:if>
                 </div>
                 <div class="drag">

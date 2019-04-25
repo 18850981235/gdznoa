@@ -238,9 +238,6 @@
             <if test="processState != null">
                 process_state = #{processState},
             </if>
-            <if test="updatetime != null">
-                updatetime = #{updatetime},
-            </if>
             <if test="projectid != 0">
                 #{projectid},
             </if>

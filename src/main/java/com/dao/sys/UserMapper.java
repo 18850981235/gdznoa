@@ -49,8 +49,10 @@ public interface UserMapper {
                         @Param("deptid") int deptid,
                         @Param("roleid") int roleid);
 
-    List<SysUser> getUserByIn(@Param("examine") String examine);
-
     //按部门跟公司总经理职务查询总经理id
     List<SysUser> DeptroleUser(int deptid);
+
+    //查询大区负责人
+    List<SysUser> areaManagerUser(String areaManager);
+
 }
