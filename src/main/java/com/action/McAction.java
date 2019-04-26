@@ -25,8 +25,7 @@ import java.util.Date;
 @Controller
 @RequestMapping("/mc")
 public class McAction {
-    ///////萨里打开降落伞开大声的卡路里看你说的、
-
+    
     @Resource(name = "mcPersonnelDispatchedService")
     private McPersonnelDispatchedService mcPersonnelDispatchedService;
     @Resource(name = "mcMaterialsSevice")
