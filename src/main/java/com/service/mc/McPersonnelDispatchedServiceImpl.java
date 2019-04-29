@@ -6,14 +6,13 @@ import com.beans.SysApprovalProcess;
 import com.dao.mc.McPersonnelDispatchedMapper;
 import com.dao.sys.ApprovalDetailedMapper;
 import com.dao.sys.ApprovalProcessMapper;
-import com.util.FileUtils;
+import com.dao.sys.UserMapper;
 import com.util.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -33,6 +32,8 @@ public class McPersonnelDispatchedServiceImpl implements McPersonnelDispatchedSe
     private ApprovalDetailedMapper approvalDetailedMapper;
     @Resource
     private McPersonnelDispatchedMapper mcPersonnelDispatchedMapper;
+    @Resource
+    private UserMapper userMapper;
 
 
     /**
@@ -41,14 +42,10 @@ public class McPersonnelDispatchedServiceImpl implements McPersonnelDispatchedSe
      * @return 是否添加成功
      */
     @Override
-    public int add(McPersonnelDispatched personnelDispatched, HttpServletRequest request) {
+    public int add(McPersonnelDispatched personnelDispatched) {
         int num = 0;
         try {
             SysApprovalProcess process = approvalProcessMapper.getProcessById(9);
-            String accessory= FileUtils.uploadFile(request,"file");
-            if (accessory!=null&&!accessory.equals("")){
-                personnelDispatched.setAccessory(accessory);
-            }
             String[] arr = process.getUsersid().split(",");
             personnelDispatched.setProcessid(9);
             personnelDispatched.setProcessUserid(Integer.parseInt(arr[0]));
@@ -82,30 +79,40 @@ public class McPersonnelDispatchedServiceImpl implements McPersonnelDispatchedSe
         detailed.setApprovalName("商务人员派遣");
         try {
             approvalDetailedMapper.add(detailed);
-            McPersonnelDispatched pd_update = new McPersonnelDispatched();
+            McPersonnelDispatched update = new McPersonnelDispatched();
+            int processUserid = 0;
+            McPersonnelDispatched pd = mcPersonnelDispatchedMapper.getListById(detailed.getApprovalId());
+            String state = "进行中";
+            String users = pd.getProcess().getUsersid();
+            String[] userArr = users.split(",");
             if (detailed.getState().equals("通过")) {
-                String state = "进行中";
-                int processUserid = 0;
-                McPersonnelDispatched fb=  mcPersonnelDispatchedMapper.getListById(detailed.getApprovalId());
-                String users = fb.getProcess().getUsersid();
-                String[] userArr = users.split(",");
-                for (int i = 0; i < userArr.length; i++) {
-                    if (userArr[i].equals(String.valueOf(fb.getProcessUserid()))) {
-                        if (i != userArr.length - 1) {
-                            processUserid = Integer.parseInt(userArr[i + 1]);
-                        } else {
-                            state = "已结束";
-                        }
-                    }
+                pd.setProcessNode(pd.getProcessNode()+1);
+                if(userArr.length<pd.getProcessNode()){
+                    state="已结束";
+                    pd.setProcessNode(0);
                 }
-                pd_update.setProcessUserid(processUserid);
-                pd_update.setProcessState(state);
-                pd_update.setId(detailed.getApprovalId());
             } else {
-                pd_update.setProcessState(detailed.getState());
-                pd_update.setId(detailed.getApprovalId());
+                pd.setProcessNode(pd.getProcessNode()-1);
             }
-            return mcPersonnelDispatchedMapper.updateById(pd_update);
+
+            if(pd.getProcessNode()==1){
+                processUserid =Integer.parseInt(userArr[0]);
+            }
+            if(pd.getProcessNode()==2){
+                processUserid = userMapper.DeptroleUser(pd.getDeptid()).get(0).getId();
+            }
+            if(pd.getProcessNode()==3){
+                processUserid=pd.getUserid();
+            }
+            if(pd.getProcessNode()==4){
+                processUserid =Integer.parseInt(userArr[3]);
+            }
+
+            update.setProcessNode(pd.getProcessNode());
+            update.setProcessUserid(processUserid);
+            update.setId(detailed.getApprovalId());
+            update.setProcessState(state);
+            return mcPersonnelDispatchedMapper.updateById(update);
         } catch (Exception e) {
             e.printStackTrace();
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
@@ -114,19 +121,29 @@ public class McPersonnelDispatchedServiceImpl implements McPersonnelDispatchedSe
     }
 
     @Override
-    public Map<String, Object> getList(String name, int deptid, int userid, Date start, Date end, int pageIndex) {
+    public Map<String, Object> getList(String projectName,String personnelCondition, int deptid, int userid, Date start, Date end, int pageIndex) {
         Map<String, Object> map=new HashMap<>();
         Page page=new Page();
+        List<McPersonnelDispatched> list=null;
         try {
             if (pageIndex == 0) {
                 pageIndex = 1;
             }
             page.setPageSize(10);
-            page.setTotalCount(mcPersonnelDispatchedMapper.getCount(name,deptid,userid,start,end));
-            page.setCurrentPageNo(pageIndex);
-            List<McPersonnelDispatched> list=mcPersonnelDispatchedMapper.getList(name,deptid,userid,start,end,(page.getCurrentPageNo()-1)*page.getPageSize(),page.getPageSize());
+            if (projectName==null){
+                page.setTotalCount(mcPersonnelDispatchedMapper.getCount(personnelCondition,deptid,userid,start,end));
+                page.setCurrentPageNo(pageIndex);
+                list=mcPersonnelDispatchedMapper.getList(personnelCondition,deptid,userid,start,end,(page.getCurrentPageNo()-1)*page.getPageSize(),page.getPageSize());
+            }else{
+                page.setTotalCount(mcPersonnelDispatchedMapper.getCountProject(projectName,personnelCondition,deptid,userid,start,end));
+                page.setCurrentPageNo(pageIndex);
+                list=mcPersonnelDispatchedMapper.getListProject(projectName,personnelCondition,deptid,userid,start,end,(page.getCurrentPageNo()-1)*page.getPageSize(),page.getPageSize());
+
+            }
             map.put("page",page);
             map.put("list",list);
+
+
         } catch (Exception e) {
             e.printStackTrace();
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();

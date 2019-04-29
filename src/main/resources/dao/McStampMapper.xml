@@ -39,14 +39,20 @@
     <select id="getList" resultMap="BaseResultMap">
         SELECT * FROM `mc_stamp`
         <trim prefix="where" prefixOverrides="and">
+            <if test="userid != 0">
+                and userid=#{userid}
+            </if>
             <if test="stampType != null">
                 and `stamp_type` like CONCAT('%',#{stampType},'%')
             </if>
             <if test="deptid != 0">
                 and deptid=#{deptid}
             </if>
-            <if test="userid != 0">
-                and userid=#{userid}
+            <if test="content != null">
+                and `content` like CONCAT('%',#{content},'%')
+            </if>
+            <if test="purpose != null">
+                and `purpose` like CONCAT('%',#{purpose},'%')
             </if>
             <if test="start != null">
                 and `createtime` &gt;= #{start}
@@ -59,17 +65,24 @@
             LIMIT #{pageIndex},#{pageSize}
         </if>
     </select>
+
     <select id="getCount" resultType="int">
         SELECT  count(1) FROM `mc_stamp`
         <trim prefix="where" prefixOverrides="and">
+            <if test="userid != 0">
+                and userid=#{userid}
+            </if>
             <if test="stampType != null">
                 and `stamp_type` like CONCAT('%',#{stampType},'%')
             </if>
             <if test="deptid != 0">
                 and deptid=#{deptid}
             </if>
-            <if test="userid != 0">
-                and userid=#{userid}
+            <if test="content != null">
+                and `content` like CONCAT('%',#{content},'%')
+            </if>
+            <if test="purpose != null">
+                and `purpose` like CONCAT('%',#{purpose},'%')
             </if>
             <if test="start != null">
                 and `createtime` &gt;= #{start}
@@ -79,11 +92,77 @@
             </if>
         </trim>
     </select>
+
+    <select id="getListProject" resultMap="BaseResultMap">
+        SELECT * FROM `mc_stamp` ,`bd_project`
+        <trim prefix="where" prefixOverrides="and">
+            `bd_project`.`id`=`mc_stamp`.`projectid`
+            <if test="userid != 0">
+                and `mc_stamp`.userid=#{userid}
+            </if>
+            <if test="projectName != null">
+                and `bd_project`.`name` like CONCAT('%',#{projectName},'%')
+            </if>
+            <if test="stampType != null">
+                and `mc_stamp`.`stamp_type` like CONCAT('%',#{stampType},'%')
+            </if>
+            <if test="deptid != 0">
+                and `mc_stamp`.deptid=#{deptid}
+            </if>
+            <if test="content != null">
+                and `mc_stamp`.`content` like CONCAT('%',#{content},'%')
+            </if>
+            <if test="purpose != null">
+                and `mc_stamp`.`purpose` like CONCAT('%',#{purpose},'%')
+            </if>
+            <if test="start != null">
+                and `mc_stamp`.`createtime` &gt;= #{start}
+            </if>
+            <if test="end != null">
+                and `mc_stamp`.`createtime` &lt;= #{end}
+            </if>
+        </trim>
+        <if test="pageSize!=0">
+            LIMIT #{pageIndex},#{pageSize}
+        </if>
+    </select>
+
+    <select id="getCountProject" resultType="int">
+        <trim prefix="where" prefixOverrides="and">
+            `bd_project`.`id`=`mc_stamp`.`projectid`
+            <if test="userid != 0">
+                and `mc_stamp`.userid=#{userid}
+            </if>
+            <if test="projectName != null">
+                and `bd_project`.`name` like CONCAT('%',#{projectName},'%')
+            </if>
+            <if test="stampType != null">
+                and `mc_stamp`.`stamp_type` like CONCAT('%',#{stampType},'%')
+            </if>
+            <if test="deptid != 0">
+                and `mc_stamp`.deptid=#{deptid}
+            </if>
+            <if test="content != null">
+                and `mc_stamp`.`content` like CONCAT('%',#{content},'%')
+            </if>
+            <if test="purpose != null">
+                and `mc_stamp`.`purpose` like CONCAT('%',#{purpose},'%')
+            </if>
+            <if test="start != null">
+                and `mc_stamp`.`createtime` &gt;= #{start}
+            </if>
+            <if test="end != null">
+                and `mc_stamp`.`createtime` &lt;= #{end}
+            </if>
+        </trim>
+    </select>
+
     <select id="getListById" resultMap="BaseResultMap">
         SELECT *
         FROM `mc_stamp`
         WHERE id = #{id}
     </select>
+
     <insert id="add">
         insert into mc_stamp
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -193,6 +272,7 @@
             </if>
         </trim>
     </insert>
+
     <update id="updateById">
         update mc_stamp
         <set>
@@ -253,6 +333,7 @@
         </set>
         where id=#{id}
     </update>
+
     <delete id="deleteById">
         delete
         from mc_stamp

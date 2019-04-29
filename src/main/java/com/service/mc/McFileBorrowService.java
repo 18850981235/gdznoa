@@ -15,7 +15,7 @@ public interface McFileBorrowService {
     int addProjectApproval(SysApprovalDetailed detailed);
     int add(McFileBorrow fileBorrow, HttpServletRequest request);
     int update(McFileBorrow fileBorrow);
-    Map<String, Object> getList(String name, int deptid,Date start,
+    Map<String, Object> getList(String projectName,String name, int deptid,Date start,
                                 Date end, int usreid, int pageIndex);
     McFileBorrow getListById(int id);
     Map<String, Object> getParticular1ById(int id);

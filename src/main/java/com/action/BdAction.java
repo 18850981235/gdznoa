@@ -175,25 +175,24 @@ public class BdAction {
 
     @RequestMapping(value = "/project/query.html", produces = "text/html;charset=UTF-8")
     @ResponseBody
-    public String ProjectList(@RequestParam(required = false) String name, @RequestParam(required = false) String type,
-                              @RequestParam(required = false) String code, @RequestParam(required = false) String status,
+    public String ProjectList(@RequestParam(required = false) String projectName, @RequestParam(required = false, defaultValue = "0") int deptid,
+                              @RequestParam(required = false) String stage, @RequestParam(required = false, defaultValue = "0") int areaManager,
+                              @RequestParam(required = false) String principalName,
                               @RequestParam(required = false) Date start, @RequestParam(required = false) Date end,
                               @RequestParam(required = false, defaultValue = "0") int pageIndex, HttpSession session) {
-        if (name == null || name == "") {
-            name = null;
+        if (projectName == null || projectName == "") {
+            projectName = null;
         }
-        if (type == null || type == "") {
-            type = null;
+        if (stage == null || stage == "") {
+            stage = null;
         }
-        if (code == null || code == "") {
-            code = null;
+        if (principalName == null || principalName == "") {
+            principalName = null;
         }
-        if (status == null || status == "") {
-            status = null;
-        }
+
         //int userid = (int) session.getAttribute("userId");
         int  userid=1;
-        return JSONObject.toJSONString(bdProjectService.getlist(userid, name, type, code, status, start, end, pageIndex)
+        return JSONObject.toJSONString(bdProjectService.getlist(userid,projectName, deptid, stage, areaManager,principalName, start, end, pageIndex)
                 , SerializerFeature.DisableCircularReferenceDetect);
     }
 

@@ -172,7 +172,7 @@
             <if test="processUserid != 0" >
                 #{processUserid},
             </if>
-            <if test="processState != null" >
+            <if test="proces sState != null" >
                 #{processState},
             </if>
         </trim>
@@ -254,24 +254,26 @@
         where id = #{id}
     </delete>
     <select id="getList" resultMap="BaseResultMap">
-        select *
-        from `bd_project`,`bd_client`
+        SELECT * FROM `bd_project`,`sys_user`
         <trim prefix="where" prefixOverrides="and">
-            `bd_client`.`id`=`clientid`
-            <if test="userid!=null">
+            `bd_project`.`principal`=`sys_user`.id
+            <if test="userid!=0">
                 and  userid=#{userid}
             </if>
-            <if test="name != null">
-                and `name` like CONCAT('%',#{name},'%')
+            <if test="projectName != null">
+                and `bd_project`.`name` like CONCAT('%',#{projectName},'%')
             </if>
-            <if test="type != null">
-                and unit_type=#{type}
+            <if test="deptid != 0">
+                and `bd_project`.deptid=#{deptid}
             </if>
-            <if test="code != null">
-                and `code`=#{code}
+            <if test="stage != null">
+                and `bd_project`.`stage`=#{stage}
             </if>
-            <if test="status!=null">
-            and  process_state=#{status}
+            <if test="areaManager != 0">
+                and `bd_project`.`area_manager`=#{areaManager}
+            </if>
+            <if test="principalName != null">
+                and `sys_user`.`name` like CONCAT('%',#{principalName},'%')
             </if>
             <if test="start != null">
                 and `createtime` &gt;= #{start}
@@ -286,21 +288,26 @@
         </if>
     </select>
     <select id="getCount" resultType="int">
-        select count(1)
-        from `bd_project`
+        select count(1) FROM `bd_project`,`sys_user`
         <trim prefix="where" prefixOverrides="and">
-            (`principal`=#{userid} OR `examine` LIKE CONCAT('%',#{userid},'%'))
-            <if test="name != null">
-                and `name` like CONCAT('%',#{name},'%')
+            `bd_project`.`principal`=`sys_user`.id
+            <if test="userid!=null">
+                and  userid=#{userid}
             </if>
-            <if test="type != null">
-                and `type`=#{type}
+            <if test="projectName != null">
+                and `bd_project`.`name` like CONCAT('%',#{projectName},'%')
             </if>
-            <if test="code != null">
-                and `code`=#{code}
+            <if test="deptid != null">
+                and `bd_project`.deptid=#{deptid}
             </if>
-            <if test="status!=null">
-                and  process_state=#{status}
+            <if test="stage != null">
+                and `bd_project`.`stage`=#{stage}
+            </if>
+            <if test="areaManager != null">
+                and `bd_project`.`areaManager`=#{areaManager}
+            </if>
+            <if test="principalName != null">
+                and `sys_user`.`name` like CONCAT('%',#{principalName},'%')
             </if>
             <if test="start != null">
                 and `createtime` &gt;= #{start}
@@ -310,6 +317,8 @@
             </if>
         </trim>
     </select>
+
+
     <select id="getByProcessUser" resultMap="BaseResultMap">
         SELECT *
         FROM `bd_project`

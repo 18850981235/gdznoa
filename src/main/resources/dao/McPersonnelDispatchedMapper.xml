@@ -10,11 +10,12 @@
         <result column="userid" property="userid" jdbcType="INTEGER"/>
         <result column="evection_time" property="evectionTime" jdbcType="VARCHAR"/>
         <result column="evection_cost" property="evectionCost" jdbcType="DECIMAL"/>
-        <result column="accessory" property="accessory" jdbcType="VARCHAR"/>
         <result column="processid" property="processid" jdbcType="INTEGER"/>
         <result column="process_userid" property="processUserid" jdbcType="INTEGER"/>
         <result column="process_state" property="processState" jdbcType="VARCHAR"/>
-        <result column="projectName" property="projectName" jdbcType="VARCHAR"/>
+        <association property="project" javaType="com.beans.BdProject" column="projectid"
+                     select="com.dao.bd.BdProjectMapper.getProjectById">
+        </association>
         <association property="dept" javaType="com.beans.SysDept" column="deptid"
                      select="com.dao.sys.DeptMapper.getListById">
         </association>
@@ -28,14 +29,17 @@
                      select="com.dao.sys.UserMapper.getByID">
         </association>
     </resultMap>
-    <select id="getList" resultMap="BaseResultMap">
+    <select id="getListProject" resultMap="BaseResultMap">
         SELECT `mc_personnel_dispatched`.*,`bd_project`.`name` AS projectName
         FROM `mc_personnel_dispatched`,
              `bd_project`
         <trim prefix="where" prefixOverrides="and">
             `bd_project`.`id` = `projectid`
-            <if test="name != null">
-                and `bd_project`.`name` like CONCAT('%',#{name},'%')
+            <if test="projectName != null">
+                and `bd_project`.`name` like CONCAT('%',#{projectName},'%')
+            </if>
+            <if test="personnelCondition != null">
+                and `mc_personnel_dispatched`.`personnel_condition` like CONCAT('%',#{personnelCondition},'%')
             </if>
             <if test="deptid != 0">
                 and `mc_personnel_dispatched`.deptid=#{deptid}
@@ -55,14 +59,18 @@
         </if>
 
     </select>
-    <select id="getCount"  resultType="int">
+
+    <select id="getCountProject"  resultType="int">
         SELECT count(1)
         FROM `mc_personnel_dispatched`,
         `bd_project`
         <trim prefix="where" prefixOverrides="and">
             `bd_project`.`id` = `projectid`
-            <if test="name != null">
-                and `bd_project`.`name` like CONCAT('%',#{name},'%')
+            <if test="projectName != null">
+                and `bd_project`.`name` like CONCAT('%',#{projectName},'%')
+            </if>
+            <if test="personnelCondition != null">
+                and `mc_personnel_dispatched`.`personnel_condition` like CONCAT('%',#{personnelCondition},'%')
             </if>
             <if test="deptid != 0">
                 and `mc_personnel_dispatched`.deptid=#{deptid}
@@ -79,32 +87,97 @@
         </trim>
     </select>
 
+    <select id="getList" resultMap="BaseResultMap">
+        SELECT *
+        FROM `mc_personnel_dispatched`,
+        <trim prefix="where" prefixOverrides="and">
+            <if test="deptid != 0">
+                and `mc_personnel_dispatched`.deptid=#{deptid}
+            </if>
+            <if test="personnelCondition != null">
+                and `mc_personnel_dispatched`.`personnel_condition` like CONCAT('%',#{personnelCondition},'%')
+            </if>
+            <if test="userid != 0">
+                AND `mc_personnel_dispatched`.`userid` = #{userid}
+            </if>
+            <if test="start != null">
+                and `mc_personnel_dispatched`.`createtime` &gt;= #{start}
+            </if>
+            <if test="end != null">
+                and `mc_personnel_dispatched`.`createtime` &lt;= #{end}
+            </if>
+        </trim>
+        <if test="pageSize!=0">
+            LIMIT #{pageIndex},#{pageSize}
+        </if>
+
+    </select>
+
+    <select id="getCount"  resultType="int">
+        SELECT count(1)
+        FROM `mc_personnel_dispatched`
+        <trim prefix="where" prefixOverrides="and">
+            <if test="deptid != 0">
+                and `mc_personnel_dispatched`.deptid=#{deptid}
+            </if>
+            <if test="personnelCondition != null">
+                and `mc_personnel_dispatched`.`personnel_condition` like CONCAT('%',#{personnelCondition},'%')
+            </if>
+            <if test="userid != 0">
+                AND `mc_personnel_dispatched`.`userid` = #{userid}
+            </if>
+            <if test="start != null">
+                and `mc_personnel_dispatched`.`createtime` &gt;= #{start}
+            </if>
+            <if test="end != null">
+                and `mc_personnel_dispatched`.`createtime` &lt;= #{end}
+            </if>
+        </trim>
+    </select>
+
+
+
     <insert id="add">
         insert into mc_personnel_dispatched
         <trim prefix="(" suffix=")" suffixOverrides="," >
-            <if test="deptid != 0" >
-                deptid,
-            </if>
-            <if test="createtime != null" >
-                createtime,
-            </if>
             <if test="projectid != 0" >
                 projectid,
             </if>
-            <if test="demand != null" >
-                demand,
+            <if test="deptid != 0" >
+                deptid,
             </if>
             <if test="userid != 0" >
                 userid,
             </if>
+            <if test="createtime != null" >
+                createtime,
+            </if>
+            <if test="demand != null" >
+                demand,
+            </if>
             <if test="evectionTime != null" >
                 evection_time,
             </if>
+            <if test="personnelCondition != null" >
+                personnel_condition,
+            </if>
+            <if test="costStandard != null" >
+                cost_standard,
+            </if>
+            <if test="evectionBudget != null" >
+                evection_budget,
+            </if>
+            <if test="practicalTime != null" >
+                practical_time,
+            </if>
+            <if test="evectionCondition != null" >
+                evection_condition,
+            </if>
+            <if test="travelCost != null" >
+                travel_cost,
+            </if>
             <if test="evectionCost != null" >
                 evection_cost,
-            </if>
-            <if test="accessory != null" >
-                accessory,
             </if>
             <if test="processid != 0" >
                 processid,
@@ -115,31 +188,49 @@
             <if test="processState != null" >
                 process_state,
             </if>
+            <if test="processNode != 0" >
+                process_node,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides="," >
-            <if test="deptid != 0" >
-                #{deptid},
-            </if>
-            <if test="createtime != null" >
-                #{createtime},
-            </if>
             <if test="projectid != 0" >
                 #{projectid},
             </if>
-            <if test="demand != null" >
-                #{demand},
+            <if test="deptid != 0" >
+                #{deptid},
             </if>
             <if test="userid != 0" >
                 #{userid},
             </if>
+            <if test="createtime != null" >
+                #{createtime},
+            </if>
+            <if test="demand != null" >
+                #{demand},
+            </if>
             <if test="evectionTime != null" >
                 #{evectionTime},
             </if>
+            <if test="personnelCondition != null" >
+                #{personnelCondition},
+            </if>
+            <if test="costStandard != null" >
+                #{costStandard},
+            </if>
+            <if test="evectionBudget != null" >
+                #{evectionBudget},
+            </if>
+            <if test="practicalTime != null" >
+                #{practicalTime},
+            </if>
+            <if test="evectionCondition != null" >
+                #{evectionCondition},
+            </if>
+            <if test="travelCost != null" >
+                #{travelCost},
+            </if>
             <if test="evectionCost != null" >
                 #{evectionCost},
-            </if>
-            <if test="accessory != null" >
-                #{accessory},
             </if>
             <if test="processid != 0" >
                 #{processid},
@@ -150,34 +241,52 @@
             <if test="processState != null" >
                 #{processState},
             </if>
+            <if test="processNode != 0" >
+                #{processNode},
+            </if>
         </trim>
     </insert>
     <update id="updateById">
         update mc_personnel_dispatched
         <set >
-            <if test="deptid != 0" >
-                deptid = #{deptid},
-            </if>
-            <if test="createtime != null" >
-                createtime = #{createtime},
-            </if>
             <if test="projectid != 0" >
                 projectid = #{projectid},
             </if>
-            <if test="demand != null" >
-                demand = #{demand},
+            <if test="deptid != 0" >
+                deptid = #{deptid},
             </if>
             <if test="userid != 0" >
                 userid = #{userid},
             </if>
+            <if test="createtime != null" >
+                createtime = #{createtime},
+            </if>
+            <if test="demand != null" >
+                demand = #{demand},
+            </if>
             <if test="evectionTime != null" >
                 evection_time = #{evectionTime},
             </if>
+            <if test="personnelCondition != null" >
+                personnel_condition = #{personnelCondition},
+            </if>
+            <if test="costStandard != null" >
+                cost_standard = #{costStandard},
+            </if>
+            <if test="evectionBudget != null" >
+                evection_budget = #{evectionBudget},
+            </if>
+            <if test="practicalTime != null" >
+                practical_time = #{practicalTime},
+            </if>
+            <if test="evectionCondition != null" >
+                evection_condition = #{evectionCondition},
+            </if>
+            <if test="travelCost != null" >
+                travel_cost = #{travelCost},
+            </if>
             <if test="evectionCost != null" >
                 evection_cost = #{evectionCost},
-            </if>
-            <if test="accessory != null" >
-                accessory = #{accessory},
             </if>
             <if test="processid != 0" >
                 processid = #{processid},
@@ -187,6 +296,9 @@
             </if>
             <if test="processState != null" >
                 process_state = #{processState},
+            </if>
+            <if test="processNode != 0" >
+                process_node = #{processNode},
             </if>
         </set>
           WHERE id={id}

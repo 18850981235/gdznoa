@@ -19,17 +19,40 @@ public interface McStampMapper {
      //删除盖章申请
      int deleteById(@Param("id") int id);
      //按条件查询盖章集合
-     List<McStamp>  getList(@Param("stampType") String stampType,
+     List<McStamp>  getList(@Param("userid") int userid,
+                            @Param("stampType") String stampType,
                             @Param("deptid") int deptid,
-                            @Param("userid") int userid,
+                            @Param("content") String content,
+                            @Param("stampType") String purpose,
                             @Param("start")Date start,
                             @Param("end") Date end,
                             @Param("pageIndex")int pageIndex,
                             @Param("pageSize")int pageSize);
      //按条件统计盖章个数
-     int getCount(@Param("stampType") String stampType,
+     int getCount(@Param("userid") int userid,
+                  @Param("stampType") String stampType,
                   @Param("deptid") int deptid,
+                  @Param("content") String content,
+                  @Param("stampType") String purpose,
+                  @Param("start")Date start,
+                  @Param("end") Date end);
+
+     List<McStamp>  getListProject(@Param("projectName")String projectName,
+                            @Param("userid") int userid,
+                            @Param("stampType") String stampType,
+                            @Param("deptid") int deptid,
+                            @Param("content") String content,
+                            @Param("stampType") String purpose,
+                            @Param("start")Date start,
+                            @Param("end") Date end,
+                            @Param("pageIndex")int pageIndex,
+                            @Param("pageSize")int pageSize);
+     int getCountProject(@Param("projectName")String projectName,
                   @Param("userid") int userid,
+                  @Param("stampType") String stampType,
+                  @Param("deptid") int deptid,
+                  @Param("content") String content,
+                  @Param("stampType") String purpose,
                   @Param("start")Date start,
                   @Param("end") Date end);
 }

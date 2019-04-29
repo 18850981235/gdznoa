@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
-import java.util.HashMap;
-import java.util.Map;
 
 
 /**
@@ -36,15 +34,6 @@ public class UtilAciton {
     private ApprovalProcessService approvalProcessService;
     @Resource(name = "userService")
     private UserService userService;
-
-    @RequestMapping("/foundUser")
-    @ResponseBody
-    public String foundUser(String name,int id){
-        Map map=new HashMap();
-        map.put("name",name);
-        map.put("id",id);
-        return JSONObject.toJSONString(map);
-    }
 
     @RequestMapping(value = "/getDeptUsers",produces = "text/html;charset=UTF-8")
     @ResponseBody

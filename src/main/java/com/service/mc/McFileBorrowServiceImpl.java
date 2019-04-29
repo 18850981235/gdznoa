@@ -6,7 +6,7 @@ import com.beans.SysApprovalProcess;
 import com.dao.mc.McFileBorrowMapper;
 import com.dao.sys.ApprovalDetailedMapper;
 import com.dao.sys.ApprovalProcessMapper;
-import com.util.FileUtils;
+import com.dao.sys.UserMapper;
 import com.util.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,6 +33,8 @@ public class McFileBorrowServiceImpl implements McFileBorrowService{
     private ApprovalDetailedMapper approvalDetailedMapper;
     @Resource
     private McFileBorrowMapper mcFileBorrowMapper;
+    @Resource
+    private UserMapper userMapper;
 
     /**
      * 添加原文件借用审批详情 修改人员派遣下一个审批人审批状态
@@ -44,32 +46,37 @@ public class McFileBorrowServiceImpl implements McFileBorrowService{
         detailed.setApprovalName("商务原文件借用");
         try {
             approvalDetailedMapper.add(detailed);
-            McFileBorrow fb_update = new McFileBorrow();
-            if (detailed.getState() .equals("通过")) {
-                String state = "进行中";
-                int processUserid = 0;
-                McFileBorrow fb=  mcFileBorrowMapper.getListById(detailed.getApprovalId());
-                String users = fb.getProcess().getUsersid();
-                String[] userArr = users.split(",");
-                for (int i = 0; i < userArr.length; i++) {
-                    if (userArr[i].equals(String.valueOf(fb.getProcessUserid()))) {
-                        if (i != userArr.length - 1) {
-                            processUserid = Integer.parseInt(userArr[i + 1]);
-                        } else {
-                            state = "已结束";
-                        }
-                    }
-                }
-                fb_update.setProcessUserid(processUserid);
-                fb_update.setUpdatetime(new Date());
-                fb_update.setProcessState(state);
-                fb_update.setId(detailed.getApprovalId());
+            McFileBorrow update = new McFileBorrow();
+            int processUserid = 0;
+            McFileBorrow fb = mcFileBorrowMapper.getListById(detailed.getApprovalId());
+            String state = "进行中";
+            String users = fb.getProcess().getUsersid();
+            String[] userArr = users.split(",");
+            if (detailed.getState().equals("通过")) {
+                fb.setProcessNode(fb.getProcessNode()+1);
             } else {
-                fb_update.setUpdatetime(new Date());
-                fb_update.setProcessState(detailed.getState());
-                fb_update.setId(detailed.getApprovalId());
+                fb.setProcessNode(fb.getProcessNode()-1);
             }
-            return mcFileBorrowMapper.updateById(fb_update);
+
+            if(fb.getProcessNode()==1){
+                processUserid =Integer.parseInt(userArr[0]);
+            }
+            if(fb.getProcessNode()==2){
+                processUserid =Integer.parseInt(userArr[1]);
+            }
+            if(fb.getProcessNode()==3){
+                processUserid = userMapper.DeptroleUser(fb.getDeptid()).get(0).getId();
+            }
+            if(fb.getProcessNode()==4){
+                processUserid=fb.getUserid();
+            }
+            if(fb.getProcessNode()==5){
+                processUserid =Integer.parseInt(userArr[4]);
+            }
+            update.setProcessNode(fb.getProcessNode());
+            update.setProcessUserid(processUserid);
+            update.setId(detailed.getApprovalId());
+            return mcFileBorrowMapper.updateById(update);
         } catch (Exception e) {
             e.printStackTrace();
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
@@ -88,10 +95,6 @@ public class McFileBorrowServiceImpl implements McFileBorrowService{
         int num = 0;
         try {
             SysApprovalProcess process = approvalProcessMapper.getProcessById(7);
-            String accessory= FileUtils.uploadFile(request,"file");
-            if (accessory!=null&&!accessory.equals("")){
-                fileBorrow.setAccessory(accessory);
-            }
             String[] arr = process.getUsersid().split(",");
             fileBorrow.setProcessid(7);
             fileBorrow.setProcessUserid(Integer.parseInt(arr[0]));
@@ -110,18 +113,25 @@ public class McFileBorrowServiceImpl implements McFileBorrowService{
     }
 
     @Override
-    public Map<String, Object> getList(String name, int deptid, Date start,
+    public Map<String, Object> getList(String projectName,String name, int deptid, Date start,
                                       Date end, int usreid, int pageIndex) {
         Map<String, Object> map=new HashMap<>();
         Page page=new Page();
+        List<McFileBorrow> list=null;
         try {
             if (pageIndex == 0) {
                 pageIndex = 1;
             }
             page.setPageSize(10);
-            page.setTotalCount(mcFileBorrowMapper.getCount(name, deptid, start, end, usreid));
-            page.setCurrentPageNo(pageIndex);
-            List<McFileBorrow> list=mcFileBorrowMapper.getList(name, deptid, start, end, usreid,(page.getCurrentPageNo()-1)*page.getPageSize(),page.getPageSize());
+            if(projectName==null){
+                page.setTotalCount(mcFileBorrowMapper.getCount(name, deptid, start, end, usreid));
+                page.setCurrentPageNo(pageIndex);
+                list=mcFileBorrowMapper.getList(name, deptid, start, end, usreid,(page.getCurrentPageNo()-1)*page.getPageSize(),page.getPageSize());
+            }else{
+                page.setTotalCount(mcFileBorrowMapper.getCountProject(projectName,name, deptid, start, end, usreid));
+                page.setCurrentPageNo(pageIndex);
+                list=mcFileBorrowMapper.getListProject(projectName,name, deptid, start, end, usreid,(page.getCurrentPageNo()-1)*page.getPageSize(),page.getPageSize());
+            }
             map.put("page",page);
             map.put("list",list);
         } catch (Exception e) {
