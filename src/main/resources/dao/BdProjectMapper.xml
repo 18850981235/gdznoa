@@ -282,7 +282,7 @@
                 and `createtime` &lt;= #{end}
             </if>
         </trim>
-        ORDER BY `createtime` DESC
+        ORDER BY `bd_project`.`createtime` DESC
         <if test="pageSize!=0">
             LIMIT #{pageIndex},#{pageSize}
         </if>
@@ -304,7 +304,7 @@
                 and `bd_project`.`stage`=#{stage}
             </if>
             <if test="areaManager != null">
-                and `bd_project`.`areaManager`=#{areaManager}
+                and `bd_project`.`area_manager`=#{areaManager}
             </if>
             <if test="principalName != null">
                 and `sys_user`.`name` like CONCAT('%',#{principalName},'%')

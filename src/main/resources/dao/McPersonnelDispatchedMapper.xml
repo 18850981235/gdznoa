@@ -135,8 +135,6 @@
         </trim>
     </select>
 
-
-
     <insert id="add">
         insert into mc_personnel_dispatched
         <trim prefix="(" suffix=")" suffixOverrides="," >
