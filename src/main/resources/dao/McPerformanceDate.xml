@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.mc.McPerformanceDateMapper">
+    <resultMap id="BaseResultMap" type="com.beans.McPerformanceDate">
+        <id column="id" property="id"/>
+        <result column="project_id" property="projectId" jdbcType="INTEGER"/>
+        <result column="bidding_notice" property="biddingNotice" jdbcType="TIMESTAMP"/>
+        <result column="bidding_time" property="biddingTime" jdbcType="TIMESTAMP"/>
+        <result column="performance_contract" property="performanceContract" jdbcType="INTEGER"/>
+        <result column="signing_time" property="signingTime" jdbcType="VARCHAR"/>
+        <result column="acceptance_report" property="acceptanceReport" jdbcType="INTEGER"/>
+        <result column="acceptance_time" property="acceptanceTime" jdbcType="VARCHAR"/>
+        <result column="maintenance_proof" property="maintenanceProof" jdbcType="VARCHAR"/>
+        <result column="maintenance_time" property="maintenanceTime" jdbcType="VARCHAR"/>
+        <result column="public_address" property="publicAddress" jdbcType="VARCHAR"/>
+        <result column="public_picture" property="publicPicture" jdbcType="INTEGER"/>
+        <result column="borrow_stada" property="borrowStada" jdbcType="INTEGER"/>
+        <result column="pdf_out" property="pdfOut" jdbcType="INTEGER"/>
+        <result column="manager_id" property="managerId" jdbcType="VARCHAR"/>
+        <result column="filing_time" property="filingTime" jdbcType="TIMESTAMP"/>
+        <association property="project" javaType="com.beans.BdProject" column="project_id"
+                     select="com.dao.bd.BdProjectMapper.getProjectById">
+        </association>
+    </resultMap>
+
+    <insert id="addPerformanceDate">
+        INSERT INTO `sys_dept`
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="projectId!=0">
+                `project_id`,
+            </if>
+            <if test="biddingNotice!=null">
+                `bidding_notice`,
+            </if>
+            <if test="biddingTime!=null">
+                `bidding_time`,
+            </if>
+            <if test="performanceContract!=null">
+                `performance_contract`,
+            </if>
+            <if test="signingTime!=null">
+                `signing_time`,
+            </if>
+            <if test="acceptanceReport!=null">
+                `acceptance_report`,
+            </if>
+            <if test="acceptanceTime!=null">
+                `acceptance_time`,
+            </if>
+            <if test="maintenanceProof!=null">
+                `maintenance_proof`,
+            </if>
+            <if test="maintenanceTime!=null">
+                `maintenance_time`,
+            </if>
+            <if test="publicAddress!=null">
+                `public_address`,
+            </if>
+            <if test="publicPicture!=null">
+                `public_picture`,
+            </if>
+            <if test="borrowStada!=null">
+                `borrow_stada`,
+            </if>
+            <if test="pdfOut!=null">
+                `pdf_out`,
+            </if>
+            <if test="managerId!=0">
+                `manager_id`,
+            </if>
+            <if test="filingTime!=null">
+                `filing_time`,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="projectId!=0">
+                #{projectId},
+            </if>
+            <if test="biddingNotice!=null">
+                #{biddingNotice},
+            </if>
+            <if test="biddingTime!=null">
+                #{biddingTime},
+            </if>
+            <if test="performanceContract!=null">
+                #{performanceContract},
+            </if>
+            <if test="signingTime!=null">
+                #{signingTime},
+            </if>
+            <if test="acceptanceReport!=null">
+                #{acceptanceReport},
+            </if>
+            <if test="acceptanceTime!=null">
+                #{acceptanceTime},
+            </if>
+            <if test="maintenanceProof!=null">
+                #{maintenanceProof},
+            </if>
+            <if test="maintenanceTime!=null">
+                #{maintenanceTime},
+            </if>
+            <if test="publicAddress!=null">
+                #{publicAddress},
+            </if>
+            <if test="publicPicture!=null">
+                #{publicPicture},
+            </if>
+            <if test="borrowStada!=null">
+                #{borrowStada},
+            </if>
+            <if test="pdfOut!=null">
+                #{pdfOut},
+            </if>
+            <if test="managerId!=null">
+                #{managerId},
+            </if>
+            <if test="filingTime!=null">
+                #{filingT
+                ime},
+            </if>
+        </trim>
+    </insert>
+
+
+    <select id="queryMcPerformanceDatebyid" resultMap="BaseResultMap">
+        SELECT * FROM `mc_performance_date` ,`bd_project`where
+                `bd_project`.`id`=`mc_performance_date`.`project_id` and `mc_performance_date`.id=#{id}
+    </select>
+
+
+    <select id="querycont" resultMap="BaseResultMap">
+        SELECT * FROM `mc_performance_date`,`bd_project`
+        <trim prefix="where" prefixOverrides="and">
+            `mc_performance_date`.`project_id`=`bd_project`.`id`
+
+            <if test="projectName != null">
+                and `bd_project`.`name` like CONCAT('%',#{projectName},'%')
+            </if>
+            <if test="bidtimeStart != null">
+                and `mc_performance_date`.`bidding_time` &gt;= #{bidtimeStart}
+            </if>
+            <if test="bidtimeEnd != null">
+                and `mc_performance_date`.`bidding_time` &lt;= #{bidtimeEnd}
+            </if>
+            <if test="accetimeStart != null">
+                and `mc_performance_date`.`Acceptance_time` &gt;= #{accetimeStart}
+            </if>
+            <if test="accetimeEnd != null">
+                and `mc_performance_date`.`Acceptance_time` &lt;= #{accetimeEnd}
+            </if>
+            <if test="borrow != null">
+                and `mc_performance_date`.`borrow_stada` like CONCAT('%',#{borrow},'%')
+            </if>
+        </trim>
+
+    </select>
+
+    <select id="queryMcPerformanceDatebysome" resultMap="BaseResultMap">
+        SELECT * FROM `mc_performance_date`,`bd_project` where
+        <trim prefix="where" prefixOverrides="and">
+            `mc_performance_date`.`project_id`=`bd_project`.`id`
+
+            <if test="projectName != null">
+                and `bd_project`.`name` like CONCAT('%',#{projectName},'%')
+            </if>
+            <if test="bidtimeStart != null">
+                and `mc_performance_date`.`bidding_time` &gt;= #{bidtimeStart}
+            </if>
+            <if test="bidtimeEnd != null">
+                and `mc_performance_date`.`bidding_time` &lt;= #{bidtimeEnd}
+            </if>
+            <if test="accetimeStart != null">
+                and `mc_performance_date`.`Acceptance_time` &gt;= #{accetimeStart}
+            </if>
+            <if test="accetimeEnd != null">
+                and `mc_performance_date`.`Acceptance_time` &lt;= #{accetimeEnd}
+            </if>
+            <if test="borrow != null">
+                and `mc_performance_date`.`borrow_stada` like CONCAT('%',#{borrow},'%')
+            </if>
+        </trim>
+        <if test="pageSize!=0">
+            LIMIT #{pageIndex},#{pageSize}
+        </if>
+    </select>
+
+
+    <delete id="deleteMcPerformanceDate">
+        delete
+        from `mc_performance_date`
+        where id = #{id}
+    </delete>
+
+
+</mapper>
