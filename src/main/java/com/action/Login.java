@@ -199,6 +199,6 @@ public class Login {
         //int userid=(int)session.getAttribute("userId");
         int userid = 1;
         map.put("authority", authorityService.getMenuIdByUserId(userid));
-        return JSONObject.toJSONString(map, SerializerFeature.DisableCircularReferenceDetect);
+        return JSONObject.toJSONString(map, SerializerFeature.DisableCircularReferenceDetect,SerializerFeature.WriteNullStringAsEmpty);
     }
 }

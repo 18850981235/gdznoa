@@ -49,7 +49,7 @@ public class McPersonnelDispatchedServiceImpl implements McPersonnelDispatchedSe
             String[] arr = process.getUsersid().split(",");
             personnelDispatched.setProcessid(9);
             personnelDispatched.setProcessUserid(Integer.parseInt(arr[0]));
-            personnelDispatched.setProcessState("进行中");
+            personnelDispatched.setProcessState("未审批");
             num = mcPersonnelDispatchedMapper.add(personnelDispatched);
         } catch (Exception e) {
             e.printStackTrace();
@@ -82,13 +82,13 @@ public class McPersonnelDispatchedServiceImpl implements McPersonnelDispatchedSe
             McPersonnelDispatched update = new McPersonnelDispatched();
             int processUserid = 0;
             McPersonnelDispatched pd = mcPersonnelDispatchedMapper.getListById(detailed.getApprovalId());
-            String state = "进行中";
+            String state = "审批中";
             String users = pd.getProcess().getUsersid();
             String[] userArr = users.split(",");
-            if (detailed.getState().equals("通过")) {
+            if (detailed.getState().equals("同意")) {
                 pd.setProcessNode(pd.getProcessNode()+1);
                 if(userArr.length<pd.getProcessNode()){
-                    state="已结束";
+                    state="审批结束";
                     pd.setProcessNode(0);
                 }
             } else {

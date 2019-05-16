@@ -1,4 +1,4 @@
-package com.dao;
+package com.dao.publics;
 
 import com.beans.MyWork;
 import org.apache.ibatis.annotations.Mapper;

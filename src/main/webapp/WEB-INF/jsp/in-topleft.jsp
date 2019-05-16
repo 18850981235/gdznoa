@@ -7,6 +7,7 @@
 %>
 
 
+<%--
 <div id="left">
     <div id="imgs">
         <img src="<%=basePath%>/imgs/logo1.png" />
@@ -70,4 +71,4 @@
         <span>${user.name}</span>
         <p class="comment"></p>
     </div>
-</div>
+</div>--%>

@@ -51,10 +51,10 @@ public class McStampServiceImpl implements McStampService {
             McStamp stamp_update = new McStamp();
             int processUserid = 0;
             McStamp stamp = mcStampMapper.getListById(detailed.getApprovalId());
-            String state = "进行中";
+            String state = "审批中";
             String users = stamp.getProcess().getUsersid();
             String[] userArr = users.split(",");
-            if (detailed.getState().equals("通过")) {
+            if (detailed.getState().equals("同意")) {
                 boolean flag=true;
                 for (int i = 0; i < userArr.length; i++) {
                     if (userArr[i].equals(String.valueOf(stamp.getProcessUserid()))) {
@@ -69,7 +69,7 @@ public class McStampServiceImpl implements McStampService {
                         if (i != userArr.length - 1) {
                             processUserid = Integer.parseInt(userArr[i + 1]);
                         } else {
-                            state = "已结束";
+                            state = "审批结束";
                         }
                     }
                 }
@@ -130,7 +130,7 @@ public class McStampServiceImpl implements McStampService {
             String[] arr = process.getUsersid().split(",");
             stamp.setProcessid(12);
             stamp.setProcessUserid(Integer.parseInt(arr[0]));
-            stamp.setProcessState("进行中");
+            stamp.setProcessState("未审批");
             num = mcStampMapper.add(stamp);
         } catch (Exception e) {
             e.printStackTrace();

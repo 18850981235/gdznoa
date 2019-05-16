@@ -24,7 +24,7 @@ public interface McMaterialsMapper {
                  @Param("end") Date end,
                  @Param("userid") int usreid);
 
-    List<McMaterials> getList(@Param("offerTpye") String offerTpye,
+    List<McMaterials> getList(@Param("projectName") String projectName,
                               @Param("deptid") int deptid,
                               @Param("start") Date start,
                               @Param("end") Date end,

@@ -48,7 +48,7 @@ public class McMaterialsSeviceImpl implements McMaterialsSevice {
             approvalDetailedMapper.add(detailed);
             McMaterials mr_update = new McMaterials();
             if (detailed.getState().equals("通过")) {
-                String state = "进行中";
+                String state = "审批中";
                 int processUserid = 0;
                 McMaterials fb=  mcMaterialsMapper.getListById(detailed.getApprovalId());
                 String users = fb.getProcess().getUsersid();
@@ -58,7 +58,7 @@ public class McMaterialsSeviceImpl implements McMaterialsSevice {
                         if (i != userArr.length - 1) {
                             processUserid = Integer.parseInt(userArr[i + 1]);
                         } else {
-                            state = "已结束";
+                            state = "审批结束";
                         }
                     }
                 }
@@ -89,7 +89,7 @@ public class McMaterialsSeviceImpl implements McMaterialsSevice {
             String[] arr = process.getUsersid().split(",");
             mcMaterials.setProcessid(8);
             mcMaterials.setProcessUserid(Integer.parseInt(arr[0]));
-            mcMaterials.setProcessState("进行中");
+            mcMaterials.setProcessState("未审批");
             num = mcMaterialsMapper.add(mcMaterials);
         } catch (Exception e) {
             e.printStackTrace();
@@ -104,7 +104,7 @@ public class McMaterialsSeviceImpl implements McMaterialsSevice {
     }
 
     @Override
-    public Map<String, Object> getList(String offerTpye, int deptid, Date start, Date end, int usreid, int pageIndex) {
+    public Map<String, Object> getList(String projectName, int deptid, Date start, Date end, int usreid, int pageIndex) {
         Map<String, Object> map=new HashMap<>();
         Page page=new Page();
         try {
@@ -112,9 +112,9 @@ public class McMaterialsSeviceImpl implements McMaterialsSevice {
                 pageIndex = 1;
             }
             page.setPageSize(10);
-            page.setTotalCount(mcMaterialsMapper.getCount(offerTpye, deptid, start, end, usreid));
+            page.setTotalCount(mcMaterialsMapper.getCount(projectName, deptid, start, end, usreid));
             page.setCurrentPageNo(pageIndex);
-            List<McMaterials> list=mcMaterialsMapper.getList(offerTpye, deptid, start, end, usreid,(page.getCurrentPageNo()-1)*page.getPageSize(),page.getPageSize());
+            List<McMaterials> list=mcMaterialsMapper.getList(projectName, deptid, start, end, usreid,(page.getCurrentPageNo()-1)*page.getPageSize(),page.getPageSize());
             map.put("page",page);
             map.put("list",list);
         } catch (Exception e) {

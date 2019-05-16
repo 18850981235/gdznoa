@@ -48,6 +48,7 @@ public class BdProjectServiceImpl implements BdProjectService {
         try {
             SysApprovalProcess process = approvalProcessMapper.getProcessById(1);
             String accessory = FileUtils.uploadFile(request, "file");
+
             if (accessory != null && !accessory.equals("")) {
                 project.setAccessory(accessory);
             }
@@ -55,7 +56,7 @@ public class BdProjectServiceImpl implements BdProjectService {
             int userId = (int) request.getSession().getAttribute("userId");
             project.setUserid(userId);
             project.setProcessUserid(project.getAreaManager());
-            project.setProcessState("进行中");
+            project.setProcessState("未审批");
             num = bdProjectMapper.add(project);
         } catch (Exception e) {
             e.printStackTrace();
@@ -76,10 +77,10 @@ public class BdProjectServiceImpl implements BdProjectService {
         try {
             approvalDetailedMapper.add(detailed);
             BdProject project_update = new BdProject();
-            String state = "进行中";
+            String state = "审批中";
             int processUserid = 0;
             BdProject project = bdProjectMapper.getListById(detailed.getApprovalId());
-            if (detailed.getState().equals("通过")) {
+            if (detailed.getState().equals("同意")) {
                 String users = project.getProcess().getUsersid();
                 String[] userArr = users.split(",");
                 boolean flag = true;
@@ -89,13 +90,14 @@ public class BdProjectServiceImpl implements BdProjectService {
                         if (i != userArr.length - 1) {
                             processUserid = Integer.parseInt(userArr[i + 1]);
                         } else {
-                            state = "已结束";
+                            state = "审批结束";
                         }
                     }
                 }
                 if (flag) {
                     processUserid = Integer.parseInt(userArr[1]);
                 }
+                project_update.setProcessNode(project.getProcessNode()+1);
                 project_update.setProcessUserid(processUserid);
                 project_update.setProcessState(state);
                 project_update.setId(detailed.getApprovalId());
@@ -104,7 +106,6 @@ public class BdProjectServiceImpl implements BdProjectService {
                 String[] userArr = users.split(",");
                 for (int i = 0; i < userArr.length; i++) {
                     if (userArr[i].equals(String.valueOf(project.getProcessUserid()))) {
-
                         if (userArr[1].equals(String.valueOf(project.getProcessUserid()))) {
                             processUserid = project.getAreaManager();
                             break;
@@ -114,6 +115,7 @@ public class BdProjectServiceImpl implements BdProjectService {
                         }
                     }
                 }
+                project_update.setProcessNode(project.getProcessNode()-1);
                 project_update.setProcessUserid(processUserid);
                 project_update.setId(detailed.getApprovalId());
             }
@@ -130,7 +132,6 @@ public class BdProjectServiceImpl implements BdProjectService {
      * 按用户id,名字,类型,编号,状态,开始时间,结束时间查询立项信息
      *
      * @param userid 用户id
-
      * @param start  开始时间
      * @param end    结束时间
      * @return 立项集合and分页类
@@ -173,8 +174,6 @@ public class BdProjectServiceImpl implements BdProjectService {
             List<SysApprovalDetailed> list = approvalDetailedMapper.getListByapprovalId(id, "项目立项");
             map.put("project", project);
             map.put("list", list);
-            // map.put("users",users);
-
         } catch (Exception e) {
             e.printStackTrace();
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
@@ -197,6 +196,5 @@ public class BdProjectServiceImpl implements BdProjectService {
     public List<BdProject> getProjectName() {
         return bdProjectMapper.getProjectName();
     }
-
 
 }

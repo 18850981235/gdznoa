@@ -45,6 +45,7 @@ public class McAction {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         dateFormat.setLenient(false);
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
+
         //true:允许输入空值，false:不能为空值
     }
 
@@ -80,7 +81,8 @@ public class McAction {
         //int userid=(int) session.getAttribute("userId");
         int userid=1;
         return JSONObject.toJSONString(mcStampService.getList( projectName, userid,  stampType, deptid,  content, purpose,start,end, pageIndex),
-                SerializerFeature.DisableCircularReferenceDetect);
+                SerializerFeature.DisableCircularReferenceDetect,
+                SerializerFeature.WriteNullStringAsEmpty);
     }
     @RequestMapping("/stamp/add")
     public String showAddStamp(){
@@ -103,7 +105,8 @@ public class McAction {
     @ResponseBody
     public String UpdateStampJson(@RequestParam int id){
         return JSONObject.toJSONString(mcStampService.getListById(id),
-                SerializerFeature.DisableCircularReferenceDetect);
+                SerializerFeature.DisableCircularReferenceDetect,
+                SerializerFeature.WriteNullStringAsEmpty);
     }
     @RequestMapping("/stamp/update.html")
     public String UpdateStamp(McStamp mcStamp){
@@ -120,7 +123,8 @@ public class McAction {
     @ResponseBody
     public String StampJson(@RequestParam int id){
         return JSONObject.toJSONString(mcStampService.getParticular1ById(id),
-                SerializerFeature.DisableCircularReferenceDetect);
+                SerializerFeature.DisableCircularReferenceDetect,
+                SerializerFeature.WriteNullStringAsEmpty,SerializerFeature.WriteNullStringAsEmpty);
     }
     @RequestMapping("/stamp/approvalDetailed")
     public String stampParticular(SysApprovalDetailed approvalDetailed,HttpSession session) {
@@ -157,7 +161,8 @@ public class McAction {
         int userid=(int) session.getAttribute("userId");
         //int  userid=1;
         return JSONObject.toJSONString(mcFileBorrowService.getList(projectName,name,deptid,start,end ,userid,pageIndex),
-                SerializerFeature.DisableCircularReferenceDetect);
+                SerializerFeature.DisableCircularReferenceDetect,
+                SerializerFeature.WriteNullStringAsEmpty);
     }
 
     @RequestMapping("/borrow/add")
@@ -178,6 +183,7 @@ public class McAction {
 
     @RequestMapping("/borrow/update.html")
     public String UpdateFileBorrow(McFileBorrow mcFileBorrow){
+        mcFileBorrowService.update(mcFileBorrow);
         return "redirect:/mc/borrow/query";
     }
 
@@ -185,7 +191,8 @@ public class McAction {
     @ResponseBody
     public String UpdateFileBorrowJson(@RequestParam int id){
         return JSONObject.toJSONString(mcFileBorrowService.getListById(id),
-                SerializerFeature.DisableCircularReferenceDetect);
+                SerializerFeature.DisableCircularReferenceDetect,
+                SerializerFeature.WriteNullStringAsEmpty);
     }
 
     @RequestMapping("/borrow/particular")
@@ -197,7 +204,8 @@ public class McAction {
     @ResponseBody
     public String borrowJson(@RequestParam int id){
         return JSONObject.toJSONString(mcFileBorrowService.getParticular1ById(id),
-                SerializerFeature.DisableCircularReferenceDetect);
+                SerializerFeature.DisableCircularReferenceDetect,
+                SerializerFeature.WriteNullStringAsEmpty);
     }
     @RequestMapping("/borrow/approvalDetailed")
     public String borrowParticular(SysApprovalDetailed approvalDetailed,HttpSession session) {
@@ -216,18 +224,19 @@ public class McAction {
     }
     @RequestMapping(value = "/materials/query.html", produces = "text/html;charset=UTF-8")
     @ResponseBody
-    public String materialsList(@RequestParam(required = false)String offerTpye,
+    public String materialsList(@RequestParam(required = false)String projectName,
                             @RequestParam(required = false, defaultValue = "0")int deptid,
                             @RequestParam(required = false)Date start,
                             @RequestParam(required = false)Date end,
                             @RequestParam(required = false, defaultValue = "0")int pageIndex,
                             HttpSession session){
-        if (offerTpye == null || offerTpye == "") {
-            offerTpye = null;
+        if (projectName == null || projectName == "") {
+            projectName = null;
         }
         int userid=(int) session.getAttribute("userId");
-        return JSONObject.toJSONString(mcMaterialsSevice.getList(offerTpye,deptid,start,end,userid,pageIndex),
-                SerializerFeature.DisableCircularReferenceDetect);
+        return JSONObject.toJSONString(mcMaterialsSevice.getList(projectName,deptid,start,end,userid,pageIndex),
+                SerializerFeature.DisableCircularReferenceDetect,
+                SerializerFeature.WriteNullStringAsEmpty);
     }
     @RequestMapping("/materials/add")
     public String showAddMaterials(){
@@ -250,7 +259,8 @@ public class McAction {
     @ResponseBody
     public String UpdateMaterialsJson(@RequestParam int id){
         return JSONObject.toJSONString(mcMaterialsSevice.getListById(id),
-                SerializerFeature.DisableCircularReferenceDetect);
+                SerializerFeature.DisableCircularReferenceDetect,
+                SerializerFeature.WriteNullStringAsEmpty);
     }
     @RequestMapping("/materials/update.html")
     public String UpdateMaterials(McMaterials materials){
@@ -267,7 +277,8 @@ public class McAction {
     @ResponseBody
     public String materialsJson(@RequestParam int id){
         return JSONObject.toJSONString(mcMaterialsSevice.getParticular1ById(id),
-                SerializerFeature.DisableCircularReferenceDetect);
+                SerializerFeature.DisableCircularReferenceDetect,
+                SerializerFeature.WriteNullStringAsEmpty);
     }
 
     @RequestMapping("/materials/approvalDetailed")
@@ -303,7 +314,8 @@ public class McAction {
 
         int userid=(int) session.getAttribute("userId");
         return JSONObject.toJSONString(mcPersonnelDispatchedService.getList(projectName,personnelCondition,deptid, userid, start, end, pageIndex),
-                SerializerFeature.DisableCircularReferenceDetect);
+                SerializerFeature.DisableCircularReferenceDetect,
+                SerializerFeature.WriteNullStringAsEmpty);
     }
     @RequestMapping("/dispatched/add")
     public String showAddDispatched(){
@@ -327,7 +339,8 @@ public class McAction {
     @ResponseBody
     public String UpdateDispatchedJson(@RequestParam int id){
         return JSONObject.toJSONString(mcPersonnelDispatchedService.getListById(id),
-                SerializerFeature.DisableCircularReferenceDetect);
+                SerializerFeature.DisableCircularReferenceDetect,
+                SerializerFeature.WriteNullStringAsEmpty);
     }
     @RequestMapping("/dispatched/update.html")
     public String UpdateDispatched(McPersonnelDispatched personnelDispatched){
@@ -344,7 +357,8 @@ public class McAction {
     @ResponseBody
     public String dispatchedJson(@RequestParam int id){
         return JSONObject.toJSONString(mcPersonnelDispatchedService.getParticular1ById(id),
-                SerializerFeature.DisableCircularReferenceDetect);
+                SerializerFeature.DisableCircularReferenceDetect,
+                SerializerFeature.WriteNullStringAsEmpty);
     }
     @RequestMapping("/dispatched/delete")
     public String delete(@RequestParam int id){
@@ -380,7 +394,8 @@ public class McAction {
         int userid=(int) session.getAttribute("userId");
         //int userid=1;
         return JSONObject.toJSONString(mcDatumCostService.getList(projectName,deptid,start, end, userid,  pageIndex),
-                SerializerFeature.DisableCircularReferenceDetect);
+                SerializerFeature.DisableCircularReferenceDetect,
+                SerializerFeature.WriteNullStringAsEmpty);
     }
     @RequestMapping("/datum/add")
     public String showAddDatum(){
@@ -402,7 +417,8 @@ public class McAction {
     @ResponseBody
     public String UpdateDatumJson(@RequestParam int id){
         return JSONObject.toJSONString(mcDatumCostService.getListById(id),
-                SerializerFeature.DisableCircularReferenceDetect);
+                SerializerFeature.DisableCircularReferenceDetect,
+                SerializerFeature.WriteNullStringAsEmpty);
     }
 
     @RequestMapping("/datum/update.html")
@@ -420,7 +436,8 @@ public class McAction {
     @ResponseBody
     public String datumJson(@RequestParam int id){
         return JSONObject.toJSONString(mcDatumCostService.getParticular1ById(id),
-                SerializerFeature.DisableCircularReferenceDetect);
+                SerializerFeature.DisableCircularReferenceDetect,
+                SerializerFeature.WriteNullStringAsEmpty);
     }
     @RequestMapping("/datum/delete")
     public String delectDatum(@RequestParam int id){
@@ -470,7 +487,8 @@ public class McAction {
     public String Query(@RequestParam int id)
     {
         return JSONObject.toJSONString(mcregisterservice.querybyid(id)
-                , SerializerFeature.DisableCircularReferenceDetect);
+                , SerializerFeature.DisableCircularReferenceDetect,
+                SerializerFeature.WriteNullStringAsEmpty);
     }
     //更改备案信息
     @RequestMapping(value = "/register/updateImpl")
@@ -494,7 +512,8 @@ public class McAction {
     public String Querydetailsbyid(@RequestParam int id)
     {
         return JSONObject.toJSONString(mcregisterservice.querydetailbyid(id),
-                SerializerFeature.DisableCircularReferenceDetect);
+                SerializerFeature.DisableCircularReferenceDetect,
+                SerializerFeature.WriteNullStringAsEmpty);
     }
 
     //根据ID删除某条备案信息
@@ -525,7 +544,8 @@ public class McAction {
         }
 
         return JSONObject.toJSONString(mcregisterservice.querybyrecords(deptid,Name, Type, pageIndex),
-                SerializerFeature.DisableCircularReferenceDetect);
+                SerializerFeature.DisableCircularReferenceDetect,
+                SerializerFeature.WriteNullStringAsEmpty);
     }
     // endregion
 
@@ -558,7 +578,8 @@ public class McAction {
     @ResponseBody
     public  String   querybyid(@RequestParam int  id){
         return JSONObject.toJSONString(mcQualificationService.querybyid(id),
-                SerializerFeature.DisableCircularReferenceDetect);
+                SerializerFeature.DisableCircularReferenceDetect,
+                SerializerFeature.WriteNullStringAsEmpty);
     }
     //资质正式信息更改
     @RequestMapping(value = "/qualification/updateImpl",produces =  "application/json; charset=utf-8")
@@ -581,7 +602,8 @@ public class McAction {
     @ResponseBody
     public  String   querydetailbyid(@RequestParam int  id){
         return JSONObject.toJSONString(mcQualificationService.querydetailbyid(id)
-                , SerializerFeature.DisableCircularReferenceDetect);
+                , SerializerFeature.DisableCircularReferenceDetect,
+                SerializerFeature.WriteNullStringAsEmpty);
     }
     //跳转到资历证书详情界面
     @RequestMapping("/qualification/query")
@@ -600,7 +622,8 @@ public class McAction {
         }
 
         return JSONObject.toJSONString(mcQualificationService.querybytypename(deptid,Name, Type, pageIndex),
-                SerializerFeature.DisableCircularReferenceDetect);
+                SerializerFeature.DisableCircularReferenceDetect,
+                SerializerFeature.WriteNullStringAsEmpty);
     }
     //删除资质证书
     @RequestMapping(value = "/qualification/delete",produces =  "application/json; charset=utf-8")

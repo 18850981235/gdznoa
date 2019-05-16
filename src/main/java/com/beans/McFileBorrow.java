@@ -15,6 +15,7 @@ public class McFileBorrow {
   private int id;
 
   private int deptid;
+
   @JsonFormat(pattern = "yyyy-MM-dd")
   @JSONField(format = "yyyy-MM-dd")
   @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -27,6 +28,8 @@ public class McFileBorrow {
   private int projectid;
 
   private String name;
+
+  private String content;
 
   private String purpose;
 
@@ -41,14 +44,17 @@ public class McFileBorrow {
   private int  processNode;
 
   private String processState;
+
   @JsonFormat(pattern = "yyyy-MM-dd")
   @JSONField(format = "yyyy-MM-dd")
   @DateTimeFormat(pattern = "yyyy-MM-dd")
   private Date updatetime;
+
   @JsonFormat(pattern = "yyyy-MM-dd")
   @JSONField(format = "yyyy-MM-dd")
   @DateTimeFormat(pattern = "yyyy-MM-dd")
   private Date sendtime;
+
   @JsonFormat(pattern = "yyyy-MM-dd")
   @JSONField(format = "yyyy-MM-dd")
   @DateTimeFormat(pattern = "yyyy-MM-dd")

@@ -22,8 +22,10 @@
         <result column="accessory" property="accessory" jdbcType="VARCHAR" />
         <result column="userid" property="userid" jdbcType="INTEGER" />
         <result column="processid" property="processid" jdbcType="INTEGER" />
+        <result column="process_node" property="processNode" jdbcType="INTEGER" />
         <result column="process_userid" property="processUserid" jdbcType="INTEGER" />
         <result column="process_state" property="processState" jdbcType="VARCHAR" />
+
         <association property="principalUser" javaType="com.beans.SysUser" column="principal"
                      select="com.dao.sys.UserMapper.getByID">
         </association>
@@ -35,6 +37,9 @@
         </association>
         <association property="client" javaType="com.beans.BdClient" column="clientid"
                      select="com.dao.bd.BdClientMapper.getClientById">
+        </association>
+        <association property="dept" javaType="com.beans.SysDept" column="deptid"
+                     select="com.dao.sys.DeptMapper.getListById">
         </association>
     </resultMap>
 
@@ -243,6 +248,9 @@
             </if>
             <if test="processState != null" >
                 process_state = #{processState},
+            </if>
+            <if test="processNode != 0" >
+                process_node = #{processNode},
             </if>
         </set>
         where id=#{id}

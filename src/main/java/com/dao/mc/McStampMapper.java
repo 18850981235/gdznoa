@@ -23,7 +23,7 @@ public interface McStampMapper {
                             @Param("stampType") String stampType,
                             @Param("deptid") int deptid,
                             @Param("content") String content,
-                            @Param("stampType") String purpose,
+                            @Param("purpose") String purpose,
                             @Param("start")Date start,
                             @Param("end") Date end,
                             @Param("pageIndex")int pageIndex,
@@ -33,7 +33,7 @@ public interface McStampMapper {
                   @Param("stampType") String stampType,
                   @Param("deptid") int deptid,
                   @Param("content") String content,
-                  @Param("stampType") String purpose,
+                  @Param("purpose") String purpose,
                   @Param("start")Date start,
                   @Param("end") Date end);
 
@@ -42,17 +42,18 @@ public interface McStampMapper {
                             @Param("stampType") String stampType,
                             @Param("deptid") int deptid,
                             @Param("content") String content,
-                            @Param("stampType") String purpose,
+                            @Param("purpose") String purpose,
                             @Param("start")Date start,
                             @Param("end") Date end,
                             @Param("pageIndex")int pageIndex,
                             @Param("pageSize")int pageSize);
+
      int getCountProject(@Param("projectName")String projectName,
                   @Param("userid") int userid,
                   @Param("stampType") String stampType,
                   @Param("deptid") int deptid,
                   @Param("content") String content,
-                  @Param("stampType") String purpose,
+                  @Param("purpose") String purpose,
                   @Param("start")Date start,
                   @Param("end") Date end);
 }

@@ -8,6 +8,7 @@
         <result column="userid" property="userid" jdbcType="INTEGER"/>
         <result column="phone" property="phone" jdbcType="VARCHAR"/>
         <result column="projectid" property="projectid" jdbcType="INTEGER"/>
+        <result column="content" property="content" jdbcType="VARCHAR"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
         <result column="purpose" property="purpose" jdbcType="VARCHAR"/>
         <result column="consignee" property="consignee" jdbcType="VARCHAR"/>
@@ -66,6 +67,9 @@
             </if>
             <if test="name != null">
                 `name` = #{name},
+            </if>
+            <if test="content != null">
+                `content` = #{content},
             </if>
             <if test="purpose != null">
                 purpose = #{purpose},
@@ -139,6 +143,9 @@
             <if test="name != null">
                 `name`,
             </if>
+            <if test="content != null">
+                `content`,
+            </if>
             <if test="purpose != null">
                 purpose,
             </if>
@@ -201,6 +208,9 @@
             </if>
             <if test="name != null">
                 #{name},
+            </if>
+            <if test="content != null">
+                #{content},
             </if>
             <if test="purpose != null">
                 #{purpose},
