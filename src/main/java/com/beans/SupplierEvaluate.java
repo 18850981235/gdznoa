@@ -16,4 +16,7 @@ public class SupplierEvaluate {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date time;
     private int supplierId;
+    private Supplier supplier;
+
+    private SysUser sysUser;
 }

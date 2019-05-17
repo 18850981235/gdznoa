@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.util.Date;
+
 @Data
 public class McPerformanceDate {
     private  int  id;
@@ -13,22 +15,22 @@ public class McPerformanceDate {
     @JsonFormat(pattern = "yyyy-MM-dd")
     @JSONField(format = "yyyy-MM-dd")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Data biddingTime;
+    private Date biddingTime;
     private  String    performanceContract;
     @JsonFormat(pattern = "yyyy-MM-dd")
     @JSONField(format = "yyyy-MM-dd")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Data signingTime;
+    private Date signingTime;
     private  String    acceptanceReport;
     @JsonFormat(pattern = "yyyy-MM-dd")
     @JSONField(format = "yyyy-MM-dd")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Data acceptanceTime;
+    private Date acceptanceTime;
     private  String    maintenanceProof;
     @JsonFormat(pattern = "yyyy-MM-dd")
     @JSONField(format = "yyyy-MM-dd")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Data maintenanceTime;
+    private Date maintenanceTime;
 
     private String publicAddress;
     private  String publicPicture;
@@ -39,7 +41,7 @@ public class McPerformanceDate {
     @JsonFormat(pattern = "yyyy-MM-dd")
     @JSONField(format = "yyyy-MM-dd")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Data filingTime;
+    private Date filingTime;
 
     private BdProject project;
 

@@ -9,6 +9,7 @@ import lombok.Data;
 public class SupplierTrademark {
 
   private int id;
+  private String systemName;
   private String name;
   private String product;
   private String englishName;

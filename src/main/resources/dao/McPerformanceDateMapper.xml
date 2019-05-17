@@ -2,21 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.dao.mc.McPerformanceDateMapper">
     <resultMap id="BaseResultMap" type="com.beans.McPerformanceDate">
-        <id column="id" property="id"/>
+        <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="project_id" property="projectId" jdbcType="INTEGER"/>
-        <result column="bidding_notice" property="biddingNotice" jdbcType="TIMESTAMP"/>
+        <result column="bidding_notice" property="biddingNotice" jdbcType="VARCHAR"/>
         <result column="bidding_time" property="biddingTime" jdbcType="TIMESTAMP"/>
         <result column="performance_contract" property="performanceContract" jdbcType="INTEGER"/>
-        <result column="signing_time" property="signingTime" jdbcType="VARCHAR"/>
+        <result column="signing_time" property="signingTime" jdbcType="TIMESTAMP"/>
         <result column="acceptance_report" property="acceptanceReport" jdbcType="INTEGER"/>
-        <result column="acceptance_time" property="acceptanceTime" jdbcType="VARCHAR"/>
+        <result column="acceptance_time" property="acceptanceTime" jdbcType="TIMESTAMP"/>
         <result column="maintenance_proof" property="maintenanceProof" jdbcType="VARCHAR"/>
-        <result column="maintenance_time" property="maintenanceTime" jdbcType="VARCHAR"/>
+        <result column="maintenance_time" property="maintenanceTime" jdbcType="TIMESTAMP"/>
         <result column="public_address" property="publicAddress" jdbcType="VARCHAR"/>
         <result column="public_picture" property="publicPicture" jdbcType="INTEGER"/>
         <result column="borrow_stada" property="borrowStada" jdbcType="INTEGER"/>
         <result column="pdf_out" property="pdfOut" jdbcType="INTEGER"/>
-        <result column="manager_id" property="managerId" jdbcType="VARCHAR"/>
+        <result column="manager_id" property="managerId" jdbcType="INTEGER"/>
         <result column="filing_time" property="filingTime" jdbcType="TIMESTAMP"/>
         <association property="project" javaType="com.beans.BdProject" column="project_id"
                      select="com.dao.bd.BdProjectMapper.getProjectById">
@@ -24,51 +24,51 @@
     </resultMap>
 
     <insert id="addPerformanceDate">
-        INSERT INTO `sys_dept`
+        INSERT INTO `mc_performance_date`
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="projectId!=0">
+            <if test="projectId !=0">
                 `project_id`,
             </if>
-            <if test="biddingNotice!=null">
+            <if test="biddingNotice !=null">
                 `bidding_notice`,
             </if>
-            <if test="biddingTime!=null">
+            <if test="biddingTime !=null">
                 `bidding_time`,
             </if>
-            <if test="performanceContract!=null">
+            <if test="performanceContract !=null">
                 `performance_contract`,
             </if>
-            <if test="signingTime!=null">
+            <if test="signingTime !=null">
                 `signing_time`,
             </if>
-            <if test="acceptanceReport!=null">
+            <if test="acceptanceReport !=null">
                 `acceptance_report`,
             </if>
-            <if test="acceptanceTime!=null">
+            <if test="acceptanceTime !=null">
                 `acceptance_time`,
             </if>
-            <if test="maintenanceProof!=null">
+            <if test="maintenanceProof !=null">
                 `maintenance_proof`,
             </if>
-            <if test="maintenanceTime!=null">
+            <if test="maintenanceTime !=null">
                 `maintenance_time`,
             </if>
-            <if test="publicAddress!=null">
+            <if test="publicAddress !=null">
                 `public_address`,
             </if>
-            <if test="publicPicture!=null">
+            <if test="publicPicture !=null">
                 `public_picture`,
             </if>
-            <if test="borrowStada!=null">
+            <if test="borrowStada !=null">
                 `borrow_stada`,
             </if>
-            <if test="pdfOut!=null">
+            <if test="pdfOut !=null">
                 `pdf_out`,
             </if>
-            <if test="managerId!=0">
+            <if test="managerId !=0">
                 `manager_id`,
             </if>
-            <if test="filingTime!=null">
+            <if test="filingTime !=null">
                 `filing_time`,
             </if>
         </trim>
@@ -121,6 +121,57 @@
             </if>
         </trim>
     </insert>
+    <update id="updateMcPerformanceDate">
+      update `mc_performance_date`
+      <set>
+          <if test="projectId != 0">
+              project_id = #{projectId},
+          </if>
+          <if test="biddingNotice != null">
+              bidding_notice = #{biddingNotice},
+          </if>
+          <if test="biddingTime != null">
+              bidding_time = #{biddingTime},
+          </if>
+          <if test="performanceContract != null">
+              performance_contract = #{performanceContract},
+          </if>
+          <if test="signingTime != null">
+              signing_time = #{signingTime},
+          </if>
+          <if test="acceptanceReport != null">
+              acceptance_report = #{acceptanceReport},
+          </if>
+          <if test="acceptanceTime != null">
+              acceptance_time = #{acceptanceTime},
+          </if>
+          <if test="maintenanceProof != null">
+              maintenance_proof = #{maintenanceProof},
+          </if>
+          <if test="maintenanceTime != null">
+              maintenance_time = #{maintenanceTime},
+          </if>
+          <if test="publicAddress != null">
+              public_address = #{publicAddress},
+          </if>
+          <if test="publicPicture != null">
+              public_picture = #{publicPicture},
+          </if>
+          <if test="borrowStada != null">
+              borrow_stada = #{borrowStada},
+          </if>
+          <if test="pdf_out != null">
+              pdf_out = #{pdf_out},
+          </if>
+          <if test="manager_id != 0">
+              manager_id = #{manager_id},
+          </if>
+          <if test="filing_time != null">
+              filing_time = #{filing_time},
+          </if>
+      </set>
+        where id=#{id};
+    </update>
 
 
     <select id="queryMcPerformanceDatebyid" resultMap="BaseResultMap">
@@ -129,8 +180,8 @@
     </select>
 
 
-    <select id="querycont" resultMap="BaseResultMap">
-        SELECT * FROM `mc_performance_date`,`bd_project`
+    <select id="querycont" resultType="java.lang.Integer">
+        SELECT count (*) FROM `mc_performance_date`,`bd_project`
         <trim prefix="where" prefixOverrides="and">
             `mc_performance_date`.`project_id`=`bd_project`.`id`
 
@@ -157,7 +208,7 @@
     </select>
 
     <select id="queryMcPerformanceDatebysome" resultMap="BaseResultMap">
-        SELECT * FROM `mc_performance_date`,`bd_project` where
+        SELECT * FROM `mc_performance_date`,`bd_project`
         <trim prefix="where" prefixOverrides="and">
             `mc_performance_date`.`project_id`=`bd_project`.`id`
 
@@ -183,6 +234,10 @@
         <if test="pageSize!=0">
             LIMIT #{pageIndex},#{pageSize}
         </if>
+    </select>
+    <select id="queryall" resultMap="BaseResultMap">
+   SELECT * FROM `mc_performance_date`,`bd_project`
+    where `mc_performance_date`.`project_id`=`bd_project`.`id`
     </select>
 
 

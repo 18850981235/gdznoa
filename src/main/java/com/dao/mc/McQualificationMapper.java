@@ -22,4 +22,6 @@ public interface McQualificationMapper {
     int querycount(@Param("deptid") int deptid, @Param("name") String name, @Param("type") String type);
     //删除资质证书
     int delete( @Param("id") int id);
+
+    List<McQualificationCertificate> queryall();
 }

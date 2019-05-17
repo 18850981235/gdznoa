@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 /*
 许思明
@@ -32,6 +33,8 @@ public class SupplierAction {
     private SupplierService supplierService;
     @Resource(name="SupplierEvaluateService")
     private SupplierEvaluateService supplierEvaluateService;
+
+
     //增加品牌
     @RequestMapping(value="/trademark/addtrademarkpage" , produces = "text/html;charset=UTF-8")
     public String  addtrademarkpage(){
@@ -153,8 +156,8 @@ public class SupplierAction {
         return "添加界面";
     }
     @RequestMapping(value="/supplier2/addSupplier" , produces = "text/html;charset=UTF-8")
-    public int addSupplier(Supplier Supplier){
-        return supplierService.addSupplier(Supplier);
+    public int addSupplier(Supplier Supplier, HttpServletRequest request){
+        return supplierService.addSupplier(Supplier,request);
     }
     //删除供应商
     @RequestMapping(value="/supplier2/delete",produces ="text/html;charset=UTF-8" )
@@ -185,7 +188,7 @@ public class SupplierAction {
     public String  querySupplierPage(){
         return "添加界面";
     }
-    @RequestMapping(value = "/supplier2/querye",produces = "application/json; charset=utf-8")
+    @RequestMapping(value = "/supplier2/querySupplier",produces = "application/json; charset=utf-8")
     public String querySupplier(@RequestParam(required = false) String code, @RequestParam(required = false) String traname,@RequestParam(required = false) String name,@RequestParam(required = false, defaultValue = "0") int pageIndex) {
 
         if (code == null || code == "") {
@@ -242,7 +245,7 @@ public class SupplierAction {
         return "详情界面";
     }
     //模糊搜索供应商
-    @RequestMapping(value = "/supplier2/querye",produces = "application/json; charset=utf-8")
+    @RequestMapping(value = "/evaluate/querySupplierEvaluate",produces = "application/json; charset=utf-8")
     public String querySupplierEvaluate(@RequestParam(required = false, defaultValue = "0") int userId,@RequestParam(required = false, defaultValue = "0") int supplierId,@RequestParam(required = false, defaultValue = "0") int pageIndex) {
 
 

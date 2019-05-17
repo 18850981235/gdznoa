@@ -4,7 +4,9 @@ package com.service.mc;
 import com.beans.McFileBorrow;
 import com.beans.McPerformanceDate;
 import com.dao.mc.McPerformanceDateMapper;
+import com.util.FileUtils;
 import com.util.Page;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import javax.annotation.Resource;
@@ -13,14 +15,40 @@ import javax.xml.crypto.Data;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+@Service("mcPerformanceDateservice")
 public class McPerformanceDateServiceImp implements McPerformanceDateService{
     @Resource
     private McPerformanceDateMapper mcPerformanceDateMapper;
 
     @Override
     public int addPerformanceDate(McPerformanceDate mcPerformanceDate, HttpServletRequest request) {
-        return mcPerformanceDateMapper.addPerformanceDate(mcPerformanceDate, request);
+        try {
+        String bidFile= FileUtils.uploadFile(request,"bidFile");
+        if (bidFile!=null&&!bidFile.equals("")){
+            mcPerformanceDate.setBiddingNotice(bidFile);
+        }
+        String performanceFile= FileUtils.uploadFile(request,"performanceFile");
+        if (performanceFile!=null&&!performanceFile.equals("")){
+            mcPerformanceDate.setPerformanceContract(performanceFile);
+        }
+        String acceptance= FileUtils.uploadFile(request,"acceptanceFile");
+        if (acceptance!=null&&!acceptance.equals("")){
+            mcPerformanceDate.setAcceptanceReport(acceptance);
+        }
+        String maintenanceFile= FileUtils.uploadFile(request,"maintenanceFile");
+        if (maintenanceFile!=null&&!maintenanceFile.equals("")){
+            mcPerformanceDate.setMaintenanceProof(maintenanceFile);
+        }
+            String ImpFile= FileUtils.uploadFile(request,"ImpFile");
+            if (ImpFile!=null&&!maintenanceFile.equals("")){
+                mcPerformanceDate.setPublicPicture(ImpFile);
+            }
+    } catch (Exception e) {
+        e.printStackTrace();
+        TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+    }
+
+        return mcPerformanceDateMapper.addPerformanceDate(mcPerformanceDate);
     }
 
     @Override
@@ -29,7 +57,33 @@ public class McPerformanceDateServiceImp implements McPerformanceDateService{
     }
 
     @Override
-    public int updateMcPerformanceDate(McPerformanceDate mcPerformanceDate) {
+    public int updateMcPerformanceDate(McPerformanceDate mcPerformanceDate,HttpServletRequest request) {
+        try {
+            String bidFile= FileUtils.uploadFile(request,"bidFile");
+            if (bidFile!=null&&!bidFile.equals("")){
+                mcPerformanceDate.setBiddingNotice(bidFile);
+            }
+            String performanceFile= FileUtils.uploadFile(request,"performanceFile");
+            if (performanceFile!=null&&!performanceFile.equals("")){
+                mcPerformanceDate.setPerformanceContract(performanceFile);
+            }
+            String acceptance= FileUtils.uploadFile(request,"acceptanceFile");
+            if (acceptance!=null&&!acceptance.equals("")){
+                mcPerformanceDate.setAcceptanceReport(acceptance);
+            }
+            String maintenanceFile= FileUtils.uploadFile(request,"maintenanceFile");
+            if (maintenanceFile!=null&&!maintenanceFile.equals("")){
+                mcPerformanceDate.setMaintenanceProof(maintenanceFile);
+            }
+            String ImpFile= FileUtils.uploadFile(request,"ImpFile");
+            if (ImpFile!=null&&!maintenanceFile.equals("")){
+                mcPerformanceDate.setPublicPicture(ImpFile);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+        }
+
         return mcPerformanceDateMapper.updateMcPerformanceDate(mcPerformanceDate);
     }
 
@@ -60,4 +114,5 @@ public class McPerformanceDateServiceImp implements McPerformanceDateService{
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return map; }
+
 }
