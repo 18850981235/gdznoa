@@ -30,7 +30,9 @@ public class BdProject {
   private BigDecimal budget;
 
   private String biddingType;
-
+  @JsonFormat(pattern = "yyyy-MM-dd")
+  @JSONField(format = "yyyy-MM-dd")
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
   private Date biddate;
 
   private int clientid;
@@ -53,13 +55,15 @@ public class BdProject {
 //申请人
   private int userid;
 
-
+  private int processNode;
 
   private int processid;
 
   private int processUserid;
 
   private String processState;
+
+
 
 
   private SysDept dept;

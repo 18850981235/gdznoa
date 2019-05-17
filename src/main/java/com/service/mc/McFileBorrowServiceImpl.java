@@ -53,10 +53,10 @@ public class McFileBorrowServiceImpl implements McFileBorrowService{
             McFileBorrow update = new McFileBorrow();
             int processUserid = 0;
             McFileBorrow fb = mcFileBorrowMapper.getListById(detailed.getApprovalId());
-            String state = "进行中";
+            String state = "审批中";
             String users = fb.getProcess().getUsersid();
             String[] userArr = users.split(",");
-            if (detailed.getState().equals("通过")) {
+            if (detailed.getState().equals("同意")) {
                 fb.setProcessNode(fb.getProcessNode()+1);
             } else {
                 fb.setProcessNode(fb.getProcessNode()-1);
@@ -76,8 +76,10 @@ public class McFileBorrowServiceImpl implements McFileBorrowService{
             }
             if(fb.getProcessNode()==5){
                 processUserid =Integer.parseInt(userArr[4]);
+                state="审批结束";
             }
             update.setProcessNode(fb.getProcessNode());
+            update.setProcessState(state);
             update.setProcessUserid(processUserid);
             update.setId(detailed.getApprovalId());
             return mcFileBorrowMapper.updateById(update);
@@ -102,7 +104,7 @@ public class McFileBorrowServiceImpl implements McFileBorrowService{
             String[] arr = process.getUsersid().split(",");
             fileBorrow.setProcessid(7);
             fileBorrow.setProcessUserid(Integer.parseInt(arr[0]));
-            fileBorrow.setProcessState("进行中");
+            fileBorrow.setProcessState("未审批");
             num = mcFileBorrowMapper.add(fileBorrow);
         } catch (Exception e) {
             e.printStackTrace();

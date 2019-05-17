@@ -21,12 +21,10 @@ public class McMaterials {
   private Date createtime;
   private int projectid;
   private String content;
-  private String offerTpye;
   private String purpose;
-  private String consignee;
-  private String consigneeAddress;
-  private String consigneePhone;
   private String accessory;
+  private String phone;
+
   private int processid;
   private int processUserid;
   private String processState;

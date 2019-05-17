@@ -28,6 +28,7 @@ public class McDatumCost {
   private int processid;
   private int processUserid;
   private String processState;
+  private int processNode;
 
   private SysDept dept;
   private SysUser user;

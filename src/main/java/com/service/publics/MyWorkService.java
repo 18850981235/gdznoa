@@ -1,4 +1,4 @@
-package com.service;
+package com.service.publics;
 
 import java.util.Date;
 import java.util.Map;

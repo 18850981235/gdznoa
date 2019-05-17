@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.dao.MyWorkMapper">
+<mapper namespace="com.dao.publics.MyWorkMapper">
     <resultMap id="BaseResultMap" type="com.beans.MyWork">
         <result column="createtime" property="createtime" jdbcType="TIMESTAMP"/>
         <result column="id" property="id" jdbcType="INTEGER"/>
@@ -20,49 +20,49 @@
         <!--商务盖章申请-->
         SELECT `id`,`userid`,`processid`,`process_userid`,`createtime`
         FROM `mc_stamp`
-        where `process_state` = '进行中'
+        where (`process_state` = '未审批' OR `process_state` = '审批中')
           and process_userid = #{userid};
         <!--项目立项申请-->
         INSERT INTO tmp_table
         SELECT `id`, `userid`,`processid`,`process_userid`,`createtime`
         FROM `bd_project`
-        where `process_state` = '进行中'
+        where (`process_state` = '未审批' OR `process_state` = '审批中')
           and process_userid = #{userid};
         <!--原文件借用申请-->
         INSERT INTO tmp_table
         SELECT `id`,`userid`,`processid`,`process_userid`,`createtime`
         FROM mc_file_borrow
-        where `process_state` = '进行中'
+        where (`process_state` = '未审批' OR `process_state` = '审批中')
           and process_userid = #{userid};
         <!--人员派遣申请-->
         INSERT INTO tmp_table
         SELECT `id`,`userid`,`processid`,`process_userid`,`createtime`
         FROM mc_personnel_dispatched
-        where `process_state` = '进行中'
+        where (`process_state` = '未审批' OR `process_state` = '审批中')
           and process_userid = #{userid};
         <!--商务材料申请-->
         INSERT INTO tmp_table
         SELECT `id`,`userid`,`processid`,`process_userid`,`createtime`
         FROM mc_materials
-        where `process_state` = '进行中'
+        where (`process_state` = '未审批' OR `process_state` = '审批中')
         and process_userid = #{userid};
         <!--资料费申请-->
         INSERT INTO tmp_table
         SELECT `id`,`userid`,`processid`,`process_userid`,`createtime`
         FROM `mc_datum_cost`
-        where `process_state` = '进行中'
+        where (`process_state` = '未审批' OR `process_state` = '审批中')
         and process_userid = #{userid};
         <!--资质证书申请-->
         INSERT INTO tmp_table
         SELECT `id`,`userid`,`processid`,`process_userid`,`createtime`
         FROM `mc_qualification_certificate`
-        where `process_state` = '进行中'
+        where (`process_state` = '未审批' OR `process_state` = '审批中')
         and process_userid = #{userid};
         <!--注册备案申请-->
         INSERT INTO tmp_table
         SELECT `id`,`principal` as userid,`processid`,`process_userid`,`createtime`
         FROM `mc_register_records`
-        where `process_state` = '进行中'
+        where (`process_state` = '未审批' OR `process_state` = '审批中')
         and process_userid = #{userid};
 
         SELECT *

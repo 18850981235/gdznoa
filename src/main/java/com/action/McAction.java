@@ -11,12 +11,10 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import sun.awt.SunHints;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.xml.crypto.Data;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -41,9 +39,6 @@ public class McAction {
     private McQualificationService mcQualificationService;
     @Resource(name = "mcRegisterService")
     private McRegisterService mcregisterservice;
-    @Resource(name = "mcPerformanceDateservice")
-    private McPerformanceDateService mcPerformanceDateService;
-
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {
@@ -56,21 +51,20 @@ public class McAction {
 
     // region ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~商务盖章~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     @RequestMapping("/stamp/query")
-    public String showStamp() {
+    public String showStamp(){
         return "/mc/mcStamp/mcStampList";
     }
-
     @RequestMapping(value = "/stamp/query.html", produces = "text/html;charset=UTF-8")
     @ResponseBody
-    public String stampList(@RequestParam(required = false) String projectName,
-                            @RequestParam(required = false) String stampType,
-                            @RequestParam(required = false, defaultValue = "0") int deptid,
-                            @RequestParam(required = false) String content,
-                            @RequestParam(required = false) String purpose,
-                            @RequestParam(required = false) Date start,
-                            @RequestParam(required = false) Date end,
-                            @RequestParam(required = false, defaultValue = "0") int pageIndex,
-                            HttpSession session) {
+    public String stampList(@RequestParam(required = false)String projectName,
+                            @RequestParam(required = false)String stampType,
+                            @RequestParam(required = false, defaultValue = "0")int deptid,
+                            @RequestParam(required = false)String content,
+                            @RequestParam(required = false)String purpose,
+                            @RequestParam(required = false)Date start,
+                            @RequestParam(required = false)Date end,
+                            @RequestParam(required = false, defaultValue = "0")int pageIndex,
+                            HttpSession session){
         if (projectName == null || projectName == "") {
             projectName = null;
         }
@@ -84,57 +78,53 @@ public class McAction {
             purpose = null;
         }
         //int userid=(int) session.getAttribute("userId");
-        int userid = 1;
-        return JSONObject.toJSONString(mcStampService.getList(projectName, userid, stampType, deptid, content, purpose, start, end, pageIndex),
+        int userid=1;
+        return JSONObject.toJSONString(mcStampService.getList( projectName, userid,  stampType, deptid,  content, purpose,start,end, pageIndex),
                 SerializerFeature.DisableCircularReferenceDetect);
     }
-
     @RequestMapping("/stamp/add")
-    public String showAddStamp() {
+    public String showAddStamp(){
         return "/mc/mcStamp/mcStampAdd";
     }
 
     @RequestMapping("/stamp/add.html")
-    public String AddStamp(McStamp mcStamp, HttpServletRequest request) {
-        int userid = (int) request.getSession().getAttribute("userId");
+    public String AddStamp(McStamp mcStamp,HttpServletRequest request){
+        int userid=(int) request.getSession().getAttribute("userId");
         mcStamp.setUserid(userid);
-        mcStampService.add(mcStamp, request);
+        mcStampService.add(mcStamp,request);
         return "redirect:/mc/stamp/query";
     }
-
     @RequestMapping("/stamp/update")
-    public String showUpdateStamp() {
+    public String showUpdateStamp(){
         return "/mc/mcStamp/mcStampUpdate";
     }
 
     @RequestMapping(value = "/stamp/update.json", produces = "text/html;charset=UTF-8")
     @ResponseBody
-    public String UpdateStampJson(@RequestParam int id) {
+    public String UpdateStampJson(@RequestParam int id){
         return JSONObject.toJSONString(mcStampService.getListById(id),
                 SerializerFeature.DisableCircularReferenceDetect);
     }
-
     @RequestMapping("/stamp/update.html")
-    public String UpdateStamp(McStamp mcStamp) {
+    public String UpdateStamp(McStamp mcStamp){
         mcStampService.update(mcStamp);
         return "redirect:/mc/stamp/query";
     }
 
     @RequestMapping("/stamp/particular")
-    public String particularStamp() {
+    public String particularStamp(){
         return "/mc/mcStamp/mcStampParticular";
     }
 
     @RequestMapping(value = "/stamp/particular.json", produces = "text/html;charset=UTF-8")
     @ResponseBody
-    public String StampJson(@RequestParam int id) {
+    public String StampJson(@RequestParam int id){
         return JSONObject.toJSONString(mcStampService.getParticular1ById(id),
                 SerializerFeature.DisableCircularReferenceDetect);
     }
-
     @RequestMapping("/stamp/approvalDetailed")
-    public String stampParticular(SysApprovalDetailed approvalDetailed, HttpSession session) {
-        int userid = (int) session.getAttribute("userId");
+    public String stampParticular(SysApprovalDetailed approvalDetailed,HttpSession session) {
+        int userid=(int) session.getAttribute("userId");
         approvalDetailed.setApprovalUser(userid);
         approvalDetailed.setApprovalDate(new Date());
         mcStampService.addProjectApproval(approvalDetailed);
@@ -144,158 +134,145 @@ public class McAction {
 
     //region ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~原文件借用~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     @RequestMapping("/borrow/query")
-    public String showFileBorrow() {
+    public String showFileBorrow(){
         return "/mc/borrow/mcBorrowList";
     }
 
     @RequestMapping(value = "/borrow/query.html", produces = "text/html;charset=UTF-8")
     @ResponseBody
-    public String borrowList(@RequestParam(required = false) String projectName,
-                             @RequestParam(required = false) String name,
-                             @RequestParam(required = false, defaultValue = "0") int deptid,
-                             @RequestParam(required = false) Date start,
-                             @RequestParam(required = false) Date end,
-                             @RequestParam(required = false, defaultValue = "0") int pageIndex,
+    public String borrowList(@RequestParam(required = false)String projectName,
+                             @RequestParam(required = false)String name,
+                             @RequestParam(required = false, defaultValue = "0")int deptid,
+                             @RequestParam(required = false)Date start,
+                             @RequestParam(required = false)Date end,
+                             @RequestParam(required = false, defaultValue = "0")int pageIndex,
                              HttpSession session
-    ) {
+                             ){
         if (name == null || name == "") {
             name = null;
         }
         if (projectName == null || projectName == "") {
             projectName = null;
         }
-        int userid = (int) session.getAttribute("userId");
+        int userid=(int) session.getAttribute("userId");
         //int  userid=1;
-        return JSONObject.toJSONString(mcFileBorrowService.getList(projectName, name, deptid, start, end, userid, pageIndex),
+        return JSONObject.toJSONString(mcFileBorrowService.getList(projectName,name,deptid,start,end ,userid,pageIndex),
                 SerializerFeature.DisableCircularReferenceDetect);
     }
 
     @RequestMapping("/borrow/add")
-    public String showAddFileBorrow() {
+    public String showAddFileBorrow(){
         return "/mc/borrow/mcBorrowAdd";
     }
 
     @RequestMapping("/borrow/add.html")
-    public String AddFileBorrow(McFileBorrow mcFileBorrow, HttpServletRequest request) {
-        mcFileBorrowService.add(mcFileBorrow, request);
+    public String AddFileBorrow(McFileBorrow mcFileBorrow,HttpServletRequest request){
+        mcFileBorrowService.add(mcFileBorrow,request);
         return "redirect:/mc/borrow/query";
     }
 
     @RequestMapping("/borrow/update")
-    public String showUpdateFileBorrow() {
+    public String showUpdateFileBorrow(){
         return "/mc/borrow/mcBorrowPadute";
     }
 
     @RequestMapping("/borrow/update.html")
-    public String UpdateFileBorrow(McFileBorrow mcFileBorrow) {
+    public String UpdateFileBorrow(McFileBorrow mcFileBorrow){
         return "redirect:/mc/borrow/query";
     }
 
     @RequestMapping(value = "/borrow/update.json", produces = "text/html;charset=UTF-8")
     @ResponseBody
-    public String UpdateFileBorrowJson(@RequestParam int id) {
+    public String UpdateFileBorrowJson(@RequestParam int id){
         return JSONObject.toJSONString(mcFileBorrowService.getListById(id),
                 SerializerFeature.DisableCircularReferenceDetect);
     }
 
     @RequestMapping("/borrow/particular")
-    public String showBorrowParticular() {
+    public String showBorrowParticular(){
         return "/mc/borrow/mcBorrowParticular";
     }
 
     @RequestMapping(value = "/borrow/particular.json", produces = "text/html;charset=UTF-8")
     @ResponseBody
-    public String borrowJson(@RequestParam int id) {
+    public String borrowJson(@RequestParam int id){
         return JSONObject.toJSONString(mcFileBorrowService.getParticular1ById(id),
                 SerializerFeature.DisableCircularReferenceDetect);
     }
-
     @RequestMapping("/borrow/approvalDetailed")
-    public String borrowParticular(SysApprovalDetailed approvalDetailed, HttpSession session) {
-        int userid = (int) session.getAttribute("userId");
+    public String borrowParticular(SysApprovalDetailed approvalDetailed,HttpSession session) {
+        int userid=(int) session.getAttribute("userId");
         approvalDetailed.setApprovalUser(userid);
         approvalDetailed.setApprovalDate(new Date());
         mcFileBorrowService.addProjectApproval(approvalDetailed);
         return "redirect:/showMyWork";
     }
-
-    @RequestMapping(value = "/borrow/queryMailFile", produces = "application/json; charset=utf-8")
-    @ResponseBody
-    public String queryMailFile() {
-        return JSONObject.toJSONString(mcFileBorrowService.queryMailFile(), SerializerFeature.DisableCircularReferenceDetect);
-
-    }
-
     // endregion
 
     //region ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~商务材料~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     @RequestMapping("/materials/query")
-    public String showMaterials() {
+    public String showMaterials(){
         return "/mc/mcMaterial/mcMaterialList";
     }
-
     @RequestMapping(value = "/materials/query.html", produces = "text/html;charset=UTF-8")
     @ResponseBody
-    public String materialsList(@RequestParam(required = false) String offerTpye,
-                                @RequestParam(required = false, defaultValue = "0") int deptid,
-                                @RequestParam(required = false) Date start,
-                                @RequestParam(required = false) Date end,
-                                @RequestParam(required = false, defaultValue = "0") int pageIndex,
-                                HttpSession session) {
+    public String materialsList(@RequestParam(required = false)String offerTpye,
+                            @RequestParam(required = false, defaultValue = "0")int deptid,
+                            @RequestParam(required = false)Date start,
+                            @RequestParam(required = false)Date end,
+                            @RequestParam(required = false, defaultValue = "0")int pageIndex,
+                            HttpSession session){
         if (offerTpye == null || offerTpye == "") {
             offerTpye = null;
         }
-        int userid = (int) session.getAttribute("userId");
-        return JSONObject.toJSONString(mcMaterialsSevice.getList(offerTpye, deptid, start, end, userid, pageIndex),
+        int userid=(int) session.getAttribute("userId");
+        return JSONObject.toJSONString(mcMaterialsSevice.getList(offerTpye,deptid,start,end,userid,pageIndex),
                 SerializerFeature.DisableCircularReferenceDetect);
     }
-
     @RequestMapping("/materials/add")
-    public String showAddMaterials() {
+    public String showAddMaterials(){
         return "/mc/mcMaterial/mcMaterialAdd";
     }
 
     @RequestMapping("/materials/add.html")
-    public String AddMaterials(McMaterials mcMaterials, HttpServletRequest request) {
-        int userid = (int) request.getSession().getAttribute("userId");
+    public String AddMaterials(McMaterials mcMaterials, HttpServletRequest request){
+        int userid=(int) request.getSession().getAttribute("userId");
         mcMaterials.setUserid(userid);
-        mcMaterialsSevice.add(mcMaterials, request);
+        mcMaterialsSevice.add(mcMaterials,request);
         return "redirect:/mc/materials/query";
     }
-
     @RequestMapping("/materials/update")
-    public String showUpdateMaterials() {
+    public String showUpdateMaterials(){
         return "/mc/mcMaterial/mcMaterialPadute";
     }
 
     @RequestMapping(value = "/materials/update.json", produces = "text/html;charset=UTF-8")
     @ResponseBody
-    public String UpdateMaterialsJson(@RequestParam int id) {
+    public String UpdateMaterialsJson(@RequestParam int id){
         return JSONObject.toJSONString(mcMaterialsSevice.getListById(id),
                 SerializerFeature.DisableCircularReferenceDetect);
     }
-
     @RequestMapping("/materials/update.html")
-    public String UpdateMaterials(McMaterials materials) {
+    public String UpdateMaterials(McMaterials materials){
         mcMaterialsSevice.update(materials);
         return "redirect:/mc/materials/query";
     }
 
     @RequestMapping("/materials/particular")
-    public String particularMaterials() {
+    public String particularMaterials(){
         return "/mc/mcMaterial/mcMaterialParticular";
     }
 
     @RequestMapping(value = "/materials/particular.json", produces = "text/html;charset=UTF-8")
     @ResponseBody
-    public String materialsJson(@RequestParam int id) {
+    public String materialsJson(@RequestParam int id){
         return JSONObject.toJSONString(mcMaterialsSevice.getParticular1ById(id),
                 SerializerFeature.DisableCircularReferenceDetect);
     }
 
     @RequestMapping("/materials/approvalDetailed")
-    public String materialsParticular(SysApprovalDetailed approvalDetailed, HttpSession session) {
-        int userid = (int) session.getAttribute("userId");
+    public String materialsParticular(SysApprovalDetailed approvalDetailed,HttpSession session) {
+        int userid=(int) session.getAttribute("userId");
         approvalDetailed.setApprovalUser(userid);
         approvalDetailed.setApprovalDate(new Date());
         mcMaterialsSevice.addProjectApproval(approvalDetailed);
@@ -305,19 +282,18 @@ public class McAction {
 
     //region ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~人员派遣~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     @RequestMapping("/dispatched/query")
-    public String showDispatched() {
+    public String showDispatched(){
         return "/mc/mcDispatch/mcDispatchList";
     }
-
     @RequestMapping(value = "/dispatched/query.html", produces = "text/html;charset=UTF-8")
     @ResponseBody
-    public String dispatchedList(@RequestParam(required = false) String projectName,
-                                 @RequestParam(required = false) String personnelCondition,
-                                 @RequestParam(required = false, defaultValue = "0") int deptid,
-                                 @RequestParam(required = false) Date start,
-                                 @RequestParam(required = false) Date end,
-                                 @RequestParam(required = false, defaultValue = "0") int pageIndex,
-                                 HttpSession session) {
+    public String dispatchedList(@RequestParam(required = false)String projectName,
+                                 @RequestParam(required = false)String  personnelCondition,
+                                @RequestParam(required = false, defaultValue = "0")int deptid,
+                                @RequestParam(required = false)Date start,
+                                @RequestParam(required = false)Date end,
+                                @RequestParam(required = false, defaultValue = "0")int pageIndex,
+                                HttpSession session){
         if (projectName == null || projectName == "") {
             projectName = null;
         }
@@ -325,64 +301,59 @@ public class McAction {
             personnelCondition = null;
         }
 
-        int userid = (int) session.getAttribute("userId");
-        return JSONObject.toJSONString(mcPersonnelDispatchedService.getList(projectName, personnelCondition, deptid, userid, start, end, pageIndex),
+        int userid=(int) session.getAttribute("userId");
+        return JSONObject.toJSONString(mcPersonnelDispatchedService.getList(projectName,personnelCondition,deptid, userid, start, end, pageIndex),
                 SerializerFeature.DisableCircularReferenceDetect);
     }
-
     @RequestMapping("/dispatched/add")
-    public String showAddDispatched() {
+    public String showAddDispatched(){
         return "/mc/mcDispatch/mcDispatchAdd";
     }
 
     @RequestMapping("/dispatched/add.html")
-    public String AddDispatched(McPersonnelDispatched personnelDispatched, HttpServletRequest request) {
-        int userid = (int) request.getSession().getAttribute("userId");
+    public String AddDispatched(McPersonnelDispatched personnelDispatched, HttpServletRequest request){
+        int userid=(int) request.getSession().getAttribute("userId");
         personnelDispatched.setUserid(userid);
         personnelDispatched.setCreatetime(new Date());
         mcPersonnelDispatchedService.add(personnelDispatched);
         return "redirect:/mc/dispatched/query";
     }
-
     @RequestMapping("/dispatched/update")
-    public String showUpdateDispatched() {
+    public String showUpdateDispatched(){
         return "/mc/mcDispatch/mcDispatchPadute";
     }
 
     @RequestMapping(value = "/dispatched/update.json", produces = "text/html;charset=UTF-8")
     @ResponseBody
-    public String UpdateDispatchedJson(@RequestParam int id) {
+    public String UpdateDispatchedJson(@RequestParam int id){
         return JSONObject.toJSONString(mcPersonnelDispatchedService.getListById(id),
                 SerializerFeature.DisableCircularReferenceDetect);
     }
-
     @RequestMapping("/dispatched/update.html")
-    public String UpdateDispatched(McPersonnelDispatched personnelDispatched) {
+    public String UpdateDispatched(McPersonnelDispatched personnelDispatched){
         mcPersonnelDispatchedService.update(personnelDispatched);
         return "redirect:/mc/dispatched/query";
     }
 
     @RequestMapping("/dispatched/particular")
-    public String particulaDispatched() {
+    public String particulaDispatched(){
         return "/mc/mcDispatch/mcDispatchParticular";
     }
 
     @RequestMapping(value = "/dispatched/particular.json", produces = "text/html;charset=UTF-8")
     @ResponseBody
-    public String dispatchedJson(@RequestParam int id) {
+    public String dispatchedJson(@RequestParam int id){
         return JSONObject.toJSONString(mcPersonnelDispatchedService.getParticular1ById(id),
                 SerializerFeature.DisableCircularReferenceDetect);
     }
-
     @RequestMapping("/dispatched/delete")
-    public String delete(@RequestParam int id) {
+    public String delete(@RequestParam int id){
         mcPersonnelDispatchedService.deleteById(id);
         return "redirect:/mc/dispatched/query";
     }
-
     @RequestMapping("/dispatched/approvalDetailed")
-    public String dispatchedParticular(SysApprovalDetailed approvalDetailed, HttpSession session) {
-        int userid = (int) session.getAttribute("userId");
+    public String dispatchedParticular(SysApprovalDetailed approvalDetailed,HttpSession session) {
+        int userid=(int) session.getAttribute("userId");
         approvalDetailed.setApprovalUser(userid);
         approvalDetailed.setApprovalDate(new Date());
         mcPersonnelDispatchedService.addProjectApproval(approvalDetailed);
@@ -392,78 +363,74 @@ public class McAction {
 
     //region ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~资料费~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     @RequestMapping("/datum/query")
-    public String showDatum() {
+    public String showDatum(){
         return "/mc/mcCost/mcCostList";
     }
-
     @RequestMapping(value = "/datum/query.html", produces = "text/html;charset=UTF-8")
     @ResponseBody
-    public String datumList(@RequestParam(required = false) String projectName,
-                            @RequestParam(required = false, defaultValue = "0") int deptid,
-                            @RequestParam(required = false) Date start,
-                            @RequestParam(required = false) Date end,
-                            @RequestParam(required = false, defaultValue = "0") int pageIndex,
-                            HttpSession session) {
+    public String datumList(@RequestParam(required = false)String projectName,
+                                 @RequestParam(required = false, defaultValue = "0")int deptid,
+                                 @RequestParam(required = false)Date start,
+                                 @RequestParam(required = false)Date end,
+                                 @RequestParam(required = false, defaultValue = "0")int pageIndex,
+                                 HttpSession session){
         if (projectName == null || projectName == "") {
             projectName = null;
         }
-        int userid = (int) session.getAttribute("userId");
+        int userid=(int) session.getAttribute("userId");
         //int userid=1;
-        return JSONObject.toJSONString(mcDatumCostService.getList(projectName, deptid, start, end, userid, pageIndex),
+        return JSONObject.toJSONString(mcDatumCostService.getList(projectName,deptid,start, end, userid,  pageIndex),
                 SerializerFeature.DisableCircularReferenceDetect);
     }
-
     @RequestMapping("/datum/add")
-    public String showAddDatum() {
+    public String showAddDatum(){
         return "/mc/mcCost/mcCostAdd";
     }
 
     @RequestMapping("/datum/add.html")
-    public String AddDatum(McDatumCost datumCost, HttpServletRequest request) {
+    public String AddDatum(McDatumCost datumCost, HttpServletRequest request){
         //personnelDispatched.setCreatetime(new Date());
-        mcDatumCostService.add(datumCost, request);
+        mcDatumCostService.add(datumCost,request);
         return "redirect:/mc/datum/query";
     }
-
     @RequestMapping("/datum/update")
-    public String showUpdateDatum() {
+    public String showUpdateDatum(){
         return "/mc/mcCost/mcCostPadute";
     }
 
     @RequestMapping(value = "/datum/update.json", produces = "text/html;charset=UTF-8")
     @ResponseBody
-    public String UpdateDatumJson(@RequestParam int id) {
+    public String UpdateDatumJson(@RequestParam int id){
         return JSONObject.toJSONString(mcDatumCostService.getListById(id),
                 SerializerFeature.DisableCircularReferenceDetect);
     }
 
     @RequestMapping("/datum/update.html")
-    public String UpdateDatum(McDatumCost datumCost) {
+    public String UpdateDatum(McDatumCost datumCost){
         mcDatumCostService.update(datumCost);
         return "redirect:/mc/datum/query";
     }
 
     @RequestMapping("/datum/particular")
-    public String particulaDatum() {
+    public String particulaDatum(){
         return "/mc/mcCost/mcCostParticular";
     }
 
     @RequestMapping(value = "/datum/particular.json", produces = "text/html;charset=UTF-8")
     @ResponseBody
-    public String datumJson(@RequestParam int id) {
+    public String datumJson(@RequestParam int id){
         return JSONObject.toJSONString(mcDatumCostService.getParticular1ById(id),
                 SerializerFeature.DisableCircularReferenceDetect);
     }
-
     @RequestMapping("/datum/delete")
-    public String delectDatum(@RequestParam int id) {
+    public String delectDatum(@RequestParam int id){
         //mcDatumCostService.deleteById(id);
         return "redirect:/mc/datum/query";
     }
 
     @RequestMapping("/datum/approvalDetailed")
-    public String datumParticular(SysApprovalDetailed approvalDetailed, HttpSession session) {
-        int userid = (int) session.getAttribute("userId");
+    public String datumParticular(SysApprovalDetailed approvalDetailed,HttpSession session) {
+        int userid=(int) session.getAttribute("userId");
         approvalDetailed.setApprovalUser(userid);
         approvalDetailed.setApprovalDate(new Date());
         mcDatumCostService.addProjectApproval(approvalDetailed);
@@ -480,13 +447,13 @@ public class McAction {
 
     //添加注册备案
     @RequestMapping(value = "/register/addImpl")
-    public String addRegister(McRegisterRecords mcRegisterRecords, HttpServletRequest request) {
+    public String  addRegister(McRegisterRecords mcRegisterRecords, HttpServletRequest request){
         int sum;
-        sum = mcregisterservice.addregister(mcRegisterRecords, request);
-        if (sum > 0) {
+        sum=  mcregisterservice.addregister(mcRegisterRecords,request);
+        if(sum>0){
             return "mc/mcRegister/mcRegisterList";
 
-        } else {
+        }else{
             return "mc/mcRegister/mcRegisterAdd";
         }
     }
@@ -498,60 +465,57 @@ public class McAction {
     }
 
     //根据ID查询
-    @RequestMapping(value = "/register/query.json", produces = "application/json; charset=utf-8")
+    @RequestMapping(value = "/register/query.json",produces = "application/json; charset=utf-8")
     @ResponseBody
-    public String Query(@RequestParam int id) {
+    public String Query(@RequestParam int id)
+    {
         return JSONObject.toJSONString(mcregisterservice.querybyid(id)
                 , SerializerFeature.DisableCircularReferenceDetect);
     }
-
     //更改备案信息
     @RequestMapping(value = "/register/updateImpl")
-    public String updateRegister(McRegisterRecords mcRegisterRecords) {
+    public String  updateRegister(McRegisterRecords mcRegisterRecords){
         int sum;
-        sum = mcregisterservice.updateregist(mcRegisterRecords);
-        if (sum > 0) {
+        sum= mcregisterservice.updateregist(mcRegisterRecords);
+        if(sum>0){
             return "mc/mcRegister/mcRegisterList";
-        } else {
+        }else{
             return "mc/mcRegister/mcRegisterPadute";
         }
     }
-
     //跳转到详情界面
     @RequestMapping("/register/detail")
     public String detailRegisterPage() {
         return "mc/mcRegister/mcRegisterParticular";
     }
-
     //根据ID查询详情
-    @RequestMapping(value = "/register/querydetailsbyid.json", produces = "application/json; charset=utf-8")
+    @RequestMapping(value = "/register/querydetailsbyid.json",produces = "application/json; charset=utf-8")
     @ResponseBody
-    public String Querydetailsbyid(@RequestParam int id) {
+    public String Querydetailsbyid(@RequestParam int id)
+    {
         return JSONObject.toJSONString(mcregisterservice.querydetailbyid(id),
                 SerializerFeature.DisableCircularReferenceDetect);
     }
 
     //根据ID删除某条备案信息
-    @RequestMapping(value = "/register/deleteImpl", produces = "application/json; charset=utf-8")
-    public String deleteRegister(@RequestParam int id) {
-        int sum = mcregisterservice.delete(id);
-        if (sum > 0) {
+    @RequestMapping(value = "/register/deleteImpl",produces = "application/json; charset=utf-8")
+    public String   deleteRegister(@RequestParam int id){
+        int sum= mcregisterservice.delete(id);
+        if(sum>0){
             return "mc/mcRegister/mcRegisterList";
-        } else {
+        }else{
             return "mc/mcRegister/mcRegisterList";
         }
     }
-
     //跳转到模糊查询界面
     @RequestMapping("/register/query")
     public String queryRegisterPage() {
         return "mc/mcRegister/mcRegisterList";
     }
-
     //模糊搜索备案信息
-    @RequestMapping(value = "/register/querybynametype.json", produces = "application/json; charset=utf-8")
+    @RequestMapping(value = "/register/querybynametype.json",produces = "application/json; charset=utf-8")
     @ResponseBody
-    public String querybynametype(@RequestParam(required = false, defaultValue = "0") int deptid, @RequestParam(required = false) String Name, @RequestParam(required = false) String Type, @RequestParam(required = false, defaultValue = "0") int pageIndex) {
+    public String querybynametype(@RequestParam(required = false, defaultValue = "0") int deptid,@RequestParam(required = false) String Name, @RequestParam(required = false) String Type,@RequestParam(required = false, defaultValue = "0") int pageIndex) {
 
         if (Name == null || Name == "") {
             Name = null;
@@ -560,7 +524,7 @@ public class McAction {
             Type = null;
         }
 
-        return JSONObject.toJSONString(mcregisterservice.querybyrecords(deptid, Name, Type, pageIndex),
+        return JSONObject.toJSONString(mcregisterservice.querybyrecords(deptid,Name, Type, pageIndex),
                 SerializerFeature.DisableCircularReferenceDetect);
     }
     // endregion
@@ -572,19 +536,17 @@ public class McAction {
     public String addQualificationPage() {
         return "mc/mcCertificate/mcCertificateAdd";
     }
-
     //资质证书添加
     @RequestMapping(value = "/qualification/addImpl")
-    public String addqualification(McQualificationCertificate mcQualificationCertificate, HttpServletRequest reques) {
+    public String  addqualification(McQualificationCertificate mcQualificationCertificate,HttpServletRequest reques){
         int sum;
-        sum = mcQualificationService.addQualificationCertificate(mcQualificationCertificate, reques);
-        if (sum > 0) {
-            return "mc/mcCertificate/mcCertificateList";
-        } else {
-            return "mc/mcCertificate/mcCertificateAdd";
+        sum= mcQualificationService.addQualificationCertificate(mcQualificationCertificate, reques);
+        if(sum>0){
+            return"mc/mcCertificate/mcCertificateList";
+        }else{
+            return"mc/mcCertificate/mcCertificateAdd";
         }
     }
-
     //跳转到资历证书更改界面
     @RequestMapping("/qualification/update")
     public String updateQualificationPage() {
@@ -594,47 +556,42 @@ public class McAction {
     //根据ID查询
     @RequestMapping(value = "/qualification/querybyid.json")
     @ResponseBody
-    public String querybyid(@RequestParam int id) {
+    public  String   querybyid(@RequestParam int  id){
         return JSONObject.toJSONString(mcQualificationService.querybyid(id),
                 SerializerFeature.DisableCircularReferenceDetect);
     }
-
     //资质正式信息更改
-    @RequestMapping(value = "/qualification/updateImpl", produces = "application/json; charset=utf-8")
-    public String updatequalification(McQualificationCertificate mcQualificationCertificate) {
+    @RequestMapping(value = "/qualification/updateImpl",produces =  "application/json; charset=utf-8")
+    public String updatequalification(McQualificationCertificate mcQualificationCertificate){
         int sum;
-        sum = mcQualificationService.updateMcQualification(mcQualificationCertificate);
-        if (sum > 0) {
+        sum= mcQualificationService.updateMcQualification(mcQualificationCertificate);
+        if(sum>0){
             return "mc/mcCertificate/mcCertificateList";
-        } else {
+        }else{
             return "mc/mcCertificate/mcCertificatePadute";
         }
     }
-
     //跳转到资历证书详情界面
     @RequestMapping("/qualification/detail")
     public String detailQualificationPage() {
         return "mc/mcCertificate/meCertificateParticular";
     }
-
     //根据ID查询详情
-    @RequestMapping(value = "/qualification/querydetailbyid.json", produces = "application/json; charset=utf-8")
+    @RequestMapping(value = "/qualification/querydetailbyid.json",produces =  "application/json; charset=utf-8")
     @ResponseBody
-    public String querydetailbyid(@RequestParam int id) {
+    public  String   querydetailbyid(@RequestParam int  id){
         return JSONObject.toJSONString(mcQualificationService.querydetailbyid(id)
                 , SerializerFeature.DisableCircularReferenceDetect);
     }
-
     //跳转到资历证书详情界面
     @RequestMapping("/qualification/query")
     public String allQualificationPage() {
         return "mc/mcCertificate/mcCertificateList";
     }
-
     //模糊查询资历证书
-    @RequestMapping(value = "/qualification/querybytypename.json", produces = "application/json; charset=utf-8")
+    @RequestMapping(value = "/qualification/querybytypename.json",produces =  "application/json; charset=utf-8")
     @ResponseBody
-    public String querybytypename(@RequestParam(required = false, defaultValue = "0") int deptid, @RequestParam(required = false) String Type, @RequestParam(required = false) String Name, @RequestParam(required = false, defaultValue = "0") int pageIndex) {
+    public String querybytypename(@RequestParam(required = false, defaultValue = "0") int  deptid, @RequestParam(required = false) String Type,@RequestParam(required = false) String Name, @RequestParam(required = false, defaultValue = "0") int pageIndex) {
         if (Name == null || Name == "") {
             Name = null;
         }
@@ -642,88 +599,14 @@ public class McAction {
             Type = null;
         }
 
-        return JSONObject.toJSONString(mcQualificationService.querybytypename(deptid, Name, Type, pageIndex),
+        return JSONObject.toJSONString(mcQualificationService.querybytypename(deptid,Name, Type, pageIndex),
                 SerializerFeature.DisableCircularReferenceDetect);
     }
-
     //删除资质证书
-    @RequestMapping(value = "/qualification/delete", produces = "application/json; charset=utf-8")
-    public String deleteQualification(@RequestParam int id) {
+    @RequestMapping(value = "/qualification/delete",produces =  "application/json; charset=utf-8")
+    public String  deleteQualification(@RequestParam int id){
         int sum = mcQualificationService.delete(id);
         return "mc/mcCertificate/meCertificateParticular.";
     }
-
     // endregion
-    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~业绩材料~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    @RequestMapping(value = "/performance/addPerformancepage", produces = "application/json; charset=utf-8")
-    public String toAddPage() {
-        return "跳转到添加页面";
-    }
-
-    @RequestMapping(value = "/performance/addPerformanceImpl", produces = "application/json; charset=utf-8")
-    public String addperformance(McPerformanceDate mcPerformanceDate, HttpServletRequest reques) {
-        int sum;
-        sum = mcPerformanceDateService.addPerformanceDate(mcPerformanceDate, reques);
-        if (sum > 0) {
-            return "mc/添加完成";
-        } else {
-            return "mc/添加失败";
-        }
-    }
-
-    @RequestMapping(value = "/performance/aqueryPerformancePage", produces = "application/json; charset=utf-8")
-    public String QueryperformancePage() {
-        return "跳转到查询界面";
-    }
-
-    @RequestMapping(value = "/performance/aqueryPerformanceImpl", produces = "application/json; charset=utf-8")
-    @ResponseBody
-    public String QueryperformanceImpl(@RequestParam(required = false) String projectName, @RequestParam(required = false) Data bidtimestart, @RequestParam(required = false) Data bidtimeEnd, @RequestParam(required = false) Data accetimeStart, @RequestParam(required = false) Data acctimeEnd, @RequestParam(required = false) String borrow, @RequestParam(required = false, defaultValue = "0") int pageIndex) {
-        if (projectName == null || projectName == "") {
-            projectName = null;
-        }
-        if (borrow == null || borrow == "") {
-            borrow = null;
-        }
-
-        return JSONObject.toJSONString(mcPerformanceDateService.queryMcPerformanceDatebysome
-                        (projectName, bidtimestart, bidtimeEnd, accetimeStart, acctimeEnd, borrow, pageIndex)
-                , SerializerFeature.DisableCircularReferenceDetect);
-
-    }
-
-
-    @RequestMapping(value = "/performance/getperformanceIdPage", produces = "application/json; charset=utf-8")
-    public String getperformanceIdPage() {
-        return "根据ID获取信息";
-    }
-
-    @RequestMapping(value = "/performance/getperformanceIdImpl", produces = "application/json; charset=utf-8")
-    @ResponseBody
-    public String getperformanceIdImpl(@RequestParam(required = false, defaultValue = "0") int id) {
-        return JSONObject.toJSONString(mcPerformanceDateService.queryMcPerformanceDatebyid(id), SerializerFeature.DisableCircularReferenceDetect);
-    }
-
-    @RequestMapping(value = "/performance/updaperformancePage", produces = "application/json; charset=utf-8")
-    public String updaperformancePage() {
-        return "修改界面";
-    }
-
-    @RequestMapping(value = "/performance/updaperformance", produces = "application/json; charset=utf-8")
-    public String updaperformance(McPerformanceDate mcPerformanceDate, HttpServletRequest reques) {
-        int sum;
-        sum = mcPerformanceDateService.updateMcPerformanceDate(mcPerformanceDate, reques);
-        if (sum > 0) {
-            return "mc/修改完成";
-        } else {
-            return "mc/修改失败";
-        }
-    }
-
-    @RequestMapping(value = "/qualification/deleteperformance", produces = "application/json; charset=utf-8")
-    public String deleteperformance(@RequestParam int id) {
-        int sum = mcPerformanceDateService.deleteMcPerformanceDate(id);
-        return "返回页面";
-    }
-
 }

@@ -13,7 +13,10 @@ import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -64,14 +67,16 @@ public class BdAction {
             unitType = null;
         }
         return JSONObject.toJSONString(bdClientService.getList(name, address, unitType, userid, pageIndex),
-                SerializerFeature.DisableCircularReferenceDetect);
+                SerializerFeature.DisableCircularReferenceDetect,
+                SerializerFeature.WriteNullStringAsEmpty);
     }
 
     @RequestMapping(value = "/client/getAddres", produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String getAddres() {
         return JSONObject.toJSONString(bdClientService.getAddres(),
-                SerializerFeature.DisableCircularReferenceDetect);
+                SerializerFeature.DisableCircularReferenceDetect,
+                SerializerFeature.WriteNullStringAsEmpty);
     }
 
     @RequestMapping("/client/deptUser")
@@ -146,7 +151,8 @@ public class BdAction {
             clientname = null;
         }
         return JSONObject.toJSONString(bdClientContactsService.getList(name, clientname, pageIndex),
-                SerializerFeature.DisableCircularReferenceDetect);
+                SerializerFeature.DisableCircularReferenceDetect,
+                SerializerFeature.WriteNullStringAsEmpty);
     }
 
     @RequestMapping(value = "/client_contacts/update")
@@ -175,11 +181,15 @@ public class BdAction {
 
     @RequestMapping(value = "/project/query.html", produces = "text/html;charset=UTF-8")
     @ResponseBody
-    public String ProjectList(@RequestParam(required = false) String projectName, @RequestParam(required = false, defaultValue = "0") int deptid,
-                              @RequestParam(required = false) String stage, @RequestParam(required = false, defaultValue = "0") int areaManager,
+    public String ProjectList(@RequestParam(required = false) String projectName,
+                              @RequestParam(required = false, defaultValue = "0") int deptid,
+                              @RequestParam(required = false) String stage,
+                              @RequestParam(required = false, defaultValue = "0") int areaManager,
                               @RequestParam(required = false) String principalName,
-                              @RequestParam(required = false) Date start, @RequestParam(required = false) Date end,
-                              @RequestParam(required = false, defaultValue = "0") int pageIndex, HttpSession session) {
+                              @RequestParam(required = false) Date start,
+                              @RequestParam(required = false) Date end,
+                              @RequestParam(required = false, defaultValue = "0") int pageIndex,
+                              HttpSession session) {
         if (projectName == null || projectName == "") {
             projectName = null;
         }
@@ -193,7 +203,8 @@ public class BdAction {
         //int userid = (int) session.getAttribute("userId");
         int  userid=1;
         return JSONObject.toJSONString(bdProjectService.getlist(userid,projectName, deptid, stage, areaManager,principalName, start, end, pageIndex)
-                , SerializerFeature.DisableCircularReferenceDetect);
+                , SerializerFeature.DisableCircularReferenceDetect,
+                SerializerFeature.WriteNullStringAsEmpty);
     }
 
     @RequestMapping("/project/add")
@@ -222,7 +233,8 @@ public class BdAction {
     @ResponseBody
     public String projectUpdateJson(@RequestParam int id) {
         return JSONObject.toJSONString(bdProjectService.getProjectById(id)
-                , SerializerFeature.DisableCircularReferenceDetect);
+                , SerializerFeature.DisableCircularReferenceDetect,
+                SerializerFeature.WriteNullStringAsEmpty);
     }
 
     @RequestMapping("/project/particular")
@@ -234,7 +246,8 @@ public class BdAction {
     @ResponseBody
     public String projectParticular(@RequestParam int id) {
         return JSONObject.toJSONString(bdProjectService.getProjectById(id),
-                SerializerFeature.DisableCircularReferenceDetect);
+                SerializerFeature.DisableCircularReferenceDetect,
+                SerializerFeature.WriteNullStringAsEmpty);
     }
     @RequestMapping("/project/approvalDetailed")
     public String projectParticular(SysApprovalDetailed approvalDetailed,HttpSession session) {

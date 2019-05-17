@@ -15,6 +15,7 @@
         <result column="processid" property="processid" jdbcType="INTEGER"/>
         <result column="process_userid" property="processUserid" jdbcType="INTEGER"/>
         <result column="process_state" property="processState" jdbcType="VARCHAR"/>
+        <result column="process_node" property="processNode" jdbcType="INTEGER" />
         <association property="dept" javaType="com.beans.SysDept" column="deptid"
                      select="com.dao.sys.DeptMapper.getListById">
         </association>

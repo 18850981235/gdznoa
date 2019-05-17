@@ -15,7 +15,7 @@ public interface McMaterialsSevice {
     int addProjectApproval(SysApprovalDetailed detailed);
     int add(McMaterials mcMaterials, HttpServletRequest request);
     int update(McMaterials materials);
-    Map<String, Object> getList(String offerTpye, int deptid, Date start,
+    Map<String, Object> getList(String projectName, int deptid, Date start,
                                 Date end, int usreid, int pageIndex);
     McMaterials getListById(int id);
     Map<String, Object> getParticular1ById(int id);

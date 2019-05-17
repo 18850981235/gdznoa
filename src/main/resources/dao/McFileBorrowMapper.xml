@@ -8,6 +8,7 @@
         <result column="userid" property="userid" jdbcType="INTEGER"/>
         <result column="phone" property="phone" jdbcType="VARCHAR"/>
         <result column="projectid" property="projectid" jdbcType="INTEGER"/>
+        <result column="content" property="content" jdbcType="VARCHAR"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
         <result column="purpose" property="purpose" jdbcType="VARCHAR"/>
         <result column="consignee" property="consignee" jdbcType="VARCHAR"/>
@@ -24,7 +25,6 @@
         <result column="send_address" property="sendAddress" jdbcType="VARCHAR"/>
         <result column="return_expressage_name" property="returnExpressageName" jdbcType="VARCHAR"/>
         <result column="return_expressage_waybill" property="returnExpressageWaybill" jdbcType="VARCHAR"/>
-        <result column="return_address" property="returnAddress" jdbcType="VARCHAR"/>
         <association property="dept" javaType="com.beans.SysDept" column="deptid"
                      select="com.dao.sys.DeptMapper.getListById">
         </association>
@@ -66,6 +66,9 @@
             </if>
             <if test="name != null">
                 `name` = #{name},
+            </if>
+            <if test="content != null">
+                `content` = #{content},
             </if>
             <if test="purpose != null">
                 purpose = #{purpose},
@@ -112,12 +115,12 @@
             <if test="returnExpressageWaybill != null">
                 return_expressage_waybill = #{returnExpressageWaybill},
             </if>
-            <if test="returnAddress != null">
-                return_address = #{returnAddress},
-            </if>
+
         </set>
         where id=#{id}
     </update>
+
+
     <insert id="add">
         insert into mc_file_borrow
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -138,6 +141,9 @@
             </if>
             <if test="name != null">
                 `name`,
+            </if>
+            <if test="content != null">
+                `content`,
             </if>
             <if test="purpose != null">
                 purpose,
@@ -178,9 +184,7 @@
             <if test="returnExpressageWaybill != null">
                 return_expressage_waybill,
             </if>
-            <if test="returnAddress != null">
-                return_address,
-            </if>
+
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
 
@@ -201,6 +205,9 @@
             </if>
             <if test="name != null">
                 #{name},
+            </if>
+            <if test="content != null">
+                #{content},
             </if>
             <if test="purpose != null">
                 #{purpose},
@@ -241,9 +248,7 @@
             <if test="returnExpressageWaybill != null">
                 #{returnExpressageWaybill},
             </if>
-            <if test="returnAddress != null">
-                #{returnAddress},
-            </if>
+
         </trim>
     </insert>
     <select id="getList" resultMap="BaseResultMap">
@@ -301,7 +306,7 @@
                 and `mc_file_borrow`.userid=#{userid}
             </if>
             <if test="projectName != null">
-                and `bd_project`.`name` like CONCAT('%',#{projectName},'%')
+                and `bd_project`.`abbreviation` like CONCAT('%',#{projectName},'%')
             </if>
             <if test="deptid != 0">
                 and `mc_file_borrow`.deptid=#{deptid}
@@ -321,14 +326,14 @@
         </if>
     </select>
     <select id="getCountProject" resultType="int">
-        SELECT * FROM `mc_file_borrow`,`bd_project`
+        SELECT count(1) FROM `mc_file_borrow`,`bd_project`
         <trim prefix="where" prefixOverrides="and">
             `mc_file_borrow`.`projectid`=`bd_project`.`id`
             <if test="userid != 0">
                 and `mc_file_borrow`.userid=#{userid}
             </if>
             <if test="projectName != null">
-                and `bd_project`.`name` like CONCAT('%',#{projectName},'%')
+                and `bd_project`.`abbreviation` like CONCAT('%',#{projectName},'%')
             </if>
             <if test="deptid != 0">
                 and `mc_file_borrow`.deptid=#{deptid}
