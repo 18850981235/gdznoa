@@ -70,7 +70,11 @@
                 $.each(date.menuList, function (i, menu) {
                         if (menu.levels == 1) {
                             html+='<ul class="yiji">';
-                            html += "<li><a href='#' class='inactive'>" + menu.name + "</a>";
+                            var url="#";
+                            if(menu.url!=null){
+                                url=menu.url;
+                            }
+                            html += "<li><a href='"+url+"' class='inactive'>" + menu.name + "</a>";
                             $.each(date.menuList, function (i, menu2) {
                                     if (menu2.levels == 2 && menu2.pcode == menu.code) {
                                         var url2 = "";

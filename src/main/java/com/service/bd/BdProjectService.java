@@ -16,8 +16,8 @@ import java.util.Map;
 public interface BdProjectService {
     int add(BdProject project, HttpServletRequest request);
     int addProjectApproval(SysApprovalDetailed detailed);
-    Map<String, Object> getlist(int userid, String name, String type, String code, String status,
-                                Date start, Date end, int pageIndex);
+    Map<String, Object> getlist(int userid, String projectName, int deptid, String stage, int areaManager,
+                                String principalName,Date start, Date end, int pageIndex);
     Map<String,Object>  getProjectById(int id);
     int update(BdProject project);
 

@@ -31,44 +31,73 @@ public class Login {
     @Resource(name = "authorityService")
     private AuthorityService authorityService;
 
+    /**
+     * 登录页面
+     *
+     * @return 登录页面视图
+     */
     @RequestMapping("/index")
     public String index() {
         return "index";
     }
 
+    /**
+     * 首页
+     *
+     * @return 首页视图
+     */
     @RequestMapping("/sign")
     public String sign() {
         return "sign";
     }
 
+    /**
+     * 登录验证
+     *
+     * @param account  账号
+     * @param password 密码
+     * @return 视图
+     */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(@RequestParam String account,
                         @RequestParam String password,
                         Model model, HttpSession session) {
-
-            SysUser user = userService.getByAccount(account);
-            if (user == null) {
-                model.addAttribute("error", "没有该账号");
+        SysUser user = userService.getByAccount(account);
+        if (user == null) {
+            model.addAttribute("error", "没有该账号");
+            return "index";
+        } else {
+            if (!user.getPassword().equals(DigestUtils.md5DigestAsHex(password.getBytes()))) {
+                model.addAttribute("error", "密码错误");
+                model.addAttribute("account", account);
                 return "index";
-            } else {
-                if (!user.getPassword().equals(DigestUtils.md5DigestAsHex(password.getBytes()))) {
-                    model.addAttribute("error", "密码错误");
-                    model.addAttribute("account", account);
-                    return "index";
-                }
             }
-            session.setAttribute("user", user);
-            session.setAttribute("userId", user.getId());
+        }
+        session.setAttribute("user", user);
+        session.setAttribute("userId", user.getId());
         //return "sign";
         return "topleft";
     }
 
-
+    /**
+     * 注册
+     *
+     * @return 注册视图
+     */
     @RequestMapping("/register")
     public String zhuce() {
         return "register";
     }
 
+    /**
+     * 注册验证
+     *
+     * @param mobile     账号
+     * @param password   密码
+     * @param name       名字
+     * @param verifyCode 验证码
+     * @return 状态
+     */
     @RequestMapping(value = "register.html", produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String register(@RequestParam String mobile,
@@ -92,6 +121,13 @@ public class Login {
         return "注册成功";
     }
 
+
+    /**
+     * 验证码发送
+     *
+     * @param mobile 账号
+     * @return 是否发送成功
+     */
     @RequestMapping("/sendSms.json")
     @ResponseBody
     public String sendSms(@RequestParam String mobile, HttpSession session) {
@@ -103,6 +139,13 @@ public class Login {
             return "fail";
         }
     }
+
+    /**
+     * 验证手机是否存在
+     *
+     * @param mobile 账号
+     * @return 是否注册过
+     */
     @RequestMapping(value = "isAccount.html", produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String isAccount(@RequestParam(required = false) String mobile) {
@@ -113,6 +156,12 @@ public class Login {
         }
     }
 
+    /**
+     * a
+     * 退出用户
+     *
+     * @return 登录视图
+     */
     @RequestMapping("/quit")
     public String quit(HttpSession session) {
         session.removeAttribute("user");
@@ -120,7 +169,13 @@ public class Login {
         return "redirect:/index";
     }
 
-
+    /**
+     * 修改用户密码
+     *
+     * @param mobile      账号
+     * @param newpassword 新密码
+     * @return 视图名
+     */
     @RequestMapping("/updatePassword")
     public String updatePassword(@RequestParam String mobile, @RequestParam String newpassword) {
         if (userService.updatePassWord(mobile, newpassword) > 0) {
@@ -129,17 +184,21 @@ public class Login {
             return "";
         }
     }
-    @RequestMapping(value = "/menu",produces = "application/json; charset=utf-8")
+
+    /**
+     * 查询菜单栏跟用户权限
+     *
+     * @return 查询菜单栏跟用户权限集合
+     */
+
+    @RequestMapping(value = "/menu", produces = "application/json; charset=utf-8")
     @ResponseBody
-    public String menuList(HttpSession session){
-        SysUser user=(SysUser)session.getAttribute("user");
-        Map<String,Object> map=new HashMap<>();
+    public String menuList(HttpSession session) {
+        Map<String, Object> map = new HashMap<>();
         map.put("menuList", menuService.getMenuList(0));
         //int userid=(int)session.getAttribute("userId");
-        int userid=1;
-        map.put("authority",authorityService.getMenuIdByUserId(userid));
-
-        //map.put("authority",authorityService.getMenuIdByUserId(userid));
-        return JSONObject.toJSONString(map, SerializerFeature.DisableCircularReferenceDetect);
+        int userid = 1;
+        map.put("authority", authorityService.getMenuIdByUserId(userid));
+        return JSONObject.toJSONString(map, SerializerFeature.DisableCircularReferenceDetect,SerializerFeature.WriteNullStringAsEmpty);
     }
 }

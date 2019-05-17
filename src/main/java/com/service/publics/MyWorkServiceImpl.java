@@ -1,7 +1,7 @@
-package com.service;
+package com.service.publics;
 
 import com.beans.MyWork;
-import com.dao.MyWorkMapper;
+import com.dao.publics.MyWorkMapper;
 import com.util.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

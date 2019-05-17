@@ -73,7 +73,6 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                         <span>用户名</span>
                     </div>
                     <input placeholder="请输入用户名"   name="name">
-                    <span class="co"> * 账号不存在</span>
                 </div>
                 <div class="conduct div-phone">
                     <div class="back-img">

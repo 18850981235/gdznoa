@@ -15,7 +15,10 @@ import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.util.*;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author 李鹏熠
@@ -48,10 +51,10 @@ public class McStampServiceImpl implements McStampService {
             McStamp stamp_update = new McStamp();
             int processUserid = 0;
             McStamp stamp = mcStampMapper.getListById(detailed.getApprovalId());
-            String state = "进行中";
+            String state = "审批中";
             String users = stamp.getProcess().getUsersid();
             String[] userArr = users.split(",");
-            if (detailed.getState().equals("通过")) {
+            if (detailed.getState().equals("同意")) {
                 boolean flag=true;
                 for (int i = 0; i < userArr.length; i++) {
                     if (userArr[i].equals(String.valueOf(stamp.getProcessUserid()))) {
@@ -66,7 +69,7 @@ public class McStampServiceImpl implements McStampService {
                         if (i != userArr.length - 1) {
                             processUserid = Integer.parseInt(userArr[i + 1]);
                         } else {
-                            state = "已结束";
+                            state = "审批结束";
                         }
                     }
                 }
@@ -77,7 +80,6 @@ public class McStampServiceImpl implements McStampService {
                 stamp_update.setProcessState(state);
                 stamp_update.setId(detailed.getApprovalId());
             } else {
-
                 boolean flag=true;
                 for (int i = 0; i < userArr.length; i++) {
                     if (userArr[i].equals(String.valueOf(stamp.getProcessUserid()))) {
@@ -128,7 +130,7 @@ public class McStampServiceImpl implements McStampService {
             String[] arr = process.getUsersid().split(",");
             stamp.setProcessid(12);
             stamp.setProcessUserid(Integer.parseInt(arr[0]));
-            stamp.setProcessState("进行中");
+            stamp.setProcessState("未审批");
             num = mcStampMapper.add(stamp);
         } catch (Exception e) {
             e.printStackTrace();
@@ -138,17 +140,27 @@ public class McStampServiceImpl implements McStampService {
     }
 
     @Override
-    public Map<String, Object> getList(String stampType, int deptid, int userid, Date start, Date end, int pageIndex) {
+    public Map<String, Object> getList(String projectName,int userid, String stampType,
+                                       int deptid, String content,
+                                       String purpose, Date start,
+                                       Date end,int pageIndex) {
         Map<String, Object> map = new HashMap<>();
         Page page = new Page();
+        List<McStamp> list=null;
         try {
             if (pageIndex == 0) {
                 pageIndex = 1;
             }
             page.setPageSize(10);
-            page.setTotalCount(mcStampMapper.getCount(stampType, deptid, userid, start, end));
-            page.setCurrentPageNo(pageIndex);
-            List<McStamp> list = mcStampMapper.getList(stampType, deptid, userid, start, end, (page.getCurrentPageNo() - 1) * page.getPageSize(), page.getPageSize());
+            if(projectName==null){
+                page.setTotalCount(mcStampMapper.getCount(userid,stampType, deptid, content,purpose, start, end));
+                page.setCurrentPageNo(pageIndex);
+                list = mcStampMapper.getList(userid,stampType, deptid, content,purpose, start, end, (page.getCurrentPageNo() - 1) * page.getPageSize(), page.getPageSize());
+            }else{
+                page.setTotalCount(mcStampMapper.getCountProject(projectName,userid,stampType, deptid, content,purpose, start, end));
+                page.setCurrentPageNo(pageIndex);
+                list = mcStampMapper.getListProject(projectName,userid,stampType, deptid, content,purpose, start, end, (page.getCurrentPageNo() - 1) * page.getPageSize(), page.getPageSize());
+            }
             map.put("page", page);
             map.put("list", list);
         } catch (Exception e) {

@@ -2,7 +2,7 @@ package com.action;
 
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
-import com.service.MyWorkService;
+import com.service.publics.MyWorkService;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
@@ -44,7 +44,8 @@ public class MyWork {
                          HttpSession session) {
         int userid = (int) session.getAttribute("userId");
         return JSONObject.toJSONString(myWorkService.getList(userid, processid, id, start, end, pageIndex),
-                SerializerFeature.DisableCircularReferenceDetect);
+                SerializerFeature.DisableCircularReferenceDetect,
+                SerializerFeature.WriteNullStringAsEmpty);
     }
     @RequestMapping("/showMyWork")
     public String showMyWork() {

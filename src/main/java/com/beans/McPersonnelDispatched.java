@@ -1,38 +1,53 @@
 package com.beans;
 
 
-import com.alibaba.fastjson.annotation.JSONField;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
-import org.springframework.format.annotation.DateTimeFormat;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 
 @Data
 public class McPersonnelDispatched {
-
   private int id;
-  private int deptid;
-  @JsonFormat(pattern = "yyyy-MM-dd")
-  @JSONField(format = "yyyy-MM-dd")
-  @DateTimeFormat(pattern = "yyyy-MM-dd")
-  private Date createtime;
+
   private int projectid;
-  private String demand;
+
+  private int deptid;
+
   private int userid;
-  @JsonFormat(pattern = "yyyy-MM-dd")
-  @JSONField(format = "yyyy-MM-dd")
-  @DateTimeFormat(pattern = "yyyy-MM-dd")
+
+  private Date createtime;
+
+  private String demand;
+
   private Date evectionTime;
-  private double evectionCost;
-  private String accessory;
+
+  private String personnelCondition;
+
+  private String costStandard;
+
+  private BigDecimal evectionBudget;
+
+  private Date practicalTime;
+
+  private String evectionCondition;
+
+  private BigDecimal travelCost;
+
+  private BigDecimal evectionCost;
+
   private int processid;
+
   private int processUserid;
+
   private String processState;
+
+  private int processNode;
+
   private SysDept dept;
   private SysUser user;
-  private String projectName;
+  private BdProject project;
   private SysApprovalProcess process;
   private SysUser processUser;
 

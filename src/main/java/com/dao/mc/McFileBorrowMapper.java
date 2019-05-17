@@ -24,4 +24,19 @@ public interface McFileBorrowMapper {
                   @Param("start") Date start,
                   @Param("end") Date end,
                   @Param("userid") int usreid);
+
+    List<McFileBorrow> getListProject( @Param("projectName") String projectName,
+                                       @Param("name") String name,
+                                       @Param("deptid") int deptid,
+                                       @Param("start") Date start,
+                                       @Param("end") Date end,
+                                       @Param("userid") int usreid,
+                                       @Param("pageIndex")int pageIndex,
+                                       @Param("pageSize")int pageSize);
+    int  getCountProject( @Param("projectName") String projectName,
+                          @Param("name") String name,
+                          @Param("deptid") int deptid,
+                          @Param("start") Date start,
+                          @Param("end") Date end,
+                          @Param("userid") int usreid);
 }
