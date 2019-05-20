@@ -1,9 +1,9 @@
 package com.service.mc;
 
-import com.beans.McFileBorrow;
-import com.beans.SysApprovalDetailed;
-import com.beans.SysApprovalProcess;
+import com.beans.*;
 import com.dao.mc.McFileBorrowMapper;
+import com.dao.mc.McPerformanceDateMapper;
+import com.dao.mc.McQualificationMapper;
 import com.dao.sys.ApprovalDetailedMapper;
 import com.dao.sys.ApprovalProcessMapper;
 import com.dao.sys.UserMapper;
@@ -35,6 +35,10 @@ public class McFileBorrowServiceImpl implements McFileBorrowService{
     private McFileBorrowMapper mcFileBorrowMapper;
     @Resource
     private UserMapper userMapper;
+    @Resource
+    private McQualificationMapper mcQualificationMapper;
+    @Resource
+    private McPerformanceDateMapper mcPerformanceDateMapper;
 
     /**
      * 添加原文件借用审批详情 修改人员派遣下一个审批人审批状态
@@ -162,6 +166,20 @@ public class McFileBorrowServiceImpl implements McFileBorrowService{
         }
         return map;
     }
-
+    @Override
+    public Map<String, Object> queryMailFile( ) {
+        Map<String, Object> map = new HashMap<>();
+        try {
+           List<McQualificationCertificate>   ListQ = mcQualificationMapper.queryall();
+            List<McPerformanceDate> listP = mcPerformanceDateMapper.queryall();
+            System.err.print(listP);
+            map.put("McQualificationCertificate",ListQ);
+            map.put("McPerformanceDate",listP);
+        } catch (Exception e) {
+            e.printStackTrace();
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+        }
+        return map;
+    }
 
 }

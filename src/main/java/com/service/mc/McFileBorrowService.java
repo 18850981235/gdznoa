@@ -19,4 +19,5 @@ public interface McFileBorrowService {
                                 Date end, int usreid, int pageIndex);
     McFileBorrow getListById(int id);
     Map<String, Object> getParticular1ById(int id);
+    Map<String,Object> queryMailFile();
 }

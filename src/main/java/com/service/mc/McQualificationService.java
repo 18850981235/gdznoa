@@ -26,6 +26,6 @@ public interface McQualificationService {
     //删除资质证书
     int delete(@Param("id") int id);
 
-
     int addProjectApproval(SysApprovalDetailed detailed);
+
 }
