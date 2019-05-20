@@ -1,0 +1,310 @@
+#content-in{
+    width: 91%;
+    height: 80% ;
+    position: absolute;
+    left: 9% ;
+    top: 130px ;
+    display: inline-block;
+    /*background-color: #f6f7f9;*/
+    overflow-y:auto;
+    overflow-x:auto;
+}
+#center{
+    position: absolute;
+    top: 10px ;
+    left: calc(50% - 605px);
+}
+@media screen and (max-width: 1340px) {
+    #content-in{
+        width: 1276px ;
+        position: absolute;
+        left: 126px ;
+        top:130px;
+    }
+}
+#content-in .add-to{
+    color: blue;
+}
+#content-in .query{
+     width: 80px;
+     height: 25px ;
+     border-radius: 7px ;
+     background-color: #fbfbfb;
+     cursor: pointer;
+    float: right;
+ }
+#content-in .query:hover,
+#content-in .reset:hover,
+#content-in .add:hover{
+    background-color: #7d7dff;
+}
+#content-in .add{
+    width: 50px;
+    height: 25px ;
+    border-radius: 7px ;
+    cursor: pointer;
+    background-color: #fbfbfb;
+    float: left;
+}
+#content-in .reset{
+    width: 80px;
+    height: 25px ;
+    border-radius: 7px ;
+    cursor: pointer;
+    background-color: #fbfbfb;
+    float: right;
+}
+#content-in .start{
+    text-align: center;
+    background-color: #c4de83;
+    /*border-bottom: 1px solid  #000000 ;*/
+}
+#content-in .start td {
+    /*border-right: 1px solid #000000;*/
+}
+/*#content-in .content .content-in-on,*/
+/*#content-in .content .content-in{*/
+    /*text-align: center;*/
+
+/*}*/
+/*#content-in .content {*/
+    /*!*border-bottom: 1px solid  #000000 ;*!*/
+/*}*/
+#content-in .paging{
+    width: 1211px ;
+    height: 498px ;
+    /*border: 1px solid #000000;*/
+}
+#paging-selection {
+    width: 1211px ;
+    height: 70px ;
+    display: inline-block;
+    margin-top: 20px ;
+}
+#paging-selection .page-selection{
+    padding-top: 20px;
+    margin-left: auto ;
+    margin-right: auto;
+    text-align: center;
+    color: #8c8c8c;
+
+}
+#paging-selection .page-selection .format{
+    width: 55px ;
+    height: 30px ;
+    border: 1px solid #8c8c8c;
+    border-radius: 7px;
+    margin-right: 5px ;
+    display: inline-block;
+}
+#paging-selection .page-selection li{
+    width: 20px ;
+    height: 30px ;
+    border: 1px solid #8c8c8c;
+    border-radius: 7px;
+    margin-right: 5px ;
+    display: inline-block;
+    line-height: 30px ;
+}
+#paging-selection .page-selection li:hover{
+    background-color:#7d7dff ;
+    cursor: pointer;
+}
+#paging-selection .page-selection a{
+    width: 100%;
+    height: 100%;
+    color: #000000;
+}
+#paging-selection .page-selection .dian{
+    width: 40px ;
+    display: inline-block;
+
+}
+#paging-selection .page-selection .dian-in{
+    /*display: inline-block;*/
+    display: none;
+}
+/*分页*/
+#paginator-test{
+    margin-left: 40% ;
+
+}
+#paginator-test a{
+    width: 40px ;
+    height: 40px ;
+    margin-left: 4px ;
+    line-height: 25px ;
+    text-align: center;
+}
+/*分页*/
+/*是否删除*/
+#confirm{
+    display:none;
+    width: 200px ;
+    height: 200px;
+    background-color: blue;
+    z-index: 1;
+    color: brown;
+    position: absolute;
+    top: 200px ;
+    left: 700px;
+    padding: 6px;
+}
+#confirm .confirm-ok{
+    width: 40px;display: inline-block;line-height: 25px ;text-align: center ;
+    background-color: #9d9d9d; height: 25px;border-radius: 6px;  margin-left: 20px;
+}
+#confirm .confirm-no{
+    width: 40px;
+    display: inline-block;
+    line-height: 25px ;
+    text-align: center  ;
+    background-color: #9d9d9d;
+    height: 25px;
+    border-radius: 6px;
+    margin-left: 60px;
+}
+/*是否删除*/
+/*查询排列*/
+#query-button{
+    height: 138px ;
+    width:1201px ;
+}
+#query-button .top1{
+    width:300px;
+    height: 40px ;
+    display: inline-block;
+    line-height: 38px ;
+    border:1px solid rgba(62,62,62,0.2);
+    text-align: center;
+    float: left;
+}
+#query-button .top1>span{
+    display: inline-block;
+    width: 100px ;
+    height: 37px ;
+    background-color: #eeeeee;
+    float: left;
+    margin-top: 1px ;
+    margin-left: 1px ;
+}
+#query-button .top1>input{
+    display: inline-block;
+    width: 195px ;
+    height: 37px ;
+    float: left;
+    border: 0px ;
+    padding-left: 3px ;
+}
+#query-button .top2{
+    width:300px;
+    height: 40px ;
+    display: inline-block;
+    float: left;
+    text-align: center;
+    border:1px solid rgba(62,62,62,0.2);
+    margin-left: 100px ;
+}
+#query-button .top2>span{
+    display: inline-block;
+    width: 100px ;
+    height: 37px ;
+    line-height: 38px ;
+    background-color: #eeeeee;
+    float: left;
+    margin-top: 1px ;
+    margin-left: 1px ;
+}
+#query-button .top2 select{
+    width: 197px ;
+    margin-top: 7px ;
+    border: 0px ;
+}
+#query-button .top3{
+    width:300px;
+    height: 40px ;
+    display: inline-block;
+    float: left;
+    text-align: center;
+    border:1px solid rgba(62,62,62,0.2);
+    margin-left: 105px ;
+}
+#query-button .top3>span{
+    display: inline-block;
+    width: 100px ;
+    height: 38px ;
+    line-height: 38px ;
+    background-color: #eeeeee;
+    float: left;
+    margin-top: 1px ;
+    margin-left: 1px ;
+}
+#query-button .top3 select{
+    width: 197px ;
+    margin-top: 7px ;
+    border: 0px ;
+}
+#query-button .query-in {
+    display: inline-block;
+    margin-top: 15px;
+}
+#query-button .in1{
+    width:370px;
+    height: 40px ;
+    display: inline-block;
+    line-height: 38px ;
+    border:1px solid rgba(62,62,62,0.2);
+    text-align: center;
+    float: left;
+    margin-right: 25px ;
+}
+#query-button .in1>span{
+    display: inline-block;
+    width: 100px ;
+    height: 37px ;
+    background-color: #eeeeee;
+    float: left;
+    margin-top: 1px ;
+    margin-left: 1px ;
+}
+#query-button .in1>input{
+    display: inline-block;
+    width: 255px ;
+    height: 37px ;
+    line-height: 37px ;
+    float: left;
+    border: 0px ;
+    padding-left: 3px ;
+    margin-top: 1px ;
+}
+#query-button .in2{
+    width:550px;
+    height: 40px ;
+    display: inline-block;
+    line-height: 38px ;
+    border:1px solid rgba(62,62,62,0.2);
+    text-align: center;
+    float: left;
+}
+#query-button .in2>span{
+    display: inline-block;
+    width: 120px ;
+    height: 37px ;
+    background-color: #eeeeee;
+    float: left;
+    margin-top: 1px ;
+    margin-left: 1px ;
+}
+#query-button .in2>input{
+    display: inline-block;
+    width: 150px ;
+    height: 37px ;
+    float: left;
+    border: 0px ;
+    padding-left: 3px ;
+    margin-top: 1px ;
+}
+#query-button .query-button{
+    width: 100%;
+    height: 45px ;
+}

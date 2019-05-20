@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.dao.ApprovalProcessMapper">
+<mapper namespace="com.dao.sys.ApprovalProcessMapper">
     <update id="updateProcessById">
         update `sys_approval_process`
         set usersid=#{usersid}
         where id = #{id}
     </update>
-
-    <select id="getProcessList">
+    <select id="getProcessList" resultType="com.beans.SysApprovalProcess">
         select * from `sys_approval_process`
     </select>
-    <select id="getProcessById" resultType="SysApprovalProcess">
+    <select id="getProcessById" resultType="com.beans.SysApprovalProcess">
         select * from `sys_approval_process` where id=#{id}
     </select>
 </mapper>

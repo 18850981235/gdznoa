@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.mc.McQualificationMapper">
+    <resultMap id="BaseResultMap" type="com.beans.McQualificationCertificate" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="deptid" property="deptid" jdbcType="INTEGER" />
+        <result column="userid" property="userid" jdbcType="INTEGER" />
+        <result column="type" property="type" jdbcType="VARCHAR" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="content" property="content" jdbcType="VARCHAR" />
+        <result column="state" property="state" jdbcType="VARCHAR" />
+        <result column="borrow" property="borrow" jdbcType="VARCHAR" />
+        <result column="security" property="security" jdbcType="INTEGER" />
+        <result column="annual_time" property="annualTime" jdbcType="VARCHAR" />
+        <result column="annual_principal" property="annualPrincipal" jdbcType="INTEGER" />
+        <result column="file" property="file" jdbcType="VARCHAR" />
+        <result column="watermark" property="watermark" jdbcType="VARCHAR" />
+        <result column="accessory" property="accessory" jdbcType="VARCHAR" />
+        <result column="processid" property="processid" jdbcType="INTEGER" />
+        <result column="deptName" property="deptName" jdbcType="VARCHAR" />
+        <result column="process_userid" property="processUserid" jdbcType="INTEGER" />
+        <result column="process_state" property="processState" jdbcType="VARCHAR" />
+        <collection property="user" column="userid"
+                    select="com.dao.sys.UserMapper.getByID">
+        </collection>
+        <collection property="process" javaType="SysApprovalProcess" column="processid"
+                     select="com.dao.sys.ApprovalProcessMapper.getProcessById">
+        </collection>
+    </resultMap>
+
+    <insert id="addMcQualification" >
+        insert into mc_qualification_certificate
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="deptid != 0" >
+                deptid,
+            </if>
+            <if test="userid != 0" >
+                userid,
+            </if>
+            <if test="type != null" >
+                `type`,
+            </if>
+            <if test="name != null" >
+               `name`,
+            </if>
+            <if test="content != null" >
+                content,
+            </if>
+            <if test="state != null" >
+                state,
+            </if>
+            <if test="borrow != null" >
+                borrow,
+            </if>
+            <if test="security != 0" >
+                security,
+            </if>
+            <if test="annualTime != null" >
+                annual_time,
+            </if>
+            <if test="annualPrincipal != 0" >
+                annual_principal,
+            </if>
+            <if test="file != null" >
+                file,
+            </if>
+            <if test="watermark != null" >
+                watermark,
+            </if>
+            <if test="accessory != null" >
+                accessory,
+            </if>
+            <if test="processid != 0" >
+                processid,
+            </if>
+            <if test="processUserid != 0" >
+                process_userid,
+            </if>
+            <if test="processState != null" >
+                process_state,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="deptid != 0" >
+                #{deptid},
+            </if>
+            <if test="userid != 0" >
+                #{userid},
+            </if>
+            <if test="type != null" >
+                #{type},
+            </if>
+            <if test="name != null" >
+                #{name},
+            </if>
+            <if test="content != null" >
+                #{content},
+            </if>
+            <if test="borrow != null" >
+                #{borrow},
+            </if>
+            <if test="state != null" >
+                #{state},
+            </if>
+            <if test="annualTime != null" >
+                #{annualTime},
+            </if>
+            <if test="security != 0" >
+                #{security},
+            </if>
+            <if test="annualPrincipal != 0" >
+                #{annualPrincipal},
+            </if>
+            <if test="file != null" >
+                #{file},
+            </if>
+            <if test="watermark != null" >
+                #{watermark},
+            </if>
+            <if test="accessory != null" >
+                #{accessory},
+            </if>
+            <if test="processid != 0" >
+                #{processid},
+            </if>
+            <if test="processUserid != 0" >
+                #{processUserid},
+            </if>
+            <if test="processState != null" >
+                #{processState},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateMcQualification">
+        update mc_qualification_certificate
+        <set>
+            <if test="deptid != 0">
+                deptid = #{deptid},
+            </if>
+            <if test="userid != 0">
+                userid = #{userid},
+            </if>
+            <if test="type != null">
+                  `type` = #{type},
+            </if>
+            <if test="name != null">
+                `name` = #{name},
+            </if>
+            <if test="content != null">
+                content = #{content},
+            </if>
+            <if test="state != null">
+                state = #{state},
+            </if>
+            <if test="borrow != null">
+                borrow = #{borrow},
+            </if>
+            <if test="security != 0">
+                security = #{security},
+            </if>
+            <if test="annualTime != null">
+                annual_Time = #{annualTime},
+            </if>
+            <if test="annualPrincipal != 0">
+                annual_principal = #{annualPrincipal},
+            </if>
+            <if test="file != null">
+                file = #{file},
+            </if>
+            <if test="watermark != null">
+                watermark = #{watermark},
+            </if>
+            <if test="accessory != null">
+                accessory = #{accessory},
+            </if>
+            <if test="processid != 0">
+                processid = #{processid},
+            </if>
+            <if test="processUserid != 0">
+                process_userid = #{processUserid},
+            </if>
+            <if test="processState != null">
+                process_state = #{processState},
+            </if>
+
+        </set>
+        where id=#{id}
+    </update>
+
+    <select id="querybyid"  resultMap="BaseResultMap">
+        SELECT *  FROM `mc_qualification_certificate` where `id` = #{id}
+    </select>
+    <delete id="delete">
+        delete
+        from mc_qualification_certificate
+        where id = #{id}
+    </delete>
+
+    <select id="querybytypename"   resultMap="BaseResultMap">
+        select `mc_qualification_certificate`.*,`sys_dept`.name as  deptName
+        from `mc_qualification_certificate`,`sys_dept`
+        <trim prefix="where" prefixOverrides="and">
+            `sys_dept`.`id` = `mc_qualification_certificate`.`deptid`
+            <if test="deptid != 0">
+                and `mc_qualification_certificate`.`deptid` =#{deptid}
+            </if>
+            <if test="name != null">
+                and `mc_qualification_certificate`.`name` like CONCAT('%',#{name},'%')
+            </if>
+            <if test="type != null">
+                and `mc_qualification_certificate`.`type` like CONCAT('%',#{type},'%')
+            </if>
+        </trim>
+        <if test="pageSize!=0">
+            LIMIT #{pageIndex},#{pageSize}
+        </if>
+    </select>
+    <select id="querycount" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM mc_qualification_certificate
+        <trim prefix="where" prefixOverrides="and">
+            <if test="deptid != 0">
+                and `deptid` =#{deptid}
+            </if>
+            <if test="name != null">
+                and `name` like CONCAT('%',#{name},'%')
+            </if>
+            <if test="type != null">
+                and `type` like CONCAT('%',#{type},'%')
+            </if>
+        </trim>
+    </select>
+
+
+</mapper>

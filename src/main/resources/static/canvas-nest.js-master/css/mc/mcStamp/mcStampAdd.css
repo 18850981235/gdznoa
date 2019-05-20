@@ -1,0 +1,21 @@
+#content-in{
+    width: 91%;
+    height: 80% ;
+    position: absolute;
+    left: 9% ;
+    top: 130px ;
+    display: inline-block;
+    /*background-color: #f6f7f9;*/
+    overflow-y:auto;
+    overflow-x:auto;
+}
+#center{
+    display: inline-block;
+    position: inherit;
+    top: 10px ;
+    left: calc(50% - 450px);
+}
+#center td{
+  padding-left: 4px ;
+}
+/**/

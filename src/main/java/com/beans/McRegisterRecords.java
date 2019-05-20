@@ -30,5 +30,10 @@ public class McRegisterRecords {
   private int processid;
   private int processUserid;
   private String processState;
+  private String deptName;
+  private SysUser user;
+  private SysApprovalProcess process;
+
+
 
 }

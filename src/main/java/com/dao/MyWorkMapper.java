@@ -4,6 +4,7 @@ import com.beans.MyWork;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -12,5 +13,16 @@ import java.util.List;
  */
 @Mapper
 public interface MyWorkMapper {
-    List<MyWork> getList(@Param("userid") int userid);
+    List<MyWork> getList(@Param("userid") int userid,
+                         @Param("processid") int processid,
+                         @Param("id") int id,
+                         @Param("start") Date start,
+                         @Param("end") Date end,
+                         @Param("pageIndex")int pageIndex,
+                         @Param("pageSize")int pageSize);
+    int getCount(@Param("userid") int userid,
+                 @Param("processid") int processid,
+                 @Param("id") int id,
+                 @Param("start") Date start,
+                 @Param("end") Date end);
 }

@@ -1,0 +1,225 @@
+*{
+    margin: 0px;
+    font-weight: normal;
+    padding: 0px ;
+    font-family: "宋体","微软雅黑";
+}
+a{
+    text-decoration: none;
+    color: #000;
+}
+ul{
+    list-style: none;
+
+}
+input{
+    border: 0px ;
+    outline: none;
+}
+body,html{
+    height: 100%;
+}
+#on{
+    width: 100%;
+    height: 100% ;
+    background:url("../imgs/index_bg.jpg")no-repeat center ;
+    padding-top: 60px ;
+    background-size: 100% 100%;
+}
+#on-in{
+    width: auto;
+    height: 100%;
+    padding: 0px  120px ;
+}
+@media screen and (max-width: 1700px)  {
+    #on{
+        width: 1700px ;
+    }
+    #on-in{
+        width:1700px   ;
+    }
+}
+#on .logo{
+    width: 90px  ;
+    height: 90px ;
+    float: left;
+}
+#on-in .on-time{
+    display: inline-block;
+    width: 100%;
+    height: 90px ;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+}
+#time{
+    display: inline-block;
+    width: 350px ;
+    height: 100%;
+    font-size: 88px;
+    color: #ffffff;
+    background-color:transparent ;
+}
+#day-time{
+    width: 130px;
+    display: inline-block;
+}
+#daytime{
+    display: block;
+     width: 130px ;
+     height: 20px ;
+    font-size: 25px;
+    color: #ffffff;
+     background-color:transparent ;
+ }
+#day{
+    display: block;
+    width: 130px ;
+    height: 40px ;
+    font-size: 25px;
+    color: #ffffff;
+    background-color:transparent ;
+}
+#on-in .user{
+    display: inline-block;
+    float: right;
+}
+#on-in .user img{
+    height:90px ;
+    width:90px ;
+    float: right;
+    margin-left: 10px ;
+}
+#on-in .user .user-left{
+    display: inline-block;
+    float: right;
+}
+#on-in .user .user-left span{
+    color: #ffffff;
+    font-size: 22px ;
+    margin-left: 20px ;
+    float: right;
+
+}
+#on-in .user .user-left a{
+    color: #ffffff;
+    font-size: 18px ;
+    display: block;
+    margin-top: 45px ;
+    text-align: right;
+}
+#on-in .user .user-left a:hover{
+    color: #ffffff;
+}
+#on-in .content{
+    width: 100%;
+    height: 550px ;
+    padding-top: 100px ;
+    display: flex;
+    justify-content: space-between;
+    /*align-items: center;*/
+}
+#on-in .content ul{
+    float: left;
+    width: 24%;
+
+    /*margin-right: 20px ;*/
+}
+/*#on-in .content ul:nth-child(4){*/
+    /*margin-right: 0px ;*/
+/*}*/
+#on-in .content li{
+    margin-bottom: 20px ;
+    height: 135px;
+    display: flex;
+    justify-content: space-between;
+}
+#on-in .content a{
+    display: inline-block;
+    text-decoration: none;
+    color: #ffffff;
+}
+#on-in .content a span{
+    font-size: 50px ;
+    display: inline-block;
+}
+#on-in .content .modular{
+    width:100% ;
+    height: 135px;
+    padding-left: 125px ;
+    line-height: 135px ;
+}
+/*#on-in .content .modular:hover{*/
+    /*background-color: ;*/
+/*}*/
+#on-in .content .modular1{
+    width:48% ;
+    height: 135px;
+    padding-top: 10px ;
+    text-align: center;
+}
+#on-in .content .modular2{
+    width:100% ;
+    height: 445px;
+}
+#on-in .name{
+    margin-left: 30px ;
+    display: inline-block;
+    font-size: 28px ;
+}
+#on-in .name1{
+    font-size: 28px ;
+}
+#on-in .size::before{
+    font-size: 35px ;
+}
+#on-in .content .colour-1{
+    background-color: #34a8b4;
+}
+#on-in .content .colour-2{
+    background-color: #e03c58;
+}
+#on-in .content .colour-3{
+    background-color: #16a3a4;
+}
+#on-in .content .colour-4{
+    background-color: #bba680;
+}
+#on-in .content .colour-5{
+    background-color: #86b235;
+}
+#on-in .content .colour-6{
+    background-color: #e2b244;
+}
+#on-in .content .colour-7{
+    background-color: #86b235;
+}
+#on-in .content .colour-8{
+    background-color: #bba680;
+}
+#on-in .content .colour-9{
+    background-color: #e03c58;
+}
+#on-in .content .colour-10{
+    background-color: #375c7e;
+}
+#on-in .content .colour-11{
+    background-color: #34a8b4;
+    display: inline-block;
+}
+#on-in .content .colour-12{
+    background-color: #86b235;
+}
+/*@media screen and (max-width: 1570px)  {*/
+    /*#on-in .content{*/
+        /*width: 1370px ;*/
+    /*}*/
+    /*#on{*/
+        /*width: 1580px;*/
+    /*}*/
+/*}*/
+/*
+工程管理
+信息发布
+*/
+

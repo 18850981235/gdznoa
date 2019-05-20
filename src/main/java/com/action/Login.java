@@ -4,10 +4,9 @@ package com.action;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.beans.SysUser;
-import com.service.AuthorityService;
-import com.service.MenuService;
-import com.service.UserService;
-import com.util.FileUtils;
+import com.service.sys.AuthorityService;
+import com.service.sys.MenuService;
+import com.service.sys.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.DigestUtils;
@@ -17,8 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
@@ -37,6 +34,11 @@ public class Login {
     @RequestMapping("/index")
     public String index() {
         return "index";
+    }
+
+    @RequestMapping("/sign")
+    public String sign() {
+        return "sign";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -133,13 +135,11 @@ public class Login {
         SysUser user=(SysUser)session.getAttribute("user");
         Map<String,Object> map=new HashMap<>();
         map.put("menuList", menuService.getMenuList(0));
-//        map.put("authority",authorityService.getMenuIdByUserId(user.getId()));
-        int userid=(int)session.getAttribute("userId");
+        //int userid=(int)session.getAttribute("userId");
+        int userid=1;
         map.put("authority",authorityService.getMenuIdByUserId(userid));
+
+        //map.put("authority",authorityService.getMenuIdByUserId(userid));
         return JSONObject.toJSONString(map, SerializerFeature.DisableCircularReferenceDetect);
     }
-
-
-
-
 }

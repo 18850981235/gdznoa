@@ -1,0 +1,27 @@
+#content-in{
+    width: 91%;
+    height: 80% ;
+    position: absolute;
+    left: 9% ;
+    top: 130px ;
+    display: inline-block;
+    /*background-color: #f6f7f9;*/
+    overflow-y:auto;
+    overflow-x:auto;
+}
+#center{
+    position: absolute;
+    top: 10px ;
+    left: calc(50% - 450px);
+}
+@media screen and (max-width: 1340px) {
+    #content-in{
+        width: 1276px ;
+        position: absolute;
+        left: 126px ;
+        top:130px;
+    }
+}
+#content-in td{
+    padding-left: 4px ;
+}

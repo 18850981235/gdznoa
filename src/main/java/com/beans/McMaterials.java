@@ -30,6 +30,7 @@ public class McMaterials {
   private int processid;
   private int processUserid;
   private String processState;
+  private String projectName;
 
   private SysDept dept;
   private SysUser user;

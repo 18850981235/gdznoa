@@ -1,289 +1,253 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.dao.BdProjectMapper">
+<mapper namespace="com.dao.bd.BdProjectMapper">
     <resultMap id="BaseResultMap" type="com.beans.BdProject">
-        <id column="id" property="id" jdbcType="INTEGER"/>
-        <result column="code" property="code" jdbcType="VARCHAR"/>
-        <result column="name" property="name" jdbcType="VARCHAR"/>
-        <result column="abbreviation" property="abbreviation" jdbcType="VARCHAR"/>
-        <result column="principal" property="principal" jdbcType="INTEGER"/>
-        <result column="site" property="site" jdbcType="VARCHAR"/>
-        <result column="type" property="type" jdbcType="VARCHAR"/>
-        <result column="stage" property="stage" jdbcType="VARCHAR"/>
-        <result column="budget" property="budget" jdbcType="DECIMAL"/>
-        <result column="bidding_type" property="biddingType" jdbcType="VARCHAR"/>
-        <result column="biddate" property="biddate" jdbcType="TIMESTAMP"/>
-        <result column="clientid" property="clientid" jdbcType="INTEGER"/>
-        <result column="cooperation_type" property="cooperationType" jdbcType="VARCHAR"/>
-        <result column="cooperation_unit" property="cooperationUnit" jdbcType="VARCHAR"/>
-        <result column="cooperation_name" property="cooperationName" jdbcType="VARCHAR"/>
-        <result column="cooperation_role" property="cooperationRole" jdbcType="VARCHAR"/>
-        <result column="cooperation_phone" property="cooperationPhone" jdbcType="VARCHAR"/>
-        <result column="createtime" property="createtime" jdbcType="TIMESTAMP"/>
-        <result column="examine" property="examine" jdbcType="VARCHAR"/>
-        <result column="leader" property="leader" jdbcType="VARCHAR"/>
-        <result column="content" property="content" jdbcType="VARCHAR"/>
-        <result column="accessory" property="accessory" jdbcType="VARCHAR"/>
-        <result column="processid" property="processid" jdbcType="INTEGER"/>
-        <result column="process_userid" property="processUserid" jdbcType="INTEGER"/>
-        <result column="process_state" property="processState" jdbcType="VARCHAR"/>
-        <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP"/>
-        <association property="processUser" javaType="sysuser" column="process_userid"
-                     select="com.dao.UserMapper.getByID">
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="code" property="code" jdbcType="VARCHAR" />
+        <result column="abbreviation" property="abbreviation" jdbcType="VARCHAR" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="site" property="site" jdbcType="VARCHAR" />
+        <result column="type" property="type" jdbcType="VARCHAR" />
+        <result column="stage" property="stage" jdbcType="VARCHAR" />
+        <result column="budget" property="budget" jdbcType="DECIMAL" />
+        <result column="bidding_type" property="biddingType" jdbcType="VARCHAR" />
+        <result column="biddate" property="biddate" jdbcType="TIMESTAMP" />
+        <result column="clientid" property="clientid" jdbcType="INTEGER" />
+        <result column="capital_source" property="capitalSource" jdbcType="VARCHAR" />
+        <result column="deptid" property="deptid" jdbcType="INTEGER" />
+        <result column="principal" property="principal" jdbcType="INTEGER" />
+        <result column="area_manager" property="areaManager" jdbcType="INTEGER" />
+        <result column="content" property="content" jdbcType="VARCHAR" />
+        <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+        <result column="accessory" property="accessory" jdbcType="VARCHAR" />
+        <result column="userid" property="userid" jdbcType="INTEGER" />
+        <result column="processid" property="processid" jdbcType="INTEGER" />
+        <result column="process_userid" property="processUserid" jdbcType="INTEGER" />
+        <result column="process_state" property="processState" jdbcType="VARCHAR" />
+        <association property="principalUser" javaType="com.beans.SysUser" column="principal"
+                     select="com.dao.sys.UserMapper.getByID">
         </association>
-        <association property="principalUser" javaType="sysuser" column="principal"
-                     select="com.dao.UserMapper.getByID">
+        <association property="areaManagerUser" javaType="com.beans.SysUser" column="area_manager"
+                     select="com.dao.sys.UserMapper.getByID">
         </association>
-        <association property="process" javaType="SysApprovalProcess" column="processid"
-                     select="com.dao.ApprovalProcessMapper.getProcessById">
+        <association property="process" javaType="com.beans.SysApprovalProcess" column="processid"
+                     select="com.dao.sys.ApprovalProcessMapper.getProcessById">
         </association>
-        <association property="client" javaType="BdClient" column="clientid"
-                     select="com.dao.BdClientMapper.getClientById">
+        <association property="client" javaType="com.beans.BdClient" column="clientid"
+                     select="com.dao.bd.BdClientMapper.getClientById">
         </association>
     </resultMap>
+
     <select id="getListById" resultMap="BaseResultMap">
         select *
         from `bd_project`
         where id = #{id}
     </select>
+
     <insert id="add">
         insert into bd_project
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="code != null">
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="code != null" >
                 code,
             </if>
-            <if test="name != null">
-                `name`,
-            </if>
-            <if test="abbreviation != null">
+            <if test="abbreviation != null" >
                 abbreviation,
             </if>
-            <if test="principal != 0">
-                principal,
+            <if test="name != null" >
+                `name`,
             </if>
-            <if test="site != null">
+            <if test="site != null" >
                 site,
             </if>
-            <if test="type != null">
-                `type`,
+            <if test="type != null" >
+                type,
             </if>
-            <if test="stage != null">
+            <if test="stage != null" >
                 stage,
             </if>
-            <if test="budget != null">
+            <if test="budget != null" >
                 budget,
             </if>
-            <if test="biddingType != null">
+            <if test="biddingType != null" >
                 bidding_type,
             </if>
-            <if test="biddate != null">
+            <if test="biddate != null" >
                 biddate,
             </if>
-            <if test="clientid != 0">
+            <if test="clientid != 0" >
                 clientid,
             </if>
-            <if test="cooperationType != null">
-                cooperation_type,
+            <if test="capitalSource != null" >
+                capital_source,
             </if>
-            <if test="cooperationUnit != null">
-                cooperation_unit,
+            <if test="deptid != 0" >
+                deptid,
             </if>
-            <if test="cooperationName != null">
-                cooperation_name,
+            <if test="principal != 0" >
+                principal,
             </if>
-            <if test="cooperationRole != null">
-                cooperation_role,
+            <if test="areaManager != 0" >
+                area_manager,
             </if>
-            <if test="cooperationPhone != null">
-                cooperation_phone,
-            </if>
-            <if test="createtime != null">
-                createtime,
-            </if>
-            <if test="examine != null">
-                examine,
-            </if>
-            <if test="leader != null">
-                leader,
-            </if>
-            <if test="content != null">
+            <if test="content != null" >
                 content,
             </if>
-            <if test="accessory != null">
+            <if test="createtime != null" >
+                createtime,
+            </if>
+            <if test="accessory != null" >
                 accessory,
             </if>
-            <if test="processid != 0">
+            <if test="userid != 0" >
+                userid,
+            </if>
+            <if test="processid != 0" >
                 processid,
             </if>
-            <if test="processUserid != 0">
+            <if test="processUserid != 0" >
                 process_userid,
             </if>
-            <if test="processState != null">
+            <if test="processState != null" >
                 process_state,
             </if>
-            <if test="updatetime != null">
-                updatetime,
-            </if>
         </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="code != null">
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="code != null" >
                 #{code},
             </if>
-            <if test="name != null">
-                #{name},
-            </if>
-            <if test="abbreviation != null">
+            <if test="abbreviation != null" >
                 #{abbreviation},
             </if>
-            <if test="principal != null">
-                #{principal},
+            <if test="name != null" >
+                #{name},
             </if>
-            <if test="site != null">
+            <if test="site != null" >
                 #{site},
             </if>
-            <if test="type != null">
+            <if test="type != null" >
                 #{type},
             </if>
-            <if test="stage != null">
+            <if test="stage != null" >
                 #{stage},
             </if>
-            <if test="budget != null">
+            <if test="budget != null" >
                 #{budget},
             </if>
-            <if test="biddingType != null">
+            <if test="biddingType != null" >
                 #{biddingType},
             </if>
-            <if test="biddate != null">
+            <if test="biddate != null" >
                 #{biddate},
             </if>
-            <if test="clientid != 0">
+            <if test="clientid != 0" >
                 #{clientid},
             </if>
-            <if test="cooperationType != null">
-                #{cooperationType},
+            <if test="capitalSource != null" >
+                #{capitalSource},
             </if>
-            <if test="cooperationUnit != null">
-                #{cooperationUnit},
+            <if test="deptid != 0" >
+                #{deptid},
             </if>
-            <if test="cooperationName != null">
-                #{cooperationName},
+            <if test="principal != 0" >
+                #{principal},
             </if>
-            <if test="cooperationRole != null">
-                #{cooperationRole},
+            <if test="areaManager != 0" >
+                #{areaManager},
             </if>
-            <if test="cooperationPhone != null">
-                #{cooperationPhone},
-            </if>
-            <if test="createtime != null">
-                #{createtime},
-            </if>
-            <if test="examine != null">
-                #{examine},
-            </if>
-            <if test="leader != null">
-                #{leader},
-            </if>
-            <if test="content != null">
+            <if test="content != null" >
                 #{content},
             </if>
-            <if test="accessory != null">
+            <if test="createtime != null" >
+                #{createtime},
+            </if>
+            <if test="accessory != null" >
                 #{accessory},
             </if>
-            <if test="processid != 0">
+            <if test="userid != 0" >
+                #{userid},
+            </if>
+            <if test="processid != 0" >
                 #{processid},
             </if>
-            <if test="processUserid != 0">
+            <if test="processUserid != 0" >
                 #{processUserid},
             </if>
-            <if test="processState != null">
+            <if test="processState != null" >
                 #{processState},
-            </if>
-            <if test="updatetime != null">
-                #{updatetime},
             </if>
         </trim>
     </insert>
+
     <update id="updateById">
         update bd_project
         <set>
-            <if test="code != null">
+            <if test="code != null" >
                 code = #{code},
             </if>
-            <if test="name != null">
-                `name` = #{name},
-            </if>
-            <if test="abbreviation != null">
+            <if test="abbreviation != null" >
                 abbreviation = #{abbreviation},
             </if>
-            <if test="principal != 0">
-                principal = #{principal},
+            <if test="name != null" >
+                `name`= #{name},
             </if>
-            <if test="site != null">
+            <if test="site != null" >
                 site = #{site},
             </if>
-            <if test="type != null">
-                `type` = #{type},
+            <if test="type != null" >
+                type = #{type},
             </if>
-            <if test="stage != null">
+            <if test="stage != null" >
                 stage = #{stage},
             </if>
-            <if test="budget != 0">
+            <if test="budget != null" >
                 budget = #{budget},
             </if>
-            <if test="biddingType != null">
+            <if test="biddingType != null" >
                 bidding_type = #{biddingType},
             </if>
-            <if test="biddate != null">
+            <if test="biddate != null" >
                 biddate = #{biddate},
             </if>
-            <if test="clientid != 0">
+            <if test="clientid != 0" >
                 clientid = #{clientid},
             </if>
-            <if test="cooperationType != null">
-                cooperation_type = #{cooperationType},
+            <if test="capitalSource != null" >
+                capital_source = #{capitalSource},
             </if>
-            <if test="cooperationUnit != null">
-                cooperation_unit = #{cooperationUnit},
+            <if test="deptid != 0" >
+                deptid = #{deptid},
             </if>
-            <if test="cooperationName != null">
-                cooperation_name = #{cooperationName},
+            <if test="principal != 0" >
+                principal = #{principal},
             </if>
-            <if test="cooperationRole != null">
-                cooperation_role = #{cooperationRole},
+            <if test="areaManager != 0" >
+                area_manager = #{areaManager},
             </if>
-            <if test="cooperationPhone != null">
-                cooperation_phone = #{cooperationPhone},
-            </if>
-            <if test="createtime != null">
-                createtime = #{createtime},
-            </if>
-            <if test="examine != null">
-                examine = #{examine},
-            </if>
-            <if test="leader != null">
-                leader = #{leader},
-            </if>
-            <if test="content != null">
+            <if test="content != null" >
                 content = #{content},
             </if>
-            <if test="accessory != null">
+            <if test="createtime != null" >
+                createtime = #{createtime},
+            </if>
+            <if test="accessory != null" >
                 accessory = #{accessory},
             </if>
-            <if test="processid != 0">
+            <if test="userid != 0" >
+                userid = #{userid},
+            </if>
+            <if test="processid != 0" >
                 processid = #{processid},
             </if>
-            <if test="processUserid != null">
+            <if test="processUserid != null" >
                 process_userid = #{processUserid},
             </if>
-            <if test="processState != null">
-                process_state= #{processState},
-            </if>
-            <if test="updatetime != null">
-                updatetime = #{updatetime},
+            <if test="processState != null" >
+                process_state = #{processState},
             </if>
         </set>
         where id=#{id}
     </update>
+
     <delete id="deleteById">
         delete
         from bd_project
@@ -291,14 +255,17 @@
     </delete>
     <select id="getList" resultMap="BaseResultMap">
         select *
-        from `bd_project`
+        from `bd_project`,`bd_client`
         <trim prefix="where" prefixOverrides="and">
-            (`principal`=#{userid} OR `examine` LIKE CONCAT('%',#{userid},'%'))
+            `bd_client`.`id`=`clientid`
+            <if test="userid!=null">
+                and  userid=#{userid}
+            </if>
             <if test="name != null">
                 and `name` like CONCAT('%',#{name},'%')
             </if>
             <if test="type != null">
-                and `type`=#{type}
+                and unit_type=#{type}
             </if>
             <if test="code != null">
                 and `code`=#{code}
@@ -343,9 +310,15 @@
             </if>
         </trim>
     </select>
-    <select id="getByProcessUser">
+    <select id="getByProcessUser" resultMap="BaseResultMap">
         SELECT *
         FROM `bd_project`
         WHERE `process_userid` = #{processUserId}
+    </select>
+    <select id="getProjectName" resultType="com.beans.BdProject">
+        select id,`abbreviation` from bd_project
+    </select>
+    <select id="getProjectById" resultType="com.beans.BdProject">
+        select id,`abbreviation` from bd_project where id=#{id}
     </select>
 </mapper>

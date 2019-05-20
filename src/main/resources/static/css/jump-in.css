@@ -35,54 +35,75 @@ a:visited{
     text-decoration: none;
     /*color: #fff;*/
 }
+
 #left{
-    width: 170px;
+    width: 9%;
     height: 100%;
     float: left;
     display: inline-block;
-    background-color: #354052;
+    background-color: #1e81b0;
+    /*border-right: 2px solid #8c8c8c;*/
 }
-#left>img {
-    padding-left: 30px;
-    width: 120px ;
+#left>#imgs{
+    width: 100%;
+    height: 90px ;
+    background-color: #467ca2;
+}
+#left>#imgs img {
+    padding-left: 12%;
+    padding-top: 5px ;
+    width: 80% ;
     height: 80px;
     display: inline-block;
 }
 #top{
-    width: 1608px ;
+    width: 91% ;
     height: 90px ;
     position: absolute;
-    left: 170px ;
+    left: 9% ;
     top:0px;
-    background-color: #354052;
-    float: left;
+    background-color: #1e81b0;
+    /*//#1e81b0*/
+    /*//156dc8*/
 }
 #top>a{
-    width: 150px ;
+    width: 120px ;
     height: 100%;
     text-align: center;
     display: inline-block;
     color: #ffffff;
-    padding-top: 15px ;
+    padding-top: 1% ;
     transition: 2s;
     float: left;
 }
-#top>a:hover{
+#top #tc{
+    width: 90px ;
+    height: 100%;
+    text-align: center;
+    display: inline-block;
+    color: #ffffff;
+    transition: 2s;
+    float: left;
+}
+#top>a:hover,
+#top>#tc{.
     color: #cb2a4b;
 }
 #top .top-right{
+    width: 90px ;
     float: right;
 }
-#top>a>p{
+#top>a>p,
+#top>#tc{
     margin-top: 10px ;
 }
 /**/
 #page{
-    width: 1608px ;
+    width: 91% ;
     height: 40px ;
     position: absolute;
     top: 90px;
-    left: 170px ;
+    left: 9% ;
     border: 1px solid #3c3c3c;
     float: left;
     background-color: #e5e5e5;
@@ -90,7 +111,7 @@ a:visited{
 
 }
 #page a{
-    width: 110px ;
+    width: 200px ;
     height: 30px ;
     display: inline-block;
     font-size: 16px ;
@@ -99,14 +120,14 @@ a:visited{
 }
 /**/
 #weather{
-    width: 170px ;
+    width: 200px ;
     height: 100%;
     color: #ffffff;
     display: inline-block;
     text-align: center;
     float: right;
     padding-top: 12px ;
-    margin-right: 25px  ;
+    margin-right: 8%  ;
 }
 #time{
     display: inline-block;
@@ -144,12 +165,13 @@ a:visited{
 #menu{
     color: #ffffff;
     float: left;
-    margin-top: 12px;
+    width: 100%;
+    /*margin-top: 12px;*/
     border-top:1px solid #4c647c;
     border-bottom:1px solid #4c647c;
 }
 #menu .list{
-    width: 170px;
+    width: 100%;
     border-bottom:solid 1px #316a91;
 
 }
@@ -172,10 +194,10 @@ a:visited{
 }
 #menu .list ul li .inactive,
 #menu .list ul li .inactive1{
-    background:url(../imgs/off.png) no-repeat 150px center;
+    background:url(../imgs/off.png) no-repeat 90% center;
 }
 #menu .list ul li .inactives{
-    background:url(../imgs/on.png) no-repeat 150px center;
+    background:url(../imgs/on.png) no-repeat 90% center;
 }
 #menu .list ul li ul{
     display: none;
@@ -224,6 +246,7 @@ a:visited{
     display: inline-block;
     background: url("../imgs/org_select.png") no-repeat;
     background-position:0px 3px  ;
+
 }
 .clear-to,
 .clear-to1,
@@ -244,7 +267,13 @@ a:visited{
     background: url("../imgs/org_select.png") no-repeat;
     background-position:0px -36px  ;
 }
+.clear-to input,
+.clear-to1 input,
+.clear-to2 input{
+    background-color: #ffffff;
+}
 /*负责人选择*/
+
 #choice,
 #choice1,
 #choice2{
@@ -260,8 +289,8 @@ a:visited{
     z-index: 1;
     background-color: #ffffff;
 }
-#choice>.title,
-#choice2>.title{
+#choice .title,
+#choice2 .title{
     font-size: 30px ;
     width: 100%;
     height: 60px ;
@@ -269,9 +298,9 @@ a:visited{
     line-height: 60px ;
     background-color: #c4de83;
     margin: 0px;
-    border-radius: 10px  10px 0px 0px ;
 }
-#choice1 .name li{
+#choice1 .name li,
+#choice1 .name1 li{
     font-size: 30px ;
     width: 100%;
     height: 40px ;
@@ -282,7 +311,6 @@ a:visited{
     border-radius: 10px  10px 10px 10px ;
 }
 #choice .yiji-no a,
-#choice1 .yiji-no1 a,
 #choice2 .yiji-no2 a{
     height: 30px ;
     line-height: 30px ;
@@ -300,13 +328,13 @@ a:visited{
     background-color: #dae9bb;
 }
 #choice .name li>a,
-#choice1 .name li>a,
-#choice2 .name li>a{
+#choice1 .name1 li>a,
+#choice2 .name2 li>a{
     border-bottom: 1px dashed #3c3c3c;
 }
 #choice .name li>a:hover,
-#choice1 .name li>a:hover,
-#choice2 .name li>a:hover{
+#choice1 .name1 li>a:hover,
+#choice2 .name2 li>a:hover{
     background-color: #dae9bb;
 }
 #close,
@@ -334,5 +362,79 @@ a:visited{
     right: 0px ;
     margin: 0px auto;
 }
+/*查询*/
+#content-in .query{
+    width: 80px;
+    height: 25px ;
+    border-radius: 7px ;
+    background-color: #fbfbfb;
+    cursor: pointer;
+}
+#content-in .query:hover,
+#content-in .reset:hover{
+    background-color: #7d7dff;
+}
+#content-in .reset{
+    width: 50px;
+    height: 25px ;
+    border-radius: 7px ;
+    cursor: pointer;
+    background-color: #fbfbfb;
+}
+/*查询*/
+@media screen and (max-width: 1340px) {
+    #top{
+        width: 1277px ;
+        height: 90px ;
+        position: absolute;
+        left: 126px ;
+        top:0px;
 
+    }
+    #left{
+        width: 126px ;
+    }
+    #page{
+        width: 1276px ;
+        position: absolute;
+        left: 126px ;
+        top:90px;
+    }
+}
 
+/*确定 返回 按钮*/
+#ok,
+#no{
+    width: 60px;
+    height: 30px ;
+    border: 1px solid #36434e;
+    border-radius:15px  ;
+    display: inline-block;
+    float: left;
+    line-height: 30px;
+    text-align: center;
+    background-color: #ffffff;
+}
+ #ok{
+    margin-left:250px  ;
+    margin-top: 10px ;
+}
+#no{
+    margin-left: 50px ;
+    margin-top: 10px ;
+}
+ #ok:hover,
+#no:hover{
+    background-color: #787dff;
+}
+/**/
+/*分页*/
+#paginator-test{
+    margin-left: 40%;
+}
+
+/*审批人*/
+#center .approval tr:nth-of-type(2n-1){
+    background-color: #eeeeee;
+}
+/*审批人*/

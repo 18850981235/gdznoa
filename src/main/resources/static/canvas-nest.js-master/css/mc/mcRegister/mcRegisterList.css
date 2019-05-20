@@ -1,0 +1,181 @@
+#content-in{
+    width: 91%;
+    height: 80% ;
+    position: absolute;
+    left: 9% ;
+    top: 130px ;
+    display: inline-block;
+    /*background-color: #f6f7f9;*/
+    overflow-y:auto;
+    overflow-x:auto;
+}
+#content-in .paging{
+    width: 1211px ;
+    height: 450px ;
+}
+#content-in .paging tr:nth-of-type(2n){
+    background-color: #eeeeee;
+}
+#center{
+    display: inline-block;
+    position: inherit;
+    top: 10px ;
+    left: calc(50% - 600px);
+}
+/*是否删除*/
+#confirm{
+    display:none;
+    width: 300px ;
+    height: 150px;
+    background-color: #769cb0;
+    border-radius: 8px ;
+    z-index: 1;
+    color: brown;
+    position:absolute;
+    top: 50px;
+    left: 400px;
+    padding: 6px;
+}
+#confirm .confirm-ok{
+    width: 40px;display: inline-block;line-height: 25px ;text-align: center ;
+    background-color: #9d9d9d; height: 25px;border-radius: 6px;  margin-left: 20px;
+}
+#confirm .confirm-no{
+    width: 40px;
+    display: inline-block;
+    line-height: 25px ;
+    text-align: center  ;
+    background-color: #9d9d9d;
+    height: 25px;
+    border-radius: 6px;
+    margin-left: 60px;
+}
+/*是否删除*/
+@media screen and (max-width: 1340px) {
+    #content-in{
+        width: 1276px ;
+        position: absolute;
+        left: 126px ;
+        top:130px;
+    }
+}
+/**/
+/*查询排列*/
+#query-button{
+    height: 140px ;
+    width:1170px ;
+}
+#query-button .top1{
+    width:300px;
+    height: 40px ;
+    display: inline-block;
+    line-height: 38px ;
+    border:1px solid rgba(62,62,62,0.2);
+    text-align: center;
+    float: left;
+}
+#query-button .top1>span{
+    display: inline-block;
+    width: 100px ;
+    height: 37px ;
+    background-color: #eeeeee;
+    float: left;
+    margin-top: 1px ;
+    margin-left: 1px ;
+}
+#query-button .top1>input{
+    display: inline-block;
+    width: 195px ;
+    height: 37px ;
+    float: left;
+    border: 0px ;
+    padding-left: 3px ;
+}
+#query-button .top2{
+    width:450px;
+    height: 40px ;
+    display: inline-block;
+    float: left;
+    text-align: center;
+    border:1px solid rgba(62,62,62,0.2);
+    margin-left: 100px ;
+    margin-right: 100px ;
+}
+#query-button .top2>span{
+    display: inline-block;
+    width: 100px ;
+    height: 37px ;
+    line-height: 38px ;
+    background-color: #eeeeee;
+    float: left;
+    margin-top: 1px ;
+    margin-left: 1px ;
+}
+#query-button .top2 input{
+    width: 130px ;
+    margin-top: 7px ;
+    border: 0px ;
+}
+#query-button .query-in{
+    width: 100%;
+    height: 40px ;
+    float: left;
+    margin-top: 15px ;
+}
+#query-button .in1{
+    width:350px;
+    height: 40px ;
+    display: inline-block;
+    float: left;
+    text-align: center;
+    border:1px solid rgba(62,62,62,0.2);
+
+}
+#query-button .in1>span{
+    display: inline-block;
+    width: 100px ;
+    height: 37px ;
+    line-height: 38px ;
+    background-color: #eeeeee;
+    float: left;
+    margin-top: 1px ;
+    margin-left: 1px ;
+}
+#query-button .in1 input{
+    width: 235px ;
+    margin-top: 7px ;
+    border: 0px ;
+}
+
+/*查询*/
+
+#content-in .query{
+    width: 80px;
+    height: 25px ;
+    border-radius: 7px ;
+    background-color: #fbfbfb;
+    cursor: pointer;
+    float: right;
+}
+#content-in .query:hover,
+#content-in .reset:hover,
+#content-in .add:hover{
+    background-color: #7d7dff;
+}
+#content-in .reset{
+    width: 50px;
+    height: 25px ;
+    border-radius: 7px ;
+    cursor: pointer;
+    background-color: #fbfbfb;
+    float: right;
+}
+#content-in .add{
+    width: 50px;
+    height: 25px ;
+    border-radius: 7px ;
+    cursor: pointer;
+    background-color: #fbfbfb;
+    float: left;
+}
+/*查询*/
