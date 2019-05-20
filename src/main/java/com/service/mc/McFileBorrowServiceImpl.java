@@ -172,6 +172,7 @@ public class McFileBorrowServiceImpl implements McFileBorrowService{
         try {
            List<McQualificationCertificate>   ListQ = mcQualificationMapper.queryall();
             List<McPerformanceDate> listP = mcPerformanceDateMapper.queryall();
+            System.err.print(listP);
             map.put("McQualificationCertificate",ListQ);
             map.put("McPerformanceDate",listP);
         } catch (Exception e) {

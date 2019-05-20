@@ -21,12 +21,12 @@ public class McPerformanceDate {
     @JSONField(format = "yyyy-MM-dd")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date signingTime;
-    private  String    acceptanceReport;
+    private  String acceptanceReport;
     @JsonFormat(pattern = "yyyy-MM-dd")
     @JSONField(format = "yyyy-MM-dd")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date acceptanceTime;
-    private  String    maintenanceProof;
+    private  String maintenanceProof;
     @JsonFormat(pattern = "yyyy-MM-dd")
     @JSONField(format = "yyyy-MM-dd")
     @DateTimeFormat(pattern = "yyyy-MM-dd")

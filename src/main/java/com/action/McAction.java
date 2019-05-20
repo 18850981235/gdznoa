@@ -207,6 +207,13 @@ public class McAction {
         mcFileBorrowService.addProjectApproval(approvalDetailed);
         return "redirect:/showMyWork";
     }
+
+    @RequestMapping(value = "/borrow/queryMailFile",produces = "text/html;charset=UTF-8")
+    @ResponseBody
+    public String queryMailFile() {
+        return JSONObject.toJSONString(mcFileBorrowService.queryMailFile(),
+                SerializerFeature.DisableCircularReferenceDetect);
+    }
     // endregion
 
     //region ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~商务材料~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

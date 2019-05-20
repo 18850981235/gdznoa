@@ -8,14 +8,14 @@
         <result column="bidding_time" property="biddingTime" jdbcType="TIMESTAMP"/>
         <result column="performance_contract" property="performanceContract" jdbcType="INTEGER"/>
         <result column="signing_time" property="signingTime" jdbcType="TIMESTAMP"/>
-        <result column="acceptance_report" property="acceptanceReport" jdbcType="INTEGER"/>
+        <result column="acceptance_report" property="acceptanceReport" jdbcType="VARCHAR"/>
         <result column="acceptance_time" property="acceptanceTime" jdbcType="TIMESTAMP"/>
         <result column="maintenance_proof" property="maintenanceProof" jdbcType="VARCHAR"/>
         <result column="maintenance_time" property="maintenanceTime" jdbcType="TIMESTAMP"/>
         <result column="public_address" property="publicAddress" jdbcType="VARCHAR"/>
         <result column="public_picture" property="publicPicture" jdbcType="INTEGER"/>
         <result column="borrow_stada" property="borrowStada" jdbcType="INTEGER"/>
-        <result column="pdf_out" property="pdfOut" jdbcType="INTEGER"/>
+        <result column="pdf_out" property="pdfOut" jdbcType="VARCHAR"/>
         <result column="manager_id" property="managerId" jdbcType="INTEGER"/>
         <result column="filing_time" property="filingTime" jdbcType="TIMESTAMP"/>
         <association property="project" javaType="com.beans.BdProject" column="project_id"
