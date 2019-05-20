@@ -18,8 +18,9 @@ public interface McStampService {
 
     int update(McStamp stamp);
 
-    Map<String, Object> getList(String stampType, int deptid,
-                                int userid, Date start,
+    Map<String, Object> getList(String projectName,int userid, String stampType,
+                                int deptid, String content,
+                                String purpose, Date start,
                                 Date end,int pageIndex);
 
     McStamp getListById(int id);

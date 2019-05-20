@@ -57,18 +57,30 @@ public class McAction {
     }
     @RequestMapping(value = "/stamp/query.html", produces = "text/html;charset=UTF-8")
     @ResponseBody
-    public String stampList(@RequestParam(required = false)String stampType,
+    public String stampList(@RequestParam(required = false)String projectName,
+                            @RequestParam(required = false)String stampType,
                             @RequestParam(required = false, defaultValue = "0")int deptid,
+                            @RequestParam(required = false)String content,
+                            @RequestParam(required = false)String purpose,
                             @RequestParam(required = false)Date start,
                             @RequestParam(required = false)Date end,
                             @RequestParam(required = false, defaultValue = "0")int pageIndex,
                             HttpSession session){
+        if (projectName == null || projectName == "") {
+            projectName = null;
+        }
         if (stampType == null || stampType == "") {
             stampType = null;
         }
+        if (content == null || content == "") {
+            content = null;
+        }
+        if (purpose == null || purpose == "") {
+            purpose = null;
+        }
         //int userid=(int) session.getAttribute("userId");
         int userid=1;
-        return JSONObject.toJSONString(mcStampService.getList(stampType,deptid,userid,start,end,pageIndex),
+        return JSONObject.toJSONString(mcStampService.getList( projectName, userid,  stampType, deptid,  content, purpose,start,end, pageIndex),
                 SerializerFeature.DisableCircularReferenceDetect);
     }
     @RequestMapping("/stamp/add")
@@ -129,7 +141,8 @@ public class McAction {
 
     @RequestMapping(value = "/borrow/query.html", produces = "text/html;charset=UTF-8")
     @ResponseBody
-    public String borrowList(@RequestParam(required = false)String name,
+    public String borrowList(@RequestParam(required = false)String projectName,
+                             @RequestParam(required = false)String name,
                              @RequestParam(required = false, defaultValue = "0")int deptid,
                              @RequestParam(required = false)Date start,
                              @RequestParam(required = false)Date end,
@@ -139,9 +152,12 @@ public class McAction {
         if (name == null || name == "") {
             name = null;
         }
+        if (projectName == null || projectName == "") {
+            projectName = null;
+        }
         int userid=(int) session.getAttribute("userId");
         //int  userid=1;
-        return JSONObject.toJSONString(mcFileBorrowService.getList(name,deptid,start,end ,userid,pageIndex),
+        return JSONObject.toJSONString(mcFileBorrowService.getList(projectName,name,deptid,start,end ,userid,pageIndex),
                 SerializerFeature.DisableCircularReferenceDetect);
     }
 
@@ -191,6 +207,13 @@ public class McAction {
         approvalDetailed.setApprovalDate(new Date());
         mcFileBorrowService.addProjectApproval(approvalDetailed);
         return "redirect:/showMyWork";
+    }
+
+    @RequestMapping(value = "/borrow/queryMailFile",produces = "text/html;charset=UTF-8")
+    @ResponseBody
+    public String queryMailFile() {
+        return JSONObject.toJSONString(mcFileBorrowService.queryMailFile(),
+                SerializerFeature.DisableCircularReferenceDetect);
     }
     // endregion
 
@@ -273,6 +296,7 @@ public class McAction {
     @RequestMapping(value = "/dispatched/query.html", produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String dispatchedList(@RequestParam(required = false)String projectName,
+                                 @RequestParam(required = false)String  personnelCondition,
                                 @RequestParam(required = false, defaultValue = "0")int deptid,
                                 @RequestParam(required = false)Date start,
                                 @RequestParam(required = false)Date end,
@@ -281,8 +305,12 @@ public class McAction {
         if (projectName == null || projectName == "") {
             projectName = null;
         }
+        if (personnelCondition == null || personnelCondition == "") {
+            personnelCondition = null;
+        }
+
         int userid=(int) session.getAttribute("userId");
-        return JSONObject.toJSONString(mcPersonnelDispatchedService.getList(projectName,deptid, userid, start, end, pageIndex),
+        return JSONObject.toJSONString(mcPersonnelDispatchedService.getList(projectName,personnelCondition,deptid, userid, start, end, pageIndex),
                 SerializerFeature.DisableCircularReferenceDetect);
     }
     @RequestMapping("/dispatched/add")
@@ -295,7 +323,7 @@ public class McAction {
         int userid=(int) request.getSession().getAttribute("userId");
         personnelDispatched.setUserid(userid);
         personnelDispatched.setCreatetime(new Date());
-        mcPersonnelDispatchedService.add(personnelDispatched,request);
+        mcPersonnelDispatchedService.add(personnelDispatched);
         return "redirect:/mc/dispatched/query";
     }
     @RequestMapping("/dispatched/update")

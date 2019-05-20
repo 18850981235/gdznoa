@@ -21,6 +21,9 @@
     <link rel="stylesheet" href="<%=basePath%>/icon-font/iconfont.css">
     <link rel="stylesheet" href="<%=basePath%>/css/jump-in.css">
     <link rel="stylesheet" href="<%=basePath%>/css/bd/project/projectAdd.css">
+    <link rel="stylesheet" href="<%=basePath%>/layui/css/modules/laydate/default/laydate.css">
+    <script src="<%=basePath%>/layui/lay/modules/laydate.js" type="text/javascript"></script>
+
     <script src="<%=basePath%>/js/jquery-3.3.1.js"></script>
     <script src="<%=basePath%>/js/bootstrap.js"></script>
     <script src="<%=basePath%>/js/public/jump.js"></script>
@@ -143,7 +146,7 @@
                         </select>
                     </td>
                     <td>项目立项时间：</td>
-                    <td ><input  type="date"  name="createtime"></td>
+                    <td > <input  type="text" class="demo-input" placeholder="请选择日期" id="test1"  name="createtime"></td>
                 </tr>
                 <tr style="height: 45px ">
                     <td>项目阶段:</td>
@@ -172,7 +175,9 @@
                     </td>
                     <td>预计项目投标时间：</td>
                     <td>
-                        <input style="width: 250px " type="date" name="biddate">
+                        <%--<input style="width: 250px " type="date" name="biddate">--%>
+                            <input  type="text" class="demo-input" placeholder="请选择日期"   name="biddate">
+
                     </td>
                 </tr>
                 <tr style="height: 45px ">
@@ -237,5 +242,14 @@
     </div>
 
 </div>
+<script type="text/javascript">
+    laydate.render({
+        elem: '#test1', //指定元素
+        event: 'click',
+        format: 'yyyy-MM-dd'
+    });
+
+</script>
+
 </body>
 </html>

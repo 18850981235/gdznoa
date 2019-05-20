@@ -9,6 +9,7 @@
         <result column="state" property="state" jdbcType="VARCHAR"/>
         <result column="approval_date" property="approvalDate" jdbcType="TIMESTAMP"/>
         <result column="opinion" property="opinion" jdbcType="VARCHAR"/>
+        <result column="approval_identity" property="approvalIdentity" jdbcType="VARCHAR"/>
         <association property="user" javaType="com.beans.SysUser" column="approval_user"
                      select="com.dao.sys.UserMapper.getByID">
         </association>
@@ -34,6 +35,9 @@
             <if test="opinion != null">
                 opinion,
             </if>
+            <if test="approvalIdentity != null">
+                approval_identity,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="approvalName != null">
@@ -53,6 +57,9 @@
             </if>
             <if test="opinion != null">
                 #{opinion},
+            </if>
+            <if test="approvalIdentity != null">
+                #{approvalIdentity},
             </if>
         </trim>
     </insert>

@@ -34,5 +34,9 @@ public class Supplier {
   private String bankaddress;
   private String cashAccount;
   private String cashAccountName;
+  private int recorder;
+  private SysUser sysUser;
+
+  private SupplierTrademark supplierTrademark;
 
 }

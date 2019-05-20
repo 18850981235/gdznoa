@@ -8,11 +8,8 @@
         <result column="createtime" property="createtime" jdbcType="TIMESTAMP"/>
         <result column="projectid" property="projectid" jdbcType="INTEGER"/>
         <result column="content" property="content" jdbcType="VARCHAR"/>
-        <result column="offer_tpye" property="offerTpye" jdbcType="VARCHAR"/>
+        <result column="phone" property="phone" jdbcType="VARCHAR"/>
         <result column="purpose" property="purpose" jdbcType="VARCHAR"/>
-        <result column="consignee" property="consignee" jdbcType="VARCHAR"/>
-        <result column="consignee_address" property="consigneeAddress" jdbcType="VARCHAR"/>
-        <result column="consignee_phone" property="consigneePhone" jdbcType="VARCHAR"/>
         <result column="accessory" property="accessory" jdbcType="VARCHAR"/>
         <result column="processid" property="processid" jdbcType="INTEGER"/>
         <result column="process_userid" property="processUserid" jdbcType="INTEGER"/>
@@ -52,20 +49,11 @@
             <if test="content != null">
                 content,
             </if>
-            <if test="offerTpye != null">
-                offer_tpye,
+            <if test="phone != null">
+                phone,
             </if>
             <if test="purpose != null">
                 purpose,
-            </if>
-            <if test="consignee != null">
-                consignee,
-            </if>
-            <if test="consigneeAddress != null">
-                consignee_address,
-            </if>
-            <if test="consigneePhone != null">
-                consignee_phone,
             </if>
             <if test="accessory != null">
                 accessory,
@@ -96,20 +84,11 @@
             <if test="content != null">
                 #{content},
             </if>
-            <if test="offerTpye != null">
-                #{offerTpye},
+            <if test="phone != null">
+                #{phone},
             </if>
             <if test="purpose != null">
                 #{purpose},
-            </if>
-            <if test="consignee != null">
-                #{consignee},
-            </if>
-            <if test="consigneeAddress != null">
-                #{consigneeAddress},
-            </if>
-            <if test="consigneePhone != null">
-                #{consigneePhone},
             </if>
             <if test="accessory != null">
                 #{accessory},
@@ -144,20 +123,11 @@
             <if test="content != null">
                 content = #{content},
             </if>
-            <if test="offerTpye != null">
-                offer_tpye = #{offerTpye},
+            <if test="phone != null">
+                phone = #{phone},
             </if>
             <if test="purpose != null">
                 purpose = #{purpose},
-            </if>
-            <if test="consignee != null">
-                consignee = #{consignee},
-            </if>
-            <if test="consigneeAddress != null">
-                consignee_address = #{consigneeAddress},
-            </if>
-            <if test="consigneePhone != null">
-                consignee_phone = #{consigneePhone},
             </if>
             <if test="accessory != null">
                 accessory = #{accessory},
@@ -182,22 +152,24 @@
     </select>
 
     <select id="getList" resultMap="BaseResultMap">
-        SELECT * from mc_materials
+        SELECT *,`bd_project`.`abbreviation` AS projectName
+        FROM mc_materials,`bd_project`
         <trim prefix="where" prefixOverrides="and">
+            `projectid`=`bd_project`.`id`
             <if test="userid != 0">
-                and userid=#{userid}
+                and mc_materials.userid=#{userid}
             </if>
             <if test="deptid != 0">
-                and deptid=#{deptid}
-            </if>
-            <if test="offerTpye != null">
-                and offer_tpye=#{offerTpye}
+                and mc_materials.deptid=#{deptid}
             </if>
             <if test="start != null">
-                and `createtime` &gt;= #{start}
+                and mc_materials.`createtime` &gt;= #{start}
             </if>
             <if test="end != null">
-                and `createtime` &lt;= #{end}
+                and mc_materials.`createtime` &lt;= #{end}
+            </if>
+            <if test="projectName != null">
+                and `bd_project`.`name` like CONCAT('%',#{projectName},'%')
             </if>
         </trim>
         <if test="pageSize!=0">

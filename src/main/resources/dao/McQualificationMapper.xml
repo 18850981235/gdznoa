@@ -231,6 +231,12 @@
             </if>
         </trim>
     </select>
+    <select id="queryall" resultMap="BaseResultMap">
+          select `mc_qualification_certificate`.*,`sys_dept`.name as  deptName
+        from `mc_qualification_certificate`,`sys_dept`
+        where    `sys_dept`.`id` = `mc_qualification_certificate`.`deptid`
+
+    </select>
 
 
 </mapper>

@@ -6,6 +6,7 @@ import com.beans.SysApprovalProcess;
 import com.dao.mc.McDatumCostMapper;
 import com.dao.sys.ApprovalDetailedMapper;
 import com.dao.sys.ApprovalProcessMapper;
+import com.dao.sys.UserMapper;
 import com.util.FileUtils;
 import com.util.Page;
 import org.springframework.stereotype.Service;
@@ -32,6 +33,8 @@ public class McDatumCostServiceImpl implements McDatumCostService {
     private ApprovalDetailedMapper approvalDetailedMapper;
     @Resource
     private McDatumCostMapper mcDatumCostMapper;
+    @Resource
+    private UserMapper userMapper;
 
 
     @Override
@@ -39,30 +42,39 @@ public class McDatumCostServiceImpl implements McDatumCostService {
         detailed.setApprovalName("商务资料费申请");
         try {
             approvalDetailedMapper.add(detailed);
-            McDatumCost fb_update = new McDatumCost();
-            if (detailed.getState().equals("通过")) {
-                String state = "进行中";
-                int processUserid = 0;
-                McDatumCost fb=  mcDatumCostMapper.getListById(detailed.getApprovalId());
-                String users = fb.getProcess().getUsersid();
-                String[] userArr = users.split(",");
-                for (int i = 0; i < userArr.length; i++) {
-                    if (userArr[i].equals(String.valueOf(fb.getProcessUserid()))) {
-                        if (i != userArr.length - 1) {
-                            processUserid = Integer.parseInt(userArr[i + 1]);
-                        } else {
-                            state = "已结束";
-                        }
-                    }
+            McDatumCost update = new McDatumCost();
+            int processUserid = 0;
+            McDatumCost pd = mcDatumCostMapper.getListById(detailed.getApprovalId());
+            String state = "审批中";
+            String users = pd.getProcess().getUsersid();
+            String[] userArr = users.split(",");
+            if (detailed.getState().equals("同意")) {
+                pd.setProcessNode(pd.getProcessNode()+1);
+                if(userArr.length<pd.getProcessNode()){
+                    state="审批结束";
+                    pd.setProcessNode(0);
                 }
-                fb_update.setProcessUserid(processUserid);
-                fb_update.setProcessState(state);
-                fb_update.setId(detailed.getApprovalId());
             } else {
-                fb_update.setProcessState(detailed.getState());
-                fb_update.setId(detailed.getApprovalId());
+                pd.setProcessNode(pd.getProcessNode()-1);
             }
-            return mcDatumCostMapper.updateById(fb_update);
+            if(pd.getProcessNode()==1){
+                processUserid =Integer.parseInt(userArr[0]);
+            }
+            if(pd.getProcessNode()==2){
+                processUserid = userMapper.DeptroleUser(pd.getDeptid()).get(0).getId();
+            }
+            if(pd.getProcessNode()==3){
+                processUserid=pd.getUserid();
+            }
+            if(pd.getProcessNode()==4){
+                processUserid =Integer.parseInt(userArr[3]);
+            }
+
+            update.setProcessNode(pd.getProcessNode());
+            update.setProcessUserid(processUserid);
+            update.setId(detailed.getApprovalId());
+            update.setProcessState(state);
+            return mcDatumCostMapper.updateById(update);
         } catch (Exception e) {
             e.printStackTrace();
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
@@ -83,7 +95,7 @@ public class McDatumCostServiceImpl implements McDatumCostService {
             String[] arr = process.getUsersid().split(",");
             mcDatumCost.setProcessid(6);
             mcDatumCost.setProcessUserid(Integer.parseInt(arr[0]));
-            mcDatumCost.setProcessState("进行中");
+            mcDatumCost.setProcessState("未审批");
             num = mcDatumCostMapper.add(mcDatumCost);
         } catch (Exception e) {
             e.printStackTrace();

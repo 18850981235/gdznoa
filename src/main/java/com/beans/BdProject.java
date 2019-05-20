@@ -1,7 +1,10 @@
 package com.beans;
 
 
+import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -27,7 +30,9 @@ public class BdProject {
   private BigDecimal budget;
 
   private String biddingType;
-
+  @JsonFormat(pattern = "yyyy-MM-dd")
+  @JSONField(format = "yyyy-MM-dd")
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
   private Date biddate;
 
   private int clientid;
@@ -41,20 +46,24 @@ public class BdProject {
   private int areaManager;
 
   private String content;
-
+  @JsonFormat(pattern = "yyyy-MM-dd")
+  @JSONField(format = "yyyy-MM-dd")
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
   private Date createtime;
 
   private String accessory;
 //申请人
   private int userid;
 
-
+  private int processNode;
 
   private int processid;
 
   private int processUserid;
 
   private String processState;
+
+
 
 
   private SysDept dept;

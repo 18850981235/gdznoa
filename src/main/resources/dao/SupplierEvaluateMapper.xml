@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.sup.SupplierEvaluateMapper">
+    <resultMap id="BaseResultMap" type="com.beans.SupplierEvaluate" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="user_id" property="userId" jdbcType="INTEGER" />
+        <result column="ecaluate" property="ecaluate" jdbcType="VARCHAR" />
+        <result column="time" property="time" jdbcType="VARCHAR" />
+        <result column="supplier_id" property="supplierId" jdbcType="INTEGER" />
+
+        <association property="sysUser" javaType="com.beans.SysUser" column="user_id"
+                     select="com.dao.sys.UserMapper.getByID">
+        </association>
+
+        <association property="supplier" javaType="com.beans.Supplier" column="supplier_id"
+                     select="com.dao.sup.SupplierMapper.querybyid">
+        </association>
+    </resultMap>
+
+    <insert id="addSupplierevaluate" >
+        insert into `supplier_evaluate`
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="userId!= 0" >
+                user_id,
+            </if>
+            <if test="ecaluate != null" >
+                ecaluate,
+            </if>
+            <if test="time != null" >
+                time,
+            </if>
+            <if test="name != null" >
+                `name`,
+            </if>
+            <if test="supplierId != 0" >
+                supplier_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="userId != 0" >
+                #{user_id},
+            </if>
+            <if test="ecaluate != null" >
+                #{ecaluate},
+            </if>
+            <if test="time!= null" >
+                #{time},
+            </if>
+            <if test="supplierId != 0" >
+                #{supplier_id},
+            </if>
+        </trim>
+    </insert>
+
+    <delete id="deleteValuate">
+        delete
+        from `supplier_evaluate`
+        where id = #{id}
+    </delete>
+
+    <update id="updateValuate">
+            update `supplier_evaluate`
+            <set>
+                <if test="userId != 0">
+                    user_id = #{userId},
+                </if>
+                <if test="ecaluate != null">
+                    ecaluate = #{ecaluate},
+                </if>
+                <if test="time != null">
+                    `time` = #{time},
+                </if>
+                <if test="supplierId != 0">
+                   `supplier_id`= #{supplierId},
+                </if>
+            </set>
+            where id=#{id}
+
+    </update>
+
+    <select id="queryValuatebyid" resultMap="BaseResultMap">
+        SELECT `supplier_evaluate`.* FROM `supplier_evaluate`
+         where `supplier_evaluate`.`id` = #{id}
+    </select>
+
+
+    <select id="queryValuate" resultMap="BaseResultMap">
+        select `supplier_evaluate`.*
+        from `supplier_evaluate`
+        <trim prefix="where" prefixOverrides="and">
+            <if test="userId != 0">
+                and `supplier_evaluate`.`id`= #{userId}
+            </if>
+            <if test="supplierId != null">
+                and `supplier_evaluate`.`supplier_id`= #{supplierId}
+            </if>
+        </trim>
+        <if test="pageSize!=0">
+            LIMIT #{pageIndex},#{pageSize}
+        </if>
+    </select>
+    <select id="querycount" resultType="java.lang.Integer">
+        SELECT count(*)
+        from `supplier_evaluate`,`supplier`
+        <trim prefix="where" prefixOverrides="and">
+            <if test="userId != 0">
+                and `supplier_evaluate`.`id`= #{userId}
+            </if>
+            <if test="supplierId != null">
+                and `supplier_evaluate`.`supplier_id`= #{supplierId}
+            </if>
+        </trim>
+    </select>
+
+</mapper>

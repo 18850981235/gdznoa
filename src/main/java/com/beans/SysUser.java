@@ -21,10 +21,8 @@ public class SysUser implements Serializable {
   private int sex;
   private String phone;
   private String email;
-  private int companyid;
   private int deptid;
   private int roleid;
-  private String company;
   private String dept;
   private String role;
   @JsonFormat(pattern = "yyyy-MM-dd")

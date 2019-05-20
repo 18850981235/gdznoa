@@ -129,4 +129,5 @@ public class McQualificationServiceImpl implements McQualificationService {
         return mcQualificationMapper.delete(id);
     }
 
+
 }

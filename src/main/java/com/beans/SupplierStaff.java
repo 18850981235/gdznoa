@@ -21,5 +21,8 @@ public class SupplierStaff {
   private String qq;
   private String wechat;
   private String jobContent;
+  private String supName;
+
+  private SupplierTrademark supplierTrademark;
 
 }

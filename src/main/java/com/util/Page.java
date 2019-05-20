@@ -1,10 +1,8 @@
 package com.util;
 
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 @Component("page")
-//@Scope("prototype")
 public class Page {
 	//当前页码-来自于用户输入
 	private int currentPageNo = 1;

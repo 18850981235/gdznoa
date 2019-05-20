@@ -14,17 +14,31 @@ public interface McPersonnelDispatchedMapper {
      int  add(McPersonnelDispatched personnelDispatched);
      int  updateById(McPersonnelDispatched personnelDispatched);
      McPersonnelDispatched getListById(@Param("id")int id);
-     List<McPersonnelDispatched>  getList(@Param("name") String name,
-                                          @Param("deptid") int deptid,
-                                          @Param("userid") int userid,
-                                          @Param("start") Date start,
-                                          @Param("end") Date end,
-                                          @Param("pageIndex")int pageIndex,
-                                          @Param("pageSize")int pageSize);
-     int getCount(@Param("name") String name,
-                  @Param("deptid") int deptid,
-                  @Param("userid") int userid,
-                  @Param("start") Date start,
-                  @Param("end") Date end);
+     List<McPersonnelDispatched>  getListProject(@Param("projectName") String projectName,
+                                                 @Param("personnelCondition") String personnelCondition,
+                                                 @Param("deptid") int deptid,
+                                                 @Param("userid") int userid,
+                                                 @Param("start") Date start,
+                                                 @Param("end") Date end,
+                                                 @Param("pageIndex")int pageIndex,
+                                                 @Param("pageSize")int pageSize);
+     int getCountProject(@Param("projectName") String projectName,
+                         @Param("personnelCondition") String personnelCondition,
+                         @Param("deptid") int deptid,
+                         @Param("userid") int userid,
+                         @Param("start") Date start,
+                         @Param("end") Date end);
+    List<McPersonnelDispatched>  getList(@Param("personnelCondition") String personnelCondition,
+                                         @Param("deptid") int deptid,
+                                         @Param("userid") int userid,
+                                         @Param("start") Date start,
+                                         @Param("end") Date end,
+                                         @Param("pageIndex")int pageIndex,
+                                         @Param("pageSize")int pageSize);
+    int getCount(@Param("personnelCondition") String personnelCondition,
+                 @Param("deptid") int deptid,
+                 @Param("userid") int userid,
+                 @Param("start") Date start,
+                 @Param("end") Date end);
      int  deleteById(@Param("id") int id);
 }

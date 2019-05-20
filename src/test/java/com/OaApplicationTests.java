@@ -23,7 +23,6 @@ public class OaApplicationTests {
     @Resource(name = "bdProjectService")
     private BdProjectService bdProjectService;
 
-
     @Test
     public void contextLoads() {
         int[] arr = new int[42];
@@ -38,7 +37,7 @@ public class OaApplicationTests {
         SysApprovalDetailed a=new SysApprovalDetailed();
         a.setApprovalName("项目立项");
         a.setApprovalId(1);
-        a.setApprovalUser(32);
+        a.setApprovalUser(17);
         a.setState("通过");
         a.setApprovalDate(new Date());
         a.setOpinion("通过");
@@ -54,5 +53,4 @@ public class OaApplicationTests {
         a.setOpinion("通过");
         mcStampService.addProjectApproval(a);
     }
-
 }

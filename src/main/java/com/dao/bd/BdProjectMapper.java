@@ -19,10 +19,11 @@ public interface BdProjectMapper {
     int add(BdProject project);
     //按条件查询全部信息
     List<BdProject> getList(@Param("userid") int userid,
-                            @Param("name") String name,
-                            @Param("type") String type,
-                            @Param("code") String code,
-                            @Param("status") String status,
+                            @Param("projectName") String projectName,
+                            @Param("deptid") int deptid,
+                            @Param("stage") String stage,
+                            @Param("areaManager") int areaManager,
+                            @Param("principalName") String principalName,
                             @Param("start") Date start,
                             @Param("end") Date end,
                             @Param("pageIndex") int pageIndex,
@@ -30,10 +31,11 @@ public interface BdProjectMapper {
 
     //按条件统计数量
     int getCount(@Param("userid") int userid,
-                 @Param("name") String name,
-                 @Param("type") String type,
-                 @Param("code") String code,
-                 @Param("status") String status,
+                 @Param("projectName") String projectName,
+                 @Param("deptid") int deptid,
+                 @Param("stage") String stage,
+                 @Param("areaManager") int areaManager,
+                 @Param("principalName") String principalName,
                  @Param("start") Date start,
                  @Param("end") Date end);
 
