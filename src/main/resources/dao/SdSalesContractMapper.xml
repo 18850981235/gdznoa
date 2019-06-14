@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.sd.SdSalesContractMapper">
+    <resultMap id="BaseResultMap" type="com.beans.SdSalesContract">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="code" property="code" jdbcType="VARCHAR"/>
+        <result column="projectid" property="projectid" jdbcType="INTEGER"/>
+        <result column="clientid" property="clientid" jdbcType="INTEGER"/>
+        <result column="deptid" property="deptid" jdbcType="INTEGER"/>
+        <result column="principal" property="principal" jdbcType="INTEGER"/>
+        <result column="branchuser" property="branchuser" jdbcType="INTEGER"/>
+        <result column="area_manager" property="areaManager" jdbcType="INTEGER"/>
+        <result column="invoice_type" property="invoiceType" jdbcType="VARCHAR"/>
+        <result column="contract_amount" property="contractAmount" jdbcType="DOUBLE"/>
+        <result column="contract_list" property="contractList" jdbcType="VARCHAR"/>
+        <result column="add_amount" property="addAmount" jdbcType="DOUBLE"/>
+        <result column="add_list" property="addList" jdbcType="VARCHAR"/>
+        <result column="reduction_amount" property="reductionAmount" jdbcType="DOUBLE"/>
+        <result column="reduction_list" property="reductionList" jdbcType="VARCHAR"/>
+        <result column="management_rate" property="managementRate" jdbcType="DOUBLE"/>
+        <result column="bidiing_time" property="bidiingTime" jdbcType="TIMESTAMP"/>
+        <result column="accessory" property="accessory" jdbcType="VARCHAR"/>
+        <result column="processid" property="processid" jdbcType="INTEGER"/>
+        <result column="process_userid" property="processUserid" jdbcType="INTEGER"/>
+        <result column="process_state" property="processState" jdbcType="VARCHAR"/>
+      <!--  <association property="dept" javaType="com.beans.SysDept" column="deptid"
+                     select="com.dao.sys.DeptMapper.getListById">
+        </association>
+-->
+      <!--  <association property="project" javaType="com.beans.BdProject" column="projectid"
+                     select="com.dao.bd.BdProjectMapper.getListById">
+        </association>-->
+        <association property="project" javaType="com.beans.BdProject" column="projectid"
+                     select="com.dao.bd.BdProjectMapper.getListById">
+
+        </association>
+        <association property="dept" javaType="com.beans.SysDept" column="deptid"
+                     select="com.dao.sys.DeptMapper.getListById">
+        </association>
+    </resultMap>
+    <insert id="addSalesContract">
+        insert into sd_sales_contract
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="code != null">
+                code,
+            </if>
+            <if test="projectid != 0">
+                projectid,
+            </if>
+            <if test="clientid != 0">
+                clientid,
+            </if>
+            <if test="deptid != 0">
+                deptid,
+            </if>
+            <if test="principal != 0">
+                principal,
+            </if>
+            <if test="branchuser != 0">
+                `branchuser`,
+            </if>
+            <if test="areaManager != 0">
+                `area_manager`,
+            </if>
+            <if test="invoiceType != null">
+                invoiceType,
+            </if>
+            <if test="contractAmount != null">
+                contractAmount,
+            </if>
+            <if test="contractList != null">
+                contractList,
+            </if>
+            <if test="addAmount != null">
+                addAmount,
+            </if>
+            <if test="addList != null">
+                addList,
+            </if>
+            <if test="reductionAmount != null">
+                reductionAmount,
+            </if>
+            <if test="reductionList != null">
+                reductionList,
+            </if>
+
+            <if test="managementRate != null">
+                managementRate,
+            </if>
+            <if test="bidiingTime != null">
+                bidiingTime,
+            </if>
+            <if test="accessory != null">
+                accessory,
+            </if>
+
+            <if test="processid != 0">
+                send_address,
+            </if>
+            <if test="processUserid != 0">
+                processUserid,
+            </if>
+            <if test="processState != null">
+                processState,
+            </if>
+
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+
+            <if test="code != 0">
+                #{code},
+            </if>
+            <if test="projectid != 0">
+                #{projectid},
+            </if>
+            <if test="clientid != 0">
+                #{clientid},
+            </if>
+            <if test="deptid != 0">
+                #{deptid},
+            </if>
+            <if test="principal != 0">
+                #{principal},
+            </if>
+            <if test="branchuser != 0">
+                #{branchuser},
+            </if>
+            <if test="areaManager != 0">
+                #{areaManager},
+            </if>
+            <if test="invoiceType != null">
+                #{invoice_type},
+            </if>
+            <if test="contractAmount != null">
+                #{contract_amount},
+            </if>
+            <if test="contractList != null">
+                #{contract_list},
+            </if>
+            <if test="addAmount != 0">
+                #{add_amount},
+            </if>
+            <if test="addList != null">
+                #{add_list},
+            </if>
+            <if test="reductionAmount != null">
+                #{reduction_amount},
+            </if>
+            <if test="reductionList != null">
+                #{reduction_list},
+            </if>
+            <if test="managementRate != null">
+                #{management_rate},
+            </if>
+            <if test="bidiingTime != null">
+                #{bidiing_time},
+            </if>
+            <if test="accessory != null">
+                #{accessory},
+            </if>
+            <if test="processid != 0">
+                #{processid},
+            </if>
+            <if test="processState != null">
+                #{process_userid},
+            </if>
+            <if test="returnExpressageWaybill != null">
+                #{process_state},
+            </if>
+
+        </trim>
+    </insert>
+
+
+    <update id="updateSalesContract">
+        update sd_sales_contract
+
+        <set>
+            <if test="code != 0">
+                code = #{code},
+            </if>
+            <if test="projectid != 0">
+                projectid = #{projectid},
+            </if>
+            <if test="userid != 0">
+                userid = #{userid},
+            </if>
+            <if test="clientid != null">
+                clientid = #{clientid},
+            </if>
+            <if test="deptid != 0">
+                deptid = #{deptid},
+            </if>
+            <if test="principal != null">
+                `principal` = #{principal},
+            </if>
+            <if test="branchuser != null">
+                `branchuser` = #{branchuser},
+            </if>
+            <if test="areaManager != null">
+                area_manager = #{areaManager},
+            </if>
+            <if test="contractAmount != null">
+                contract_amount = #{contractAmount},
+            </if>
+            <if test="addAmount != null">
+                contract_list = #{addAmount},
+            </if>
+            <if test="processid != 0">
+                add_amount = #{processid},
+            </if>
+            <if test="addList != null">
+                add_list = #{addList},
+            </if>
+            <if test="reductionAmount != null">
+                reduction_amount = #{reductionAmount},
+            </if>
+            <if test="reductionList != null">
+                reduction_list = #{reductionList},
+            </if>
+            <if test="managementRate != null">
+                management_rate = #{managementRate},
+            </if>
+            <if test="bidiingTime != null">
+                bidiing_time = #{bidiingTime},
+            </if>
+            <if test="accessory != null">
+                accessory = #{accessory},
+            </if>
+            <if test="processid != 0">
+                processid = #{processid},
+            </if>
+            <if test="processUserid != null">
+                process_userid = #{processUserid},
+            </if>
+            <if test="processState != null">
+                process_state = #{processState},
+            </if>
+
+        </set>
+        where id=#{id}
+    </update>
+    <select id="querybyid" resultMap="BaseResultMap">
+        select *
+        from sd_sales_contract
+        where id = #{id}
+    </select>
+
+
+    <select id="querybysome" resultMap="BaseResultMap">
+        select *
+        from sd_sales_contract
+        <trim prefix="where" prefixOverrides="and">
+            <if test="projectId != 0">
+                and projectid=#{projectId}
+            </if>
+            <if test="clientId != 0">
+                and clientid=#{clientId}
+            </if>
+            <if test="deptId != 0">
+                and deptid=#{deptId}
+            </if>
+            <if test="areauser != 0">
+                and areauser=#{areauser}
+            </if>
+            <if test="vocational != 0">
+                and vocational=#{vocational}
+            </if>
+            <if test="didtimestart != null">
+                and `bidiing_time` &gt;= #{didtimestart}
+            </if>
+            <if test="didtimeend != null">
+                and `bidiing_time` &lt;= #{didtimeend}
+            </if>
+        </trim>
+        <if test="pageSize!=0">
+            LIMIT #{pageIndex},#{pageSize}
+        </if>
+    </select>
+    <select id="querycount" resultType="int">
+        select count(1)
+        from sd_sales_contract
+        <trim prefix="where" prefixOverrides="and">
+            <if test="projectId != 0">
+                and projectid=#{projectId}
+            </if>
+            <if test="clientId != 0">
+                and clientid=#{clientId}
+            </if>
+            <if test="deptId != 0">
+                and deptid=#{deptId}
+            </if>
+            <if test="areauser != 0">
+                and areauser=#{areauser}
+            </if>
+            <if test="vocational != 0">
+                and vocational=#{vocational}
+            </if>
+            <if test="didtimestart != null">
+                and `bidiing_time` &gt;= #{didtimestart}
+            </if>
+            <if test="didtimeend != null">
+                and `bidiing_time` &lt;= #{didtimeend}
+            </if>
+        </trim>
+    </select>
+
+
+
+
+</mapper>

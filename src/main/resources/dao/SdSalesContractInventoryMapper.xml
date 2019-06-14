@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.sd.SdSalesContractInventoryMapper">
+    <resultMap id="BaseResultMap" type="com.beans.SdSalesContractInventory">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="branch_name" property="branchName" jdbcType="VARCHAR"/>
+        <result column="project_id" property="projectId" jdbcType="INTEGER"/>
+        <result column="sales_contract" property="salesContract" jdbcType="INTEGER"/>
+        <result column="system_id" property="systemId" jdbcType="INTEGER"/>
+        <result column="subitem_id" property="subitemId" jdbcType="INTEGER"/>
+
+        <association property="system" javaType="com.beans.system" column="system_id"
+                     select="com.dao.system.systemMapper.querybyid">
+        </association>
+        <association property="subitem" javaType="com.beans.system" column="subitem_id"
+                     select="com.dao.system.systemMapper.querybyid">
+        </association>
+
+        <association property="project" javaType="com.beans.BdProject" column="project_id"
+                     select="com.dao.bd.BdProjectMapper.getListById">
+        </association>
+
+    </resultMap>
+    <insert id="addSalesContractInventory">
+        insert into sd_sales_contract_inventory
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="branchName != null">
+                branch_name,
+            </if>
+            <if test="salesContract != 0">
+                sales_contract,
+            </if>
+            <if test="projectId != 0">
+                project_id,
+            </if>
+            <if test="systemId != 0">
+                system_id,
+            </if>
+            <if test="subitemId != 0">
+                subitem_id,
+            </if>
+            <if test="code != null">
+                code,
+            </if>
+            <if test="name != null">
+                `name`,
+            </if>
+            <if test="model != null">
+                `model`,
+            </if>
+            <if test="parameter != null">
+                parameter,
+            </if>
+            <if test="trademarkid != 0">
+                trademarkid,
+            </if>
+            <if test="unit != null">
+                unit,
+            </if>
+            <if test="num != 0">
+                num,
+            </if>
+            <if test="unitCost != null">
+                unit_cost,
+            </if>
+            <if test="total != null">
+                total,
+            </if>
+            <if test="subtotal != null">
+                subtotal,
+            </if>
+            <if test="remarks != null">
+                remarks,
+            </if>
+
+
+
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+
+            <if test="branchName != null">
+                #{branch_name},
+            </if>
+            <if test="salesContract != 0">
+                #{sales_contract},
+            </if>
+            <if test="projectId != 0">
+                #{project_id},
+            </if>
+            <if test="systemId != 0">
+                #{system_id},
+            </if>
+            <if test="subitemId != 0">
+                #{subitem_id},
+            </if>
+            <if test="code != null">
+                #{code},
+            </if>
+            <if test="name != null">
+                #{name},
+            </if>
+            <if test="model != null">
+                #{model},
+            </if>
+            <if test="parameter != null">
+                #{parameter},
+            </if>
+            <if test="trademarkid != 0">
+                #{trademarkid},
+            </if>
+            <if test="unit != null">
+                #{unit},
+            </if>
+            <if test="num != 0">
+                #{num},
+            </if>
+            <if test="unitCost != null">
+                #{unitCost},
+            </if>
+            <if test="total != null">
+                #{total},
+            </if>
+            <if test="subtotal != null">
+                #{subtotal},
+            </if>
+            <if test="remarks != null">
+                #{remarks},
+            </if>
+
+        </trim>
+    </insert>
+
+
+    <update id="updateInventory">
+        update sd_sales_contract_inventory
+
+        <set>
+            <if test="branchName != 0">
+                branch_name = #{branchName},
+            </if>
+            <if test="salesContract != 0">
+                sales_contract = #{salesContract},
+            </if>
+            <if test="projectId != 0">
+                project_id = #{projectId},
+            </if>
+            <if test="systemId != 0">
+                system_id = #{systemId},
+            </if>
+            <if test="subitemId != null">
+                subitem_id = #{subitemId},
+            </if>
+            <if test="code != 0">
+                code = #{code},
+            </if>
+            <if test="name != null">
+                `name` = #{name},
+            </if>
+            <if test="model != null">
+                `model` = #{model},
+            </if>
+            <if test="parameter != null">
+                parameter = #{parameter},
+            </if>
+            <if test="trademarkid != null">
+                trademarkid = #{trademarkid},
+            </if>
+            <if test="unit != null">
+                unit = #{unit},
+            </if>
+            <if test="num != 0">
+                num = #{num},
+            </if>
+            <if test="unitCost != null">
+                unit_cost = #{unitCost},
+            </if>
+            <if test="total != null">
+                total = #{total},
+            </if>
+            <if test="subtotal != null">
+                subtotal = #{subtotal},
+           </if>
+            <if test="remarks != null">
+                remarks = #{remarks},
+            </if>
+
+
+        </set>
+        where id=#{id}
+    </update>
+    <delete id="deletecontractInven">
+        delete
+        from sd_sales_contract_inventory
+        where id = #{id}
+    </delete>
+
+    <select id="querybyProjectid" resultMap="BaseResultMap">
+        select *
+        from sd_sales_contract_inventory
+        where project_id = #{projectId}
+        <if test="pageSize!=0">
+            LIMIT #{pageIndex},#{pageSize}
+        </if>
+    </select>
+    <select id="querycountProjectid" resultType="int">
+        select count(1)
+        from sd_sales_contract_inventory
+        where project_id = #{projectId}
+
+    </select>
+
+    <select id="queryContractInventorbyid" resultMap="BaseResultMap">
+        select *
+        from sd_sales_contract_inventory
+        where id = #{id}
+    </select>
+
+    <select id="queryry" resultMap="BaseResultMap">
+          select *
+          from sd_sales_contract_inventory;
+    </select>
+
+    <select id="querybysales_contract" resultMap="BaseResultMap">
+        select *
+        from sd_sales_contract_inventory
+        where branch_name = #{branch_name}
+    </select>
+
+
+
+    <select id="query" resultMap="BaseResultMap">
+        select *
+        from sd_sales_contract_inventory
+        <trim prefix="where" prefixOverrides="and">
+            <if test="projectId != 0">
+                and Project_id=#{projectId}
+            </if>
+            <if test="branchName != null">
+                and `branch_name` like CONCAT('%',#{branchName},'%')
+           </if>
+            <if test="systemId != 0">
+                and system_id=#{systemId}
+            </if>
+            <if test="subitemId != 0">
+                and subitem_id=#{subitemId}
+            </if>
+
+        </trim>
+        <if test="pageSize!=0">
+            LIMIT #{pageIndex},#{pageSize}
+        </if>
+    </select>
+    <select id="querycount" resultType="int">
+        select count(1)
+        from sd_sales_contract_inventory
+        <trim prefix="where" prefixOverrides="and">
+            <if test="projectId != 0">
+                and Project_id=#{projectId}
+            </if>
+            <if test="branchName != null">
+                and `branch_name` like CONCAT('%',#{branchName},'%')
+            </if>
+            <if test="systemId != 0">
+                and system_id=#{systemId}
+            </if>
+            <if test="subitemId != 0">
+                and subitem_id=#{subitemId}
+            </if>
+
+        </trim>
+    </select>
+
+
+
+</mapper>

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.sd.SdSalesInventoryMapper">
+    <resultMap id="BaseResultMap" type="com.beans.SdSalesInventory">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="code" property="code" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="model" property="model" jdbcType="VARCHAR"/>
+        <result column="parameter" property="parameter" jdbcType="VARCHAR"/>
+        <result column="trademarkid" property="trademarkid" jdbcType="INTEGER"/>
+        <result column="unit" property="unit" jdbcType="VARCHAR"/>
+        <result column="num" property="num" jdbcType="INTEGER"/>
+        <result column="unit_cost" property="unitCost" jdbcType="DOUBLE"/>
+        <result column="subtotal" property="subtotal" jdbcType="DOUBLE"/>
+        <result column="remarks" property="remarks" jdbcType="VARCHAR"/>
+        <association property="supplierTrademark" javaType="com.beans.SupplierTrademark" column="trademarkid"
+                     select="com.dao.sup.SupplierTrademarkMapper.querybyid">
+        </association>
+
+
+
+
+    </resultMap>
+    <insert id="addInventory">
+        insert into sd_sales_inventory
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+
+            <if test="code != null">
+                code,
+            </if>
+            <if test="name != null">
+                `name`,
+            </if>
+            <if test="model != null">
+                `model`,
+            </if>
+            <if test="parameter != null">
+                parameter,
+            </if>
+            <if test="trademarkid != 0">
+                trademarkid,
+            </if>
+            <if test="unit != null">
+                unit,
+            </if>
+            <if test="num != 0">
+                num,
+            </if>
+            <if test="unitCost != null">
+                unit_cost,
+            </if>
+
+            <if test="subtotal != null">
+                subtotal,
+            </if>
+            <if test="remarks != null">
+                remarks,
+            </if>
+
+
+
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+
+
+            <if test="code != null">
+                #{code},
+            </if>
+            <if test="name != null">
+                #{name},
+            </if>
+            <if test="model != null">
+                #{model},
+            </if>
+            <if test="parameter != null">
+                #{parameter},
+            </if>
+            <if test="trademarkid != 0">
+                #{trademarkid},
+            </if>
+            <if test="unit != null">
+                #{unit},
+            </if>
+            <if test="num != 0">
+                #{num},
+            </if>
+            <if test="unitCost != null">
+                #{unitCost},
+            </if>
+
+            <if test="subtotal != null">
+                #{subtotal},
+            </if>
+            <if test="remarks != null">
+                #{remarks},
+            </if>
+
+        </trim>
+    </insert>
+    <delete id="deleteInventory">
+        delete
+        from sd_sales_inventory
+        where contractid=#{id};
+    </delete>
+
+
+    <select id="querySdSalesInventory" resultMap="BaseResultMap">
+        select *
+        from sd_sales_inventory
+        where contractid = #{contractid}
+    </select>
+    <select id="getInstancebyid" resultMap="BaseResultMap">
+         select *
+        from sd_sales_inventory
+        where id = #{id}
+    </select>
+
+
+</mapper>
