@@ -20,7 +20,12 @@
         <result column="deptName" property="deptName" jdbcType="VARCHAR" />
         <result column="process_userid" property="processUserid" jdbcType="INTEGER" />
         <result column="process_state" property="processState" jdbcType="VARCHAR" />
-        <collection property="user" column="userid"
+        <result column="pdf_outtime" property="pdf_Outtime" jdbcType="INTEGER" />
+
+        <collection property="user"  javaType="SysUser" column="userid"
+                    select="com.dao.sys.UserMapper.getByID">
+        </collection>
+        <collection property="annualUser"  javaType="SysUser" column="annual_principal"
                     select="com.dao.sys.UserMapper.getByID">
         </collection>
         <collection property="process" javaType="SysApprovalProcess" column="processid"
@@ -79,6 +84,10 @@
             <if test="processState != null" >
                 process_state,
             </if>
+            <if test="pdf_outtime != null" >
+                pdf_outtime,
+            </if>
+
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides="," >
             <if test="deptid != 0" >
@@ -128,6 +137,9 @@
             </if>
             <if test="processState != null" >
                 #{processState},
+            </if>
+            <if test="pdf_Outtime != null" >
+                #{pdf_Outtime},,
             </if>
         </trim>
     </insert>
@@ -183,7 +195,9 @@
             <if test="processState != null">
                 process_state = #{processState},
             </if>
-
+            <if test="pdf_Outtime != null">
+                pdf_outtime = #{pdf_Outtime},
+            </if>
         </set>
         where id=#{id}
     </update>
@@ -198,44 +212,70 @@
     </delete>
 
     <select id="querybytypename"   resultMap="BaseResultMap">
-        select `mc_qualification_certificate`.*,`sys_dept`.name as  deptName
+        select `mc_qualification_certificate`.*,`sys_dept`.`name` as  deptName
         from `mc_qualification_certificate`,`sys_dept`
         <trim prefix="where" prefixOverrides="and">
             `sys_dept`.`id` = `mc_qualification_certificate`.`deptid`
-            <if test="deptid != 0">
-                and `mc_qualification_certificate`.`deptid` =#{deptid}
-            </if>
             <if test="name != null">
                 and `mc_qualification_certificate`.`name` like CONCAT('%',#{name},'%')
             </if>
             <if test="type != null">
                 and `mc_qualification_certificate`.`type` like CONCAT('%',#{type},'%')
             </if>
+            <if test="content != null">
+                and `mc_qualification_certificate`.`content` like CONCAT('%',#{content},'%')
+            </if>
+            <if test="borrow != null">
+                and `mc_qualification_certificate`.`borrow` like CONCAT('%',#{borrow},'%')
+            </if>
+            <if test="state != null">
+                and `mc_qualification_certificate`.`state` like CONCAT('%',#{state},'%')
+            </if>
+            <if test="staretime != null">
+                and `mc_qualification_certificate`.`annual_time`>= #{staretime}
+            </if>
+            <if test="endtime != null">
+                and `mc_qualification_certificate`.`annual_time`&lt;= #{endtime}
+            </if>
         </trim>
-        <if test="pageSize!=0">
-            LIMIT #{pageIndex},#{pageSize}
-        </if>
     </select>
+
     <select id="querycount" resultType="java.lang.Integer">
         SELECT count(*)
         FROM mc_qualification_certificate
         <trim prefix="where" prefixOverrides="and">
-            <if test="deptid != 0">
-                and `deptid` =#{deptid}
-            </if>
-            <if test="name != null">
+       <if test="name != null">
                 and `name` like CONCAT('%',#{name},'%')
             </if>
             <if test="type != null">
                 and `type` like CONCAT('%',#{type},'%')
             </if>
+            <if test="content != null">
+                and `content` like CONCAT('%',#{content},'%')
+            </if>
+            <if test="borrow != null">
+                and `borrow` like CONCAT('%',#{borrow},'%')
+            </if>
+            <if test="state != null">
+                and `state` like CONCAT('%',#{state},'%')
+            </if>
+            <if test="staretime != null">
+                and `mc_qualification_certificate`.`annual_time` >= #{staretime}
+            </if>
+            <if test="endtime != null">
+                and `mc_qualification_certificate`.`annual_time` &lt;= #{endtime}
+            </if>
+
         </trim>
     </select>
     <select id="queryall" resultMap="BaseResultMap">
-          select `mc_qualification_certificate`.*,`sys_dept`.name as  deptName
-        from `mc_qualification_certificate`,`sys_dept`
-        where    `sys_dept`.`id` = `mc_qualification_certificate`.`deptid`
-
+          select `mc_qualification_certificate`.*
+        from `mc_qualification_certificate`
+        <trim prefix="where" prefixOverrides="and">
+            <if test="projectName != null">
+                and `name` like CONCAT('%',#{projectName},'%')
+            </if>
+        </trim>
     </select>
 
 

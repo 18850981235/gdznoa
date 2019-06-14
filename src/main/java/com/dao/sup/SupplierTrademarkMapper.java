@@ -24,4 +24,6 @@ public interface SupplierTrademarkMapper {
     List< SupplierTrademark> querybysome(@Param("name") String name, @Param("product") String product, @Param("enterpriseName") String enterpriseName, @Param("pageIndex") int pageIndex, @Param("pageSize") int pageSize);
 
     int querycount(@Param("name") String name, @Param("product") String product, @Param("enterpriseName") String enterpriseName);
+
+    List<SupplierTrademark> allSupplierTrademark();
 }

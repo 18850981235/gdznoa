@@ -3,13 +3,17 @@
 <mapper namespace="com.dao.sup.SupplierTrademarkMapper">
     <resultMap id="BaseResultMap" type="com.beans.SupplierTrademark" >
         <id column="id" property="id" jdbcType="INTEGER" />
-        <result column="system_name" property="systemName" jdbcType="VARCHAR" />
+        <result column="system_name" property="systemName" jdbcType="INTEGER" />
         <result column="name" property="name" jdbcType="VARCHAR" />
         <result column="product" property="product" jdbcType="VARCHAR" />
         <result column="english_name" property="englishName" jdbcType="VARCHAR" />
         <result column="enterprise_name" property="enterpriseName" jdbcType="VARCHAR" />
         <result column="origin_place" property="originPlace" jdbcType="VARCHAR" />
         <result column="url" property="url" jdbcType="VARCHAR" />
+
+        <association property="system" javaType="com.beans.system" column="system_name"
+                     select="com.dao.system.systemMapper.querybyid">
+        </association>
 
     </resultMap>
     <insert id="addSrademark" >
@@ -138,6 +142,11 @@
                         and `enterprise_name` like CONCAT('%',#{enterpriseName},'%')
                     </if>
             </trim>
+    </select>
+    <select id="allSupplierTrademark" resultMap="BaseResultMap" >
+        SELECT *
+        FROM supplier_trademark
+
     </select>
 
 </mapper>

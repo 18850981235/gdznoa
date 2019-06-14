@@ -23,15 +23,23 @@ public class McRegisterRecords {
   private String recordsType;
   private String recordsName;
   private String recordsState;
+  private  String dataConditions;
   private String caBorrow;
   private int annualPrincipal;
+  @JsonFormat(pattern = "yyyy-MM-dd")
+  @JSONField(format = "yyyy-MM-dd")
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
+  private Date annualTime;
   private int manager;
   private String accessory;
   private int processid;
   private int processUserid;
   private String processState;
   private String deptName;
+
+  private SysUser annualuser;
   private SysUser user;
+  private SysUser managerUser;
   private SysApprovalProcess process;
 
 

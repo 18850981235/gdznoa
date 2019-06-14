@@ -16,6 +16,4 @@ public class EdStaff {
   private String photo;
   private String buyState;
 
-
-
 }

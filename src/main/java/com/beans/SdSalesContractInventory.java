@@ -9,15 +9,16 @@ import lombok.Data;
 public class SdSalesContractInventory {
 
   private int id;
+  private int projectId;
+  private String branchName;
   private int salesContract;
-  private String code;
-  private String name;
-  private String model;
-  private String parameter;
-  private int trademarkid;
-  private String unit;
-  private int num;
-  private double unitCost;
+  private int systemId;
+  private int subitemId;
+
   private double total;
+
+  private system system;
+  private system subitem;
+  private BdProject Project;
 
 }

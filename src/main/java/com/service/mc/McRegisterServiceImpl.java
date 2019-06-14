@@ -117,7 +117,7 @@ public class McRegisterServiceImpl implements McRegisterService{
         return mcregistermapper.delete(id);
     }
     //添加查询注册备案
-    public Map<String, Object>  querybyrecords(int id,String Name, String Type, int  pageIndex) {
+    public Map<String, Object>  querybyrecords(int id,String Name, String Type,String startTime,String endTime, int  pageIndex) {
         Map<String, Object> map=new HashMap<>();
         Page page=new Page();
         try {
@@ -125,9 +125,9 @@ public class McRegisterServiceImpl implements McRegisterService{
                 pageIndex = 1;
             }
             page.setPageSize(10);
-            page.setTotalCount(mcregistermapper.querybycount(id,Name,Type));
+            page.setTotalCount(mcregistermapper.querybycount(id,Name,Type,startTime,endTime));
             page.setCurrentPageNo(pageIndex);
-            List<McRegisterRecords> list=mcregistermapper.querybynameatype(id,Name,Type,(page.getCurrentPageNo()-1)*page.getPageSize(),page.getPageSize());
+            List<McRegisterRecords> list=mcregistermapper.querybynameatype(id,Name,Type,startTime,endTime,(page.getCurrentPageNo()-1)*page.getPageSize(),page.getPageSize());
             map.put("page",page);
             map.put("list",list);
         } catch (Exception e) {

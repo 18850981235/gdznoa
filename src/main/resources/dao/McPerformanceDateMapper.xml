@@ -19,8 +19,12 @@
         <result column="manager_id" property="managerId" jdbcType="INTEGER"/>
         <result column="filing_time" property="filingTime" jdbcType="TIMESTAMP"/>
         <association property="project" javaType="com.beans.BdProject" column="project_id"
-                     select="com.dao.bd.BdProjectMapper.getProjectById">
+                     select="com.dao.bd.BdProjectMapper.getListById">
         </association>
+        <collection property="user" column="manager_id"
+                    select="com.dao.sys.UserMapper.getByID">
+        </collection>
+
     </resultMap>
 
     <insert id="addPerformanceDate">
@@ -181,11 +185,10 @@
 
 
     <select id="querycont" resultType="java.lang.Integer">
-        SELECT count (*) FROM `mc_performance_date`,`bd_project`
+        SELECT count(*) FROM `mc_performance_date`,`bd_project`
         <trim prefix="where" prefixOverrides="and">
-            `mc_performance_date`.`project_id`=`bd_project`.`id`
-
-            <if test="projectName != null">
+           <if test="projectName != null">
+                `mc_performance_date`.`project_id`=`bd_project`.`id`
                 and `bd_project`.`name` like CONCAT('%',#{projectName},'%')
             </if>
             <if test="bidtimeStart != null">
@@ -237,7 +240,13 @@
     </select>
     <select id="queryall" resultMap="BaseResultMap">
    SELECT * FROM `mc_performance_date`,`bd_project`
-    where `mc_performance_date`.`project_id`=`bd_project`.`id`
+
+        <trim prefix="where" prefixOverrides="and">
+            `mc_performance_date`.`project_id`=`bd_project`.`id`
+            <if test="projectName != null">
+                and `bd_project`.`name` like CONCAT('%',#{projectName},'%')
+            </if>
+        </trim>
     </select>
 
 

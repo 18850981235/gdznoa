@@ -8,6 +8,7 @@ import com.dao.sys.ApprovalDetailedMapper;
 import com.dao.sys.ApprovalProcessMapper;
 import com.dao.sys.UserMapper;
 import com.util.Page;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
@@ -167,11 +168,11 @@ public class McFileBorrowServiceImpl implements McFileBorrowService{
         return map;
     }
     @Override
-    public Map<String, Object> queryMailFile( ) {
+    public Map<String, Object> queryMailFile( @Param("projectName")String projectName) {
         Map<String, Object> map = new HashMap<>();
         try {
-           List<McQualificationCertificate>   ListQ = mcQualificationMapper.queryall();
-            List<McPerformanceDate> listP = mcPerformanceDateMapper.queryall();
+           List<McQualificationCertificate>   ListQ = mcQualificationMapper.queryall(projectName);
+            List<McPerformanceDate> listP = mcPerformanceDateMapper.queryall(projectName);
             System.err.print(listP);
             map.put("McQualificationCertificate",ListQ);
             map.put("McPerformanceDate",listP);
@@ -181,5 +182,7 @@ public class McFileBorrowServiceImpl implements McFileBorrowService{
         }
         return map;
     }
+
+
 
 }

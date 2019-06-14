@@ -17,9 +17,9 @@ public class SysApprovalDetailed {
   private int approvalId;//id号
   private int approvalUser;
   private String state;//通过不通过
-  @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-  @JSONField(format = "yyyy-MM-dd HH:mm:ss")
-  @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+  @JsonFormat(pattern = "yyyy-MM-dd ")
+  @JSONField(format = "yyyy-MM-dd ")
+  @DateTimeFormat(pattern = "yyyy-MM-dd ")
   private Date approvalDate;
   private String opinion;//审批内容
   private String approvalIdentity;

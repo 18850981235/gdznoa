@@ -86,6 +86,7 @@
             LIMIT #{pageIndex},#{pageSize}
         </if>
     </select>
+
     <select id="getCount" resultType="int">
         SELECT count(1)
         FROM tmp_table

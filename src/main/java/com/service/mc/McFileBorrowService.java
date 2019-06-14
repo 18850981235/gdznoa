@@ -1,10 +1,13 @@
 package com.service.mc;
 
+import com.beans.FileList;
 import com.beans.McFileBorrow;
 import com.beans.SysApprovalDetailed;
+import org.apache.ibatis.annotations.Param;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -19,5 +22,6 @@ public interface McFileBorrowService {
                                 Date end, int usreid, int pageIndex);
     McFileBorrow getListById(int id);
     Map<String, Object> getParticular1ById(int id);
-    Map<String,Object> queryMailFile();
+    Map<String,Object> queryMailFile(@Param("projectName")String projectName);
+
 }

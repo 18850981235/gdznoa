@@ -20,6 +20,6 @@ public interface McRegisterMapper {
     //删除备案
     int delete(@Param("id") int id);
     //根据名称和类型查询
-    int querybycount( @Param("id") int id,@Param("name") String name, @Param("type") String type);
-    List<McRegisterRecords> querybynameatype(@Param("id") int id,@Param("name") String name, @Param("type") String type, @Param("pageIndex") int pageIndex, @Param("pageSize") int pageSize);
+    int querybycount( @Param("id") int id,@Param("name") String name, @Param("type") String type,@Param("startTime") String startTime,@Param("endTime") String endTime);
+    List<McRegisterRecords> querybynameatype(@Param("id") int id,@Param("name") String name, @Param("type") String type,@Param("startTime") String startTime,@Param("endTime") String endTime, @Param("pageIndex") int pageIndex, @Param("pageSize") int pageSize);
 }

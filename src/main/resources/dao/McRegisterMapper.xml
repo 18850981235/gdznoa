@@ -10,8 +10,10 @@
         <result column="records_type" property="recordsType" jdbcType="VARCHAR" />
         <result column="records_name" property="recordsName" jdbcType="VARCHAR" />
         <result column="records_state" property="recordsState" jdbcType="VARCHAR" />
+        <result column="data_conditions" property="dataConditions" jdbcType="VARCHAR" />
         <result column="ca_borrow" property="caBorrow" jdbcType="VARCHAR" />
         <result column="annual_principal" property="annualPrincipal" jdbcType="INTEGER" />
+        <result column="annual_time" property="annualTime" jdbcType="VARCHAR" />
         <result column="manager" property="manager" jdbcType="INTEGER" />
         <result column="accessory" property="accessory" jdbcType="VARCHAR" />
         <result column="processid" property="processid" jdbcType="INTEGER" />
@@ -19,6 +21,12 @@
         <result column="process_state" property="processState" jdbcType="VARCHAR" />
         <result column="deptName" property="deptName" jdbcType="VARCHAR" />
         <collection property="user" column="principal"
+                    select="com.dao.sys.UserMapper.getByID">
+        </collection>
+        <collection property="annualuser" column="annual_principal"
+                    select="com.dao.sys.UserMapper.getByID">
+        </collection>
+        <collection property="managerUser" column="manager"
                     select="com.dao.sys.UserMapper.getByID">
         </collection>
         <collection property="process" javaType="SysApprovalProcess" column="processid"
@@ -54,6 +62,9 @@
             </if>
             <if test="annualPrincipal != 0" >
                 annual_principal,
+            </if>
+            <if test="annualTime != null" >
+                annual_time,
             </if>
             <if test="manager != 0" >
                 manager,
@@ -98,6 +109,9 @@
             </if>
             <if test="annualPrincipal != 0" >
                 #{annualPrincipal},
+            </if>
+            <if test="annualTime != 0" >
+                #{annualTime},
             </if>
             <if test="manager != 0" >
                 #{manager},
@@ -148,6 +162,9 @@
             <if test="annualPrincipal != 0">
                 annual_principal = #{annualPrincipal},
             </if>
+            <if test="annualTime != 0">
+                annual_time = #{annualTime},
+            </if>
             <if test="manager != 0">
                 manager = #{manager},
             </if>
@@ -190,7 +207,15 @@
         <if test="type != null">
             and `mc_register_records`.`records_type` like CONCAT('%',#{type},'%')
         </if>
-        <if test="id !=0"> and `deptid`=#{id}</if>
+        <if test="id !=0">
+            and `mc_register_records`.`deptid`=#{id}
+        </if>
+        <if test="startTime != null">
+            and `mc_register_records`.`annual_time` >= #{startTime}
+        </if>
+        <if test="endTime != null">
+            and `mc_register_records`.`annual_time` &lt;= #{endTime}
+        </if>
     </trim>
 
         <if test="pageSize!=0">
@@ -199,7 +224,7 @@
     </select>
     <select id="querybycount" resultType="java.lang.Integer">
             SELECT count(*)
-            FROM mc_register_records
+            FROM `mc_register_records`
             <trim prefix="where" prefixOverrides="and">
                 <if test="name != null">
                     and `records_name` like CONCAT('%',#{name},'%')
@@ -207,7 +232,15 @@
                 <if test="type != null">
                     and `records_type` like CONCAT('%',#{type},'%')
                 </if>
-                <if test="id !=0"> and `deptid`=#{id}</if>
+                <if test="id != 0">
+                 and `mc_register_records`.`deptid`=#{id}
+                </if>
+                <if test="startTime != null">
+                    and `mc_register_records`.`annual_time` >= #{startTime}
+                </if>
+                <if test="endTime != null">
+                    and `mc_register_records`.`annual_time` &lt;= #{endTime}
+                </if>
             </trim>
     </select>
 

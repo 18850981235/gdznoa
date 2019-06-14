@@ -4,6 +4,7 @@ import com.beans.SupplierTrademark;
 import com.dao.sup.SupplierTrademarkMapper;
 import com.util.Page;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import javax.annotation.Resource;
@@ -14,6 +15,7 @@ import java.util.Map;
  * @author 许思明
  * @create 2019/4/15
  */
+@Transactional
 @Service("supplierTrademarkService")
 public class SupplierTrademarkServiceImpl implements SupplierTrademarkService {
 
@@ -59,5 +61,10 @@ public class SupplierTrademarkServiceImpl implements SupplierTrademarkService {
     @Override
     public SupplierTrademark querybyid(int id) {
         return supplierTrademarkMapper.querybyid(id);
+    }
+
+    @Override
+    public List<SupplierTrademark> allSupplierTrademark() {
+        return supplierTrademarkMapper.allSupplierTrademark();
     }
 }

@@ -7,14 +7,17 @@ import com.dao.mc.McPerformanceDateMapper;
 import com.util.FileUtils;
 import com.util.Page;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.xml.crypto.Data;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+@Transactional
 @Service("mcPerformanceDateservice")
 public class McPerformanceDateServiceImp implements McPerformanceDateService{
     @Resource
@@ -57,6 +60,7 @@ public class McPerformanceDateServiceImp implements McPerformanceDateService{
     }
 
     @Override
+    @Transactional
     public int updateMcPerformanceDate(McPerformanceDate mcPerformanceDate,HttpServletRequest request) {
         try {
             String bidFile= FileUtils.uploadFile(request,"bidFile");
@@ -93,26 +97,28 @@ public class McPerformanceDateServiceImp implements McPerformanceDateService{
     }
 
     @Override
-    public Map<String, Object> queryMcPerformanceDatebysome(String projectName, Data bidtimeStart, Data bidtimeEnd, Data accetimeStart, Data acctimeEnd, String borrow,int pageIndex) {
-        Map<String, Object> map=new HashMap<>();
-        Page page=new Page();
-        List<McPerformanceDate> list=null;
+    public Map<String, Object> queryMcPerformanceDatebysome(String projectName, Date bidtimeStart, Date bidtimeEnd, Date accetimeStart, Date acctimeEnd, String borrow, int pageIndex) {
+
+        Map<String, Object> map = new HashMap<>();
+        Page page = new Page();
+        List<McPerformanceDate> list = null;
         try {
             if (pageIndex == 0) {
                 pageIndex = 1;
             }
             page.setPageSize(10);
 
-                page.setTotalCount(mcPerformanceDateMapper.querycont(projectName ,bidtimeStart, bidtimeEnd, accetimeStart, acctimeEnd, borrow));
-                page.setCurrentPageNo(pageIndex);
-                list=mcPerformanceDateMapper.queryMcPerformanceDatebysome(projectName ,bidtimeStart, bidtimeEnd, accetimeStart, acctimeEnd, borrow,(page.getCurrentPageNo()-1)*page.getPageSize(),page.getPageSize());
+            page.setTotalCount(mcPerformanceDateMapper.querycont(projectName, bidtimeStart, bidtimeEnd, accetimeStart, acctimeEnd, borrow));
+            page.setCurrentPageNo(pageIndex);
+            list = mcPerformanceDateMapper.queryMcPerformanceDatebysome(projectName, bidtimeStart, bidtimeEnd, accetimeStart, acctimeEnd, borrow, (page.getCurrentPageNo() - 1) * page.getPageSize(), page.getPageSize());
 
-            map.put("page",page);
-            map.put("list",list);
+            map.put("page", page);
+            map.put("list", list);
         } catch (Exception e) {
             e.printStackTrace();
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
-        return map; }
+        return map;
+    }
 
 }

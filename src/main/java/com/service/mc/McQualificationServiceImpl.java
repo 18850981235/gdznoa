@@ -9,6 +9,7 @@ import com.dao.sys.ApprovalProcessMapper;
 import com.util.FileUtils;
 import com.util.Page;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import javax.annotation.Resource;
@@ -20,6 +21,7 @@ import java.util.Map;
 许思明
 2019/04/11
  */
+@Transactional
 @Service("mcQualificationService")
 public class McQualificationServiceImpl implements McQualificationService {
     @Resource
@@ -31,7 +33,7 @@ public class McQualificationServiceImpl implements McQualificationService {
 
     @Override
     public int addProjectApproval(SysApprovalDetailed detailed) {
-        detailed.setApprovalName("资历证书");
+        detailed.setApprovalName("资质证书");
         try {
             approvalDetailedMapper.add(detailed);
             McQualificationCertificate mc = new McQualificationCertificate();
@@ -106,7 +108,7 @@ public class McQualificationServiceImpl implements McQualificationService {
     };
 
     //根据条件查询
-    public Map<String ,Object> querybytypename(int deptid,String name, String type, int  pageIndex) {
+    public Map<String ,Object> querybytypename(String name, String type,String content ,String borrow,String state,String starttime,String endtime, int  pageIndex) {
         Map<String, Object> map=new HashMap<>();
         Page page=new Page();
         try {
@@ -114,9 +116,9 @@ public class McQualificationServiceImpl implements McQualificationService {
                 pageIndex = 1;
             }
             page.setPageSize(10);
-            page.setTotalCount(mcQualificationMapper.querycount(deptid,name,type));
+            page.setTotalCount(mcQualificationMapper.querycount( name, type,content,borrow,state,starttime,endtime));
             page.setCurrentPageNo(pageIndex);
-            List<McQualificationCertificate> list=mcQualificationMapper.querybytypename(deptid,name,type,(page.getCurrentPageNo()-1)*page.getPageSize(),page.getPageSize());
+            List<McQualificationCertificate> list=mcQualificationMapper.querybytypename(name, type,content,borrow,state,starttime,endtime,(page.getCurrentPageNo()-1)*page.getPageSize(),page.getPageSize());
             map.put("page",page);
             map.put("list",list);
         } catch (Exception e) {

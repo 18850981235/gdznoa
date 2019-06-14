@@ -105,7 +105,7 @@ public class SupplierAction {
     public int addStaff(SupplierStaff SupplierStaff){
         return supplierStaffService.addstaff(SupplierStaff);
     }
-    //删除品牌
+    //删除联系人
     @RequestMapping(value="/staff/deletestaff",produces ="text/html;charset=UTF-8" )
     public int deleteStaff(@RequestParam int id){
         return supplierStaffService.deleteStaff(id);

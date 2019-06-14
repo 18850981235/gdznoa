@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.xml.crypto.Data;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 @Mapper
@@ -19,10 +20,12 @@ public interface McPerformanceDateMapper {
 
     int deleteMcPerformanceDate(@Param("id")int id);
 
-    int querycont(@Param("peojectname") String projectName, @Param("bidtimestart") Data bidtimeStart, @Param("bidtimeend") Data bidtimeEnd,
-                  @Param("accetimestart") Data accetimeStart, @Param("acctimeend") Data acctimeEnd, @Param("borrow") String borrow);
+    int querycont(@Param("projectName") String projectName, @Param("bidtimeStart") Date bidtimeStart, @Param("bidtimeEnd") Date bidtimeEnd,
+                  @Param("accetimeStart") Date accetimeStart, @Param("accetimeEnd") Date acctimeEnd, @Param("borrow") String borrow);
 
-    List<McPerformanceDate> queryMcPerformanceDatebysome(@Param("peojectname") String projectName, @Param("bidtimestart") Data bidtimeStart, @Param("bidtimeend") Data bidtimeEnd,
-                                  @Param("accetimestart") Data accetimeStart, @Param("acctimeend") Data acctimeEnd, @Param("borrow") String borrow, int pageIndex, int pageSize);
-   List<McPerformanceDate> queryall();
+    List<McPerformanceDate> queryMcPerformanceDatebysome(@Param("projectName") String projectName, @Param("bidtimeStart") Date bidtimeStart, @Param("bidtimeEnd") Date bidtimeEnd,
+                                                         @Param("accetimeStart") Date accetimeStart, @Param("accetimeEnd") Date acctimeEnd, @Param("borrow") String borrow, @Param("pageIndex") int pageIndex, @Param("pageSize") int pageSize);
+   List<McPerformanceDate> queryall(@Param("projectName")String projectName);
+
+
 }

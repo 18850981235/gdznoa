@@ -1,11 +1,13 @@
 package com.dao.mc;
 
+import com.beans.FileList;
 import com.beans.McFileBorrow;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface McFileBorrowMapper {
@@ -39,4 +41,5 @@ public interface McFileBorrowMapper {
                           @Param("start") Date start,
                           @Param("end") Date end,
                           @Param("userid") int usreid);
+
 }

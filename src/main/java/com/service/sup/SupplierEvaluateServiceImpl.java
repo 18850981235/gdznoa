@@ -5,13 +5,14 @@ import com.dao.sup.SupplierEvaluateMapper;
 import com.util.Page;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+@Transactional
 @Service("SupplierEvaluateService")
 public class SupplierEvaluateServiceImpl implements  SupplierEvaluateService {
     @Resource

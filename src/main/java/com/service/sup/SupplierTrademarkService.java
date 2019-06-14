@@ -19,4 +19,6 @@ public interface SupplierTrademarkService {
     Map<String ,Object> querybysom(String name, String product, String enterpriseName, int PageIndex);
     //根据ID查询信息详情
    SupplierTrademark querybyid(int id);
+
+    List<SupplierTrademark> allSupplierTrademark();
 }

@@ -4,6 +4,7 @@ import com.beans.SupplierStaff;
 import com.dao.sup.SupplierStaffMapper;
 import com.util.Page;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import javax.annotation.Resource;
@@ -14,6 +15,7 @@ import java.util.Map;
  * @author 许思明
  * @create 2019/4/16
  */
+@Transactional
 @Service("SupplierStaffService")
 public class SupplierStaffServiceImpl implements SupplierStaffService{
      @Resource

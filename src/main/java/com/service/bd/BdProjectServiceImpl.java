@@ -197,4 +197,9 @@ public class BdProjectServiceImpl implements BdProjectService {
         return bdProjectMapper.getProjectName();
     }
 
+    @Override
+    public List<BdProject> getallPeoject() {
+        return bdProjectMapper.getallProject();
+    }
+
 }

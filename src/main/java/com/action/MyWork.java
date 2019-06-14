@@ -42,7 +42,9 @@ public class MyWork {
                          @RequestParam(required = false) Date end,
                          @RequestParam(required = false, defaultValue = "0") int pageIndex,
                          HttpSession session) {
-        int userid = (int) session.getAttribute("userId");
+
+        //int userid = (int) session.getAttribute("userId");
+        int userid=18;
         return JSONObject.toJSONString(myWorkService.getList(userid, processid, id, start, end, pageIndex),
                 SerializerFeature.DisableCircularReferenceDetect,
                 SerializerFeature.WriteNullStringAsEmpty);

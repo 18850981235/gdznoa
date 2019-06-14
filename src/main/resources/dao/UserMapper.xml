@@ -221,4 +221,11 @@
         FROM `sys_user`
         WHERE roleid=(SELECT id FROM `sys_role` WHERE `name`=#{areaManager})
     </select>
+    <select id="queryDeptroleUser" resultType="com.beans.SysUser">
+        select *
+        from `sys_user`
+        where
+            deptid = #{deptid}
+          and roleid = 2
+    </select>
 </mapper>

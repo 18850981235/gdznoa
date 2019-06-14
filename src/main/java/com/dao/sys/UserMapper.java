@@ -55,4 +55,7 @@ public interface UserMapper {
     //查询大区负责人
     List<SysUser> areaManagerUser(String areaManager);
 
+    //按部门跟公司总经理职务查询总经理id
+    List<SysUser> queryDeptroleUser(int deptid);
+
 }

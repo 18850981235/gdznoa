@@ -33,7 +33,10 @@ public class McQualificationCertificate {
   private int processUserid;
   private String processState;
   private String deptName;
+  private int  pdf_Outtime;
+
   private SysUser user;
+  private SysUser annualUser;
   private SysApprovalProcess process;
 
 }

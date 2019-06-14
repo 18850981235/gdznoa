@@ -74,6 +74,12 @@ public class BdProject {
   private SysUser user;
   //区域负责人
   private SysUser areaManagerUser;
+
   private SysApprovalProcess process;
+
+  private SysUser branchuser;
+
+  private  Pdf pdf;
+  private  int PDfconut;
 
 }

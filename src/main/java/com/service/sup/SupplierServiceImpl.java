@@ -6,6 +6,7 @@ import com.util.FileUtils;
 import com.util.Page;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import javax.annotation.Resource;
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 /*许思明
 * 2019.04.17*/
+@Transactional
 @Service("SupplierService")
 public class SupplierServiceImpl implements SupplierService {
 

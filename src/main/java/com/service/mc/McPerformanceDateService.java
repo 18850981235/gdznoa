@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.xml.crypto.Data;
+import java.util.Date;
 import java.util.Map;
 
 /*
@@ -17,7 +18,7 @@ public interface McPerformanceDateService {
     McPerformanceDate queryMcPerformanceDatebyid(int id);
     int updateMcPerformanceDate(McPerformanceDate mcPerformanceDate,HttpServletRequest request);
     int deleteMcPerformanceDate(int id);
-    Map<String, Object> queryMcPerformanceDatebysome(String projectname, Data bidtimestart,Data bidtimeend,
-                                                    Data accetimestart,Data acctimeend,String borrow,int pageIndex);
+    Map<String, Object> queryMcPerformanceDatebysome(String projectname, Date bidtimestart, Date bidtimeend,
+                                                     Date accetimestart, Date acctimeend, String borrow, int pageIndex);
 
 }

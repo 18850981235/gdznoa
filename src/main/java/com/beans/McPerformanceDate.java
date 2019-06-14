@@ -44,6 +44,12 @@ public class McPerformanceDate {
     private Date filingTime;
 
     private BdProject project;
+    private SysUser user;
 
+
+    public McPerformanceDate() {
+
+        super();
+    }
 
 }

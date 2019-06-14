@@ -22,7 +22,7 @@ public interface McQualificationService {
     //查询详情资质证书
     Map<String,Object> querydetailbyid(@Param("id") int id);
     //根据条件查询
-    Map<String ,Object> querybytypename(@Param("deptid") int deptid,@Param("name") String name, @Param("type") String type, int pageIndex);
+    Map<String ,Object> querybytypename(@Param("name") String name, @Param("type") String type,@Param("content") String content, @Param("borrow") String borrow,@Param("state") String state, @Param("staretime") String staretime,@Param("endtime") String endtime,  int pageIndex);
     //删除资质证书
     int delete(@Param("id") int id);
 

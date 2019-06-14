@@ -41,6 +41,14 @@
         <association property="dept" javaType="com.beans.SysDept" column="deptid"
                      select="com.dao.sys.DeptMapper.getListById">
         </association>
+        <association  property="branchuser"  javaType="com.beans.SysUser" column="deptid"
+                      select="com.dao.sys.UserMapper.queryDeptroleUser">
+        </association>
+        <association  property="PDfconut"  javaType="integer" column="name"
+                    select="com.dao.publics.PdfMapper.getCount">
+        </association>
+
+
     </resultMap>
 
     <select id="getListById" resultMap="BaseResultMap">
@@ -325,6 +333,11 @@
             </if>
         </trim>
     </select>
+
+    <select id="getallProject" resultMap="BaseResultMap">
+        select * from `bd_project`
+    </select>
+
 
 
     <select id="getByProcessUser" resultMap="BaseResultMap">

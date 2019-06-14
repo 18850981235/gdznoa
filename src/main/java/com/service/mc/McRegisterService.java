@@ -23,7 +23,7 @@ public interface McRegisterService {
     //删除注册备案
     int delete(int id);
     //条件查询
-    Map<String, Object>  querybyrecords(int id,String Name, String Type, int pageIndex);
+    Map<String, Object>  querybyrecords(int id,String Name, String Type,String startTime,String endTime, int pageIndex);
 
     int addProjectApproval(SysApprovalDetailed detailed);
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~资质证书管理~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
