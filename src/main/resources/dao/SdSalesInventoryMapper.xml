@@ -7,18 +7,12 @@
         <result column="name" property="name" jdbcType="VARCHAR"/>
         <result column="model" property="model" jdbcType="VARCHAR"/>
         <result column="parameter" property="parameter" jdbcType="VARCHAR"/>
-        <result column="trademarkid" property="trademarkid" jdbcType="INTEGER"/>
+        <result column="trademark" property="trademark" jdbcType="VARCHAR"/>
         <result column="unit" property="unit" jdbcType="VARCHAR"/>
         <result column="num" property="num" jdbcType="INTEGER"/>
         <result column="unit_cost" property="unitCost" jdbcType="DOUBLE"/>
         <result column="subtotal" property="subtotal" jdbcType="DOUBLE"/>
         <result column="remarks" property="remarks" jdbcType="VARCHAR"/>
-        <association property="supplierTrademark" javaType="com.beans.SupplierTrademark" column="trademarkid"
-                     select="com.dao.sup.SupplierTrademarkMapper.querybyid">
-        </association>
-
-
-
 
     </resultMap>
     <insert id="addInventory">
@@ -37,8 +31,8 @@
             <if test="parameter != null">
                 parameter,
             </if>
-            <if test="trademarkid != 0">
-                trademarkid,
+            <if test="trademark != 0">
+                trademark,
             </if>
             <if test="unit != null">
                 unit,
@@ -75,8 +69,8 @@
             <if test="parameter != null">
                 #{parameter},
             </if>
-            <if test="trademarkid != 0">
-                #{trademarkid},
+            <if test="trademark != 0">
+                #{trademark},
             </if>
             <if test="unit != null">
                 #{unit},

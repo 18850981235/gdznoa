@@ -26,4 +26,6 @@ public interface MenuMapper {
         //查询所有菜单集合
         List<SysMenu> getMenuList(@Param("pageIndex") int pageIndex,
                                   @Param("pageSize") int pageSize);
+        SysMenu getMenubyid(@Param("id") int id);
+
 }

@@ -92,4 +92,9 @@
             LIMIT #{pageIndex},#{pageSize}
         </if>
     </select>
+    <select id="getMenubyid" resultType="com.beans.SysMenu">
+        select * from `sys_menu`
+        where id=#{id}
+
+    </select>
 </mapper>

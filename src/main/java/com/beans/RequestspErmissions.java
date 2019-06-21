@@ -8,13 +8,11 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.util.Date;
 @Data
 public class RequestspErmissions {
-    int id;
-    int userid;
-    String  muneid;
-    String  state;
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @JSONField(format = "yyyy-MM-dd")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    Date time;
+    private  int id;
+    private  int requesid;
+    private  int userid;
+    private int muneid;
+
+    private SysMenu sysMenu;
 
 }

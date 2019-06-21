@@ -618,7 +618,6 @@ public class McAction {
     @RequestMapping("/qualification/pdf")
     public void  pdfout(HttpServletRequest request,HttpServletResponse response)throws DocumentException, IOException {
         response.setContentType("application/force-download");
-    System.err.print("11111111111111111");
         Collection<Part> parts = null;
         try {
             parts = request.getParts();
@@ -645,11 +644,6 @@ public class McAction {
 
 
         }
-
-
-//
-
-
 
     };
 

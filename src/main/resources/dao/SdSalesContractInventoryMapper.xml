@@ -72,6 +72,9 @@
             <if test="remarks != null">
                 remarks,
             </if>
+            <if test="stateTime != null">
+                state_time,
+            </if>
 
 
 
@@ -125,6 +128,9 @@
             </if>
             <if test="remarks != null">
                 #{remarks},
+            </if>
+            <if test="stateTime != null">
+                stateTime,
             </if>
 
         </trim>
@@ -182,6 +188,9 @@
            </if>
             <if test="remarks != null">
                 remarks = #{remarks},
+            </if>
+            <if test="stateTime != null">
+                state_time = #{stateTime},
             </if>
 
 
@@ -269,7 +278,12 @@
 
         </trim>
     </select>
+    <select id="querynewdata" resultType="com.beans.SdSalesContractInventory">
+        select * from `sd_sales_contract_inventory` s
+        ORDER BY ABS(NOW() - s.state_time) ASC
+        limit 1
 
+    </select>
 
 
 </mapper>

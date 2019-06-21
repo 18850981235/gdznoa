@@ -10,6 +10,7 @@ import com.service.sd.SdSalesInventoryService;
 import com.service.sup.SupplierTrademarkService;
 import com.service.system.systemService;
 import org.apache.ibatis.annotations.Param;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
@@ -25,8 +26,10 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.InputStream;
-import java.io.PrintWriter;
+import java.beans.IntrospectionException;
+import java.io.*;
+import java.lang.reflect.InvocationTargetException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -220,11 +223,12 @@ System.err.print("projectId="+projectId+",branchName="+branchName+",systemId="+s
                 SerializerFeature.DisableCircularReferenceDetect,
                 SerializerFeature.WriteNullStringAsEmpty);
     }
+
     //添加Excel上传的；
     //条件查询清单
     @RequestMapping(value = "/Inventory/addInven", produces = "application/json; charset=utf-8")
     @ResponseBody
-    public int addInven(HttpServletRequest request, HttpServletResponse response,
+    public String  addInven(HttpServletRequest request, HttpServletResponse response,
                         SdSalesContractInventory sdSalesContractInventory) throws Exception{
         MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
         MultipartFile file = multipartRequest.getFile("upfile");
@@ -242,7 +246,49 @@ System.err.print("projectId="+projectId+",branchName="+branchName+",systemId="+s
         out.print("文件导入成功！");
         out.flush();
         out.close();
-    return 1;
+    return " ";
     };
+    @RequestMapping(value = "/Inventory/addInvenbywight", produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public String  addInven(SdSalesContractInventory salesContractInventory, List<SdSalesInventory> list) throws Exception{
+
+        int i=sdSalesContractInventoryService.addInventory(salesContractInventory, list);
+        if (i==0){
+             return " ";}
+        else{
+             return "" ;
+        }
+
+    };
+    public String  queryDaily(HttpServletRequest request, HttpServletResponse response,
+                           HttpSession session,SdSalesContractInventory sdSalesContractInventory) throws IllegalArgumentException, IllegalAccessException, InvocationTargetException, ClassNotFoundException, IntrospectionException, ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddhhmmssms");
+        String dateStr = sdf.format(new Date());
+        Map<String, Object> map = new HashMap<String, Object>();
+        // 指定下载的文件名
+        response.setHeader("Content-Disposition", "attachment;filename=" + dateStr + ".xlsx");
+        response.setContentType("application/vnd.ms-excel;charset=UTF-8");
+        response.setHeader("Pragma", "no-cache");
+        response.setHeader("Cache-Control", "no-cache");
+        response.setDateHeader("Expires", 0);
+        XSSFWorkbook workbook = null;
+
+        // 导出Excel对象
+        workbook = sdSalesContractInventoryService.queryDaily(sdSalesContractInventory);
+
+        OutputStream output;
+        try {
+            output = response.getOutputStream();
+            BufferedOutputStream bufferedOutPut = new BufferedOutputStream(output);
+            bufferedOutPut.flush();
+            workbook.write(bufferedOutPut);
+            bufferedOutPut.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
+         return  "  s" ;
+        }
+
+    }
 //endregion~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 }

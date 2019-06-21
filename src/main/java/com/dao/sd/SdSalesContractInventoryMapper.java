@@ -24,6 +24,6 @@ public interface SdSalesContractInventoryMapper {
     List<SdSalesContractInventory> query(@Param("projectId")int projectId,@Param("branchName")String branchName,@Param("systemId")int systemId,@Param("subitemId")int subitemId,@Param("pageIndex") int pageIndex, @Param("pageSize") int pageSize);
     int querycount (@Param("projectId")int projectId,@Param("branchName")String branchName,@Param("systemId")int systemId,@Param("subitemId")int subitemId);
 
-
+    SdSalesContractInventory querynewdata();
 
 }
