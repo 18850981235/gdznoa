@@ -139,7 +139,7 @@
                 #{processState},
             </if>
             <if test="pdf_Outtime != null" >
-                #{pdf_Outtime},,
+                #{pdf_Outtime},
             </if>
         </trim>
     </insert>

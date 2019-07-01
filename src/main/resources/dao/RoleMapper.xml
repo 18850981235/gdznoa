@@ -10,6 +10,11 @@
             </if>
         </trim>
     </select>
+    <select id="getbyid" resultType="com.beans.SysRole">
+        SELECT *
+        FROM `sys_role`
+        where  id=#{roleid}
+    </select>
     <insert id="add">
         INSERT INTO `sys_role`
         <trim prefix="(" suffix=")" suffixOverrides=",">

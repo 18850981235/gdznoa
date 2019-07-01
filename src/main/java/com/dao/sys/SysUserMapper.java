@@ -8,7 +8,8 @@ import java.util.List;
 @Mapper
 public interface SysUserMapper {
 
-     List<SysUser>  queryUser(@Param("account") String account,@Param("name") String name,
+     List<SysUser>  queryUser(@Param("account") String account,
+                              @Param("name") String name,
                               @Param("pageIndex") int pageIndex,
                               @Param("pageSize") int pageSize);
 
@@ -19,6 +20,6 @@ public interface SysUserMapper {
 
      int updateUser(SysUser user);
 
-
+     SysUser getname (@Param("id") int id);
 
 }

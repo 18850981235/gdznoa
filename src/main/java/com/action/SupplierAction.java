@@ -34,7 +34,7 @@ public class SupplierAction {
     @Resource(name="SupplierEvaluateService")
     private SupplierEvaluateService supplierEvaluateService;
 
-
+    //region
     //增加品牌
     @RequestMapping(value="/trademark/addtrademarkpage" , produces = "text/html;charset=UTF-8")
     public String  addtrademarkpage(){
@@ -71,7 +71,8 @@ public class SupplierAction {
     public String QueryTrademarkByid(@RequestParam int id)
     {
         return JSONObject.toJSONString(supplierTrademarkService.querybyid(id),
-                SerializerFeature.DisableCircularReferenceDetect);
+                SerializerFeature.DisableCircularReferenceDetect,
+                SerializerFeature.WriteNullStringAsEmpty);
     };
     //模糊搜索
 
@@ -92,10 +93,13 @@ public class SupplierAction {
             enterpriseName = null;
         }
         return JSONObject.toJSONString(supplierTrademarkService.querybysom(Name, product, enterpriseName,pageIndex),
-                SerializerFeature.DisableCircularReferenceDetect);
+                SerializerFeature.DisableCircularReferenceDetect,
+                SerializerFeature.WriteNullStringAsEmpty);
 
     }
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~联系人管理~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    //endregion
+
+    //region~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~联系人管理~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     @RequestMapping(value="/staff/addStaffpage" , produces = "text/html;charset=UTF-8")
     public String  addStaffpage(){
         return "添加界面";
@@ -146,10 +150,12 @@ public class SupplierAction {
         }
 
         return JSONObject.toJSONString(supplierStaffService.querybysome(Name, supname, pageIndex),
-                SerializerFeature.DisableCircularReferenceDetect);
+                SerializerFeature.DisableCircularReferenceDetect,
+                SerializerFeature.WriteNullStringAsEmpty);
 
     }
-    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~供应商~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+    //endregion
+    //region~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~供应商~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
     //添加供应商信息
     @RequestMapping(value="/supplier2/addSupplierPage" , produces = "text/html;charset=UTF-8")
     public String  addSupplierPage(){
@@ -181,7 +187,9 @@ public class SupplierAction {
     @RequestMapping(value = "/supplier2/QuerySupplierById",produces = "application/json; charset=utf-8")
     public String QuerySupplierById(@RequestParam int id)
     {
-        return JSONObject.toJSONString(supplierService.querybyid(id),SerializerFeature.DisableCircularReferenceDetect);
+        return JSONObject.toJSONString(supplierService.querybyid(id),
+                SerializerFeature.DisableCircularReferenceDetect,
+                SerializerFeature.WriteNullStringAsEmpty);
     };
     //模糊搜索供应商
     @RequestMapping(value="/supplier2/querySupplierPage" , produces = "text/html;charset=UTF-8")
@@ -201,10 +209,12 @@ public class SupplierAction {
             traname = null;
         }
         return JSONObject.toJSONString(supplierService.querybysome(code, name,traname,pageIndex),
-                SerializerFeature.DisableCircularReferenceDetect);
+                SerializerFeature.DisableCircularReferenceDetect,
+                SerializerFeature.WriteNullStringAsEmpty);
 
     }
-   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~评价~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    //endregion~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   //region~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~评价~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     //添加评价
    @RequestMapping(value="/evaluate/addpage" , produces = "text/html;charset=UTF-8")
    public String  addSupplierevaluatepage(){
@@ -215,7 +225,6 @@ public class SupplierAction {
     public int addSupplierevaluate(SupplierEvaluate supplierEvaluate){
         return supplierEvaluateService.addSupplierEvaluate(supplierEvaluate);
     }
-
     @RequestMapping(value="/evaluate/delete" , produces = "text/html;charset=UTF-8")
     public int deleteSupplierevaluate(@Param("id") int id){
         return supplierEvaluateService.deleteSupplierEvaluate(id);
@@ -224,6 +233,7 @@ public class SupplierAction {
     public String  updateupplierevaluatepage(){
         return "修改界面";
     }
+
 
     @RequestMapping(value="/evaluate/update" , produces = "text/html;charset=UTF-8")
     public int updateSupplierevaluate(SupplierEvaluate supplierEvaluate){
@@ -237,7 +247,8 @@ public class SupplierAction {
     @RequestMapping(value="/evaluate/EvaluateByid" , produces = "text/html;charset=UTF-8")
     public String querySupplierevaluatebyid(@Param("id")int id){
                return JSONObject.toJSONString(supplierEvaluateService.queryEvaluateByid(id),
-                SerializerFeature.DisableCircularReferenceDetect);
+                        SerializerFeature.DisableCircularReferenceDetect,
+                        SerializerFeature.WriteNullStringAsEmpty);
     }
 
     @RequestMapping(value="/evaluate/querySupplierEvaluatepage" , produces = "text/html;charset=UTF-8")
@@ -246,12 +257,16 @@ public class SupplierAction {
     }
     //模糊搜索供应商
     @RequestMapping(value = "/evaluate/querySupplierEvaluate",produces = "application/json; charset=utf-8")
-    public String querySupplierEvaluate(@RequestParam(required = false, defaultValue = "0") int userId,@RequestParam(required = false, defaultValue = "0") int supplierId,@RequestParam(required = false, defaultValue = "0") int pageIndex) {
+    public String querySupplierEvaluate(@RequestParam(required = false, defaultValue = "0") int userId,
+                                        @RequestParam(required = false, defaultValue = "0") int supplierId,
+                                        @RequestParam(required = false, defaultValue = "0") int pageIndex) {
 
 
         return JSONObject.toJSONString(supplierEvaluateService.queryEvaluate(userId, supplierId,pageIndex),
-                SerializerFeature.DisableCircularReferenceDetect);
+                SerializerFeature.DisableCircularReferenceDetect,
+                SerializerFeature.WriteNullStringAsEmpty);
 
     }
+    //endregion~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 }
 

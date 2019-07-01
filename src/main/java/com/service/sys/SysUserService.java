@@ -14,7 +14,7 @@ public interface SysUserService {
 
    SysUser querybyId(@Param("id") int id);
 
-    Map<String ,Object> queryUser(@Param("account") String account, @Param("name") String name , int pageIndex);
+    Map<String ,Object> queryUser(@Param("account") String account, @Param("name") String name ,  @Param("pageIndex") int pageIndex);
 
     int addyReques(Requestsp requestsp, HttpServletRequest request);
 

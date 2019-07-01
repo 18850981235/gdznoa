@@ -218,7 +218,6 @@ public class SdAction {
         if(branchName==null||branchName==""){
             branchName=null;
         }
-System.err.print("projectId="+projectId+",branchName="+branchName+",systemId="+systemId+",subitemId="+subitemId);
         return JSONObject.toJSONString( sdSalesContractInventoryService.queryInventory(projectId,branchName, systemId, subitemId, pageIndex),
                 SerializerFeature.DisableCircularReferenceDetect,
                 SerializerFeature.WriteNullStringAsEmpty);

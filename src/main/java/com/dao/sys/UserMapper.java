@@ -58,4 +58,6 @@ public interface UserMapper {
     //按部门跟公司总经理职务查询总经理id
     List<SysUser> queryDeptroleUser(int deptid);
 
+
+
 }

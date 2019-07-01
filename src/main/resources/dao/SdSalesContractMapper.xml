@@ -23,16 +23,8 @@
         <result column="processid" property="processid" jdbcType="INTEGER"/>
         <result column="process_userid" property="processUserid" jdbcType="INTEGER"/>
         <result column="process_state" property="processState" jdbcType="VARCHAR"/>
-      <!--  <association property="dept" javaType="com.beans.SysDept" column="deptid"
-                     select="com.dao.sys.DeptMapper.getListById">
-        </association>
--->
-      <!--  <association property="project" javaType="com.beans.BdProject" column="projectid"
-                     select="com.dao.bd.BdProjectMapper.getListById">
-        </association>-->
         <association property="project" javaType="com.beans.BdProject" column="projectid"
                      select="com.dao.bd.BdProjectMapper.getListById">
-
         </association>
         <association property="dept" javaType="com.beans.SysDept" column="deptid"
                      select="com.dao.sys.DeptMapper.getListById">

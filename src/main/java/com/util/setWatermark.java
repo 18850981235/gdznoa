@@ -29,7 +29,7 @@ public class setWatermark {
 //                content = stamper.getOverContent(i);// 在内容上方加水印
             content = stamper.getUnderContent(i);//在内容下方加水印
             gs.setFillOpacity(0.2f);
-            // content.setGState(gs);
+             content.setGState(gs);
             content.beginText();
 //                content.setColorStroke(BaseColor.WHITE);
             content.setColorFill(BaseColor.LIGHT_GRAY);

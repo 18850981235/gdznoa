@@ -10,7 +10,9 @@ import com.dao.sys.SysUserMapper;
 import com.dao.sys.requestspErmissionsMapper;
 import com.util.FileUtils;
 import com.util.Page;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import javax.annotation.Resource;
@@ -19,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+@Transactional
 @Service("SysUserService")
 public class SysUserServiceImpl implements SysUserService{
     @Resource
@@ -37,12 +40,12 @@ public class SysUserServiceImpl implements SysUserService{
     }
 
     @Override
-    public SysUser querybyId(int id) {
+    public SysUser querybyId(@Param("id") int id) {
         return sysUserMapper.queryUserbyid(id);
     }
 
     @Override
-    public Map<String ,Object> queryUser(String account, String name,int pageIndex) {
+    public Map<String ,Object> queryUser(@Param("account") String account, @Param("name") String name,@Param("pageIndex") int pageIndex) {
         Map<String, Object> map=new HashMap<>();
         Page page=new Page();
         try {
@@ -84,7 +87,7 @@ public class SysUserServiceImpl implements SysUserService{
 
 
     @Override
-    public Map<String ,Object>queryRequestbyuserid(int userid,int pageIndex) {
+    public Map<String ,Object>queryRequestbyuserid(@Param("userid")int userid,@Param("pageIndex") int pageIndex) {
         Map<String, Object> map=new HashMap<>();
         Page page=new Page();
         try {
@@ -104,28 +107,47 @@ public class SysUserServiceImpl implements SysUserService{
         return map;
     }
     @Override
-    public Requestsp queryRequestbyuserid(int id) {
+    public Requestsp queryRequestbyuserid(@Param("id") int id) {
         return requestspMapper.querybyid(id);
     }
 
     @Override
-    public List<RequestspErmissions> getListErmissions( int quesid,int userid) {
+    public List<RequestspErmissions> getListErmissions(@Param("quesid") int quesid, @Param("userid") int userid) {
         return requestspErmissionsMapper.queryErmissions(quesid, userid);
     }
 
     @Override
-    public Map<String, Object> getallMenu(int quesid, int userid) {
-        Map<String, Object> map=new HashMap<>();
-        List<RequestspErmissions> ListRequest=requestspErmissionsMapper.queryErmissions(quesid, userid);
-        List<SysMenu> listMenu=menuMapper.getMenuList(0,0);
-        map.put("ListRequest",ListRequest);
-        map.put("listMenu",listMenu);
+    public Map<String, Object> getallMenu(@Param("quesid") int quesid, @Param("userid") int userid) {
+        Map<String, Object> map = new HashMap<>();
+      try {
+
+          List<RequestspErmissions> ListRequest = requestspErmissionsMapper.queryErmissions(quesid, userid);
+          List<SysMenu> listMenu = menuMapper.getMenuList(0, 0);
+          map.put("ListRequest", ListRequest);
+          map.put("listMenu", listMenu);
+      }catch (Exception e) {
+            e.printStackTrace();
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+        }
         return map;
     }
 
 
     @Override
     public int  add(List<RequestspErmissions> list,Requestsp requestsp ) {
-        return requestspErmissionsMapper.addErmissions();
-    }
+        try {
+            for (RequestspErmissions re : list) {
+                re.setRequesid(requestsp.getId());
+                re.setUserid(requestsp.getUserid());
+                requestspErmissionsMapper.addErmissions(re);
+            }
+            return 1;
+        } catch (Exception e) {
+            e.printStackTrace();
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return 0;
+        }
+
+    };
+
 }

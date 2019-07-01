@@ -22,11 +22,10 @@ public class SysUser implements Serializable {
   private String IDnumber;
   private String phone;
   private String email;
-  private int companyid;
+  private String companyid;
   private int deptid;
   private int roleid;
-  private String dept;
-  private String role;
+
   @JsonFormat(pattern = "yyyy-MM-dd")
   @JSONField(format = "yyyy-MM-dd")
   @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -39,12 +38,15 @@ public class SysUser implements Serializable {
   private String certificate;
   private String workphone;
   private String QQ;
-  private  String WeChat;
+  private String weChat;
   private int balance;
   private String bankaccount1;
   private String bank1;
   private String bankaccount2;
   private String bank2;
+
+  private SysDept dept;
+  private SysRole role;
 
 
 

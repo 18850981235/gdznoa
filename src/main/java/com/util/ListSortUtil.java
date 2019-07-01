@@ -141,7 +141,6 @@ public class ListSortUtil {
         return matcher.find();
     }
 
-
     private static boolean isFloat(String str) {
         return str.matches("[\\d]+\\.[\\d]+");
     }

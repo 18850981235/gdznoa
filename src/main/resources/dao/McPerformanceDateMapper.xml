@@ -73,7 +73,7 @@
                 `manager_id`,
             </if>
             <if test="filingTime !=null">
-                `filing_time`,
+                `filing_time`
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -120,8 +120,7 @@
                 #{managerId},
             </if>
             <if test="filingTime!=null">
-                #{filingT
-                ime},
+                #{filingTime},
             </if>
         </trim>
     </insert>

@@ -21,4 +21,6 @@ public interface RoleMapper {
     //按id删除职位信息
     int deleteById(@Param("id") int id);
 
+    SysRole getbyid(@Param("roleid") int roleid);
+
 }
