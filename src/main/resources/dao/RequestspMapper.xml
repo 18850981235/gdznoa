@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.sys.RequestspMapper">
+    <insert id="addQuestsp">
+        INSERT INTO `sys_requestsp`
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id!=0">
+                `id`,
+            </if>
+            <if test="userid!=0">
+                `userid`,
+            </if>
+            <if test="time!=null">
+                `time`,
+            </if>
+            <if test="evidence!=null">
+                `evidence`,
+            </if>
+            <if test="evidencePeople!=null">
+                `evidence_people`,
+            </if>
+            <if test="recorId!=null">
+                `recor_id`,
+            </if>
+            <if test="phone!=null">
+                `phone`,
+            </if>
+            <if test="evidencePhone!=null">
+                `evidence_phone`,
+            </if>
+            <if test="state!=null">
+                `state`
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id!=null">
+                #{id},
+            </if>
+            <if test="userid!=null">
+                #{userid},
+            </if>
+            <if test="time!=null">
+                #{time},
+            </if>
+            <if test="evidence!=null">
+                #{evidence},
+            </if>
+            <if test="evidencePeople!=null">
+                #{evidencePeople},
+            </if>
+            <if test="recorId!=null">
+                #{recorId},
+            </if>
+            <if test="phone!=null">
+                #{phone},
+            </if>
+            <if test="evidencePhone!=null">
+                #{evidencePhone},
+            </if>
+            <if test="state!=null">
+                #{state}
+            </if>
+        </trim>
+
+    </insert>
+    <select id="querybyuserid" resultType="com.beans.Requestsp">
+        SELECT `sys_requestsp`.`id`,
+        `sys_requestsp`.`userid`,
+        `sys_requestsp`.`time`,
+        `sys_requestsp`.`evidence`,
+        `sys_requestsp`.`evidence_people` as evidencePeople,
+        `sys_requestsp`.`recor_id` as recorId,
+        `sys_requestsp`.`phone`,
+        `sys_requestsp`.`evidence_phone` as evidencePhone,
+        `sys_requestsp`.`state`,
+        `sys_user`.`name` AS userName
+        FROM `sys_user`,
+        `sys_requestsp`
+
+        WHERE `sys_user`.`id` =`sys_requestsp`.`userid`
+
+        <if test="userid!=0">
+            and `sys_requestsp`.`userid`=#{userid}
+        </if>
+        ORDER BY `sys_requestsp`.`time` DESC
+        <if test="pageIndex!=null and pageSize!=0">
+            LIMIT #{pageIndex},#{pageSize}
+        </if>
+    </select>
+    <select id="querycount" resultType="int">
+        select count(1)
+        FROM `sys_requestsp`
+        <trim prefix="where" suffixOverrides="and">
+        <if test="userid!=null">
+             userid =#{userid}
+        </if>
+
+        </trim>
+    </select>
+    <select id="querybyid" resultType="com.beans.Requestsp">
+        select *
+        from  `sys_requestsp`
+        where id=#{id}
+
+    </select>
+    <select id="getRequestspby" resultType="com.beans.Requestsp">
+         select * from `sys_requestsp` s where userid=#{userid}
+        ORDER BY ABS(NOW() - s.time) ASC
+        limit 1
+    </select>
+
+
+</mapper>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.publics.TalkingMapper">
+    <resultMap id="BaseResultMap" type="com.beans.PubTalking">
+        <result column="id" property="id" jdbcType="INTEGER"/>
+        <result column="originator" property="originator" jdbcType="INTEGER"/>
+        <result column="receive" property="receive" jdbcType="INTEGER"/>
+        <result column="content" property="content" jdbcType="VARCHAR"/>
+        <result column="time" property="time" jdbcType="TIMESTAMP"/>
+        <result column="state" property="state" jdbcType="VARCHAR"/>
+        <association property="oriuser" javaType="com.beans.SysUser" column="originator"
+                     select="com.dao.sys.SysUserMapper.getname">
+        </association>
+        <association property="recuser" javaType="com.beans.SysUser" column="receive"
+                     select="com.dao.sys.SysUserMapper.getname">
+        </association>
+</resultMap>
+    <insert id="addTalking">
+        INSERT INTO `pub_talking`
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id!=0">
+                `id`,
+            </if>
+            <if test="originator!=0">
+                `originator`,
+            </if>
+            <if test="receive!=0">
+                `receive`,
+            </if>
+            <if test="content!=null">
+                `content`,
+            </if>
+            <if test="time!=null">
+                `time`,
+            </if>
+            <if test="state!=null">
+                `state`,
+            </if>
+
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id!=0">
+                #{id},
+            </if>
+            <if test="originator!=null">
+                #{originator},
+            </if>
+            <if test="receive!=0">
+                #{receive},
+            </if>
+            <if test="content!=null">
+                #{content},
+            </if>
+            <if test="time!=null">
+                #{time},
+            </if>
+            <if test="state!=null">
+                #{state},
+            </if>
+
+        </trim>
+
+    </insert>
+
+    <update id="updateState">
+    update  `pub_talking`
+    <set>
+        `state`="已读"
+    </set>
+        where originator=#{oriId} and receive=#{recId};
+    </update>
+
+
+    <select id="getTalkingByUserId" resultMap="BaseResultMap">
+        SELECT *
+        FROM `pub_talking`
+        where
+             `pub_talking`.`originator` =#{userId} OR `pub_talking`.`receive` =#{userId}
+
+
+        ORDER BY `time` DESC
+        <if test="pageSize!=0">
+            LIMIT  #{pageIndex},#{pageSize}
+        </if>
+    </select>
+    <select id="getcountByUserId" resultType="int">
+        select count(1)
+        FROM `pub_talking`
+        where    `pub_talking`.`originator` =#{userId} OR `pub_talking`.`receive` =#{userId}
+    </select>
+    <select id="queryoriginator" resultMap="BaseResultMap">
+         SELECT distinct originator
+        FROM `pub_talking`
+        where originator!=#{userId}
+        group by originator
+    </select>
+
+    <select id="querynnewcontent" resultType="java.lang.Integer">
+         SELECT  count(1)
+        FROM `pub_talking`
+        where `state`="未读"
+      and  `originator` !=#{userId}
+    </select>
+    <select id="getNewContent" resultMap="BaseResultMap">
+         SELECT  *
+        FROM `pub_talking`
+        where `state`="未读"
+        and  `originator` !=#{userId}
+    </select>
+
+
+</mapper>
