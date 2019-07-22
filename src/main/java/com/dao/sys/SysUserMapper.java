@@ -22,4 +22,5 @@ public interface SysUserMapper {
 
      SysUser getname (@Param("id") int id);
 
+     int updatePassword(@Param("userId") int userId ,@Param("password") String password);
 }

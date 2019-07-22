@@ -104,6 +104,11 @@ public class McMaterialsSeviceImpl implements McMaterialsSevice {
     }
 
     @Override
+    public int delete(int id) {
+        return mcMaterialsMapper.delete(id);
+    }
+
+    @Override
     public Map<String, Object> getList(String projectName, int deptid, Date start, Date end, int usreid, int pageIndex) {
         Map<String, Object> map=new HashMap<>();
         Page page=new Page();

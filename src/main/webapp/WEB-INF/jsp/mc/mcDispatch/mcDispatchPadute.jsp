@@ -19,11 +19,13 @@
     <title>人员派遣修改</title>
     <link rel="stylesheet" href="<%=basePath%>/css/bootstrap.css">
     <link rel="stylesheet" href="<%=basePath%>/icon-font/iconfont.css">
+    <link rel="stylesheet" href="<%=basePath%>/layui/css/modules/laydate/default/laydate.css">
     <link rel="stylesheet" href="<%=basePath%>/css/jump-in.css">
     <link rel="stylesheet" href="<%=basePath%>/css/mc/mcStamp/mcStampAdd.css">
     <script src="<%=basePath%>/js/jquery-3.3.1.js"></script>
     <script src="<%=basePath%>/js/bootstrap.js"></script>
     <script src="<%=basePath%>/js/bootstrap-paginator.js"></script>
+    <script src="<%=basePath%>/layui/lay/modules/laydate.js" type="text/javascript"></script>
     <script src="<%=basePath%>/js/public/jump.js"></script>
     <script src="<%=basePath%>/js/public/department.js"></script>
     <script src="<%=basePath%>/js/public/responsible.js"></script>
@@ -31,7 +33,7 @@
     <script src="<%=basePath%>/js/mc/mcDispatch/mcDispatchPadute.js"></script>
 </head>
 <body>
-<jsp:include page="../../in-topleft.jsp"/>
+
 <div id="choice" style="display: none">
     <p class="title">
         <img src="<%=basePath%>/imgs/root.png" height="40" width="40"/>
@@ -54,51 +56,94 @@
         <a class="close-in" >返回</a >
     </div>
 </div>
-<div id="page">
-    <a class="page-left ">人员派遣修改</a>
-</div>
+
 <div id="content-in">
     <div id="center">
         <form action="/mc/dispatched/update.html" method="post"  enctype="multipart/form-data">
             <table border="1">
                 <tr style="height: 40px ;background-color: #efefef">
-                    <td colspan="4" style="text-align: center"><b>人员派遣修改</b><input style="display: none" name="id"></td>
+                    <td colspan="4" style="text-align: center">
+                        <b>人员派遣修改</b>
+                        <input style="display: none">
+                    </td>
                 </tr>
                 <tr style="height:40px;">
                     <td style="width:150px ;;background-color: #efefef">项目名</td>
-                    <td style="width:300px ;">
-                        <select class="projectname" style="width:200px;height: 30px " name="projectid">
+                    <td colspan="3" style="width:300px ;">
+                        <select class="projectname" style="width:600px;height: 30px " name="projectid">
 
                         </select>
                     </td>
-                    <td style="width:150px ;background-color: #efefef;">申请部门</td>
-                    <td style="width:300px ;">
-                        <select class="department" style="width: 100px;height: 30px " name="deptid">
 
+
+                </tr>
+                <tr style="height:40px;">
+                    <td style="width:150px ;background-color: #efefef;">
+                        <span>申请部门</span>
+                    </td>
+                    <td style="width:300px ;">
+                        <select class="department" style="width: 100px;height: 30px " name="deptid" required>
+                            <option value="">请选择</option>
                         </select>
+                    </td>
+                    <td style="width:150px ;background-color: #efefef;">
+                        <span>申请人</span>
+                    </td>
+                    <td style="width:300px ;">
+                        <input style="width:270px ;">
+                        <input style="display: none" name="userid" required>
                     </td>
                 </tr>
                 <tr  style="height:40px;">
-                    <td style="width:150px ;background-color: #efefef;">申请人派遣要求:</td>
-                    <td colspan="3"><input style="width: 700px " name="demand"></td>
+                    <td style="width:150px ;background-color: #efefef;">申请人派遣要求</td>
+                    <td colspan="3">
+                        <input style="width: 700px "name="demand">
+                    </td>
 
                 </tr>
                 <tr style="height:40px;">
-                    <td style="width:150px ;background-color: #efefef;">预计出差时间:</td>
-                    <td ><input style="width: 300px " type="date" name="evectionTime"></td>
-                    <td style="width:150px ;background-color: #efefef;">人员出场费用:</td>
+                    <td style="width:150px ;background-color: #efefef;">预计出差时间</td>
+                    <td ><input style="width: 280px " type="text" class="demo-input" placeholder="请选择日期" id="test1" name="evectionTime"></td>
+                    <td style="width:150px ;background-color: #efefef;">派遣人员情况</td>
                     <td ><input style="width: 300px " name="evectionCost"></td>
                 </tr>
                 <tr style="height:40px;">
-                    <td style="width:150px ;background-color: #efefef;">附件</td>
-                    <td colspan="3"><input style="width: 700px " type="file" name="file"></td>
+                    <td style="width:150px ;background-color: #efefef;">人员费用标准</td>
+                    <td ><input style="width: 300px " name="costStandard"></td>
+                    <td style="width:150px ;background-color: #efefef;">人员费用预算</td>
+                    <td ><input style="width: 300px " name="evectionBudget"></td>
+                </tr>
+                <tr style="height:40px;">
+                    <td style="width:150px ;background-color: #efefef;">实际出差时间</td>
+                    <td ><input style="width: 280px " type="text" class="demo-input" placeholder="请选择日期" id="test2" name="practicalTime"></td>
+                    <td style="width:150px ;background-color: #efefef;">出差情况确认</td>
+                    <td ><input style="width: 300px " name="evectionCondition"></td>
+                </tr>
+                <tr style="height:40px;">
+                    <td style="width:150px ;background-color: #efefef;">人员费用结算</td>
+                    <td ><input style="width: 300px " name="evectionCost"></td>
+                    <td style="width:150px ;background-color: #efefef;">差旅费用结算</td>
+                    <td ><input style="width: 300px " name="travelCost"></td>
                 </tr>
 
             </table>
             <input id="ok"  type="submit" value="确定" style="margin-left:400px ">
-            <a href="#" id="no" style="color: #333">取消</a>
+            <a href="/mc/dispatched/query" id="no"  >取消</a>
         </form>
     </div>
 </div>
+<script type="text/javascript">
+    laydate.render({
+        elem: '#test1', //指定元素
+        event: 'click',
+        format: 'yyyy-MM-dd'
+    });
+    laydate.render({
+        elem: '#test2', //指定元素
+        event: 'click',
+        format: 'yyyy-MM-dd'
+    });
+
+</script>
 </body>
 </html>

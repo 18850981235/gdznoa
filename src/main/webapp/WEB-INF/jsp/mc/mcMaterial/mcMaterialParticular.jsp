@@ -31,53 +31,12 @@
 </head>
 <body>
 <body>
-<jsp:include page="../../in-topleft.jsp"/>
-<div id="page">
-    <a class="page-left ">商务材料详情</a>
-</div>
+
 <div id="content-in">
     <div id="center">
         <form>
-            <!--<table border="1">-->
-            <!--<tr style="text-align: center;height: 45px ">-->
-            <!--<td colspan="4" style="width: 900px;background-color: #efefef "><b>商务材料详情</b><input style="display: none" name="id"></td>-->
-            <!--</tr>-->
-            <!--<tr style="height: 45px ">-->
-            <!--<td style="width:150px ;background-color: #efefef;">申请部门</td>-->
-            <!--<td style="width:300px ;"></td>-->
-            <!--<td style="width:150px ;;background-color: #efefef">申请日期</td>-->
-            <!--<td style="width:300px ;"></td>-->
-            <!--</tr>-->
-            <!--<tr  style="height: 45px ">-->
-            <!--<td style="width:150px ;background-color: #efefef;">提供方式</td>-->
-            <!--<td style="width:300px ;"></td>-->
-            <!--<td style="width:150px ;background-color: #efefef;">收件人</td>-->
-            <!--<td style="width:300px ;"></td>-->
-            <!--</tr>-->
-            <!--<tr style="height: 45px ">-->
-            <!--<td style="width:150px ;background-color: #efefef;">收件人电话</td>-->
-            <!--<td colspan="3" ></td>-->
-            <!--</tr>-->
-            <!--<tr style="height: 45px ">-->
-            <!--<td style="width:150px ;background-color: #efefef;">收件地址</td>-->
-            <!--<td colspan="3" ></td>-->
-            <!--</tr>-->
-            <!--<tr style="height: 45px ">-->
-            <!--<td style="width:150px ;background-color: #efefef;">申请商务资料的内容及要求</td>-->
-            <!--<td colspan="3" ></td>-->
-            <!--</tr>-->
-            <!--<tr style="height: 45px ">-->
-            <!--<td style="width:150px ;background-color: #efefef;">资料用途说明</td>-->
-            <!--<td colspan="3" ></td>-->
-            <!--</tr>-->
-            <!--<tr style="height: 45px ">-->
-            <!--<td style="width:150px ;background-color: #efefef;">附件</td>-->
-            <!--<td colspan="3" ></td>-->
-            <!--</tr>-->
 
-            <!--</table>-->
-
-            <a href="#" id="no" style="color: #333;margin-left: 450px ">返回</a>
+            <a href="/mc/materials/query" id="no" style="color: #333;margin-left: 450px ">返回</a>
         </form>
     </div>
 </div>

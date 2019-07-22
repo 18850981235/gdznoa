@@ -47,12 +47,12 @@ public class BdProjectServiceImpl implements BdProjectService {
         int num = 0;
         try {
             SysApprovalProcess process = approvalProcessMapper.getProcessById(1);
+            project.setProcessid(1);
             String accessory = FileUtils.uploadFile(request, "file");
 
             if (accessory != null && !accessory.equals("")) {
                 project.setAccessory(accessory);
             }
-            String[] arr = process.getUsersid().split(",");
             int userId = (int) request.getSession().getAttribute("userId");
             project.setUserid(userId);
             project.setProcessUserid(project.getAreaManager());

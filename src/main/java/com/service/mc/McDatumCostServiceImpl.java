@@ -87,7 +87,7 @@ public class McDatumCostServiceImpl implements McDatumCostService {
     {
         int num = 0;
         try {
-            SysApprovalProcess process = approvalProcessMapper.getProcessById(7);
+            SysApprovalProcess process = approvalProcessMapper.getProcessById(6);
             String accessory= FileUtils.uploadFile(request,"file");
             if (accessory!=null&&!accessory.equals("")){
                 mcDatumCost.setAccessory(accessory);
@@ -107,6 +107,11 @@ public class McDatumCostServiceImpl implements McDatumCostService {
     @Override
     public int update(McDatumCost mcDatumCost) {
         return mcDatumCostMapper.updateById(mcDatumCost);
+    }
+
+    @Override
+    public int deleteById(int id) {
+        return mcDatumCostMapper.delete(id);
     }
 
     @Override

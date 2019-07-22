@@ -14,6 +14,7 @@ public interface McDatumCostMapper {
     int updateById(McDatumCost mcDatumCost);
 
     McDatumCost getListById(int id);
+    int delete(@Param("id")int id);
 
     int getCount(@Param("name") String name,
                  @Param("deptid") int deptid,

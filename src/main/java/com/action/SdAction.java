@@ -61,16 +61,24 @@ public class SdAction {
     }
 
     //region ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~销售合同~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
     //获取所有项目
     @RequestMapping(value = "/SdSalesContract/getProject", produces = "application/json; charset=utf-8")
     @ResponseBody
     public String getProject() {
-
         return JSONObject.toJSONString(bdProjectService.getallPeoject(),
                 SerializerFeature.DisableCircularReferenceDetect,
                 SerializerFeature.WriteNullStringAsEmpty);
 
     }
+
+    @RequestMapping("/SdSalesContract/AddProjectPage")
+    public String AddProjectPage() {
+        return "/sale/contract/contractAdd";
+    }
+
     //添加合同
     @RequestMapping(value = "/SdSalesContract/addContract", produces = "application/json; charset=utf-8")
     public String addContract(SdSalesContract sdSalesContract,HttpServletRequest reques) {
@@ -80,9 +88,12 @@ public class SdAction {
         } else {
             return " ";
         }
+    };
+    @RequestMapping("/SdSalesContract/UpdateProjectPage")
+    public String UpdateProjectPage() {
+        return "/sale/contract/contractPadute";
     }
 
-    ;
     //修改合同信息
     @RequestMapping(value = "/SdSalesContract/updateContract", produces = "application/json; charset=utf-8")
     public String updateContract(SdSalesContract sdSalesContract) {
@@ -92,19 +103,22 @@ public class SdAction {
         } else {
             return "";
         }
-    }
+    } ;
 
-    ;
+
 //获取合同单挑数据
     @RequestMapping(value = "/SdSalesContract/getContractbyid", produces = "application/json; charset=utf-8")
     @ResponseBody
     public String getContractbyid(@Param("id") int id) {
-
         return JSONObject.toJSONString(sdSalesContractservice.querybyId(id),
                 SerializerFeature.DisableCircularReferenceDetect,
                 SerializerFeature.WriteNullStringAsEmpty);
     }
-    //根据ID查询详情
+    //根据ID查询审批详情
+    @RequestMapping("/SdSalesContract/detailProjectPage")
+    public String detailProjectPage() {
+        return "/sale/contract/contractParticular";
+    }
     @RequestMapping(value = "/SdSalesContract/querydetailsbyid", produces = "application/json; charset=utf-8")
     @ResponseBody
     public String Querydetailsbyid(@RequestParam int id) {
@@ -112,7 +126,10 @@ public class SdAction {
                 SerializerFeature.DisableCircularReferenceDetect,
                 SerializerFeature.WriteNullStringAsEmpty);
     }
-
+    @RequestMapping("/sales/query")
+    public String toProjectPage() {
+        return "/sale/contract/contractList";
+    }
     //模糊查询合同数据
     @RequestMapping(value = "/SdSalesContract/queryContract", produces = "application/json; charset=utf-8")
     @ResponseBody
@@ -131,10 +148,10 @@ public class SdAction {
                 SerializerFeature.WriteNullStringAsEmpty);
 
     }
-    //审批流程
+    //我的工作：添加审批流程
     @RequestMapping("/SdSalesContract/approvalDetailed")
-    public String datumParticular(SysApprovalDetailed approvalDetailed, HttpSession session) {
-        int userid = (int) session.getAttribute("userId");
+    public String datumParticular(SysApprovalDetailed approvalDetailed, HttpServletRequest request) {
+        int userid = (int)request.getSession().getAttribute("userId");
         approvalDetailed.setApprovalUser(userid);
         approvalDetailed.setApprovalDate(new Date());
         sdSalesContractservice.addContractApproval(approvalDetailed);
@@ -144,7 +161,13 @@ public class SdAction {
     //endregion ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~销售合同结束~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   //region~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~合同清单~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  //根据工程ID查询中间表
+
+
+    @RequestMapping("/Inventory/getContractbyprojectPage")
+    public String getContractbyprojectPage() {
+        return "/sale/detailed/detailedParticular";
+    }
+    //根据工程ID查询中间表
   @RequestMapping(value = "/Inventory/getContractbyproject", produces = "application/json; charset=utf-8")
   @ResponseBody
    public String getContractbyproject(@RequestParam(required = false,defaultValue = "0") int projectId, @RequestParam(required = false, defaultValue = "0")int pageIndex) {
@@ -152,6 +175,10 @@ public class SdAction {
               SerializerFeature.DisableCircularReferenceDetect,
               SerializerFeature.WriteNullStringAsEmpty);
    }
+    @RequestMapping("/Inventory/getInventorybyprojectPage")
+    public String getInventorybyprojectPage() {
+        return "/sale/detailed/detailedParticular";
+    }
 //直接根据ID查询详情表和清单表
     @RequestMapping(value = "/Inventory/getInventorybyproject", produces = "application/json; charset=utf-8")
     @ResponseBody
@@ -159,6 +186,11 @@ public class SdAction {
         return JSONObject.toJSONString(sdSalesContractInventoryService.queryContractInventorbyid(id),
                 SerializerFeature.DisableCircularReferenceDetect,
                 SerializerFeature.WriteNullStringAsEmpty);
+    }
+
+    @RequestMapping("/Inventory/getInventorybyidPage")
+    public String getInventorybyidPage() {
+        return "/sale/detailed/detailedParticular";
     }
    //直接根据ID查询详情表和清单表
     @RequestMapping(value = "/Inventory/getInventorybyid", produces = "application/json; charset=utf-8")
@@ -206,7 +238,10 @@ public class SdAction {
                 SerializerFeature.DisableCircularReferenceDetect,
                 SerializerFeature.WriteNullStringAsEmpty);
     };
-
+    @RequestMapping("/salesinventory/query")
+    public String InventorybyidPage() {
+        return "/sale/detailed/detailedList";
+    }
 //条件查询清单
     @RequestMapping(value = "/Inventory/quyry", produces = "application/json; charset=utf-8")
     @ResponseBody
@@ -222,7 +257,10 @@ public class SdAction {
                 SerializerFeature.DisableCircularReferenceDetect,
                 SerializerFeature.WriteNullStringAsEmpty);
     }
-
+    @RequestMapping("/Inventory/AddnventorybyidPage")
+    public String AddnventorybyidPage() {
+        return "/sale/detailed/detailedAdd";
+    }
     //添加Excel上传的；
     //条件查询清单
     @RequestMapping(value = "/Inventory/addInven", produces = "application/json; charset=utf-8")
@@ -247,6 +285,8 @@ public class SdAction {
         out.close();
     return " ";
     };
+
+
     @RequestMapping(value = "/Inventory/addInvenbywight", produces = "application/json; charset=utf-8")
     @ResponseBody
     public String  addInven(SdSalesContractInventory salesContractInventory, List<SdSalesInventory> list) throws Exception{

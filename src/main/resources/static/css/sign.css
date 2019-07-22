@@ -8,6 +8,9 @@ a{
     text-decoration: none;
     color: #000;
 }
+p{
+    margin: 0px ;
+}
 ul{
     list-style: none;
 
@@ -23,31 +26,32 @@ body,html{
     width: 100%;
     height: 100% ;
     background:url("../imgs/index_bg.jpg")no-repeat center ;
-    padding-top: 60px ;
+    padding-top: 4%;
     background-size: 100% 100%;
 }
 #on-in{
-    width: auto;
+
     height: 100%;
-    padding: 0px  120px ;
+    width: 100%;
+    padding: 0px  7% ;
 }
-@media screen and (max-width: 1700px)  {
+@media screen and (max-width: 1270px)  {
     #on{
-        width: 1700px ;
+        width: 1270px ;
     }
     #on-in{
-        width:1700px   ;
+        width:1270px   ;
     }
 }
-#on .logo{
-    width: 90px  ;
-    height: 90px ;
+#on .logo {
+    width: 110px;
+    height: 100px;
     float: left;
 }
 #on-in .on-time{
     display: inline-block;
     width: 100%;
-    height: 90px ;
+    height: 120px   ;
     margin-right: auto;
     margin-left: auto;
     text-align: center;
@@ -59,15 +63,18 @@ body,html{
     font-size: 88px;
     color: #ffffff;
     background-color:transparent ;
+    float: left;
+    margin-left: 250px ;
 }
 #day-time{
     width: 130px;
+    height: 100%;
     display: inline-block;
 }
 #daytime{
     display: block;
      width: 130px ;
-     height: 20px ;
+     height: 40% ;
     font-size: 25px;
     color: #ffffff;
      background-color:transparent ;
@@ -75,7 +82,7 @@ body,html{
 #day{
     display: block;
     width: 130px ;
-    height: 40px ;
+    height: 60% ;
     font-size: 25px;
     color: #ffffff;
     background-color:transparent ;
@@ -113,8 +120,8 @@ body,html{
 }
 #on-in .content{
     width: 100%;
-    height: 550px ;
-    padding-top: 100px ;
+    height: 80% ;
+    padding-top: 6%;
     display: flex;
     justify-content: space-between;
     /*align-items: center;*/
@@ -122,6 +129,7 @@ body,html{
 #on-in .content ul{
     float: left;
     width: 24%;
+    height: 90%;
 
     /*margin-right: 20px ;*/
 }
@@ -129,8 +137,9 @@ body,html{
     /*margin-right: 0px ;*/
 /*}*/
 #on-in .content li{
-    margin-bottom: 20px ;
-    height: 135px;
+    margin-bottom: 3% ;
+    width: 100%;
+    height: 30%;
     display: flex;
     justify-content: space-between;
 }
@@ -140,29 +149,34 @@ body,html{
     color: #ffffff;
 }
 #on-in .content a span{
-    font-size: 50px ;
+    /*font-size: 50px ;*/
     display: inline-block;
 }
 #on-in .content .modular{
-    width:100% ;
-    height: 135px;
-    padding-left: 125px ;
-    line-height: 135px ;
+    width:60% ;
+    height: 100%;
+    /*padding-left:  ;*/
+    margin: 0px auto;
+
 }
 /*#on-in .content .modular:hover{*/
     /*background-color: ;*/
 /*}*/
+#on-in .content .Height{
+    line-height: 900%;
+}
 #on-in .content .modular1{
     width:48% ;
-    height: 135px;
-    padding-top: 10px ;
+    height: 100%;
+    /*padding-top: 10px ;*/
     text-align: center;
 }
 #on-in .content .modular2{
     width:100% ;
-    height: 445px;
+    height: 100%;
 }
 #on-in .name{
+    height: 35px ;
     margin-left: 30px ;
     display: inline-block;
     font-size: 28px ;
@@ -208,16 +222,51 @@ body,html{
     display: inline-block;
 }
 #on-in .content .colour-12{
+    height: 95%;
     background-color: #86b235;
 }
-/*@media screen and (max-width: 1570px)  {*/
-    /*#on-in .content{*/
-        /*width: 1370px ;*/
-    /*}*/
-    /*#on{*/
-        /*width: 1580px;*/
-    /*}*/
-/*}*/
+@media screen and (max-width: 1570px)  {
+    #on-in .on-time{
+        width: 1350px ;
+    }
+#on-in .content{
+width: 1350px ;
+}
+#on{
+width: 1570px;
+}
+    #on-in .content ul{
+        width: 320px ;
+        height: 373px;
+    }
+    #on-in .content li{
+        height: 118px ;
+        width: 320px ;
+    }
+    #on-in .content .colour-12,
+    #on-in .content .modular2 li{
+        height: 373px ;
+        width: 320px ;
+    }
+}
+@media screen and (max-height: 700px ){
+    #on{
+        height: 700px ;
+    }
+    #on-in .content{
+        height: 300px ;
+    }
+    #on-in .content ul{
+        width: 320px ;
+    }
+    #on-in .content li{
+        height: 118px ;
+        width: 320px ;
+    }
+    #on-in .content .colour-12   {
+        height: 373px ;
+    }
+}
 /*
 工程管理
 信息发布

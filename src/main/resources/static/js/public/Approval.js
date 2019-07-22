@@ -6,7 +6,7 @@ $.ajax({
     type:"post",
     dataType:"json",
     url:"/myWork",
-    // url:"http://192.168.1.191:8080/util/getClient",
+    // url:"/util/getClient",
     success:function (data) {
 
         var path= window.location.pathname+"Detailed";

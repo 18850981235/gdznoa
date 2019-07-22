@@ -23,4 +23,6 @@ public interface RoleMapper {
 
     SysRole getbyid(@Param("roleid") int roleid);
 
+    List<SysRole> getallRole();
+
 }

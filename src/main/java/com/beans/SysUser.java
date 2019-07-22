@@ -22,7 +22,7 @@ public class SysUser implements Serializable {
   private String IDnumber;
   private String phone;
   private String email;
-  private String companyid;
+  private String company;
   private int deptid;
   private int roleid;
 

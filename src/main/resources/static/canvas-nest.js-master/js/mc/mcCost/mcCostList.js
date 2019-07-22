@@ -15,7 +15,7 @@ function lo() {
 
     $.ajax({
         type: "get",
-        url: "../../../json/mc.json",
+        url: "<%=basePath%>/json/mc.json",
         // data: {"clientname":clientname,"name":name},
         dataType: "json",
         success: function (data) {

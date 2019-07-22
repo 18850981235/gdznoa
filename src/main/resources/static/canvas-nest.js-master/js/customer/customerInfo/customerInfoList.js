@@ -15,7 +15,7 @@
         var s3=$(".Eliminate").val();
         $.ajax({
             type: "get",
-            url: "../../../json/screen.json",
+            url: "<%=basePath%>/json/screen.json",
             // data: {"bankaddress":s,"address":s1,"unitType":s2,"name":s3},
             dataType: "json",
             success: function (data) {

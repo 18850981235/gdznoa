@@ -34,11 +34,11 @@ table{
 #content-in .add-to{
     color: blue;
 }
-@media screen and (max-width: 1340px) {
-    #content-in{
-        width: 1276px ;
-        position: absolute;
-        left: 126px ;
-        top:130px;
-    }
-}
+/*@media screen and (max-width: 1340px) {*/
+    /*#content-in{*/
+        /*width: 1276px ;*/
+        /*position: absolute;*/
+        /*left: 126px ;*/
+        /*top:130px;*/
+    /*}*/
+/*}*/

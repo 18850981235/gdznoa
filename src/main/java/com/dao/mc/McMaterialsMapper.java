@@ -18,6 +18,8 @@ public interface McMaterialsMapper {
     //按id查询商务材料
     McMaterials getListById(int id);
 
+    int delete(@Param("id")int id);
+
     int getCount(@Param("offerTpye") String offerTpye,
                  @Param("deptid") int deptid,
                  @Param("start") Date start,

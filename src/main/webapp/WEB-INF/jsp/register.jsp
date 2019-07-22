@@ -9,13 +9,13 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 <head>
     <meta charset="UTF-8">
     <title>注册</title>
-    <link rel="stylesheet" href="<%=basePath%>/css/bootstrap.css">
-    <link rel="stylesheet" href="<%=basePath%>/icon-font/iconfont.css">
-    <!--<link rel="stylesheet" href="<%=basePath%>/css/sign-in.css">-->
-    <link rel="stylesheet" href="<%=basePath%>/css/register.css">
-    <script src="<%=basePath%>/js/jquery-3.3.1.js"></script>
-    <script src="<%=basePath%>/js/bootstrap.js"></script>
-    <!--<script src="<%=basePath%>/js/sign-in.js"></script>-->
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <link rel="stylesheet" href="../icon-font/iconfont.css">
+    <!--<link rel="stylesheet" href="../css/sign-in.css">-->
+    <link rel="stylesheet" href="../css/register.css">
+    <script src="../js/jquery-3.3.1.js"></script>
+    <script src="../js/bootstrap.js"></script>
+    <!--<script src="../js/sign-in.js"></script>-->
     <style>
         * {
             margin: 0;
@@ -62,7 +62,10 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 <body>
 <div id="github-iframe"></div>
 <div id="top">
-    <img src="<%=basePath%>/imgs/logo.png" />
+
+    <div id="logo"><img src="../imgs/logo.png"></div>
+
+
     <div id="on">
 
         <div class="in">
@@ -73,6 +76,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                         <span>用户名</span>
                     </div>
                     <input placeholder="请输入用户名"   name="name">
+                    <span class="co"> * 账号不存在</span>
                 </div>
                 <div class="conduct div-phone">
                     <div class="back-img">
@@ -94,7 +98,12 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                         <span>密码</span>
                     </div>
                     <input placeholder="请输入密码"   type="password" >
-                    <span class="co"> * 账号不存在</span>
+                </div>
+                <div class="conduct">
+                    <div class="back-img" style="text-align: center">
+                        <span>密码</span>
+                    </div>
+                    <input placeholder="请再次输入密码"   type="password" >
                 </div>
                 <input value="注册"  type="button" class="ok"  style="background-color:#0067b8 ">
             </form>
@@ -103,15 +112,35 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                 <a class="retrieve">忘记密码</a>
             </div>
         </div>
-        <p class="bottom">福建省广电智能系统集成工贸有限公司@版权所有</p>
+        <!--<p class="bottom">福建省广电智能系统集成工贸有限公司@版权所有</p>-->
     </div>
 
 
 </div>
-<script type="text/javascript" color="255,255,255" pointColor="255,255,255" opacity='40' zIndex="-2" count="200" src="<%=basePath%>/canvas-nest.js-master/dist/canvas-nest.js"></script>
-<script type="text/javascript" src="<%=basePath%>/canvas-nest.js-master/dist/canvas-nest.umd.js"></script>
+<script type="text/javascript" color="255,255,255" pointColor="255,255,255" opacity='40' zIndex="-2" count="1" src="../canvas-nest.js-master/dist/canvas-nest.js"></script>
+<script type="text/javascript" src="../canvas-nest.js-master/dist/canvas-nest.umd.js"></script>
 <script>
 
+    $("#phone").mouseout(function () {
+        $("#phone").mouseleave(function () {
+            var phone=$("#phone").val();
+            $.ajax({
+                type:"get",
+                dataType:"text",
+                url:"/page/isAccount.html",
+                data:{"mobile":phone},
+                success:function (data) {
+                    if (data == 1) {
+
+                    } else {
+                        alert("用户已注册！")
+                        window.location.href = "/page/index"
+
+                }
+                }
+            });
+        })
+    })
     $(".ok").click(function () {
 
         var name=$("input").eq(0).val();
@@ -125,6 +154,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
             data:{"name":name,"mobile":mobile,"verifyCode":verifyCode,"password":password},
             success:function (data) {
                 alert(data);
+                window.location.href = "/page/index"
 
             }
         });
@@ -133,13 +163,13 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
         color: '255,0,255',
         count: 5,
     });
-//    $("body").on("click",".send1",function () {
-//        console.log(2);
-//    })
-//    $("send1").click(function () {
-//        console.log(1);
-//        sends.send();
-//    })
+    //    $("body").on("click",".send1",function () {
+    //        console.log(2);
+    //    })
+    //    $("send1").click(function () {
+    //        console.log(1);
+    //        sends.send();
+    //    })
     function ok() {
         var phone=$("input").eq(1).val();
         $.ajax({
@@ -162,7 +192,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
         checked:1,
 
     }
-   function send(){
+    function send(){
         var numbers = /^1\d{10}$/;
         var val = $('#phone').val().replace(/\s+/g,""); //获取输入手机号码
         if($('.div-phone').find('span').length == 0 && $('.div-phone a').attr('class') == 'send1'){

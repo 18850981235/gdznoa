@@ -40,7 +40,7 @@
                         html += "<a style='color: blue' href='/bd/client/particular?id="+obj1.id+"'>详情</a>";
                         html += "<a style='margin-left:6px;color:#dea97d;  ' href='/bd/client/update?id="+obj1.id+"'>编辑</a>";
                         html += " <a class='del' style='color: #a6d1c0'>删除</a>";
-                        html += "<div id='confirm'   >";
+                        html += "<div id='confirm' >";
                         html += "<p style='margin-bottom: 80px;font-size:20px '>" + "是否删除客户联系人信息" + "</p>";
                         html += "<a class='confirm-ok' type='submit'  href='/bd/client/delete?id="+obj1.id+"' >" + "是" + "</a>";
                         html += "<a class='confirm-no' type='submit' >" + "否" + "</a>";

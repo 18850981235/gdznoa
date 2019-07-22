@@ -26,14 +26,14 @@ public class McQualificationCertificate {
   private Date annualTime;
   private int security;
   private int annualPrincipal;
-  private String file;
+  private String filename;
   private String watermark;
   private String accessory;
   private int processid;
   private int processUserid;
   private String processState;
   private String deptName;
-  private int  pdf_Outtime;
+  private int  pdf_outtime;
 
   private SysUser user;
   private SysUser annualUser;

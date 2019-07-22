@@ -40,18 +40,23 @@
         from `sys_dept`
         where id = #{id}
     </delete>
+
     <select id="getDeptUsers" resultMap="BaseResultMap">
         SELECT *  FROM `sys_dept`
     </select>
-    <resultMap id="BaseResultMap" type="com.beans.SysDept">
+    <resultMap id="BaseResultMap" type="sysdept">
         <id column="id" property="id"/>
-        <collection property="users" javaType="java.util.ArrayList" ofType="com.beans.SysUser"
+        <collection property="users" javaType="java.util.ArrayList" ofType="sysuser"
                     column="id" select="getUser">
         </collection>
     </resultMap>
-    <select id="getUser" resultType="com.beans.SysUser">
+    <select id="getUser" resultType="sysuser">
         SELECT `id`,`name`,`deptid`
         FROM `sys_user`
         WHERE `deptid` = #{id}
+    </select>
+
+    <select id="getAllDepy" resultType="com.beans.SysDept">
+        SELECT *  FROM `sys_dept`
     </select>
 </mapper>

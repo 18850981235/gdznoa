@@ -12,4 +12,6 @@ import java.util.Map;
 public interface SysRequestspService {
 
     Requestsp getRequestspby(int userid);
+
+    int updatetRequestsp(@Param("id") int id,@Param("state") String state);
 }

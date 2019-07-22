@@ -11,7 +11,7 @@ $.ajax({
 
         $.each(data,function (index,obj) {
             var html="";
-            console.log(obj.name);
+
             // html+='<ul class="name" >';
             html+='<option value='+obj.id+'>'+obj.name+'</option>';
             // html+='</ul>';

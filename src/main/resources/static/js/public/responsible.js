@@ -8,7 +8,7 @@
 $.ajax({
     type:"post",
     dataType:"json",
-    url:"/util/getDeptUsers",
+        url:"/util/getDeptUsers",
     success:function (data) {
         // var users=data.names.users;
         $.each(data,function (index,obj) {
@@ -19,12 +19,12 @@ $.ajax({
                 if(i==obj.id){
 
                     html+='<li>';
-                    html+='<a class="click">'+obj.name+'</a>';
+                    html+='<a class="click" >'+obj.name+'</a>';
                     // 二级
                     $.each(obj.users,function (index1,obj2) {
                         html+='<ul class="name" style="display: none" >';
                         html += '<li class="co">';
-                        html += '<a class="upload" >';
+                        html += '<a class="upload"  >';
                         html += '<span class="name-block" >'+obj2.name+'</span>';
                         html += '<span class="name-none" style="display: none">'+obj2.id+'</span>';
                         html += '</a>';

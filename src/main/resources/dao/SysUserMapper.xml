@@ -9,7 +9,6 @@
         <result column="IDnumber" property="IDnumber" jdbcType="VARCHAR"/>
         <result column="phone" property="phone" jdbcType="VARCHAR"/>
         <result column="email" property="email" jdbcType="VARCHAR"/>
-        <result column="companyid" property="companyid" jdbcType="VARCHAR"/>
         <result column="deptid" property="deptid" jdbcType="INTEGER"/>
         <result column="roleid" property="roleid" jdbcType="INTEGER"/>
         <result column="createtime" property="createtime" jdbcType="TIMESTAMP"/>
@@ -39,7 +38,7 @@
         FROM `sys_user`
         <trim prefix="where" prefixOverrides="and">
         <if test="account!=null">
-            and sys_user.`account` like CONCAT('%',#{account},'%')
+            and  sys_user.`account` like CONCAT('%',#{account},'%')
         </if>
         <if test="name!=null">
             and sys_user.`name` like CONCAT('%',#{name},'%')
@@ -53,9 +52,9 @@
     <select id="querycount" resultType="int">
         select count(1)
         FROM `sys_user`
-        <trim prefix="(" suffix=")" suffixOverrides=",">
+        <trim prefix="where" prefixOverrides="and">
         <if test="account!=null">
-            and sys_user.`account` like CONCAT('%',#{account},'%')
+           and  sys_user.`account` like CONCAT('%',#{account},'%')
         </if>
         <if test="name!=null">
             and sys_user.`name` like CONCAT('%',#{name},'%')
@@ -93,7 +92,7 @@
             <if test="password!=null">
                 `password`= #{password},
             </if>
-            <if test="sex!=0">
+            <if test="sex!=3">
                 `sex`=#{sex},
             </if>
             <if test="IDnumber!=null">
@@ -105,9 +104,7 @@
             <if test="email!=null">
                 `email`=#{email},
             </if>
-            <if test="companyid!=0">
-                `companyid`=#{companyid},
-            </if>
+
             <if test="deptid!=0">
                 `deptid`=#{deptid},
             </if>
@@ -132,8 +129,8 @@
             <if test="QQ!=null">
                 `QQ`= #{QQ},
             </if>
-            <if test="WeChat!=null">
-                `WeChat`=#{WeChat},
+            <if test="weChat!=null">
+                `weChat`=#{weChat},
             </if>
             <if test="balance!=0">
                 `balance`=#{balance},
@@ -153,10 +150,12 @@
         </set>
         WHERE `id` = #{id}
     </update>
+    <update id="updatePassword">
+        update `sys_user`
+          set `password`=#{password}
+        where `id` = #{userId}
 
-
-
-
+    </update>
 
 
 </mapper>

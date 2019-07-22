@@ -17,10 +17,10 @@ public class Requestsp {
     private Date time;
     private String evidence;
     private String evidencePeople;
-    private int recorId;
     private String phone;
     private  String evidencePhone;
     private  String state;
+    private  String ermissions;
 
     private  String userName;
 }

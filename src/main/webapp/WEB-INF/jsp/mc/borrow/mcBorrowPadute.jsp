@@ -30,11 +30,11 @@
     <script src="<%=basePath%>/js/mc/mcBorrow/mcBorrowPadute.js"></script>
 </head>
 <body>
-<jsp:include page="../../in-topleft.jsp"/>
+
 <div id="choice" style="display: none">
     <p class="title">
         <img src="<%=basePath%>/imgs/root.png" height="40" width="40"/>
-        福建省广电智能系统集成工贸有限公司
+        广电智能
     </p>
     <ul class="yiji-no">
         <li style="display:none;">
@@ -53,14 +53,40 @@
         <a class="close-in" >返回</a >
     </div>
 </div>
-<div id="page">
-    <a class="page-left ">原件借用修改</a>
+<div id="choice4" style="display: none" >
+    <p class="title">
+        <img src="<%=basePath%>/imgs/root.png" height="40" width="40"/>
+        广电智能
+    </p>
+    <div class="search">
+        <input class="search-1" style="border: 1px solid">
+        <input class="search-2"  type="button" value="搜索">
+        <input class="search-3" type="button" value="返回">
+    </div>
+    <div class="choice4-con" style="display: none">
+        <a class="noe">
+            <p>资历证书</p>
+        </a>
+        <a class="tow">
+            <p>业绩证书</p>
+        </a>
+    </div>
+    <div class="noe-no" style="display: none">
+
+    </div>
+    <div class="tow-no">
+
+    </div>
+    <div class="on" style="text-align: center"></div>
+    <div id="close4">
+        <a class="close-in" >关闭</a >
+    </div>
 </div>
 <div id="content-in">
     <div id="center">
         <form action="/mc/borrow/update.html" method="post"  enctype="multipart/form-data">
             <input id="ok"  type="submit" value="确定" style="margin-left:400px ">
-            <a href="#" id="no" style="color: #333">取消</a>
+            <a href="/mc/borrow/query" id="no"  >取消</a>
         </form>
     </div>
 </div>

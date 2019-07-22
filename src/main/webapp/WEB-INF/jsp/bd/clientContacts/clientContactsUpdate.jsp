@@ -26,11 +26,6 @@
     <script src="<%=basePath%>/js/public/jump.js"></script>
 </head>
 <body>
-
-<jsp:include page="../../in-topleft.jsp"/>
-<div id="page">
-    <a class="page-left ">修改联系人</a>
-</div>
 <div id="new" >
     <div id="center">
         <form action="/bd/client_contacts/update.html" method="post">
@@ -42,7 +37,7 @@
                 <tr>
                     <td style="height: 50px;background-color: #efefef">客户单位：</td>
                     <td colspan="3">
-                        <select class="customer" required style="width:200px ;height: 25px  "  name="clientid">
+                        <select class="customer" required style="width:200px ;height: 25px  "  name="clientid" required>
                             <option value="">请选择</option>
                             <c:forEach items="${clientName}" var="a">
                                 <c:if test="${a.id==clientContacts.clientid}">
@@ -57,15 +52,15 @@
                 </tr>
                 <tr>
                     <td style="height: 50px;background-color: #efefef ">姓名：</td>
-                    <td ><input required  name="name" value="${clientContacts.name}"></td>
-                    <td style="background-color: #efefef">职务：</td>
-                    <td><input required  name="role" value="${clientContacts.role}"></td>
+                    <td ><input required  name="name" value="${clientContacts.name}" required></td>
+                    <td style="background-color: #efefef" >职务：</td>
+                    <td><input required  name="role" value="${clientContacts.role}" required></td>
                 </tr>
                 <tr>
                     <td style="height: 50px;background-color: #efefef ">联络电话：</td>
                     <td ><input name="mobile" value="${clientContacts.mobile}" ></td>
                     <td style="background-color: #efefef">手机：</td>
-                    <td><input required name="phone" value="${clientContacts.phone}"></td>
+                    <td><input required name="phone" value="${clientContacts.phone}" required></td>
                 </tr>
                 <tr>
                     <td style="height: 50px;background-color: #efefef ">微信号：</td>
@@ -79,7 +74,7 @@
                 </tr>
             </table>
             <input id="ok" type="submit" value="确定"  style="margin-left: 180px ">
-            <a id="no" >返回</a>
+            <a href="/bd/client_contacts/query" id="no" >返回</a>
         </form>
     </div>
 

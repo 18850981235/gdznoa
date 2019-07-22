@@ -17,7 +17,7 @@
 
         $.ajax({
             type: "get",
-            url: "../../../json/approval.json",
+            url: "<%=basePath%>/json/approval.json",
             // data: {"status":status,"start":start,"type":type,"code":code,"name":name},
             dataType: "json",
             success: function (data) {

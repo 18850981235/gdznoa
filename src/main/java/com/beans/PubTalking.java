@@ -11,7 +11,7 @@ public class PubTalking {
     private int id;
 
     private int originator;
-
+//接受人ID
     private  int receive;
 
     private  String content;

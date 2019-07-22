@@ -23,7 +23,7 @@ public class McRegisterRecords {
   private String recordsType;
   private String recordsName;
   private String recordsState;
-  private  String dataConditions;
+  private String dataConditions;
   private String caBorrow;
   private int annualPrincipal;
   @JsonFormat(pattern = "yyyy-MM-dd")
@@ -36,7 +36,6 @@ public class McRegisterRecords {
   private int processUserid;
   private String processState;
   private String deptName;
-
   private SysUser annualuser;
   private SysUser user;
   private SysUser managerUser;

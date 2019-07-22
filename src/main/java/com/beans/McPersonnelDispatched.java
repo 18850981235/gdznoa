@@ -25,7 +25,7 @@ public class McPersonnelDispatched {
 
   private String personnelCondition;
 
-  private String costStandard;
+  private BigDecimal costStandard;
 
   private BigDecimal evectionBudget;
 

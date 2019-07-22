@@ -11,12 +11,17 @@ import com.service.sup.SupplierService;
 import com.service.sup.SupplierStaffService;
 import com.service.sup.SupplierTrademarkService;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /*
 许思明
@@ -33,6 +38,15 @@ public class SupplierAction {
     private SupplierService supplierService;
     @Resource(name="SupplierEvaluateService")
     private SupplierEvaluateService supplierEvaluateService;
+
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        dateFormat.setLenient(false);
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
+        //true:允许输入空值，false:不能为空值
+    }
+
 
     //region
     //增加品牌
@@ -132,7 +146,9 @@ public class SupplierAction {
     @RequestMapping(value = "/staff/querystaffbyid",produces = "application/json; charset=utf-8")
     public String QueryStaffbyid(@RequestParam int id)
     {
-        return JSONObject.toJSONString(supplierStaffService.querybyid(id),SerializerFeature.DisableCircularReferenceDetect);
+        return JSONObject.toJSONString(supplierStaffService.querybyid(id),
+                SerializerFeature.DisableCircularReferenceDetect,
+                SerializerFeature.WriteNullStringAsEmpty);
     };
     //模糊搜索
     @RequestMapping(value="/staff/queryStaffpage" , produces = "text/html;charset=UTF-8")

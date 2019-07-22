@@ -11,7 +11,7 @@
                `email`,
                `deptid`,
                `roleid`,
-               `sys_dept`.`name` AS dept,
+               `sys_dept`.`name` AS company,
                `sys_role`.`name` AS role,
                `createtime`
         FROM `sys_user`,
@@ -22,8 +22,8 @@
           AND `account` = #{account}
     </select>
 
-    <select id="isAccount" resultType="int">
-        select count(1)
+    <select id="isAccount"  resultType="int">
+        select count(0)
         FROM `sys_user`
         where `account` = #{mobile}
     </select>
@@ -43,7 +43,7 @@
                `email`,
                `deptid`,
                `roleid`,
-               `sys_dept`.`name` AS dept,
+               `sys_dept`.`name` AS company,
                `sys_role`.`name` AS role,
                `createtime`
         FROM `sys_user`,

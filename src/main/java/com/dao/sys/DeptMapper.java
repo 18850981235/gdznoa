@@ -25,4 +25,6 @@ public interface DeptMapper {
     //按id查询部门
     SysDept getListById(@Param("id") int id);
 
+    List<SysDept> getAllDepy();
+
 }

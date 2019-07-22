@@ -9,6 +9,7 @@ import com.dao.sys.ApprovalProcessMapper;
 import com.dao.sys.UserMapper;
 import com.util.FileUtils;
 import com.util.Page;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
@@ -123,6 +124,7 @@ public class McStampServiceImpl implements McStampService {
         try {
 
             SysApprovalProcess process = approvalProcessMapper.getProcessById(12);
+
             String accessory = FileUtils.uploadFile(request, "file");
             if (accessory != null && !accessory.equals("")) {
                 stamp.setAccessory(accessory);
@@ -194,4 +196,9 @@ public class McStampServiceImpl implements McStampService {
         }
         return map;
     }
+
+
+    public int delete(@Param("id") int id){
+        return mcStampMapper.deleteById(id);
+    };
 }

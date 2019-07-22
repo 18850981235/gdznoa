@@ -9,6 +9,7 @@ import com.sun.corba.se.impl.encoding.TypeCodeOutputStream;
 import com.util.FileUtils;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -93,8 +94,8 @@ public class McAction {
         if (purpose == null || purpose == "") {
             purpose = null;
         }
-        //int userid=(int) session.getAttribute("userId");
-        int userid = 1;
+        int userid=(int) session.getAttribute("userId");
+//        int userid = 1;
         return JSONObject.toJSONString(mcStampService.getList(projectName, userid, stampType, deptid, content, purpose, start, end, pageIndex),
                 SerializerFeature.DisableCircularReferenceDetect,
                 SerializerFeature.WriteNullStringAsEmpty);
@@ -153,6 +154,13 @@ public class McAction {
         mcStampService.addProjectApproval(approvalDetailed);
         return "redirect:/showMyWork";
     }
+    @RequestMapping("/stamp/delete")
+    public String deleteStamp(@Param("id")int id) {
+        mcStampService.delete(id);
+        return "redirect:/mc/stamp/query";
+    }
+
+
     // endregion
 
     //region ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~原文件借用~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -169,7 +177,7 @@ public class McAction {
                              @RequestParam(required = false) Date start,
                              @RequestParam(required = false) Date end,
                              @RequestParam(required = false, defaultValue = "0") int pageIndex,
-                             HttpSession session
+                           HttpServletRequest request
     ) {
         if (name == null || name == "") {
             name = null;
@@ -177,8 +185,7 @@ public class McAction {
         if (projectName == null || projectName == "") {
             projectName = null;
         }
-        int userid = (int) session.getAttribute("userId");
-        //int  userid=1;
+        int userid = (int) request.getSession().getAttribute("userId");
         return JSONObject.toJSONString(mcFileBorrowService.getList(projectName, name, deptid, start, end, userid, pageIndex),
                 SerializerFeature.DisableCircularReferenceDetect,
                 SerializerFeature.WriteNullStringAsEmpty);
@@ -242,6 +249,14 @@ public class McAction {
                 SerializerFeature.DisableCircularReferenceDetect,
                 SerializerFeature.WriteNullStringAsEmpty);
     }
+
+
+    @RequestMapping("/borrow/delete")
+    public String deleteFileBorrow(@Param("id")int id) {
+        mcFileBorrowService.delete(id);
+        return "redirect:/mc/borrow/query";
+    }
+
 
 
 
@@ -316,12 +331,18 @@ public class McAction {
     }
 
     @RequestMapping("/materials/approvalDetailed")
-    public String materialsParticular(SysApprovalDetailed approvalDetailed, HttpSession session) {
-        int userid = (int) session.getAttribute("userId");
+    public String materialsParticular(SysApprovalDetailed approvalDetailed, HttpServletRequest Request) {
+        int userid = (int) Request.getSession().getAttribute("userId");
         approvalDetailed.setApprovalUser(userid);
         approvalDetailed.setApprovalDate(new Date());
         mcMaterialsSevice.addProjectApproval(approvalDetailed);
         return "redirect:/showMyWork";
+    }
+
+    @RequestMapping("/materials/delete")
+    public String deleteMaterials(@Param("id")int id) {
+        mcMaterialsSevice.delete(id);
+        return "redirect:/mc/materials/query";
     }
     // endregion
 
@@ -406,13 +427,15 @@ public class McAction {
     }
 
     @RequestMapping("/dispatched/approvalDetailed")
-    public String dispatchedParticular(SysApprovalDetailed approvalDetailed, HttpSession session) {
-        int userid = (int) session.getAttribute("userId");
+    public String dispatchedParticular(SysApprovalDetailed approvalDetailed, HttpServletRequest request) {
+        int userid = (int)request.getSession().getAttribute("userId");
         approvalDetailed.setApprovalUser(userid);
         approvalDetailed.setApprovalDate(new Date());
         mcPersonnelDispatchedService.addProjectApproval(approvalDetailed);
         return "redirect:/showMyWork";
     }
+
+
     // endregion
 
     //region ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~资料费~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -446,7 +469,7 @@ public class McAction {
 
     @RequestMapping("/datum/add.html")
     public String AddDatum(McDatumCost datumCost, HttpServletRequest request) {
-        //personnelDispatched.setCreatetime(new Date());
+//        personnelDispatched.setCreatetime(new Date());
         mcDatumCostService.add(datumCost, request);
         return "redirect:/mc/datum/query";
     }
@@ -485,13 +508,13 @@ public class McAction {
 
     @RequestMapping("/datum/delete")
     public String delectDatum(@RequestParam int id) {
-        //mcDatumCostService.deleteById(id);
+        mcDatumCostService.deleteById(id);
         return "redirect:/mc/datum/query";
     }
 
     @RequestMapping("/datum/approvalDetailed")
-    public String datumParticular(SysApprovalDetailed approvalDetailed, HttpSession session) {
-        int userid = (int) session.getAttribute("userId");
+    public String datumParticular(SysApprovalDetailed approvalDetailed, HttpServletRequest request) {
+        int userid = (int)request.getSession().getAttribute("userId");
         approvalDetailed.setApprovalUser(userid);
         approvalDetailed.setApprovalDate(new Date());
         mcDatumCostService.addProjectApproval(approvalDetailed);
@@ -604,8 +627,8 @@ public class McAction {
     }
 
     @RequestMapping("/SdSalesContract/registerParticular")
-    public String registerParticular(SysApprovalDetailed approvalDetailed, HttpSession session) {
-        int userid = (int) session.getAttribute("userId");
+    public String registerParticular(SysApprovalDetailed approvalDetailed, HttpServletRequest request) {
+        int userid = (int)request.getSession().getAttribute("userId");
         approvalDetailed.setApprovalUser(userid);
         approvalDetailed.setApprovalDate(new Date());
         mcregisterservice.addProjectApproval(approvalDetailed);
@@ -616,34 +639,36 @@ public class McAction {
     //region ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~资质证书~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //资历证书PDF导出：
     @RequestMapping("/qualification/pdf")
-    public void  pdfout(HttpServletRequest request,HttpServletResponse response)throws DocumentException, IOException {
-        response.setContentType("application/force-download");
-        Collection<Part> parts = null;
-        try {
-            parts = request.getParts();
-        } catch (ServletException e1) {
-            e1.printStackTrace();
-        }
-        for (Iterator<Part> iterator = parts.iterator(); iterator.hasNext();) {
-        Part part = iterator.next();
-        System.out.println("-----类型名称------->"+part.getName());
-        System.out.println("-----类型------->"+part.getContentType());
-        System.out.println("-----提交的类型名称------->"+part.getSubmittedFileName());
-        System.out.println("----流-------->"+part.getInputStream());
+    public void  pdfout(HttpServletRequest request, HttpServletResponse response)throws DocumentException, IOException {
+        BufferedOutputStream bos = new BufferedOutputStream(response.getOutputStream());
+            Collection<Part> parts = null;
+            try {
+                parts = request.getParts();
+            } catch (ServletException e1) {
+                e1.printStackTrace();
+            }
+            for (Iterator<Part> iterator = parts.iterator(); iterator.hasNext(); ) {
+                Part part = iterator.next();
+                System.out.println("-----类型名称------->" + part.getName());
+                System.out.println("-----类型------->" + part.getContentType());
+                System.out.println("-----提交的类型名称------->" + part.getSubmittedFileName());
+                System.out.println("----流-------->" + part.getInputStream());
+                if(part.getSubmittedFileName().endsWith(".pdf")||part.getSubmittedFileName().endsWith(".PDF")) {
+                response.setContentType("application/force-download");
+                //设置PDF默认名称
+                response.addHeader("Content-Type", "application/octet-stream");
+//                response.addHeader("Content-Disposition", "attachment; filename=" + URLEncoder.encode("已下载PDF" + new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()), "UTF-8") + ".pdf");
+                  response.addHeader("Content-Disposition", "attachment; filename=" + URLEncoder.encode( part.getSubmittedFileName()));
+                    //输出流
 
-        //设置PDF默认名称
-            response.addHeader("Content-Type", "application/octet-stream");
-            response.addHeader("Content-Disposition", "attachment; filename=" + URLEncoder.encode("已下载PDF"+new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()),"UTF-8")+".pdf");
-        //输出流
-            BufferedOutputStream bos = new BufferedOutputStream(response.getOutputStream());
-            Calendar cal = Calendar.getInstance();
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-            // 将pdf文件先加水印然后输出
-            setWatermark(bos, part.getInputStream(), format.format(cal.getTime())
-                    + " 下载使用人：" + "测试user","jkahsd sah jkshj da ",16);
+                Calendar cal = Calendar.getInstance();
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                // 将pdf文件先加水印然后输出
+                setWatermark(bos, part.getInputStream(), format.format(cal.getTime())
+                        + " 下载使用人：" + "测试user", "jkahsd sah jkshj da ", 16);
 
-
-        }
+                }
+            }
 
     };
 
@@ -677,7 +702,8 @@ public class McAction {
     @ResponseBody
     public String querybyid(@RequestParam int id) {
         return JSONObject.toJSONString(mcQualificationService.querybyid(id),
-                SerializerFeature.DisableCircularReferenceDetect);
+                SerializerFeature.DisableCircularReferenceDetect,
+                SerializerFeature.WriteNullStringAsEmpty);
     }
 
     //资质正式信息更改
@@ -692,6 +718,7 @@ public class McAction {
         }
     }
 
+
     //跳转到资历证书详情界面
     @RequestMapping("/qualification/detail")
     public String detailQualificationPage() {
@@ -703,7 +730,8 @@ public class McAction {
     @ResponseBody
     public String querydetailbyid(@RequestParam int id) {
         return JSONObject.toJSONString(mcQualificationService.querydetailbyid(id)
-                , SerializerFeature.DisableCircularReferenceDetect);
+                , SerializerFeature.DisableCircularReferenceDetect,
+                SerializerFeature.WriteNullStringAsEmpty);
     }
 
     //跳转到资历证书详情界面
@@ -738,10 +766,9 @@ public class McAction {
         if (staretime == null || staretime == "") {
             staretime = null;
         }
-
-
         return JSONObject.toJSONString(mcQualificationService.querybytypename( name, type,content,borrow,state,staretime,endtime,pageIndex),
-                SerializerFeature.DisableCircularReferenceDetect);
+                SerializerFeature.DisableCircularReferenceDetect,
+                SerializerFeature.WriteNullStringAsEmpty);
     }
 
     //删除资质证书
@@ -751,8 +778,8 @@ public class McAction {
         return "mc/mcCertificate/meCertificateParticular.";
     }
     @RequestMapping("/SdSalesContract/QualificationParticular")
-    public String QualificationParticular(SysApprovalDetailed approvalDetailed, HttpSession session) {
-        int userid = (int) session.getAttribute("userId");
+    public String QualificationParticular(SysApprovalDetailed approvalDetailed, HttpServletRequest request) {
+        int userid = (int)request.getSession().getAttribute("userId");
         approvalDetailed.setApprovalUser(userid);
         approvalDetailed.setApprovalDate(new Date());
         mcQualificationService.addProjectApproval(approvalDetailed);
@@ -763,16 +790,16 @@ public class McAction {
     //region ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~业绩资料~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     @RequestMapping("/performanceDate/addPerformanceDatePage")
     public String toaddaddPerformanceDate() {
-        return "/mc/performanceDate/        " ;
+        return "/mc/mcAchievement/mcAchievementAdd" ;
     }
 
     @RequestMapping(value = "/performanceDate/addPerformanceDate", produces = "text/html;charset=UTF-8")
     public  String  addPerformanceDate(McPerformanceDate  PerformanceDate,HttpServletRequest request){
       int sum = mcPerformanceDateService.addPerformanceDate(PerformanceDate,request);
        if (sum>0){
-           return "/mc/performanceDate/query";
+           return "/mc/mcAchievement/mcAchievementList";
        }else{
-           return "/mc/performanceDate/query";
+           return "/mc/mcAchievement/mcAchievementList";
        }
     };
 
@@ -780,14 +807,14 @@ public class McAction {
     public  String  deletePerformanceDate( @Param("id")int id){
         int sum = mcPerformanceDateService.deleteMcPerformanceDate(id);
         if (sum>0){
-            return "/mc/performanceDate/query";
+            return "/mc/mcAchievement/mcAchievementList";
         }else{
-            return "/mc/performanceDate/query";
+            return "/mc/mcAchievement/mcAchievementList";
         }
     };
     @RequestMapping("/performanceDate/updatePerformanceDatePage")
     public String toupdatePerformanceDate() {
-        return "/mc/performanceDate/        " ;
+        return "/mc/mcAchievement/mcAchievementPadute" ;
     }
 
     @RequestMapping(value = "/performanceDate/updateperformanceDate.json", produces = "text/html;charset=UTF-8")
@@ -802,15 +829,16 @@ public class McAction {
     public  String  updatePerformanceDate(McPerformanceDate  PerformanceDate,HttpServletRequest request){
         int sum = mcPerformanceDateService.updateMcPerformanceDate(PerformanceDate,request);
         if (sum>0){
-            return "/mc/performanceDate/query";
+            return "/mc/mcAchievement/mcAchievementList";
         }else{
-            return "/mc/performanceDate/query";
+            return "/mc/mcAchievement/mcAchievementList";
         }
     };
     @RequestMapping("/performanceDate/queryPerformanceDatebyidPage")
     public String toquerybyidPerformanceDate() {
-        return "/mc/performanceDate/        " ;
+        return "mc/mcAchievement/mcAchievementList" ;
     }
+
     @RequestMapping(value = "/performanceDate/querybyid", produces = "text/html;charset=UTF-8")
     @ResponseBody
     public  String  queryMcPerformanceDatebyid(@Param("id") int id){
@@ -820,7 +848,7 @@ public class McAction {
     };
     @RequestMapping("/performanceDate/queryPerformanceDatePage")
     public String toqueryPerformanceDate() {
-        return "/mc/performanceDate/        " ;
+        return "mc/mcAchievement/mcAchievementList" ;
     }
 
     @RequestMapping(value = "/performanceDate/queryPerformanceDate", produces = "text/html;charset=UTF-8")

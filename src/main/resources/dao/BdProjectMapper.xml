@@ -185,7 +185,7 @@
             <if test="processUserid != 0" >
                 #{processUserid},
             </if>
-            <if test="proces sState != null" >
+            <if test="processState != null" >
                 #{processState},
             </if>
         </trim>

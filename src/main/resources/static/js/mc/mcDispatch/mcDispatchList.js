@@ -4,28 +4,32 @@
 
 function lo(z) {
     $(".sea2").html(value="");
-    var deptid=$(".department").val();
+    var projectName=$(".projectname").val();
     var start=$(".start").val();
     var end=$(".end").val();
-    var projectName=$(".projectName").val();
+    var department=$(".department").val();
+    var personnelCondition=$(".personnelCondition").val();
     $.ajax({
         type: "get",
         url: "/mc/dispatched/query.html",
-        data: {"deptid":deptid,"start":start,"end":end,"projectName":projectName},
+        data: {"projectName":projectName,"personnelCondition":personnelCondition,"deptid":department,"start":start,"end":end,"pageIndex":z},
         dataType: "json",
         success: function (data) {
             var list = data.list;
             var page = data.page;
             var html = "";
+
             $.each(list, function (index1, obj1) {
 
                 html += '<tr style="height: 40px" >';
                 html += '<td style="width: 60px ">' + (index1+1) + '</td>';
-                html += '<td style="width: 350px ">' + obj1.projectName+ '</td>';
-                html += '<td style="width: 150px ">' + obj1.createtime + '</td>';
-                html += '<td style="width: 150px ">' + obj1.dept.name + '</td>';
-                html += '<td style="width: 170px ">' + obj1.evectionTime + '</td>';
-                html += '<td style="width: 170px ">' + obj1.evectionCost + '</td>';
+                 html += '<td style="width: 250px ">'+obj1.project.abbreviation+'</td>';
+                  html += '<td style="width: 100px ">'+obj1.dept.name+'</td>';
+                  html += '<td style="width: 100px ">'+obj1.user.name+'</td>';
+                  html += '<td style="width: 200px ">'+obj1.personnelCondition+'</td>';
+                  html += '<td style="width: 100px ">'+obj1.practicalTime+'</td>';
+                  html += '<td style="width: 130px ">'+obj1.evectionCost+'</td>';
+                  html += '<td style="width: 110px ">'+obj1.travelCost+'</td>';
                 html += '<td style="width: 130px ">';
                 html += '<a style="color:blue" href="/mc/dispatched/particular?id='+obj1.id+'">详情</a>';
                 html += '<a style="color:#dea97d; margin-left: 4px " href="/mc/dispatched/update?id='+obj1.id+'">编辑</a>';

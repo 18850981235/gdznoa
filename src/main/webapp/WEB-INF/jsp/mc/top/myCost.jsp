@@ -9,7 +9,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>注册备案管理详情</title>
+    <title>资料费管理详情</title>
     <link rel="stylesheet" href="<%=basePath%>/css/bootstrap.css">
     <link rel="stylesheet" href="<%=basePath%>/icon-font/iconfont.css">
     <link rel="stylesheet" href="<%=basePath%>/css/jump-in.css">
@@ -20,94 +20,21 @@
     <script src="<%=basePath%>/js/public/jump.js"></script>
     <script src="<%=basePath%>/js/public/department.js"></script>
     <script src="<%=basePath%>/js/public/responsible.js"></script>
-    <script src="<%=basePath%>/js/public/Approval.js"></script>
+    <%--<script src="<%=basePath%>/js/public/Approval.js"></script>--%>
     <script src="<%=basePath%>/js/mc/top/myCost.js"></script>
 
 </head>
 <body>
-<div id="left">
-    <img src="<%=basePath%>/imgs/logo1.png" />
-    <div id="menu">
-        <div class="list">
-            <ul class="yiji" >
-                <li style="display: none">
-                    <a href="#" class="inactive"></a>
-                    <ul style="display: none">
-                        <li>
-                            <a href="#" class="inactive active"></a>
-                            <ul>
-                                <li><a href="#"></a></li>
-                            </ul>
-                        </li>
 
-                    </ul>
-                </li>
-            </ul>
-        </div>
-    </div>
-</div>
-<div id="top" >
-
-    <a>
-        <img src="<%=basePath%>/imgs/icon1.png" height="25" width="25"/>
-        <p>首页</p>
-    </a>
-    <a>
-        <img src="<%=basePath%>/imgs/20160602111914531.png" height="25" width="25"/>
-        <p>我的工作</p>
-    </a>
-
-    <a class="top-right">
-        <img src="<%=basePath%>/imgs/20160602111922932.png" height="25" width="25"/>
-        <p>用户管理</p>
-    </a>
-    <a style="float: right">
-        <p>名称</p>
-        <P>公司</P>
-    </a>
-    <div class="day-time">
-        <input id="day">
-        <input id="daytime">
-    </div>
-    <input id="time">
-    <div id="weather">
-        <p></p>
-        <span></span>
-        <p class="comment"></p>
-    </div>
-</div>
-<div id="choice" style="display: none">
-    <p class="title">
-        <img src="<%=basePath%>/imgs/root.png" height="40" width="40"/>
-        福建省广电智能系统集成工贸有限公司
-    </p>
-    <ul class="yiji-no">
-        <li style="display:none;">
-            <a href="#" class="click"></a>
-            <ul class="name" style="display: none">
-                <li class="co">
-                    <a class="upload" href="">
-                        <span class="name-block"></span>
-                        <span class="name-none" style="display: none"></span>
-                    </a>
-                </li>
-            </ul>
-        </li>
-    </ul>
-    <div id="close">
-        <a class="close-in" >返回</a >
-    </div>
-</div>
-<div id="page">
-    <a class="page-left ">注册备案管理详情</a>
-</div>
 <div id="content-in">
-    <div id="center">
+    <form id="center">
 
         <div id="Approval">
 
         </div>
-    </div>
+        <input id="ok"  type="submit" value="确定" style="margin-left:400px ">
+        <a href="/showMyWork" id="no" >取消</a>
+    </form>
 </div>
 </body>
 </html>

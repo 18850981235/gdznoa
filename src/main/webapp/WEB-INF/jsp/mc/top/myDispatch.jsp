@@ -27,45 +27,21 @@
     <script src="<%=basePath%>/js/public/jump.js"></script>
     <script src="<%=basePath%>/js/public/department.js"></script>
     <script src="<%=basePath%>/js/public/responsible.js"></script>
-    <script src="<%=basePath%>/js/public/Approval.js"></script>
+    <%--<script src="<%=basePath%>/js/public/Approval.js"></script>--%>
     <script src="<%=basePath%>/js/mc/top/myDispatch.js"></script>
 </head>
 <body>
-<jsp:include page="../../in-topleft.jsp"/>
-<div id="choice" style="display: none">
-    <p class="title">
-        <img src="<%=basePath%>/imgs/root.png" height="40" width="40"/>
-        福建省广电智能系统集成工贸有限公司
-    </p>
-    <ul class="yiji-no">
-        <li style="display:none;">
-            <a href="#" class="click"></a>
-            <ul class="name" style="display: none">
-                <li class="co">
-                    <a class="upload" href="">
-                        <span class="name-block"></span>
-                        <span class="name-none" style="display: none"></span>
-                    </a>
-                </li>
-            </ul>
-        </li>
-    </ul>
-    <div id="close">
-        <a class="close-in" >返回</a >
-    </div>
-</div>
-<div id="page">
-    <a class="page-left ">人员派遣详情</a>
-</div>
+
 <div id="content-in">
-    <div id="center">
+    <form id="center">
 
         <div id="Approval">
 
 
         </div>
-
-    </div>
+        <input id="ok"  type="submit" value="确定" style="margin-left:400px ">
+        <a href="/showMyWork" id="no" >取消</a>
+    </form>
 </div>
 </body>
 </html>

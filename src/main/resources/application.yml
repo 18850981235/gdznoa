@@ -3,7 +3,7 @@ spring:
     restart:
       enabled: true #热部署
   datasource:
-    url: jdbc:mysql://192.168.1.191:3306/oa?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8&allowMultiQueries=true
+    url: jdbc:mysql://112.124.200.22:3306/oa?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8&allowMultiQueries=true
     username: root
     password: 123456
   mvc:

@@ -1,9 +1,9 @@
 #content-in{
-    width: 91%;
-    height: 80% ;
+    width: 100%;
+    height: 100% ;
     position: absolute;
-    left: 9% ;
-    top: 130px ;
+    left:0px  ;
+    top:  0px ;
     display: inline-block;
     /*background-color: #f6f7f9;*/
     overflow-y:auto;

@@ -65,7 +65,7 @@
         var html = "";
 
         $.ajaxSettings.async = false;
-        $.getJSON("../../../json/menu.json",
+        $.getJSON("<%=basePath%>/json/menu.json",
             function (date) {
                 $.each(date.menuList, function (i, menu) {
                         if (menu.levels == 1) {

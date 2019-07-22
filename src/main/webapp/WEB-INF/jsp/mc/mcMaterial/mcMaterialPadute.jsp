@@ -19,11 +19,13 @@
     <title>商务材料修改</title>
     <link rel="stylesheet" href="<%=basePath%>/css/bootstrap.css">
     <link rel="stylesheet" href="<%=basePath%>/icon-font/iconfont.css">
+    <link rel="stylesheet" href="<%=basePath%>/layui/css/modules/laydate/default/laydate.css">
     <link rel="stylesheet" href="<%=basePath%>/css/jump-in.css">
     <link rel="stylesheet" href="<%=basePath%>/css/mc/mcMaterial/mcMaterialAdd.css">
     <script src="<%=basePath%>/js/jquery-3.3.1.js"></script>
     <script src="<%=basePath%>/js/bootstrap.js"></script>
     <script src="<%=basePath%>/js/bootstrap-paginator.js"></script>
+    <script src="<%=basePath%>/layui/lay/modules/laydate.js" type="text/javascript"></script>
     <script src="<%=basePath%>/js/public/jump.js"></script>
     <script src="<%=basePath%>/js/public/department.js"></script>
     <script src="<%=basePath%>/js/public/responsible.js"></script>
@@ -32,91 +34,73 @@
 
 </head>
 <body>
-<jsp:include page="../../in-topleft.jsp"/>
-<div id="page">
-    <a class="page-left ">商务材料修改</a>
-</div>
 <div id="content-in">
     <div id="center">
         <form action="/mc/materials/update.html" method="post"  enctype="multipart/form-data">
             <table border="1">
                 <tr style="text-align: center;height: 45px ">
-                    <td colspan="4" style="width: 900px;background-color: #efefef "><b>商务材料修改</b><input style="display: none" name="id"></td>
+                    <td colspan="4" style="width: 900px;background-color: #efefef "><b>商务材料申请</b></td>
                 </tr>
                 <tr style="height: 45px ">
                     <td style="width:150px ;background-color: #efefef;">
                         <span>申请部门</span>
+                        <input style="display: none">
                     </td>
                     <td style="width:300px ;">
                         <select class="department" style="width: 100px;height: 30px " name="deptid">
-
+                            <option value="">请选择</option>
                         </select>
                     </td>
                     <td style="width:150px ;;background-color: #efefef">
                         <span>申请日期</span>
                     </td>
                     <td style="width:300px ;">
-                        <input type="date" style="width:280px " name="createtime">
+                        <input style="width: 280px " type="text" class="demo-input" placeholder="请选择日期" id="test1"name="createtime">
+
+                    </td>
+                </tr>
+                <tr style="height: 45px ">
+                    <td style="width:150px ;background-color: #efefef;">
+                        <span>申请人</span>
+                    </td>
+                    <td style="width:300px ;">
+                        <input style="width:200px ;">
+                        <input style="display: none" name="userid" required>
+                    </td>
+                    <td style="width:150px ;;background-color: #efefef">
+                        <span>联系电话</span>
+                    </td>
+                    <td style="width:300px ;">
+                        <input style="width:200px ;" name="phone">
+
                     </td>
                 </tr>
                 <tr  style="height: 45px ">
+
                     <td style="width:150px ;background-color: #efefef;">
-                        <span>提供方式</span>
+                        <span>项目名称</span>
                     </td>
-                    <td style="width:300px ;">
-                        <select class="department1"  style="width: 100px;height: 30px " name="offerTpye">
-                            <option >方式1</option>
-                            <option >提供方式</option>
-                            <option >方式2</option>
+                    <td colspan="3"   style="width:300px ;">
+                        <select class="projectname" style="width:500px;height: 30px " name="projectid">
                         </select>
                     </td>
-                    <td style="width:150px ;background-color: #efefef;">
-                        <span>项目名</span>
-                    </td>
-                    <td style="width:300px ;">
-                        <select class="projectname" style="width:200px;height: 30px " name="projectid">
+                </tr>
+                <tr  style="height: 45px ">
 
-                        </select>
+                    <td style="width:150px ;background-color: #efefef;">
+                        <span>非盖章申请内容</span>
                     </td>
+                    <td colspan="3"   style="width:300px ;">
+                        <textarea style="width: 700px " name="content"></textarea>
+                    </td>
+                </tr>
+                <tr  style="height: 45px ">
 
-
-                </tr>
-                <tr style="height: 45px ">
                     <td style="width:150px ;background-color: #efefef;">
-                        <span>收件人电话</span>
+                        <span>用途说明</span>
                     </td>
-                    <td  >
-                        <input style="width:280px "name="consigneePhone">
-                    </td>
-                    <td style="width:150px ;background-color: #efefef;">
-                        <span>收件人</span>
-                    </td>
-                    <td style="width:300px ;">
-                        <input  style="width:280px " name="consignee" >
-                    </td>
-                </tr>
-                <tr style="height: 45px ">
-                    <td style="width:150px ;background-color: #efefef;">
-                        <span>收件地址</span>
-                    </td>
-                    <td colspan="3" >
-                        <input style="width:700px "name="consigneeAddress">
-                    </td>
-                </tr>
-                <tr style="height: 45px ">
-                    <td style="width:150px ;background-color: #efefef;">
-                        <span>申请商务资料的内容及要求</span>
-                    </td>
-                    <td colspan="3" >
-                        <input style="width:700px "name="content">
-                    </td>
-                </tr>
-                <tr style="height: 45px ">
-                    <td style="width:150px ;background-color: #efefef;">
-                        <span>资料用途说明</span>
-                    </td>
-                    <td colspan="3" >
-                        <input style="width:700px "name="purpose">
+                    <td colspan="3"   style="width:300px ;">
+                        <textarea style="width: 700px " name="purpose"></textarea>
                     </td>
                 </tr>
                 <tr style="height: 45px ">
@@ -124,15 +108,22 @@
                         <span>附件</span>
                     </td>
                     <td colspan="3" >
-                        <input type="file" style="width:700px "name="file">
+                        <input type="file"   style="width:700px "name="file">
                     </td>
                 </tr>
-
             </table>
             <input id="ok"  type="submit" value="确定" style="margin-left:400px ">
-            <a href="#" id="no" style="color: #333">取消</a>
+            <a href="/mc/materials/query" id="no"  >取消</a>
         </form>
     </div>
 </div>
+<script type="text/javascript">
+    laydate.render({
+        elem: '#test1', //指定元素
+        event: 'click',
+        format: 'yyyy-MM-dd'
+    });
+
+</script>
 </body>
 </html>

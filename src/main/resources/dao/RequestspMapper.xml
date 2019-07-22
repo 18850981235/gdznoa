@@ -19,11 +19,11 @@
             <if test="evidencePeople!=null">
                 `evidence_people`,
             </if>
-            <if test="recorId!=null">
-                `recor_id`,
-            </if>
             <if test="phone!=null">
                 `phone`,
+            </if>
+            <if test="ermissions!=null">
+                `ermissions`,
             </if>
             <if test="evidencePhone!=null">
                 `evidence_phone`,
@@ -33,7 +33,7 @@
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="id!=null">
+            <if test="id!=0">
                 #{id},
             </if>
             <if test="userid!=null">
@@ -48,11 +48,12 @@
             <if test="evidencePeople!=null">
                 #{evidencePeople},
             </if>
-            <if test="recorId!=null">
-                #{recorId},
-            </if>
+
             <if test="phone!=null">
                 #{phone},
+            </if>
+            <if test="ermissions!=null">
+                #{ermissions},
             </if>
             <if test="evidencePhone!=null">
                 #{evidencePhone},
@@ -63,44 +64,95 @@
         </trim>
 
     </insert>
+    <update id="updateState">
+        update `sys_requestsp`
+        set `sys_requestsp`.`state`=#{state}
+        where `sys_requestsp`.`id`=#{id};
+
+    </update>
+    <select id="queryby" resultType="com.beans.Requestsp">
+        SELECT `sys_requestsp`.`id`,
+        `sys_requestsp`.`userid`,
+        `sys_requestsp`.`time`,
+        `sys_requestsp`.`evidence`,
+        `sys_requestsp`.`evidence_people` as evidencePeople,
+        `sys_requestsp`.`phone`,
+        `sys_requestsp`.`ermissions`,
+        `sys_requestsp`.`evidence_phone` as evidencePhone,
+        `sys_requestsp`.`state`,
+        `sys_user`.`name` AS userName
+        FROM `sys_user`,`sys_requestsp`
+
+        WHERE `sys_user`.`id` =`sys_requestsp`.`userid`
+
+
+        <if test="name != null">
+            and `sys_user`.`name` like CONCAT('%',#{name},'%')
+        </if>
+        <if test="StartTime != null">
+            and `sys_requestsp`.`time` &gt;= #{StartTime}
+        </if>
+        <if test="EndTime != null">
+            and `sys_requestsp`.`time` &lt;= #{EndTime}
+        </if>
+
+        ORDER BY `sys_requestsp`.`time` DESC
+        <if test="pageIndex!=null and pageSize!=0">
+            LIMIT #{pageIndex},#{pageSize}
+        </if>
+    </select>
+    <select id="count" resultType="int">
+        select count(1)
+        FROM `sys_user`,`sys_requestsp`
+        <trim prefix="where" prefixOverrides="and">
+            `sys_user`.`id` =`sys_requestsp`.`userid`
+            <if test="name != null">
+                and  `sys_user`.`name` like CONCAT('%',#{name},'%')
+            </if>
+            <if test="StartTime != null">
+                and `sys_requestsp`.`time` &gt;= #{StartTime}
+            </if>
+            <if test="EndTime != null">
+                and `sys_requestsp`.`time` &lt;= #{EndTime}
+            </if>
+        </trim>
+    </select>
+
     <select id="querybyuserid" resultType="com.beans.Requestsp">
         SELECT `sys_requestsp`.`id`,
         `sys_requestsp`.`userid`,
         `sys_requestsp`.`time`,
         `sys_requestsp`.`evidence`,
         `sys_requestsp`.`evidence_people` as evidencePeople,
-        `sys_requestsp`.`recor_id` as recorId,
         `sys_requestsp`.`phone`,
+        `sys_requestsp`.`ermissions`,
         `sys_requestsp`.`evidence_phone` as evidencePhone,
         `sys_requestsp`.`state`,
         `sys_user`.`name` AS userName
-        FROM `sys_user`,
-        `sys_requestsp`
+        FROM `sys_user`,`sys_requestsp`
 
         WHERE `sys_user`.`id` =`sys_requestsp`.`userid`
 
-        <if test="userid!=0">
-            and `sys_requestsp`.`userid`=#{userid}
+
+        <if test="userid != 0">
+            and `sys_requestsp`.`userid` =#{userid}
         </if>
+
+
         ORDER BY `sys_requestsp`.`time` DESC
-        <if test="pageIndex!=null and pageSize!=0">
-            LIMIT #{pageIndex},#{pageSize}
-        </if>
+
     </select>
     <select id="querycount" resultType="int">
         select count(1)
         FROM `sys_requestsp`
-        <trim prefix="where" suffixOverrides="and">
-        <if test="userid!=null">
-             userid =#{userid}
+        <if test="userid != 0">
+            where `sys_requestsp`.`userid` =#{userid}
         </if>
-
-        </trim>
     </select>
     <select id="querybyid" resultType="com.beans.Requestsp">
-        select *
-        from  `sys_requestsp`
-        where id=#{id}
+        select `sys_requestsp`.*,`sys_user`.`name` AS userName
+        from  `sys_requestsp`,`sys_user`
+        where `sys_requestsp`.`id`=#{id} and `sys_requestsp`.`userid`=`sys_user`.id
 
     </select>
     <select id="getRequestspby" resultType="com.beans.Requestsp">

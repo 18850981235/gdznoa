@@ -15,6 +15,10 @@
         FROM `sys_role`
         where  id=#{roleid}
     </select>
+    <select id="getallRole" resultType="com.beans.SysRole">
+        select *
+        from `sys_role`
+    </select>
     <insert id="add">
         INSERT INTO `sys_role`
         <trim prefix="(" suffix=")" suffixOverrides=",">

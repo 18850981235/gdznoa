@@ -76,13 +76,13 @@ public class McRegisterServiceImpl implements McRegisterService{
    public  int addregister(McRegisterRecords mcregisterrecords, HttpServletRequest request){
        int num = 0;
        try {
-           SysApprovalProcess process = approvalProcessMapper.getProcessById(6);
+           SysApprovalProcess process = approvalProcessMapper.getProcessById(11);
            String accessory= FileUtils.uploadFile(request,"file");
            if (accessory!=null&&!accessory.equals("")){
                mcregisterrecords.setAccessory(accessory);
            }
            String[] arr = process.getUsersid().split(",");
-           mcregisterrecords.setProcessid(6);
+           mcregisterrecords.setProcessid(11);
            mcregisterrecords.setProcessUserid(Integer.parseInt(arr[0]));
            mcregisterrecords.setProcessState("进行中");
            num = mcregistermapper.add(mcregisterrecords);

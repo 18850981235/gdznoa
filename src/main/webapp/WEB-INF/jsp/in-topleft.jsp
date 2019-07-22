@@ -7,7 +7,6 @@
 %>
 
 
-<%--
 <div id="left">
     <div id="imgs">
         <img src="<%=basePath%>/imgs/logo1.png" />
@@ -67,8 +66,8 @@
     </div>
     <input id="time">
     <div id="weather">
-        <p>${user.dept}</p>
+        <p>${user.company}</p>
         <span>${user.name}</span>
         <p class="comment"></p>
     </div>
-</div>--%>
+</div>

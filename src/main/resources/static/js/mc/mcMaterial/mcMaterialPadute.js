@@ -13,15 +13,17 @@ function w() {
         success:function (data) {
             $("#center input").eq(0).val(data.id);
             $("#center input").eq(1).val(data.createtime);
-            $("#center input").eq(2).val(data.consignee);
-            $("#center input").eq(3).val(data.consigneePhone);
-            $("#center input").eq(4).val(data.consigneeAddress);
-            $("#center input").eq(5).val(data.content);
-            $("#center input").eq(6).val(data.purpose);
-            console.log(data.dept.id)
+            $("#center input").eq(2).val(data.user.name);
+            $("#center input").eq(3).val(data.user.id);
+            $("#center input").eq(4).val(data.user.account);
+            $("#center input").eq(5).val(data.accessory);
+
+            $("#center textarea").eq(0).text(data.content);
+            $("#center textarea").eq(1).text(data.purpose);
+
             $(".department option").eq(0).text(data.dept.name);
-            $(".department1 option").eq(0).text(data.offerTpye);
-            $(".department2 option").eq(0).text(data.projectName);
+            $(".projectname option").eq(0).text(data.projectName);
+
 
 
         }

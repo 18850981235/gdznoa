@@ -27,19 +27,18 @@
     <script src="<%=basePath%>/js/public/jump.js"></script>
     <script src="<%=basePath%>/js/public/department.js"></script>
     <script src="<%=basePath%>/js/public/responsible.js"></script>
-    <script src="<%=basePath%>/js/public/Approval.js"></script>
+    <%--<script src="<%=basePath%>/js/public/Approval.js"></script>--%>
     <script src="<%=basePath%>/js/mc/top/myMaterial.js"></script>
 </head>
 <body>
 <body>
-<jsp:include page="../../in-topleft.jsp"/>
-<div id="page">
-    <a class="page-left ">商务材料详情</a>
-</div>
+
 <div id="content-in">
     <div id="center">
         <form id="div">
 
+            <input id="ok"  type="submit" value="确定" style="margin-left:400px ">
+            <a href="/showMyWork" id="no" >取消</a>
         </form>
 
     </div>

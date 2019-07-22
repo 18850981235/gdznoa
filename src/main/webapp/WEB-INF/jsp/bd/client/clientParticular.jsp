@@ -29,11 +29,11 @@
     <script src="<%=basePath%>/js/public/department.js"></script>
 </head>
 <body>
-<jsp:include page="../../in-topleft.jsp"/>
+
 <div id="choice" style="display: none">
     <p class="title">
         <img src="<%=basePath%>/imgs/root.png" height="40" width="40"/>
-        福建省广电智能系统集成工贸有限公司
+        广电智能
     </p>
     <ul class="yiji-no">
         <li style="display:none;">
@@ -51,12 +51,6 @@
     <div id="close">
         <a class="close-in" href="">返回</a>
     </div>
-</div>
-
-
-<div id="page">
-
-    <a class="page-right" >客户详情</a>
 </div>
 
 <div id="new"  >
@@ -146,7 +140,7 @@
                     </td>
                 </tr>
             </table>
-
+            <a href="/bd/client/query" id="no" style="color: #333">取消</a>
 
         </form>
     </div>

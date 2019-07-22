@@ -45,6 +45,12 @@ public class DeptServiceImpl implements DeptService{
     public int delete(int id){
         return deptMapper.deleteById(id);
     }
+
+    @Override
+    public int update(int id, String name) {
+        return deptMapper.updateById(id,name);
+    }
+
     /**
      * 查询每个部门下的员工
      * @return 部门以及部门下的员工
@@ -52,6 +58,11 @@ public class DeptServiceImpl implements DeptService{
     @Override
     public List<SysDept> getDeptUsers() {
         return deptMapper.getDeptUsers();
+    }
+
+    @Override
+    public List<SysDept> getAllDept() {
+        return deptMapper.getAllDepy();
     }
 
 

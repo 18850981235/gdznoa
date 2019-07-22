@@ -30,57 +30,7 @@
     <script src="<%=basePath%>/js/mc/mcCost/mcCostParticular.js"></script>
 </head>
 <body>
-<div id="left">
-    <img src="<%=basePath%>/imgs/logo1.png" />
-    <div id="menu">
-        <div class="list">
-            <ul class="yiji" >
-                <li style="display: none">
-                    <a href="#" class="inactive"></a>
-                    <ul style="display: none">
-                        <li>
-                            <a href="#" class="inactive active"></a>
-                            <ul>
-                                <li><a href="#"></a></li>
-                            </ul>
-                        </li>
 
-                    </ul>
-                </li>
-            </ul>
-        </div>
-    </div>
-</div>
-<div id="top" >
-
-    <a>
-        <img src="<%=basePath%>/imgs/icon1.png" height="25" width="25"/>
-        <p>首页</p>
-    </a>
-    <a>
-        <img src="<%=basePath%>/imgs/20160602111914531.png" height="25" width="25"/>
-        <p>我的工作</p>
-    </a>
-
-    <a class="top-right">
-        <img src="<%=basePath%>/imgs/20160602111922932.png" height="25" width="25"/>
-        <p>用户管理</p>
-    </a>
-    <a style="float: right">
-        <p>名称</p>
-        <P>公司</P>
-    </a>
-    <div class="day-time">
-        <input id="day">
-        <input id="daytime">
-    </div>
-    <input id="time">
-    <div id="weather">
-        <p></p>
-        <span></span>
-        <p class="comment"></p>
-    </div>
-</div>
 <div id="choice" style="display: none">
     <p class="title">
         <img src="<%=basePath%>/imgs/root.png" height="40" width="40"/>
@@ -103,9 +53,7 @@
         <a class="close-in" >返回</a >
     </div>
 </div>
-<div id="page">
-    <a class="page-left ">资料费管理详情</a>
-</div>
+
 <div id="content-in">
     <div id="center">
         <form>
@@ -147,7 +95,7 @@
             <!--</tr>-->
 
             <!--</table>-->
-            <a href="#" id="no" style="color: #333;margin-left: 400px ">返回</a>
+            <a href="/mc/datum/query" id="no" style="color: #333;margin-left: 400px ">返回</a>
         </form>
     </div>
 </div>

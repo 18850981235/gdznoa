@@ -58,10 +58,11 @@ public class UserServiceImpl implements UserService {
      * @return 是否存在
      */
     @Override
-    public boolean isAccount(String mobile) {
-        int num=userMapper.isAccount(mobile);
-        return num == 0;
-    }
+    public int  isAccount(String mobile) {
+       return  userMapper.isAccount(mobile);
+
+
+    };
 
     /**
      * 修改账号下的密码

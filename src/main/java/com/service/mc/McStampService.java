@@ -2,6 +2,7 @@ package com.service.mc;
 
 import com.beans.McStamp;
 import com.beans.SysApprovalDetailed;
+import org.apache.ibatis.annotations.Param;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
@@ -26,4 +27,8 @@ public interface McStampService {
     McStamp getListById(int id);
 
     Map<String, Object> getParticular1ById(int id);
+
+
+    int delete(@Param("id") int id);
+
 }

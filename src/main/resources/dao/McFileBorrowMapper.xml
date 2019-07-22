@@ -41,6 +41,11 @@
                      select="com.dao.sys.UserMapper.getByID">
         </association>
     </resultMap>
+    <delete id="delete">
+        delete from mc_file_borrow
+        where id=#{id}
+
+    </delete>
     <select id="getListById" resultMap="BaseResultMap">
         select *
         from mc_file_borrow

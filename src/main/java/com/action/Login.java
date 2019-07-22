@@ -3,10 +3,13 @@ package com.action;
 
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.beans.SysAuthority;
+import com.beans.SysMenu;
 import com.beans.SysUser;
 import com.service.sys.AuthorityService;
 import com.service.sys.MenuService;
 import com.service.sys.UserService;
+import com.util.BaseSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.DigestUtils;
@@ -16,8 +19,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -61,7 +66,7 @@ public class Login {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(@RequestParam String account,
                         @RequestParam String password,
-                        Model model, HttpSession session) {
+                        Model model, HttpServletRequest request) {
         SysUser user = userService.getByAccount(account);
         if (user == null) {
             model.addAttribute("error", "没有该账号");
@@ -72,11 +77,12 @@ public class Login {
                 model.addAttribute("account", account);
                 return "index";
             }
+            request.getSession().setAttribute("user",user);
+            request.getSession().setAttribute("userId",user.getId());
         }
-        session.setAttribute("user", user);
-        session.setAttribute("userId", user.getId());
+
         //return "sign";
-        return "topleft";
+        return "index0";
     }
 
     /**
@@ -149,10 +155,12 @@ public class Login {
     @RequestMapping(value = "isAccount.html", produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String isAccount(@RequestParam(required = false) String mobile) {
-        if (userService.isAccount(mobile)) {
-            return "手机可以使用";
+       int a= userService.isAccount(mobile);
+        System.err.println(a);
+        if (a==0) {
+            return "1";
         } else {
-            return "该手机已被注册过";
+            return "0";
         }
     }
 
@@ -193,12 +201,19 @@ public class Login {
 
     @RequestMapping(value = "/menu", produces = "application/json; charset=utf-8")
     @ResponseBody
-    public String menuList(HttpSession session) {
-        Map<String, Object> map = new HashMap<>();
-        map.put("menuList", menuService.getMenuList(0));
-        //int userid=(int)session.getAttribute("userId");
-        int userid = 1;
-        map.put("authority", authorityService.getMenuIdByUserId(userid));
-        return JSONObject.toJSONString(map, SerializerFeature.DisableCircularReferenceDetect,SerializerFeature.WriteNullStringAsEmpty);
+    public String menuList() {
+        SysUser oo=(SysUser)BaseSession.getSession().getAttribute("user");
+        Integer userid = (Integer)BaseSession.getSession().getAttribute("userId");
+        if(oo!=null){
+           Map<String, Object> map = new HashMap<>();
+            List<SysMenu> menuList=menuService.getMenuList(0);
+            map.put("menuList", menuList);
+            List<SysAuthority> authority= authorityService.getMenuIdByUserId(userid);
+            map.put("authority",authority);
+            return JSONObject.toJSONString(
+                    map, SerializerFeature.DisableCircularReferenceDetect,SerializerFeature.WriteNullStringAsEmpty);
+        }
+
+        return "用户信息不存在";
     }
 }

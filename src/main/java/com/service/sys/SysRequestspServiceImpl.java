@@ -34,4 +34,9 @@ public class SysRequestspServiceImpl implements SysRequestspService{
    public  Requestsp getRequestspby(int userid){
        return requestspMapper.getRequestspby(userid);
    }
+
+    @Override
+    public int updatetRequestsp(int id,String state) {
+        return requestspMapper.updateState(id,state);
+    }
 }

@@ -30,7 +30,7 @@
     <script src="<%=basePath%>/js/mc/mcDispatch/mcDispatchParticular.js"></script>
 </head>
 <body>
-<jsp:include page="../../in-topleft.jsp"/>
+
 <div id="choice" style="display: none">
     <p class="title">
         <img src="<%=basePath%>/imgs/root.png" height="40" width="40"/>
@@ -53,12 +53,10 @@
         <a class="close-in" >返回</a >
     </div>
 </div>
-<div id="page">
-    <a class="page-left ">人员派遣详情</a>
-</div>
+
 <div id="content-in">
     <div id="center">
-        <a href="#" id="no" style="color: #333;margin-left: 400px ">返回</a>
+        <a href="/mc/dispatched/query"id="no" style="color: #333;margin-left: 400px ">返回</a>
 
     </div>
 </div>

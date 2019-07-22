@@ -19,28 +19,25 @@
     <title>立项申请</title>
     <link rel="stylesheet" href="<%=basePath%>/css/bootstrap.css">
     <link rel="stylesheet" href="<%=basePath%>/icon-font/iconfont.css">
+    <link rel="stylesheet" href="<%=basePath%>/layui/css/modules/laydate/default/laydate.css">
     <link rel="stylesheet" href="<%=basePath%>/css/jump-in.css">
     <link rel="stylesheet" href="<%=basePath%>/css/bd/project/projectAdd.css">
-    <link rel="stylesheet" href="<%=basePath%>/layui/css/modules/laydate/default/laydate.css">
+    <script src="<%=basePath%>/js/jquery-3.3.1.js" type="text/javascript"></script>
+    <script src="<%=basePath%>/js/bootstrap.js" type="text/javascript"></script>
     <script src="<%=basePath%>/layui/lay/modules/laydate.js" type="text/javascript"></script>
-
-    <script src="<%=basePath%>/js/jquery-3.3.1.js"></script>
-    <script src="<%=basePath%>/js/bootstrap.js"></script>
-    <script src="<%=basePath%>/js/public/jump.js"></script>
-    <script src="<%=basePath%>/js/public/responsible.js"></script>
-    <script src="<%=basePath%>/js/public/see.js"></script>
-    <script src="<%=basePath%>/js/public/company.js"></script>
+    <script src="<%=basePath%>/js/public/jump.js" type="text/javascript"></script>
+    <script src="<%=basePath%>/js/public/responsible.js" type="text/javascript"></script>
+    <script src="<%=basePath%>/js/public/see.js" type="text/javascript"></script>
+    <script src="<%=basePath%>/js/public/company.js" type="text/javascript"></script>
+    <script src="<%=basePath%>/js/public/region.js" type="text/javascript"></script>
+    <script src="<%=basePath%>/js/public/department.js" type="text/javascript"></script>
 </head>
 <body>
-<jsp:include page="../../in-topleft.jsp"/>
-<div id="page">
-    <!---->
-    <a class="page-left ">项目立项</a>
-</div>
+
 <div id="choice" style="display: none">
     <p class="title">
         <img src="<%=basePath%>/imgs/root.png" height="40" width="40"/>
-        福建省广电智能系统集成工贸有限公司
+        广电智能
     </p>
     <ul class="yiji-no">
         <li style="display:none;">
@@ -59,11 +56,10 @@
         <a class="close-in" >返回</a >
     </div>
 </div>
-
 <div id="choice1" style="display: none">
     <p class="title">
         <img src="<%=basePath%>/imgs/root.png" height="40" width="40"/>
-        福建省广电智能系统集成工贸有限公司
+        广电智能
     </p>
     <ul class="name1" >
         <li class="co1">
@@ -81,7 +77,7 @@
 <div id="choice2" style="display: none">
     <p class="title">
         <img src="<%=basePath%>/imgs/root.png" height="40" width="40"/>
-        福建省广电智能系统集成工贸有限公司
+        广电智能
     </p>
     <ul class="yiji-no2">
         <li style="display:none;">
@@ -100,6 +96,42 @@
         <a class="close-in" >返回</a >
     </div>
 </div>
+<div id="choice3" style="display: none">
+    <p class="title">
+        <img src="<%=basePath%>/imgs/root.png" height="40" width="40"/>
+        广电智能
+    </p>
+    <ul class="name3" >
+        <li class="co3">
+            <a class="upload3" href="">
+                <span class="name-block3"></span>
+                <span class="name-none3" style="display: none"></span>
+            </a>
+        </li>
+    </ul>
+
+    <div id="close3">
+        <a class="close-in" >返回</a >
+    </div>
+</div>
+<div id="choice4" style="display: none">
+    <p class="title">
+        <img src="<%=basePath%>/imgs/root.png" height="40" width="40"/>
+        广电智能
+    </p>
+    <ul class="name4" >
+        <li class="co4">
+            <a class="upload4" href="">
+                <span class="name-block4"></span>
+                <span class="name-none4" style="display: none"></span>
+            </a>
+        </li>
+    </ul>
+
+    <div id="close4">
+        <a class="close-in" >返回</a >
+    </div>
+</div>
 <!---->
 <div id="content-in">
     <div id="center">
@@ -109,62 +141,61 @@
                     <td colspan="4" style="text-align: center;background-color: #efefef">项目立项</td>
                 </tr>
                 <tr style="height:45px ">
-                    <td style="width: 150px ">项目编号:</td>
+                    <td class="Color" style="width: 150px ">项目编号</td>
                     <td style="width: 300px "><input style="width: 250px " required  name="code"></td>
-                    <td style="width: 150px ">项目简称</td>
-                    <td style="width: 300px "><input style="width: 250px " required name="abbreviation"></td>
+                    <td class="Color" style="width: 150px ">项目简称</td>
+                    <td style="width: 300px "><input style="width: 250px " required name="abbreviation" required></td>
                 </tr>
                 <tr style="height: 45px ">
-                    <td>项目名称:</td>
-                    <td colspan="3"><input style="width: 650px " requiredb name="name"></td>
+                    <td class="Color">项目名称</td>
+                    <td colspan="3"><input style="width: 650px " requiredb name="name" required></td>
                 </tr>
                 <tr style="height: 45px ">
-                    <td>项目负责人:</td>
-                    <td >
-                        <input class="Eliminate" readonly>
-                        <input style="display: none" class="Eliminate-no" name="principal">
-                        <a target="_blank " class="add-to">添加</a>
-                        <a class="clear-to" >
-                            <input value="清空" class="input"  onClick="" type="button">
-                        </a>
-                    </td>
-                    <td>项目地点：</td>
-                    <td><input style="width: 250px " name="site"></td>
-                </tr>
-                <tr style="height: 45px ">
-                    <td>项目类别:</td>
+                    <td class="Color">项目类别</td>
                     <td>
                         <select  style="height: 25px " required required name="type">
                             <option value="">请选择</option>
-                            <option value="政府公建项目">政府公建项目</option>
-                            <option value="国有企业项目" >国有企业项目</option>
-                            <option value="民营企业项目">民营企业项目</option>
-                            <option value="地产类项">地产类项目</option>
-                            <option value="政府BT型项目">政府BT型项目</option>
-                            <option value="国企BT型项目">国企BT型项目</option>
-                            <option value="其他类型项目">其他类型项目</option>
+                            <option >政府公建</option>
+                            <option  >央企项目</option>
+                            <option >国有企业</option>
+                            <option >民营企业</option>
+                            <option >房地产</option>
+                            <option >私营企业分包</option>
+                            <option >国有企业分包</option>
                         </select>
                     </td>
-                    <td>项目立项时间：</td>
-                    <td > <input  type="text" class="demo-input" placeholder="请选择日期" id="test1"  name="createtime"></td>
+                    <td class="Color">项目地点</td>
+                    <td><input style="width: 250px " name="site"></td>
                 </tr>
                 <tr style="height: 45px ">
-                    <td>项目阶段:</td>
+                    <td class="Color">项目阶段</td>
                     <td>
                         <select style="height: 25px " name="stage">
                             <option value="">请选择</option>
-                            <option value="政府公建项目">前期业务阶段</option>
-                            <option value="国有企业项目" >签约施工阶段</option>
-                            <option value="民营企业项目">售后服务阶段</option>
-                            <option value="地产类项">合约完成结束</option>
-                            <option value="政府BT型项目">未中标终止</option>
+                            <option >前期业务阶段</option>
+                            <option >签约施工阶段</option>
+                            <option >售后服务阶段</option>
+                            <option>合约完成结束</option>
+                            <option >未中标终止</option>
                         </select>
                     </td>
-                    <td>项目预算金额：</td>
-                    <td><input style="width: 250px "  name="budget"></td>
+                    <td class="Color">项目预算金额</td>
+                    <td><input style="width: 250px "  name="budget" oninput="value=value.replace(/[^\d]/g,'')"></td>
+
                 </tr>
                 <tr style="height: 45px ">
-                    <td>项目招标方式：</td>
+                    <td class="Color">项目资金来源</td>
+                    <td>
+                        <select style="height: 25px " name="capitalSource">
+                            <option value="">请选择</option>
+                            <option >财政预算投资</option>
+                            <option >自筹资金投资</option>
+                            <option >银行贷款投资</option>
+                            <option >利用外资</option>
+                        </select>
+                    </td>
+
+                    <td class="Color">项目招标方式</td>
                     <td>
                         <select style="height: 25px " name="biddingType">
                             <option value="">请选择</option>
@@ -173,15 +204,19 @@
                             <option value="涉密招标">涉密招标</option>
                         </select>
                     </td>
-                    <td>预计项目投标时间：</td>
-                    <td>
-                        <%--<input style="width: 250px " type="date" name="biddate">--%>
-                            <input  type="text" class="demo-input" placeholder="请选择日期"   name="biddate">
 
-                    </td>
                 </tr>
                 <tr style="height: 45px ">
-                    <td>项目单位名称</td>
+                    <td class="Color">项目负责人</td>
+                    <td >
+                        <input class="Eliminate" readonly>
+                        <input style="display: none" class="Eliminate-no" name="principal">
+                        <a target="_blank " class="add-to">添加</a>
+                        <a class="clear-to" >
+                            <input value="清空" class="input"  onClick="" type="button">
+                        </a>
+                    </td>
+                    <td class="Color">项目单位名称</td>
                     <td>
                         <input class="Eliminate-1" readonly required>
                         <input style="display: none" class="Eliminate-no-1" name="clientid">
@@ -190,54 +225,74 @@
                             <input value="清空" class="input1"  onClick="" type="button">
                         </a>
                     </td>
-                    <td>项目合作方式：</td>
+
+                </tr>
+                <tr style="height: 45px ">
+                    <td class="Color">区域负责人</td>
                     <td>
-                        <select style="height: 25px " required name="cooperationType">
-                            <option value="">请选择</option>
-                            <option value="公司自主项目">公司自主项目</option>
-                            <option value="合作项目">合作项目</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr style="height: 45px ">
-                    <td>合作单位：</td>
-                    <td><input style="width: 250px " name="cooperationUnit"></td>
-                    <td>合作伙伴姓名：</td>
-                    <td><input style="width: 250px " name="cooperationName"></td>
-                </tr>
-                <tr style="height: 45px ">
-                    <td>职务：</td>
-                    <td><input style="width: 250px " name="cooperationRole"></td>
-                    <td>联系方式：</td>
-                    <td><input style="width: 250px " name="cooperationPhone"></td>
-                </tr>
-                <tr style="height: 45px ">
-                    <td>项目查看者：</td>
-                    <td colspan="3" >
-                        <textarea class="eliminate-2"  readonly required></textarea>
-                        <input style="display: none" class="eliminate-no-2"  name="examine">
-                        <a target="_blank "  class="add-to2">添加</a>
-                        <a class="clear-to2" >
-                            <input value="清空" class="input2"  onClick="" type="button">
+                        <input class="Eliminate-3" readonly required>
+                        <input style="display: none" class="Eliminate-no-3" name="areaManager">
+                        <a target="_blank "  class="add-to3">添加</a>
+                        <a class="clear-to3" >
+                            <input value="清空" class="input3"  onClick="" type="button">
                         </a>
+                    </td>
+
+                    <td class="Color">所属机构</td>
+                    <td>
+                        <select class="department" style="height: 25px " name="deptid">
+                            <option value="">请选择</option>
+                        </select>
                     </td>
 
                 </tr>
                 <tr style="height: 45px ">
-                    <td>项目描述：</td>
+                    <td class="Color">项目立项时间</td>
+                    <td ><input  type="text" class="demo-input" placeholder="请选择日期" id="test1"  name="createtime"></td>
+
+                    <!--<input type="text" class="demo-input" placeholder="请选择日期" id="test1">-->
+                    <td class="Color">预计项目投标时间</td>
+                    <td>
+                        <input style="width: 250px "  type="text" class="demo-input" placeholder="请选择日期" id="test2"  name="biddate">
+                    </td>
+
+                </tr>
+                <!--<tr style="height: 45px ">-->
+
+                <!--<td>项目业务情况</td>-->
+                <!--<td colspan="3">-->
+                <!--<input style="width: 750px ">-->
+                <!--</td>-->
+                <!--</tr>-->
+
+                <!--<tr style="height: 45px ">-->
+                <!--<td>项目查看者</td>-->
+                <!--<td colspan="3" >-->
+                <!--<textarea class="eliminate-2"  readonly required  style="width: 400px "></textarea>-->
+                <!--<input style="display: none" class="eliminate-no-2"  name="examine">-->
+                <!--<a target="_blank "  class="add-to2">添加</a>-->
+                <!--<a class="clear-to2" >-->
+                <!--<input value="清空" class="input2"  onClick="" type="button">-->
+                <!--</a>-->
+                <!--</td>-->
+
+                <!--</tr>-->
+                <tr style="height: 45px ">
+                    <td class="Color">项目描述</td>
                     <td colspan="3">
-                        <textarea name="content"> </textarea>
+                        <textarea name="content" style="width: 750px;height: 43px"> </textarea>
                     </td>
                 </tr>
                 <tr style="height: 45px ">
-                    <td>添加附件：</td>
+                    <td class="Color">添加附件</td>
                     <td colspan="3">
                         <input type="file" name="file">
                     </td>
                 </tr>
             </table>
-            <input id="ok" type="submit" value="保存" style="margin-left: 350px ">
-            <a href="" id="no" style="">返回</a>
+            <input  id="ok" type="submit" value="保存" style="margin-left: 350px ">
+
+            <a href="/bd/project/query;" id="no" style="">返回</a>
         </form>
     </div>
 
@@ -248,8 +303,11 @@
         event: 'click',
         format: 'yyyy-MM-dd'
     });
-
+    laydate.render({
+        elem: '#test2', //指定元素
+        event: 'click',
+        format: 'yyyy-MM-dd'
+    });
 </script>
-
 </body>
 </html>

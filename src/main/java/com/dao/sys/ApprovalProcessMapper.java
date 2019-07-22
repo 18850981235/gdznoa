@@ -17,6 +17,6 @@ public interface ApprovalProcessMapper {
     //查询所有审批流程
     List<SysApprovalProcess> getProcessList();
     //按id查询审批流程
-    SysApprovalProcess getProcessById(int id);
+    SysApprovalProcess getProcessById(@Param("id") int id);
 
 }

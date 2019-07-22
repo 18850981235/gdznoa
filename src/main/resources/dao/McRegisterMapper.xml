@@ -110,7 +110,7 @@
             <if test="annualPrincipal != 0" >
                 #{annualPrincipal},
             </if>
-            <if test="annualTime != 0" >
+            <if test="annualTime != null" >
                 #{annualTime},
             </if>
             <if test="manager != 0" >
@@ -156,13 +156,16 @@
             <if test="recordsState != null">
                 records_state = #{recordsState},
             </if>
+            <if test="dataConditions != null">
+                data_conditions = #{dataConditions},
+            </if>
             <if test="caBorrow != null">
                 ca_borrow = #{caBorrow},
             </if>
             <if test="annualPrincipal != 0">
                 annual_principal = #{annualPrincipal},
             </if>
-            <if test="annualTime != 0">
+            <if test="annualTime != null">
                 annual_time = #{annualTime},
             </if>
             <if test="manager != 0">

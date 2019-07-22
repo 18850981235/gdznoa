@@ -142,6 +142,11 @@
         </set>
           where id=#{id}
     </update>
+    <delete id="delete">
+       delete  from `mc_datum_cost`
+       where id=#{id};
+
+    </delete>
 
     <select id="getListById" resultMap="BaseResultMap">
         SELECT `mc_datum_cost`.*,`bd_project`.`name` AS projectName

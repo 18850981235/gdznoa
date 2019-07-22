@@ -33,7 +33,6 @@
         });
     },1000);
 //三级点击菜单
-
         $(document).ready(function() {
             $('body').on('click','.inactive',function(){
                 if($(this).siblings('ul').css('display')=='none'){
@@ -65,22 +64,21 @@
         var html = "";
 
         $.ajaxSettings.async = false;
-        $.getJSON("/page/menu",
+        $.getJSON("http://192.168.1.236:8080/page/menu",
             function (date) {
                 $.each(date.menuList, function (i, menu) {
                         if (menu.levels == 1) {
                             html+='<ul class="yiji">';
-                            var url="#";
-                            if(menu.url!=null){
-                                url=menu.url;
-                            }
-                            html += "<li><a href='"+url+"' class='inactive'>" + menu.name + "</a>";
+                            html += "<li><a href='#' class='inactive'>" + menu.name + "</a>";
+
                             $.each(date.menuList, function (i, menu2) {
                                     if (menu2.levels == 2 && menu2.pcode == menu.code) {
                                         var url2 = "";
                                         var flge = true;
+
                                         $.each(date.authority, function (i, auth) {
                                             if (menu2.id == auth.menu) {
+
                                                 url2 = menu2.url;
                                                 flge = false;
                                                 return false;
@@ -89,16 +87,34 @@
                                         if (flge) {
                                             url2 = "javascript:void(0);";
                                         }
-/*                                        if (menu2.url == "" || menu2.url == null) {
+                                        if (menu2.url == "" || menu2.url == null) {
                                             url2 = "javascript:void(0);";
-                                        }*/
+                                        }
                                         html += "<ul style=\"display: none\">";
-                                        html +=   " <li>";
+                                        html +=   "<li>";
                                         html +=  "<a href='" + url2 + "' class='inactive'>" + menu2.name + "</a>";
                                         html +=   "<ul>";
+                                        $.each(date.menuList, function (i, menu3) {
+                                            if (menu3.levels == 3 && menu3.pcode == menu2.code) {
+                                                var url3 = "";
+                                                var flge2 = true;
+                                                $.each(date.authority, function (i, auth) {
+                                                    if (menu3.id == auth.menu) {
+
+                                                        url3 = menu3.url;
+                                                        flge2 = false;
+                                                        return false;
+                                                    }
+                                                })
+                                                if (flge2) {
+                                                    url3 = "javascript:void(0);";
+                                                }
+                                                html += "<li><a href='" + url3 + "'>" + menu3.name + "</a></li>";
+                                            }
+                                        })
                                         html += "</ul>" +
                                             "</li>" +
-                                            "  </ul>";
+                                            " </ul>";
                                     }
                                 }
                             )
@@ -118,23 +134,20 @@
         url:"http://t.weather.sojson.com/api/weather/city/101230201",  //路径
         success:function (data) {  ////success指的是请求并成功返回信息  data是返回的内容
             var day = new Date().getDate();
-            var Datea = data.data.forecast;
+            var Datea = data.data.forecast[0];
 
-            $.each(Datea, function (index, obj) {
-                var hight = obj.high.substring(3);//substring截选
-                var low = obj.low.substring(3);
-                if (obj.date == day) {
-                    $("#weather p").text(obj.type);
-                    $("#weather span").text(hight + " ~ " + low);
-                    $("#weather .comment").text(obj.notice);
+            // $.each(Datea, function (index, obj) {
+            //     var hight = obj.high.substring(3);//substring截选
+            //     var low = obj.low.substring(3);
+            //     if (Datea == day) {
+                    $("#weather p").text(Datea.type);
+                    $("#weather span").text(Datea.hight + " ~ " + Datea.low);
+                    $("#weather .comment").text(Datea.notice);
 
-                }
-            });
+                // }
+            // });
         }
         });
-
-
-
 //分页
     $(document).ready(function () {
         $("#paging-selection .dian").click(function () {
@@ -144,8 +157,6 @@
             // $(".page-selection").css("margin-left","200px ");
         })
     })
-
-
     //点击
     $(document).ready(function () {
 
@@ -165,22 +176,41 @@
     });
     $(document).ready(function(){
         // $('.clear-to .input').click(function(){
-            $(document).on("click",".input",function f() {
+            $(document).on("click",".input",function() {
             $('.Eliminate').val("");
             $('.Eliminate-no').val("");
         });
         // $('.clear-to1 .input1').click(function(){
-            $(document).on("click",".input1",function f() {
+            $(document).on("click",".input1",function() {
             $('.Eliminate-1').val("");
             $('.Eliminate-no-1').val("");
         });
         // $('.clear-to2 .input2').click(function(){
-            $(document).on("click",".input2",function f() {
+            $(document).on("click",".input2",function() {
 
 
             $('.eliminate-2').val("");
             $('.eliminate-no-2').val("");
         });
+        $(document).on("click",".input3",function() {
+            console.log(1)
+            $('.Eliminate-3').val("");
+            $('.Eliminate-no-3').val("");
+        });
+        $(document).on("click",".input4",function() {
+            $('.eliminate-3').val("");
+            $('.eliminate-no-3').val("");
+        });
+        $(document).on("click",".input5",function() {
+            $('.Eliminate-5').val("");
+            $('.Eliminate-no-5').val("");
+        });
+        $(document).on("click",".input6",function() {
+            $('.Eliminate-6').val("");
+            $('.Eliminate-no-6').val("");
+        });
+
+
     });
     //点击显示隐藏  --选择负责人
     $(document).on('click','.click',function(){
@@ -199,41 +229,77 @@
             $("#choice").hide();
             $("#choice1").hide();
             $("#choice2").hide();
-        });
-        // $(".add-to").click(function () {
+            $("#choice3").hide();
+            $("#choice4").hide();
+            $("#choice5").hide();
+                $("#choice6").hide();
+            });
+
             $(document).on("click",".add-to",function () {
                 $("#choice").show();
             })
 
-        // });
-        // $(".add-to1").click(function () {
         $(document).on("click",".add-to1",function () {
             $("#choice1").show();
         });
-        // $(".add-to2").click(function () {
-            $(document).on("click",".add-to2",function () {
+
+        $(document).on("click",".add-to2",function () {
             $("#choice2").show();
         });
 
+        $(document).on("click",".add-to3",function () {
+            $("#choice3").show();
+        });
+        $(document).on("click",".add-to5",function () {
+            $("#choice5").show();
+        });
+        $(document).on("click",".add-to6",function () {
+            $("#choice6").show();
+        });
+
         $(document).on("click",".upload",function () {
-            //     $(document).on("click",".upload",function () {
+
             var name=$(this).find(".name-block").text();
             var id=$(this).find(".name-none").text();
             $("#choice").hide();
             $(".Eliminate").val(name);
             $(".Eliminate-no").val(id);
         });
-        // $(" .upload1").click(function () {
+
             $(document).on("click",".upload1",function () {
-            //     $(document).on("click",".upload1",function () {
+
             var name1=$(this).find(".name-block1").text();
             var id1=$(this).find(".name-none1").text();
             $("#choice1").hide();
             $(".Eliminate-1").val(name1);
             $(".Eliminate-no-1").val(id1);
         });
-        // $(" .upload-noe").click(function () {
-                $(document).on("click",".upload-noe",function () {
+
+        $(document).on("click",".upload3",function () {
+
+            var name1=$(this).find(".name-block3").text();
+            var id1=$(this).find(".name-none3").text();
+            $("#choice3").hide();
+            $(".Eliminate-3").val(name1);
+            $(".Eliminate-no-3").val(id1);
+        });
+        $(document).on("click",".upload5",function () {
+
+            var name1=$(this).find(".name-block5").text();
+            var id1=$(this).find(".name-none5").text();
+            $("#choice5").hide();
+            $(".Eliminate-5").val(name1);
+            $(".Eliminate-no-5").val(id1);
+        });
+        $(document).on("click",".upload6",function () {
+
+            var name1=$(this).find(".name-block6").text();
+            var id1=$(this).find(".name-none6").text();
+            $("#choice6").hide();
+            $(".Eliminate-6").val(name1);
+            $(".Eliminate-no-6").val(id1);
+        });
+        $(document).on("click",".upload-noe",function () {
             var c2,f2,d2,d1;
             var name2=$(this).find(".name-block2").text();
             var id2=$(this).find(".name-none2").text();
@@ -249,6 +315,23 @@
                 $(".eliminate-no-2").val(f2);
             }
         })
+        $(document).on("click",".upload-noe",function () {
+            var c2,f2,d2,d1;
+            var name2=$(this).find(".name-block2").text();
+            var id2=$(this).find(".name-none2").text();
+            d2=$(".eliminate-2").val();
+            d1=$(".eliminate-no-2").val();
+            if(d2==""){
+                $(".eliminate-2").val(name2);
+                $(".eliminate-no-2").val(id2);
+            }else {
+                c2= d2+","+name2;
+                f2= d1+","+id2;
+                $(".eliminate-2").val(c2);
+                $(".eliminate-no-2").val(f2);
+            }
+        })
+
     })
 
 })();

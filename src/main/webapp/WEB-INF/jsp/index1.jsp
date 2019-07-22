@@ -48,7 +48,7 @@
                     <div class="back-img">
                         <img src="<%=basePath%>/imgs/password.png"/>
                     </div>
-                    <input placeholder="请输入密码" style="color: #ffffff" type="password" name="password" value="123456">
+                    <input placeholder="请输入密码" style="color: #ffffff" type="password" name="password">
                     <c:if test="${error=='密码错误'}">
                         <span class="co1">*密码错误</span>
                     </c:if>

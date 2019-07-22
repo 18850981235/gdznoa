@@ -29,11 +29,12 @@
     <script src="<%=basePath%>/js/public/department.js"></script>
 </head>
 <body>
-<jsp:include page="../../in-topleft.jsp"/>
+<!--<jsp:include page="../../in-topleft.jsp"/>-->
+
 <div id="choice" style="display: none">
     <p class="title">
         <img src="<%=basePath%>/imgs/root.png" height="40" width="40"/>
-        福建省广电智能系统集成工贸有限公司
+        广电智能
     </p>
     <ul class="yiji-no">
         <li style="display:none;">
@@ -53,11 +54,6 @@
     </div>
 </div>
 
-
-<div id="page">
-
-    <a class="page-right" >新建客户</a>
-</div>
 <!--新建客户-->
 <div id="new"  >
     <div id="center">
@@ -77,11 +73,11 @@
                 <tr style="height: 46px ">
                     <td style="width: 120px;background-color: #efefef">客户编号：</td>
                     <td>
-                        <input id="Atanisi" style="width: 200px " name="code">
+                        <input id="Atanisi" style="width: 200px " name="code" required>
                     </td>
                     <td style="width: 85px;background-color: #efefef">所属部门：</td>
                     <td>
-                        <select style="height: 30px" required name="deptid"  class="department">
+                        <select style="height: 30px" required name="deptid"  class="department" required>
 
                         </select>
                     </td>
@@ -89,7 +85,7 @@
                 <tr style="height: 46px ">
                     <td style="width: 120px;background-color: #efefef">单位类型：</td>
                     <td>
-                        <select style="height: 30px ;width:185px ;" required name="unitType">
+                        <select style="height: 30px ;width:185px ;" required name="unitType" required>
                             <option value="">请选择</option>
                             <option>政府</option>
                             <option>国有企业</option>
@@ -102,7 +98,7 @@
 
                     <td  >
                         <input class="Eliminate" name="aaa" required readonly >
-                        <input class="Eliminate-no" style="display: none" name="userid" >
+                        <input class="Eliminate-no" style="display: none" name="userid"  required>
                         <a  class="add-to">添加</a>
                         <a class="clear-to" >
                             <input value="清空"  onClick="" type="reset">
@@ -160,7 +156,7 @@
                 </tr>
             </table>
             <input id="ok"  type="submit" value="确定" style="margin-left: 250px ">
-            <a href="#" id="no" style="color: #333">取消</a>
+            <a href="/bd/client/query" id="no" >取消</a>
         </form>
     </div>
 

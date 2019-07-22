@@ -26,7 +26,7 @@ function w() {
                 $.ajax({
                     type:"post",
                     dataType:"json",
-                    url:"../../../json/section.json",
+                    url:"<%=basePath%>/json/section.json",
                     success:function (data1) {
                         var names=data1.list;
                         $.each(names,function (index,obj) {

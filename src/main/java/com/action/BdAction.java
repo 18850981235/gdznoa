@@ -203,8 +203,11 @@ public class BdAction {
             principalName = null;
         }
 
-        //int userid = (int) session.getAttribute("userId");
-        int  userid=1;
+        int userid = (int) session.getAttribute("userId");
+        if (userid==1){
+            userid=0;
+        }
+
         return JSONObject.toJSONString(bdProjectService.getlist(userid,projectName, deptid, stage, areaManager,principalName, start, end, pageIndex)
                 , SerializerFeature.DisableCircularReferenceDetect,
                 SerializerFeature.WriteNullStringAsEmpty);
@@ -253,8 +256,8 @@ public class BdAction {
                 SerializerFeature.WriteNullStringAsEmpty);
     }
     @RequestMapping("/project/approvalDetailed")
-    public String projectParticular(SysApprovalDetailed approvalDetailed,HttpSession session) {
-        int userid=(int) session.getAttribute("userId");
+    public String projectParticular(SysApprovalDetailed approvalDetailed,HttpServletRequest request) {
+        int userid = (int)request.getSession().getAttribute("userId");
         approvalDetailed.setApprovalUser(userid);
         approvalDetailed.setApprovalDate(new Date());
         bdProjectService.addProjectApproval(approvalDetailed);

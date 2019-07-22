@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.dao.sys.AuthorityMapper">
+    <resultMap id="BaseResultMap" type="com.beans.SysAuthority">
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="userid" property="userid" jdbcType="INTEGER" />
+    <result column="menu" property="menu" jdbcType="INTEGER" />
+        <association property="sysmenu" javaType="com.beans.SysMenu" column="menu"
+                     select="com.dao.sys.MenuMapper.getMenubyid">
+        </association>
+    </resultMap>
     <insert id="add">
         INSERT INTO `sys_authority`(`userid`,`menu`) VALUES(#{userid},#{menuid})
     </insert>
@@ -9,7 +17,7 @@
         delete from `sys_authority` where userid=#{userid}
     </delete>
 
-    <select id="getMenuIdByUserId" resultType="com.beans.SysAuthority">
-        select * from `sys_authority` where userid=#{userid}
+    <select id="getMenuIdByUserId" resultMap="BaseResultMap">
+        select `sys_authority`.*  from `sys_authority` where `sys_authority`.userid=#{userid}
     </select>
 </mapper>

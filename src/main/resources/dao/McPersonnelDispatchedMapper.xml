@@ -89,7 +89,7 @@
 
     <select id="getList" resultMap="BaseResultMap">
         SELECT *
-        FROM `mc_personnel_dispatched`,
+        FROM `mc_personnel_dispatched`
         <trim prefix="where" prefixOverrides="and">
             <if test="deptid != 0">
                 and `mc_personnel_dispatched`.deptid=#{deptid}
@@ -240,7 +240,7 @@
                 #{processState},
             </if>
             <if test="processNode != 0" >
-                #{processNode},
+                #{processNode}
             </if>
         </trim>
     </insert>
@@ -296,7 +296,7 @@
                 process_state = #{processState},
             </if>
             <if test="processNode != 0" >
-                process_node = #{processNode},
+                process_node = #{processNode}
             </if>
         </set>
           WHERE id={id}

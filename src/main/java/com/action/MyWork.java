@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -41,10 +42,9 @@ public class MyWork {
                          @RequestParam(required = false) Date start,
                          @RequestParam(required = false) Date end,
                          @RequestParam(required = false, defaultValue = "0") int pageIndex,
-                         HttpSession session) {
+                         HttpServletRequest request) {
 
-        //int userid = (int) session.getAttribute("userId");
-        int userid=18;
+        int userid = (int) request.getSession().getAttribute("userId");
         return JSONObject.toJSONString(myWorkService.getList(userid, processid, id, start, end, pageIndex),
                 SerializerFeature.DisableCircularReferenceDetect,
                 SerializerFeature.WriteNullStringAsEmpty);
@@ -53,10 +53,6 @@ public class MyWork {
     public String showMyWork() {
         return "/mc/top/my-work";
     }
-
-
-
-
 
     @RequestMapping("/mc/borrow/approval")
     public String showMyBorrow() {
@@ -86,5 +82,15 @@ public class MyWork {
     @RequestMapping("/mc/datum/approval")
     public String showMyCost() {
         return "/mc/top/myCost";
+    }
+
+    @RequestMapping("/mc/register/approval")
+    public String showMyRegister() {
+        return "/mc/top/myRegister";
+    }
+
+    @RequestMapping("/mc/certificate/approval")
+    public String showMyCertificate() {
+        return "/mc/top/myCertificate";
     }
 }

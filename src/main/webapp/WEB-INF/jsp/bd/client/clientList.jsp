@@ -29,10 +29,8 @@
     <script src="<%=basePath%>/js/bd/client/clientList.js"></script>
 </head>
 <body>
-<jsp:include page="../../in-topleft.jsp"/>
-<div id="page">
-    <a class="page-left ">客户管理</a>
-</div>
+
+
 <div id="choice" style="display: none">
     <p class="title">
         <img src="<%=basePath%>/imgs/root.png" height="40" width="40"/>
@@ -93,9 +91,8 @@
                 </div>
             </div>
             <div class="query-button" >
-                <input value="新增" type="submit" class="add">
+                <a  href="/bd/client/add"  class="add">新增</a>
                 <input value="快速查询"  type="submit" class="query"/>
-                <input value="重置"  type="submit" class="reset">
             </div>
         </div>
 
@@ -111,6 +108,7 @@
                     <td style="width: 150px"><b>操作</b></td>
                 </tr>
             </table>
+
             <table class="paging-in"></table>
         </div>
         <div id="paginator-test"></div>

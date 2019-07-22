@@ -10,7 +10,7 @@ public interface UserService {
     SysUser getByAccount(String userName);
     int register(String name, String password, String mobile);
     JSONObject verify(String mobile);
-    boolean isAccount(String mobile);
+    int isAccount(String mobile);
     int updatePassWord(String mobile, String newPassWord);
     int add(SysUser user);
     int isCountClassify(Integer companyid, Integer deptid, Integer roleid);

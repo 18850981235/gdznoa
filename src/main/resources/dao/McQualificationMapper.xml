@@ -13,14 +13,14 @@
         <result column="security" property="security" jdbcType="INTEGER" />
         <result column="annual_time" property="annualTime" jdbcType="VARCHAR" />
         <result column="annual_principal" property="annualPrincipal" jdbcType="INTEGER" />
-        <result column="file" property="file" jdbcType="VARCHAR" />
+        <result column="filename" property="filename" jdbcType="VARCHAR" />
         <result column="watermark" property="watermark" jdbcType="VARCHAR" />
         <result column="accessory" property="accessory" jdbcType="VARCHAR" />
         <result column="processid" property="processid" jdbcType="INTEGER" />
         <result column="deptName" property="deptName" jdbcType="VARCHAR" />
         <result column="process_userid" property="processUserid" jdbcType="INTEGER" />
         <result column="process_state" property="processState" jdbcType="VARCHAR" />
-        <result column="pdf_outtime" property="pdf_Outtime" jdbcType="INTEGER" />
+        <result column="pdf_outtime" property="pdf_outtime" jdbcType="INTEGER" />
 
         <collection property="user"  javaType="SysUser" column="userid"
                     select="com.dao.sys.UserMapper.getByID">
@@ -66,8 +66,8 @@
             <if test="annualPrincipal != 0" >
                 annual_principal,
             </if>
-            <if test="file != null" >
-                file,
+            <if test="filename != null" >
+                filename,
             </if>
             <if test="watermark != null" >
                 watermark,
@@ -120,8 +120,8 @@
             <if test="annualPrincipal != 0" >
                 #{annualPrincipal},
             </if>
-            <if test="file != null" >
-                #{file},
+            <if test="filename != null" >
+                #{filename},
             </if>
             <if test="watermark != null" >
                 #{watermark},
@@ -138,8 +138,8 @@
             <if test="processState != null" >
                 #{processState},
             </if>
-            <if test="pdf_Outtime != null" >
-                #{pdf_Outtime},
+            <if test="pdf_outtime != null" >
+                #{pdf_outtime},
             </if>
         </trim>
     </insert>
@@ -177,8 +177,8 @@
             <if test="annualPrincipal != 0">
                 annual_principal = #{annualPrincipal},
             </if>
-            <if test="file != null">
-                file = #{file},
+            <if test="filename != null">
+                filename = #{filename},
             </if>
             <if test="watermark != null">
                 watermark = #{watermark},

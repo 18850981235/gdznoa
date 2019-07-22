@@ -120,6 +120,11 @@ public class McFileBorrowServiceImpl implements McFileBorrowService{
     }
 
     @Override
+    public int delete(int id) {
+        return mcFileBorrowMapper.delete(id);
+    }
+
+    @Override
     public Map<String, Object> getList(String projectName,String name, int deptid, Date start,
                                       Date end, int usreid, int pageIndex) {
         Map<String, Object> map=new HashMap<>();

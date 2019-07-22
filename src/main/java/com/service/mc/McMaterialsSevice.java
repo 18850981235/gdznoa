@@ -2,6 +2,7 @@ package com.service.mc;
 
 import com.beans.McMaterials;
 import com.beans.SysApprovalDetailed;
+import org.apache.ibatis.annotations.Param;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
@@ -15,6 +16,8 @@ public interface McMaterialsSevice {
     int addProjectApproval(SysApprovalDetailed detailed);
     int add(McMaterials mcMaterials, HttpServletRequest request);
     int update(McMaterials materials);
+
+    int delete(@Param("id")int id);
     Map<String, Object> getList(String projectName, int deptid, Date start,
                                 Date end, int usreid, int pageIndex);
     McMaterials getListById(int id);

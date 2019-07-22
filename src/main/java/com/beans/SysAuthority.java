@@ -11,4 +11,6 @@ public class SysAuthority {
   private int id;
   private int userid;
   private int menu;
+
+  private SysMenu sysmenu;
 }

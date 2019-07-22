@@ -28,10 +28,6 @@
 </head>
 <body>
 
-<jsp:include page="../../in-topleft.jsp"/>
-<div id="page">
-    <a class="page-left ">新建联系人</a>
-</div>
 <div id="new" >
     <div id="center">
         <form action="/bd/client_contacts/add.html" method="post">
@@ -42,22 +38,22 @@
                 <tr>
                     <td style="height: 50px;background-color: #efefef">客户单位：</td>
                     <td colspan="3">
-                        <select class="customer" required style="width:200px ;height: 25px  "  name="clientid">
+                        <select class="customer" required style="width:200px ;height: 25px  "  name="clientid" required>
                             <option value="">请选择</option>
                         </select>
                     </td>
                 </tr>
                 <tr>
                     <td style="height: 50px;background-color: #efefef ">姓名：</td>
-                    <td ><input required  name="name" ></td>
+                    <td ><input required  name="name" required></td>
                     <td style="background-color: #efefef">职务：</td>
-                    <td><input required  name="role"></td>
+                    <td><input required  name="role" required> </td>
                 </tr>
                 <tr>
                     <td style="height: 50px;background-color: #efefef ">联络电话：</td>
                     <td ><input name="mobile"></td>
                     <td style="background-color: #efefef">手机：</td>
-                    <td><input required name="phone"></td>
+                    <td><input required name="phone" required></td>
                 </tr>
                 <tr>
                     <td style="height: 50px;background-color: #efefef ">微信号：</td>
@@ -71,7 +67,7 @@
                 </tr>
             </table>
             <input id="ok" type="submit" value="确定"  style="margin-left: 180px ">
-            <a id="no" >返回</a>
+            <a id="no"  href="/bd/client_contacts/query">返回</a>
         </form>
     </div>
 

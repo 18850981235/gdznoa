@@ -11,4 +11,5 @@ import java.util.List;
 public interface ApprovalProcessService {
     List<SysApprovalProcess> getProcessList();
     int updateProcessById(String usersid, int id);
+    SysApprovalProcess  getSysApprovalProcessById(int id);
 }

@@ -29,13 +29,21 @@ public class setWatermark {
 //                content = stamper.getOverContent(i);// 在内容上方加水印
             content = stamper.getUnderContent(i);//在内容下方加水印
             gs.setFillOpacity(0.2f);
+            //设置状态
              content.setGState(gs);
             content.beginText();
-//                content.setColorStroke(BaseColor.WHITE);
+                    //            设置颜色笔划
+
+
+//          content.setColorStroke(BaseColor.WHITE);
+            //颜色填充
             content.setColorFill(BaseColor.LIGHT_GRAY);
+            //设置字体和大小
             content.setFontAndSize(base, 50);
+            //设置文本矩阵
             content.setTextMatrix(70, 200);
-            content.showTextAligned(Element.ALIGN_CENTER, watermark, 300,350, 55);
+            //显示文本对齐
+            content.showTextAligned(Element.ALIGN_CENTER, watermark, 300,350, 55);//旋转
 //            Image image = Image.getInstance("D:/fish.jpg");
 			/*img.setAlignment(Image.LEFT | Image.TEXTWRAP);
 			img.setBorder(Image.BOX);

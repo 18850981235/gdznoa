@@ -5,7 +5,7 @@
 $.ajax({
     type:"post",
     dataType:"json",
-    url:"../../../json/screen.json",
+    url:"<%=basePath%>/json/screen.json",
   // url:"http://192.168.1.191:8080/util/getClient",
     success:function (data) {
         var names=data.list;

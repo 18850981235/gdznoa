@@ -1,9 +1,9 @@
 #content-in{
-    width: 91%;
-    height: 80% ;
+    width: 100%;
+    height: 100% ;
     position: absolute;
-    left: 9% ;
-    top: 130px ;
+    left: 0px  ;
+    top: 0px ;
     display: inline-block;
     /*background-color: #f6f7f9;*/
     overflow-y:auto;
@@ -53,10 +53,10 @@
 /*是否删除*/
 @media screen and (max-width: 1340px) {
     #content-in{
-        width: 1276px ;
+        width: 100% ;
         position: absolute;
-        left: 126px ;
-        top:130px;
+        left: 0px  ;
+        top:0px;
     }
 }
 /**/
@@ -69,7 +69,7 @@
     /*height: 60px ;*/
 }
 #query-button .top1{
-    width:400px;
+    width:350px;
     height: 40px ;
     display: inline-block;
     line-height: 38px ;
@@ -127,7 +127,7 @@ border: 0px ;
     margin-top: 15px ;
 }
 #query-button .in1{
-    width:450px;
+    width:350px;
     height: 40px ;
     display: inline-block;
     float: left;
@@ -148,7 +148,7 @@ border: 0px ;
 #query-button .in1 input{
     width: 150px ;
     height:37px ;
-    margin-top: 2px ;
+
     border: 0px ;
 }
 
@@ -158,7 +158,7 @@ border: 0px ;
     width: 80px;
     height: 25px ;
     border-radius: 7px ;
-    background-color: #fbfbfb;
+    background-color: #7d7dff;
     cursor: pointer;
     float: right;
 }

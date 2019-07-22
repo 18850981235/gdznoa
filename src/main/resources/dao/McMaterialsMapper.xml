@@ -144,6 +144,10 @@
         </set>
         where id = #{id}
     </update>
+    <delete id="delete">
+        delete from mc_materials
+        where id=#{id}
+    </delete>
 
     <select id="getListById" resultMap="BaseResultMap">
         SELECT *,`bd_project`.`abbreviation` AS projectName

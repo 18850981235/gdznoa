@@ -12,7 +12,7 @@ function lo(z) {
     $.ajax({
         type: "get",
         url: "/myWork",
-         data: {"id":id,"start":start,"end":end,"processid":processid,"pageIndex":z},
+         data: {"processid":processid,"id":id,"start":start,"end":end,"pageIndex":z},
         dataType: "json",
         success: function (data) {
             var list = data.list;
@@ -23,9 +23,8 @@ function lo(z) {
                 html += '<tr style="height: 40px;text-align: center;line-height: 40px " class="content" >';
                 html += '<td style="width: 160px ">'+obj1.id+'</td>';
                 html += '<td style="width: 450px ">'+obj1.process.name+'</td>';
-                html += '<td style="width: 200px ">'+obj1.processUser.name+'</td>';
+                html += '<td style="width: 200px ">'+obj1.user.name+'</td>';
                 html += '<td style="width: 200px ">'+obj1.createtime+'</td>';
-
 
                 // html += '<td style="width: 60px ">' + (index1+1) + '</td>';
                 // html += '<td style="width: 100px ">' + obj1.dept.name + '</td>';
@@ -36,6 +35,7 @@ function lo(z) {
                 // html += '<td style="width: 100px ">' + obj1.fileNum + '</td>';
                 html += '<td style="width: 110px ">';
                 html += '<a href='+obj1.process.url+'?id='+obj1.id+' style="color:#dea97d; margin-left: 4px  ">审批</a>';
+                console.log(obj1.process);
                 html += '</td>';
                 html += '</tr>';
             });

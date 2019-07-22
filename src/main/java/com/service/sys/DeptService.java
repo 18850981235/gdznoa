@@ -13,5 +13,7 @@ public interface DeptService {
     List<SysDept> getDeptList(int id);
     int add(String name);
     int delete(int id);
+    int update(int id,String name);
     List<SysDept> getDeptUsers();
+    List<SysDept> getAllDept();
 }

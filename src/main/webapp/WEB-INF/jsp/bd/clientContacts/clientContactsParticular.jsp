@@ -27,10 +27,7 @@
 </head>
 <body>
 
-<jsp:include page="../../in-topleft.jsp"/>
-<div id="page">
-    <a class="page-left ">联系人详情</a>
-</div>
+
 <div id="new" >
     <div id="center">
         <form>
@@ -39,7 +36,7 @@
                     <td colspan="4" style="width:500px;background-color: #efefef">联系人基本信息</td>
                 </tr>
                 <tr>
-                    <td style="height: 50px;background-color: #efefef">客户单位：</td>
+                    <td style="height: 50px;background-color: #efefef" >客户单位：</td>
                     <td colspan="3">
                         ${clientContacts.clientname}
                     </td>
@@ -67,6 +64,7 @@
                     <td colspan="3">${clientContacts.content}</td>
                 </tr>
             </table>
+            <a href="/bd/client_contacts/query" id="no" >取消</a>
         </form>
     </div>
 

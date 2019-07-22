@@ -10,14 +10,20 @@ import com.service.sys.ApprovalProcessService;
 import com.service.sys.DeptService;
 import com.service.sys.UserService;
 import com.util.FileUtils;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 /**
@@ -39,6 +45,15 @@ public class UtilAciton {
     private UserService userService;
     @Resource(name = "pdfService")
     private PdfService pdfService;
+
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        dateFormat.setLenient(false);
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
+        //true:允许输入空值，false:不能为空值
+    }
+
 
     @RequestMapping(value = "/getDeptUsers",produces = "text/html;charset=UTF-8")
     @ResponseBody
@@ -97,9 +112,11 @@ public class UtilAciton {
 
     @RequestMapping(value = "/getUser",produces = "text/html;charset=UTF-8")
     @ResponseBody
-    public String getUser(HttpSession session){
-        return JSONObject.toJSONString(session.getAttribute("user"),
+    public String getUser(HttpServletRequest request){
+        SysUser user=(SysUser)request.getSession().getAttribute("user");
+        return JSONObject.toJSONString(user,
                 SerializerFeature.DisableCircularReferenceDetect,
                 SerializerFeature.WriteNullStringAsEmpty);
     }
+
 }

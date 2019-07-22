@@ -19,27 +19,26 @@
     <title>我的工作</title>
     <link rel="stylesheet" href="<%=basePath%>/css/bootstrap.css">
     <link rel="stylesheet" href="<%=basePath%>/icon-font/iconfont.css">
+    <link rel="stylesheet" href="<%=basePath%>/layui/css/modules/laydate/default/laydate.css">
     <link rel="stylesheet" href="<%=basePath%>/css/jump-in.css">
     <link rel="stylesheet" href="<%=basePath%>/css/mc/top/my-work.css">
     <script src="<%=basePath%>/js/jquery-3.3.1.js"></script>
     <script src="<%=basePath%>/js/bootstrap.js"></script>
     <script src="<%=basePath%>/js/bootstrap-paginator.js"></script>
+    <script src="<%=basePath%>/layui/lay/modules/laydate.js" type="text/javascript"></script>
     <script src="<%=basePath%>/js/public/jump.js"></script>
     <script src="<%=basePath%>/js/mc/top/my-work-1.js"></script>
     <script src="<%=basePath%>/js/mc/top/my-work.js"></script>
 </head>
 <body>
-<jsp:include page="../../in-topleft.jsp"/>
-<div id="page">
-    <a class="page-left ">我的工作</a>
-</div>
+
 <div id="content-in">
     <div id="center">
         <div id="query-button">
             <div class="query-top">
                 <div class="top1">
                     <span>流程类型</span>
-                    <select class="department" style="width: 280px;height: 30px ">
+                    <select class="department" style="width: 200px;height: 30px ">
                         <option value="0">请选择</option>
                     </select>
                 </div>
@@ -51,7 +50,9 @@
             <div class="query-in">
                 <div class="in1">
                     <span>接受时间</span>
-                    <input type="date" class="start">至 <input type="date" class="end">
+                    <input type="text"  placeholder="请选择日期" id="test1" style="width: 110px;display: inline-block;float: left " class="start">
+                    <span style="width: 20px ">-</span>
+                    <input type="text"  placeholder="请选择日期" id="test2" style="width: 110px;display: inline-block " class="end" >
                 </div>
             </div>
             <div class="query-button">
@@ -76,5 +77,17 @@
         <div id="paginator-test"></div>
     </div>
 </div>
+<script type="text/javascript">
+    laydate.render({
+        elem: '#test1', //指定元素
+        event: 'click',
+        format: 'yyyy-MM-dd'
+    });
+    laydate.render({
+        elem: '#test2', //指定元素
+        event: 'click',
+        format: 'yyyy-MM-dd'
+    });
+</script>
 </body>
 </html>

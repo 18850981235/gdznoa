@@ -13,7 +13,9 @@ import java.util.Map;
 public interface McFileBorrowMapper {
     int add(McFileBorrow fileBorrow);
     int updateById(McFileBorrow fileBorrow);
-    McFileBorrow getListById(int id);
+    McFileBorrow getListById(@Param("id") int id);
+
+    int delete(@Param("id")int id);
     List<McFileBorrow> getList(@Param("name") String name,
                                @Param("deptid") int deptid,
                                @Param("start") Date start,

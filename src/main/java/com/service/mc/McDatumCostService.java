@@ -2,6 +2,7 @@ package com.service.mc;
 
 import com.beans.McDatumCost;
 import com.beans.SysApprovalDetailed;
+import org.apache.ibatis.annotations.Param;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
@@ -15,6 +16,7 @@ public interface McDatumCostService {
     int addProjectApproval(SysApprovalDetailed detailed);
     int add(McDatumCost mcDatumCost, HttpServletRequest request);
     int update(McDatumCost mcDatumCost);
+    int deleteById(@Param("id")int id);
     Map<String, Object> getList(String name, int deptid, Date start,
                                 Date end, int usreid, int pageIndex);
     McDatumCost getListById(int id);

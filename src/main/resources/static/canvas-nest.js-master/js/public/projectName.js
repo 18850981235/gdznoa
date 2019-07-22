@@ -5,7 +5,7 @@
 $.ajax({
     type:"post",
     dataType:"json",
-    url:"../../../json/projectName.json",
+    url:"<%=basePath%>/json/projectName.json",
     success:function (data) {
         $.each(data,function (index,obj) {
             var html="";

@@ -5,7 +5,7 @@
 $.ajax({
     type:"post",
     dataType:"json",
-    url:"../../../json/customer.json",
+    url:"<%=basePath%>/json/customer.json",
     success:function (data) {
         var names=data;
         $.each(names,function (index,obj) {

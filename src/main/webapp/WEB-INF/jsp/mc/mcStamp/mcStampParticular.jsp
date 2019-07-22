@@ -17,22 +17,19 @@
 <head>
     <meta charset="UTF-8">
     <title>商务盖章详情</title>
-    <link rel="stylesheet" href="<%=basePath%>/css/bootstrap.css">
-    <link rel="stylesheet" href="<%=basePath%>/icon-font/iconfont.css">
-    <link rel="stylesheet" href="<%=basePath%>/css/jump-in.css">
-    <link rel="stylesheet" href="<%=basePath%>/css/mc/mcStamp/mcStampAdd.css">
-    <script src="<%=basePath%>/js/jquery-3.3.1.js"></script>
-    <script src="<%=basePath%>/js/bootstrap.js"></script>
-    <script src="<%=basePath%>/js/bootstrap-paginator.js"></script>
-    <script src="<%=basePath%>/js/public/jump.js"></script>
-    <script src="<%=basePath%>/js/public/department.js"></script>
-    <script src="<%=basePath%>/js/mc/mcStamp/mcStampParticular.js"></script>
+    <link rel="stylesheet" href=" <%=basePath%>/css/bootstrap.css">
+    <link rel="stylesheet" href=" <%=basePath%>/icon-font/iconfont.css">
+    <link rel="stylesheet" href=" <%=basePath%>/css/jump-in.css">
+    <link rel="stylesheet" href=" <%=basePath%>/css/mc/mcStamp/mcStampAdd.css">
+    <script src=" <%=basePath%>/js/jquery-3.3.1.js"></script>
+    <script src=" <%=basePath%>/js/bootstrap.js"></script>
+    <script src=" <%=basePath%>/js/bootstrap-paginator.js"></script>
+    <script src=" <%=basePath%>/js/public/jump.js"></script>
+    <script src=" <%=basePath%>/js/public/department.js"></script>
+    <script src=" <%=basePath%>/js/mc/mcStamp/mcStampParticular.js"></script>
 </head>
 <body>
-<jsp:include page="../../in-topleft.jsp"/>
-<div id="page">
-    <a class="page-left ">商务盖章详情</a>
-</div>
+
 <div id="content-in">
     <div id="center">
 

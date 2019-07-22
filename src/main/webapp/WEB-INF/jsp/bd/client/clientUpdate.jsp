@@ -13,7 +13,7 @@
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path;
 %>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:c="http://www.w3.org/1999/XSL/Transform">
 <head>
     <meta charset="UTF-8">
     <title>修改客户</title>
@@ -29,7 +29,7 @@
     <script src="<%=basePath%>/js/public/department.js"></script>
 </head>
 <body>
-<jsp:include page="../../in-topleft.jsp"/>
+
 <div id="choice" style="display: none">
     <p class="title">
         <img src="<%=basePath%>/imgs/root.png" height="40" width="40"/>
@@ -54,10 +54,7 @@
 </div>
 
 
-<div id="page">
 
-    <a class="page-right" >修改客户</a>
-</div>
 <div id="new"  >
     <div id="center">
         <form action="/bd/client/update.html" method="post">
@@ -81,7 +78,7 @@
                     </td>
                     <td style="width: 85px;background-color: #efefef">所属部门：</td>
                     <td>
-                        <select style="height: 30px " name="deptid" id="select" class="department">
+                        <select style="height: 30px " name="deptid" id="select" class="department" required>
                             <c:if test="${client.deptid!=null}">
                                 <option value="${client.dept.id}">${client.dept.name}</option>
                             </c:if>
@@ -91,7 +88,7 @@
                 <tr style="height: 46px ">
                     <td style="width: 120px;background-color: #efefef">单位类型：</td>
                     <td>
-                        <select style="height: 30px ;width:185px ;" required name="unitType">
+                        <select style="height: 30px ;width:185px ;" required name="unitType" required>
                             <option>请选择</option>
                             <option value="政府" <c:if test="${client.unitType=='政府'}"> selected="selected"</c:if> >政府</option>
                             <option value="国有企业" <c:if test="${client.unitType=='国有企业'}"> selected="selected"</c:if>>国有企业</option>
@@ -104,7 +101,7 @@
 
                     <td  >
                         <input class="Eliminate" name="aaa" required readonly value="${client.user.name}">
-                        <input class="Eliminate-no" style="display: none" name="userid" value="${client.user.id}">
+                        <input class="Eliminate-no" style="display: none" name="userid" value="${client.user.id}" required>
                         <a  class="add-to">添加</a>
                         <a class="clear-to" >
                             <input value="清空"  onClick="" type="reset">
@@ -162,7 +159,7 @@
                 </tr>
             </table>
             <input id="ok"  type="submit" value="确定" style="margin-left: 250px ">
-            <a href="#" id="no" style="color: #333">取消</a>
+            <a href="/bd/client/query" id="no" style="color: #333">取消</a>
 
         </form>
     </div>

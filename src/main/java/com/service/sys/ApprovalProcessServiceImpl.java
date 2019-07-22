@@ -38,4 +38,11 @@ public class ApprovalProcessServiceImpl implements ApprovalProcessService {
     public int updateProcessById(String usersid, int id) {
         return approvalProcessMapper.updateProcessById(usersid,id);
     }
+
+    @Override
+    public SysApprovalProcess getSysApprovalProcessById(int id) {
+        return approvalProcessMapper.getProcessById(id);
+    }
+
+
 }

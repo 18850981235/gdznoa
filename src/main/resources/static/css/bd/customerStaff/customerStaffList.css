@@ -34,7 +34,7 @@
     font-size: 13px ;
     text-align: right;
     display: inline-block;
-    background: url("../../../imgs/org_select.png") no-repeat;
+    background: url("<%=basePath%>/imgs/org_select.png") no-repeat;
     background-position:0px 3px  ;
 }
 .clear-to{
@@ -44,22 +44,22 @@
     font-size: 13px ;
     text-align: right;
     display: inline-block;
-    background: url("../../../imgs/org_select.png") no-repeat;
+    background: url("<%=basePath%>/imgs/org_select.png") no-repeat;
     background-position:0px -56px  ;
 }
 .clear-to:hover{
     color: blue;
-    background: url("../../../imgs/org_select.png") no-repeat;
+    background: url("<%=basePath%>/imgs/org_select.png") no-repeat;
     background-position:0px -36px  ;
 }
 /**/
 
 #content-in{
-    width: 91%;
-    height: 80% ;
+    width: 100%;
+    height: 100% ;
     position: absolute;
-    left: 9% ;
-    top: 130px ;
+    left:0px ;
+    top:  0px ;
     display: inline-block;
     /*background-color: #f6f7f9;*/
     overflow-y:auto;
@@ -70,14 +70,14 @@
     top: 10px ;
     left: calc(50% - 605px);
 }
-@media screen and (max-width: 1340px) {
-    #content-in{
-        width: 1276px ;
-        position: absolute;
-        left: 126px ;
-        top:130px;
-    }
-}
+/*@media screen and (max-width: 1340px) {*/
+    /*#content-in{*/
+        /*width: 1276px ;*/
+        /*position: absolute;*/
+        /*left: 126px ;*/
+        /*top:130px;*/
+    /*}*/
+/*}*/
 /**/
 table{
     background-color: #ffffff;
@@ -105,7 +105,7 @@ table{
      width: 80px;
      height: 25px ;
      border-radius: 7px ;
-     background-color: #fbfbfb;
+     background-color: #7d7dff;
      cursor: pointer;
     float: right;
  }
@@ -127,7 +127,7 @@ table{
     height: 25px ;
     border-radius: 7px ;
     cursor: pointer;
-    background-color: #fbfbfb;
+    background-color: #7d7dff;
     float: left;
 }
 /*查询*/

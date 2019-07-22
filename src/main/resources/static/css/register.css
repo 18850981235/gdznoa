@@ -23,20 +23,28 @@ body,html{
     height: 100%;
 }
 #top img{
-    width: 130px  ;
-    height: 120px ;
-    margin-top: 60px ;
-    margin-left: 180px ;
+    /*width: 130px  ;*/
+    /*height: 120px ;*/
 }
-#on{
-    width: 500px ;
-    height: 600px ;
+/*#on{*/
+    /*width: 500px ;*/
+    /*height: 600px ;*/
+    /*margin-left: auto;*/
+    /*margin-right: auto;*/
+    /*padding-top: 2% ;*/
+    /*border-radius: 10px ;*/
+    /*background-color: transparent;*/
+/*}*/
+#on {
+    width: 500px;
+    height: 600px;
     margin-left: auto;
     margin-right: auto;
-    padding-top: 2% ;
-    border-radius: 10px ;
+    padding-top: 13%;
+    border-radius: 10px;
     background-color: transparent;
 }
+
 #on .in{
     width: 500px ;
     height: 470px ;
@@ -81,7 +89,7 @@ body,html{
     display: none;
 }
 #on .in form{
-    padding-top: 30px ;
+    padding-top: 10px ;
 }
 #on .in .conduct .back-img{
     float: left;
@@ -131,7 +139,7 @@ body,html{
 #on .in .jump{
     width: 100%;
     height: 30px ;
-    margin-top: 25px ;
+    /*margin-top: 25px ;*/
     padding-left: 100px ;
     padding-right: 100px ;
 }

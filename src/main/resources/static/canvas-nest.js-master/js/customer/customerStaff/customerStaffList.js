@@ -13,7 +13,7 @@
 
         $.ajax({
             type: "get",
-            url: "../../../json/screen-1.json",
+            url: "<%=basePath%>/json/screen-1.json",
              data: {"clientname":clientname,"name":name},
             dataType: "json",
             success: function (data) {

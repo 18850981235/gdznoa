@@ -7,7 +7,7 @@
         <result column="userName" property="userName" jdbcType="VARCHAR"/>
         <result column="type" property="type" jdbcType="VARCHAR"/>
         <result column="amount" property="amount" jdbcType="INTEGER"/>
-        <result column="tradeDate" property="tradeDate" jdbcType="TIMESTAMP"/>
+        <result column="trade_date" property="tradeDate" jdbcType="TIMESTAMP"/>
         <result column="reciprocal" property="reciprocal" jdbcType="VARCHAR"/>
 
     </resultMap>

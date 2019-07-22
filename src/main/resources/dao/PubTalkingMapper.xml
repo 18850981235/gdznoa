@@ -34,7 +34,7 @@
                 `time`,
             </if>
             <if test="state!=null">
-                `state`,
+                `state`
             </if>
 
         </trim>
@@ -55,7 +55,7 @@
                 #{time},
             </if>
             <if test="state!=null">
-                #{state},
+                #{state}
             </if>
 
         </trim>
@@ -76,8 +76,6 @@
         FROM `pub_talking`
         where
              `pub_talking`.`originator` =#{userId} OR `pub_talking`.`receive` =#{userId}
-
-
         ORDER BY `time` DESC
         <if test="pageSize!=0">
             LIMIT  #{pageIndex},#{pageSize}

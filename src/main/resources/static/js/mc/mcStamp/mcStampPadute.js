@@ -11,93 +11,36 @@ function w() {
         // date:{"id":id},
         success:function (data) {
             var html="";
-             // $.each(data,function (index,project) {
-                html+='<input style="display: none" value='+data.id+' name="id">';
-                html += '<table border="1" >';
-                html += ' <tr style="text-align: center;height: 45px ">';
-                html += ' <td colspan="4" style="width: 900px;background-color: #efefef ">';
-                html += '<b>商务盖章修改</b>';
-                html += '</td>';
-                html += '</tr>';
-                html += '  <tr style="height: 45px ">';
-                html += '<td style="width:150px ;background-color: #efefef;">申请部门</td>';
-                html += '<td style="width:300px ;">';
-                html += ' <select class="department" style="width: 100px;height: 30px " name="deptid">';
-                $.ajax({
-                    type:"post",
-                    dataType:"json",
-                    url:"/util/getDept",
-                    success:function (data1) {
-                        var names=data1.list;
-                        $.each(names,function (index,obj) {
-                            if(data.dept.id=obj.id){
-                                html+='<option value='+obj.id+'select>';
-                                html+='<span>'+obj.name+'</span>';
-                                html+='</option>';
-                            }else{html+='<option value='+obj.id+'>';
-                                html+='<span>'+obj.name+'</span>';
-                                html+='</option>';}
-                            $(".department").append(html);//append() 方法在被选元素的结尾插入指定内容。//prepend()方法在被选元素的开头插入指定内容
-                        });
-                    }
-                });
-                html += '  </select>';
-                html += '</td>';
-                html += ' <td style="width:150px ;;background-color: #efefef">申请日期</td>';
-                html += '<td style="width:300px ;">';
-                html += '<input type="date" style="width:280px " name="createtime" value='+data.createtime+'>';
-                html += '</td>';
-                html += '</tr>';
-                html += '<tr style="height: 45px ">';
-                html += '<td style="width:150px ;;background-color: #efefef">联系电话</td>';
-                html += '<td style="width:300px ;">';
-                html += ' <input style="width:280px " name="phone" value='+data.phone+'>';
-                html += '</td>';
-                html += ' <td style="width:150px ;;background-color: #efefef">所需相关文件份数</td>';
-                html += '<td style="width:300px ;">';
-                html += ' <input style="width:280px " name="fileNum" value='+data.fileNum+' >';
-                html += '</td>';
-                html += '</tr>';
-                html += '<tr style="height: 45px ">';
-                html += ' <td style="width:150px ;;background-color: #efefef">盖章申请内容</td>';
-                html += '<td colspan="3" style="width:300px ;">';
-                html += '  <input style="width:700px "name="content" value='+data.content+'>';
-                html += '</td>';
-                html += '</tr>';
-                html += '</tr>';
-                html += '<tr style="height: 45px ">';
-                html += ' <td style="width:150px ;;background-color: #efefef">盖章类型说明</td>';
-                html += '<td colspan="3" style="width:300px ;">';
-                html += '  <input style="width:700px "name="stampType" value='+data.stampType+'>';
-                html += '</td>';
-                html += '</tr>';
-                html += '</tr>';
-                html += '</tr>';
-                html += '<tr style="height: 45px ">';
-                html += ' <td style="width:150px ;;background-color: #efefef">收件地址</td>';
-                html += '<td colspan="3" style="width:300px ;">';
-                html += '  <input style="width:700px "name="consigneeAddress" value='+data.consigneeAddress+'>';
-                html += '</td>';
-                html += '</tr>';
-                html += '<tr style="height: 45px ">';
-                html += '   <td style="width:150px ;background-color: #efefef;">收件人</td>';
-                html += '    <td style="width:300px ;">';
-                html += '    <input style="width:280px " name="consignee" value='+data.consignee+'>';
-                html += '   </td>';
-                html += '   <td style="width:150px ;;background-color: #efefef">联系电话</td>';
-                html += '    <td style="width:300px ;">';
-                html += '   <input style="width:280px " name="consigneePhone" value='+data.consigneePhone+'>';
-                html += '</td>';
-                html += '</tr>';
-                html += '<tr style="height: 45px ">';
-                html += '<td style=";background-color: #efefef">附件</td>';
-                html += '<td colspan="3">';
-                html += '<input type="file" name="file" value='+data.accessory+'>';
-                html += '</td>';
-                html += '</tr>';
-                html += '</table>';
-                $("#center form").prepend(html);//append() 方法在被选元素的结尾插入指定内容。//prepend()方法在被选元素的开头插入指定内容
-            // })
+
+            $("#center input").eq(0).val(data.createtime);
+            $("#center input").eq(1).val(data.user.name);
+            $("#center input").eq(2).val(data.user.phone);
+            $("#center input").eq(3).val(data.content);
+            $("#center input").eq(4).val(data.fileNum);
+            $("#center input").eq(5).val(data.stampType);
+            $("#center input").eq(6).val(data.consigneeAddress);
+            $("#center input").eq(7).val(data.consignee);
+            $("#center input").eq(8).val(data.consigneePhone);
+            if(data.expressageName==undefined){
+                $("#center input").eq(9).val("");
+            }else {
+                $("#center input").eq(9).val(data.expressageName);
+            }
+            if(data.expressageWaybill==undefined){
+                $("#center input").eq(10).val("");
+            }else {
+                $("#center input").eq(10).val(data.expressageWaybill);
+            }
+
+
+            $(".projectname option").eq(0).text(data.project.abbreviation);
+            $(".projectname option").eq(0).val(data.project.id);
+
+            $(".department option").eq(0).text(data.user.company);
+            $(".department option").eq(0).val(data.user.deptid);
+
+
+            $("#center textarea").eq(0).text(data.purpose);
         }
     });
 }

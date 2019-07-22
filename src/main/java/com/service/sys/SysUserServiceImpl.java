@@ -1,23 +1,19 @@
 package com.service.sys;
 
-import com.beans.RequestspErmissions;
-import com.beans.SysMenu;
-import com.beans.SysUser;
-import com.beans.Requestsp;
-import com.dao.sys.MenuMapper;
-import com.dao.sys.RequestspMapper;
-import com.dao.sys.SysUserMapper;
-import com.dao.sys.requestspErmissionsMapper;
+import com.beans.*;
+import com.dao.sys.*;
 import com.util.FileUtils;
 import com.util.Page;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,6 +28,8 @@ public class SysUserServiceImpl implements SysUserService{
     private requestspErmissionsMapper requestspErmissionsMapper;
     @Resource
     private MenuMapper menuMapper;
+    @Resource
+    private AuthorityMapper authorityMapper;
 
 
     @Override
@@ -69,7 +67,7 @@ public class SysUserServiceImpl implements SysUserService{
     public int addyReques(Requestsp requestsp, HttpServletRequest request) {
         int num = 0;
         try {
-            String accessory= FileUtils.uploadFile(request,"file");
+            String accessory= FileUtils.uploadFile(request,"evidence");
 
         if (accessory!=null&&!accessory.equals("")){
             requestsp.setEvidence(accessory);
@@ -87,7 +85,8 @@ public class SysUserServiceImpl implements SysUserService{
 
 
     @Override
-    public Map<String ,Object>queryRequestbyuserid(@Param("userid")int userid,@Param("pageIndex") int pageIndex) {
+    public Map<String ,Object>queryRequestbyuserid(@Param("name") String name,  @Param("EndTime")  Date StartTime,
+                                                   @Param("EndTime") Date EndTime,int pageIndex){
         Map<String, Object> map=new HashMap<>();
         Page page=new Page();
         try {
@@ -95,9 +94,9 @@ public class SysUserServiceImpl implements SysUserService{
                 pageIndex = 1;
             }
             page.setPageSize(10);
-            page.setTotalCount(requestspMapper.querycount(userid));
+            page.setTotalCount(requestspMapper.count(name, StartTime, EndTime));
             page.setCurrentPageNo(pageIndex);
-            List<Requestsp> list=requestspMapper.querybyuserid(userid,(page.getCurrentPageNo()-1)*page.getPageSize(),page.getPageSize());
+            List<Requestsp> list=requestspMapper.queryby(name, StartTime, EndTime, (page.getCurrentPageNo()-1)*page.getPageSize(),page.getPageSize());
             map.put("page",page);
             map.put("list",list);
         } catch (Exception e) {
@@ -106,8 +105,43 @@ public class SysUserServiceImpl implements SysUserService{
         }
         return map;
     }
+
     @Override
-    public Requestsp queryRequestbyuserid(@Param("id") int id) {
+    public Requestsp queryRequestbyuserid(@Param("userid") int userid) {
+        Requestsp requestsp=new Requestsp();
+      try{
+             requestsp=requestspMapper.querybyuserid(userid);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+        };
+        return requestsp;
+    }
+
+    @Override
+    public int queryrequst(int userid) {
+        return requestspMapper.querycount(userid);
+    }
+
+    @Override
+    public Map<String, Object> queryAllMunebymyselef( @Param("userid") int userid) {
+        Map<String, Object> map = new HashMap<>();
+        try {
+
+            List<SysAuthority>  ListAuthority =authorityMapper.getMenuIdByUserId(userid);
+            List<SysMenu> listMenu = menuMapper.getMenuList(0, 0);
+            map.put("ListAuthority", ListAuthority);
+            map.put("listMenu", listMenu);
+        }catch (Exception e) {
+            e.printStackTrace();
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+        }
+        return map;
+    }
+
+    @Override
+    public Requestsp queryRequestbyid(@Param("id") int id) {
         return requestspMapper.querybyid(id);
     }
 
@@ -117,13 +151,15 @@ public class SysUserServiceImpl implements SysUserService{
     }
 
     @Override
-    public Map<String, Object> getallMenu(@Param("quesid") int quesid, @Param("userid") int userid) {
+    public Map<String, Object> getallMenu( int userid) {
         Map<String, Object> map = new HashMap<>();
       try {
-
-          List<RequestspErmissions> ListRequest = requestspErmissionsMapper.queryErmissions(quesid, userid);
+          Requestsp ListRequest= requestspMapper.querybyuserid(userid);
+//          List<RequestspErmissions> ListRequest = requestspErmissionsMapper.queryErmissions(quesid, userid);
+          List<SysAuthority>  ListAuthority =authorityMapper.getMenuIdByUserId(userid);
           List<SysMenu> listMenu = menuMapper.getMenuList(0, 0);
           map.put("ListRequest", ListRequest);
+          map.put("ListAuthority", ListAuthority);
           map.put("listMenu", listMenu);
       }catch (Exception e) {
             e.printStackTrace();
@@ -149,5 +185,8 @@ public class SysUserServiceImpl implements SysUserService{
         }
 
     };
+   public int updatePassword(@Param("userId")int userId,@Param("password") String password){
+        return sysUserMapper.updatePassword(userId,password);
+    }
 
 }
