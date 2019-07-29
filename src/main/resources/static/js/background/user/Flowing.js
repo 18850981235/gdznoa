@@ -106,7 +106,7 @@ $(document).ready(function () {
     $.ajax({
         type:"post",
         dataType:"json",
-        url:"http://192.168.1.236:8080/util/getDeptUsers",
+        url:"/util/getDeptUsers",
         success:function (data) {
             // var users=data.names.users;
             $.each(data,function (index,obj) {
@@ -141,7 +141,7 @@ $(document).ready(function () {
     $.ajax({
         type:"post",
         dataType:"json",
-        url:"http://192.168.1.236:8080/util/getDeptUsers",
+        url:"/util/getDeptUsers",
         success:function (data) {
             // var users=data.names.users;
             $.each(data,function (index,obj) {
@@ -176,7 +176,7 @@ $(document).ready(function () {
     $.ajax({
         type:"post",
         dataType:"json",
-        url:"http://192.168.1.236:8080/util/getDeptUsers",
+        url:"/util/getDeptUsers",
         success:function (data) {
             // var users=data.names.users;
             $.each(data,function (index,obj) {
@@ -211,7 +211,7 @@ $(document).ready(function () {
     $.ajax({
         type:"post",
         dataType:"json",
-        url:"http://192.168.1.236:8080/util/getDeptUsers",
+        url:"/util/getDeptUsers",
         success:function (data) {
             // var users=data.names.users;
             $.each(data,function (index,obj) {
@@ -246,7 +246,7 @@ $(document).ready(function () {
     $.ajax({
         type:"post",
         dataType:"json",
-        url:"http://192.168.1.236:8080/util/getDeptUsers",
+        url:"/util/getDeptUsers",
         success:function (data) {
             // var users=data.names.users;
             $.each(data,function (index,obj) {
@@ -397,23 +397,18 @@ $(document).ready(function () {
     //提交
     $(document).on("click","#submitted",function () {
         var usid=$("#userid").val()
-        // var wh={};
-        // $(".whole").each(function (index,obj) {
-        //     // wh[index]=obj.val;
-        //     wh.push($(".whole").val());
-        // })
-        var btns = new Array();
-        $(".btn").each(function() {
-            btns[key] = $(this).val();
-            //  或者 btns[key] = $(value).val();
-        })
 
-            console.log("--"+wh)
+        var wh=[];
+        $(".whole").each(function () {
+            // wh.push($(this).val());
+            wh=wh+$(this).val()+","
+        })
+        console.log(wh)
         $.ajax({
-            type: "get",
-            dataType: "json",
+            type: "post",
+            dataType: "text",
             url: "/sys/Process/updateProcessByID",
-            data:{"userid":usid,"id":wh},
+            data:{"userid":wh,"id":usid},
             success: function (data) {
                 console.log(data)
                 if(data=="yes"){

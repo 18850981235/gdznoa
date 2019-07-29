@@ -39,7 +39,7 @@
             <div class="query-top">
                 <div class="top1">
                     <span>申请部门</span>
-                    <select class="deptid" style="width: 100px;height: 30px " name="deptid">
+                    <select class="department deptid" style="width: 100px;height: 30px " name="deptid">
                         <option value="">
                             请选择
                         </option>

@@ -34,7 +34,7 @@
 
 
 <div id="content-in">
-    <form id="center">
+    <form action="/mc/stamp/approvalDetailed" id="center">
         <div id="Approval">
 
         </div>

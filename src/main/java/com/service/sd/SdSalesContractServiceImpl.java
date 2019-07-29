@@ -52,10 +52,10 @@ public class SdSalesContractServiceImpl implements SdSalesContractservice {
                 }
                 mr_update.setProcessUserid(processUserid);
                 mr_update.setProcessState(state);
-                mr_update.setId(detailed.getApprovalId());
+                //mr_update.setId(detailed.getApprovalId());
             } else {
                 mr_update.setProcessState(detailed.getState());
-                mr_update.setId(detailed.getApprovalId());
+                //mr_update.setId(detailed.getApprovalId());
             }
             return sdSalesContractMapper.updateSalesContract(mr_update);
         } catch (Exception e) {

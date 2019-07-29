@@ -35,7 +35,7 @@
 
 <div id="content-in">
     <div id="center">
-        <form id="div">
+        <form action="/mc/materials/approvalDetailed" id="div">
 
             <input id="ok"  type="submit" value="确定" style="margin-left:400px ">
             <a href="/showMyWork" id="no" >取消</a>

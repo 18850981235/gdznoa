@@ -60,73 +60,73 @@
             })
         });
     //  三级
-    $(document).ready(function () {
-        var html = "";
-
-        $.ajaxSettings.async = false;
-        $.getJSON("http://192.168.1.236:8080/page/menu",
-            function (date) {
-                $.each(date.menuList, function (i, menu) {
-                        if (menu.levels == 1) {
-                            html+='<ul class="yiji">';
-                            html += "<li><a href='#' class='inactive'>" + menu.name + "</a>";
-
-                            $.each(date.menuList, function (i, menu2) {
-                                    if (menu2.levels == 2 && menu2.pcode == menu.code) {
-                                        var url2 = "";
-                                        var flge = true;
-
-                                        $.each(date.authority, function (i, auth) {
-                                            if (menu2.id == auth.menu) {
-
-                                                url2 = menu2.url;
-                                                flge = false;
-                                                return false;
-                                            }
-                                        })
-                                        if (flge) {
-                                            url2 = "javascript:void(0);";
-                                        }
-                                        if (menu2.url == "" || menu2.url == null) {
-                                            url2 = "javascript:void(0);";
-                                        }
-                                        html += "<ul style=\"display: none\">";
-                                        html +=   "<li>";
-                                        html +=  "<a href='" + url2 + "' class='inactive'>" + menu2.name + "</a>";
-                                        html +=   "<ul>";
-                                        $.each(date.menuList, function (i, menu3) {
-                                            if (menu3.levels == 3 && menu3.pcode == menu2.code) {
-                                                var url3 = "";
-                                                var flge2 = true;
-                                                $.each(date.authority, function (i, auth) {
-                                                    if (menu3.id == auth.menu) {
-
-                                                        url3 = menu3.url;
-                                                        flge2 = false;
-                                                        return false;
-                                                    }
-                                                })
-                                                if (flge2) {
-                                                    url3 = "javascript:void(0);";
-                                                }
-                                                html += "<li><a href='" + url3 + "'>" + menu3.name + "</a></li>";
-                                            }
-                                        })
-                                        html += "</ul>" +
-                                            "</li>" +
-                                            " </ul>";
-                                    }
-                                }
-                            )
-                            html += "</li>";
-                        }
-                    html+='</ul>';
-                    }
-                )
-                $(".yiji").append(html);
-            }
-        )
-    })
+    // $(document).ready(function () {
+    //     var html = "";
+    //
+    //     $.ajaxSettings.async = false;
+    //     $.getJSON("/page/menu",
+    //         function (date) {
+    //             $.each(date.menuList, function (i, menu) {
+    //                     if (menu.levels == 1) {
+    //                         html+='<ul class="yiji">';
+    //                         html += "<li><a href='#' class='inactive'>" + menu.name + "</a>";
+    //
+    //                         $.each(date.menuList, function (i, menu2) {
+    //                                 if (menu2.levels == 2 && menu2.pcode == menu.code) {
+    //                                     var url2 = "";
+    //                                     var flge = true;
+    //
+    //                                     $.each(date.authority, function (i, auth) {
+    //                                         if (menu2.id == auth.menu) {
+    //
+    //                                             url2 = menu2.url;
+    //                                             flge = false;
+    //                                             return false;
+    //                                         }
+    //                                     })
+    //                                     if (flge) {
+    //                                         url2 = "javascript:void(0);";
+    //                                     }
+    //                                     if (menu2.url == "" || menu2.url == null) {
+    //                                         url2 = "javascript:void(0);";
+    //                                     }
+    //                                     html += "<ul style=\"display: none\">";
+    //                                     html +=   "<li>";
+    //                                     html +=  "<a href='" + url2 + "' class='inactive'>" + menu2.name + "</a>";
+    //                                     html +=   "<ul>";
+    //                                     $.each(date.menuList, function (i, menu3) {
+    //                                         if (menu3.levels == 3 && menu3.pcode == menu2.code) {
+    //                                             var url3 = "";
+    //                                             var flge2 = true;
+    //                                             $.each(date.authority, function (i, auth) {
+    //                                                 if (menu3.id == auth.menu) {
+    //
+    //                                                     url3 = menu3.url;
+    //                                                     flge2 = false;
+    //                                                     return false;
+    //                                                 }
+    //                                             })
+    //                                             if (flge2) {
+    //                                                 url3 = "javascript:void(0);";
+    //                                             }
+    //                                             html += "<li><a href='" + url3 + "'>" + menu3.name + "</a></li>";
+    //                                         }
+    //                                     })
+    //                                     html += "</ul>" +
+    //                                         "</li>" +
+    //                                         " </ul>";
+    //                                 }
+    //                             }
+    //                         )
+    //                         html += "</li>";
+    //                     }
+    //                 html+='</ul>';
+    //                 }
+    //             )
+    //             $(".yiji").append(html);
+    //         }
+    //     )
+    // })
 //天气
     $.ajax({
         type:"get",  //请求方式

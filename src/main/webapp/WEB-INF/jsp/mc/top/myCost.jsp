@@ -27,7 +27,7 @@
 <body>
 
 <div id="content-in">
-    <form id="center">
+    <form action="/mc/datum/approvalDetailed" id="center">
 
         <div id="Approval">
 

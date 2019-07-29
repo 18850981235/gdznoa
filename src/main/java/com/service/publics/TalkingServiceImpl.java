@@ -57,10 +57,25 @@ public class TalkingServiceImpl implements TalkingService {
         return map;
     }
 
-    public List<PubTalking> getNewContent(@Param("userId") int userId){
-        return talkingMapper.getNewContent(userId);
+    public Map<String, Object> getNewContent(@Param("userId") int userId){
+        Map<String,Object> map=new HashMap<>();
+        try{
 
+           List<PubTalking>  list= talkingMapper.getNewContent(userId);
+            List<PubTalking>  OldList =talkingMapper.getOldContent(userId);
+          map.put("newList",list);
+          map.put("oldList",OldList);
+
+        }catch (Exception e) {
+            e.printStackTrace();
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+
+        }
+        return map;
     };
+
+
+
 
 
     public int addAdminTalk(PubTalking pubTalking){

@@ -2,7 +2,7 @@
     width: 100%;
     height: 100% ;
     position: absolute;
-    left: 0px  ;
+    left:0px  ;
     top:  0px ;
     display: inline-block;
     /*background-color: #f6f7f9;*/
@@ -10,19 +10,12 @@
     overflow-x:auto;
 }
 #center{
-    position: absolute;
+    display: inline-block;
+    position: inherit;
     top: 10px ;
     left: calc(50% - 450px);
 }
-/*@media screen and (max-width: 1340px) {*/
-    /*#content-in{*/
-        /*width: 1276px ;*/
-        /*position: absolute;*/
-        /*left: 126px ;*/
-        /*top:130px;*/
-    /*}*/
-/*}*/
-#content-in td{
+#center td{
     padding-left: 4px ;
-    height: 40px ;
 }
+/**/

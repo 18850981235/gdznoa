@@ -15,9 +15,6 @@ function w() {
             var datumCost=data.datumCost;
            
             html+='<input style="display: none" value='+datumCost.id+' name="id">';
-
-
-
            html+='<table border="1">';
                html+='<tr style="height: 40px ;background-color: #efefef">';
                html+='<td colspan="4" style="text-align: center">';

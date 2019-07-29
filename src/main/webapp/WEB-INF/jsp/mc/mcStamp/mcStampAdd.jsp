@@ -164,7 +164,7 @@
 
             </table>
             <input id="ok"  type="submit" value="确定" style="margin-left:400px ">
-            <a href=/mc/stamp/query" id="no" >取消</a>
+            <a href="/mc/stamp/query" id="no" >取消</a>
         </form>
     </div>
 </div>

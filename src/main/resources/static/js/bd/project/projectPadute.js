@@ -176,22 +176,25 @@ $.ajax({
         html +='</tr>';
         html +='<tr style="height: 45px ">';
         html +='<td class="Color">附件</td>';
-        if(project.accessory==undefined){
-            html += '<td colspan="3" >' + "无" + '</td>';
-        }else {
-            var strs= new Array(); //定义一数组
-            strs=project.accessory.split(","); //字符分割
-            html += '<td colspan="3" >'
-            for(i=0;i<strs.length;i++){
-                if(strs[i]!="") {
-                    html += '<form action="/util/fileDown" >';
-                    html += '<input name="file" style="width:400px ;" value=' + strs[i] + ' >';
-                    html += '<input style="background-color: transparent"  type="submit" value="点击下载">';
-                    html += ' </form>';
-                }
-            }
-            html +='</td>';
-        }
+        html +='<td colspan="3">';
+        html +='<input id="file" type="file" name="file" value='+project.accessory+' >';
+        html +='</td>';
+        // if(project.accessory==undefined){
+        //     html += '<td colspan="3" >' + "无" + '</td>';
+        // }else {
+        //     var strs= new Array(); //定义一数组
+        //     strs=project.accessory.split(","); //字符分割
+        //     html += '<td colspan="3" >'
+        //     for(i=0;i<strs.length;i++){
+        //         if(strs[i]!="") {
+        //             html += '<form action="/util/fileDown" >';
+        //             html += '<input name="file" style="width:400px ;" value=' + strs[i] + ' >';
+        //             html += '<input style="background-color: transparent"  type="submit" value="点击下载">';
+        //             html += ' </form>';
+        //         }
+        //     }
+        //     html +='</td>';
+        // }
         html +='</tr>';
         html +='</table>';
         $("#form1").prepend(html);//append() 方法在被选元素的结尾插入指定内容。//prepend()方法在被选元素的开头插入指定内容
@@ -199,7 +202,13 @@ $.ajax({
     }
 });
 }
-w();
+$(document).ready(function () {
+    w();
+    $(document).on("click","#file",function () {
+        $("#file").val("");
+    })
+})
+
 // $(document).ready(function () {
 //     w();
 // })

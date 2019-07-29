@@ -8,7 +8,7 @@
         <result column="projectid" property="projectid" jdbcType="INTEGER"/>
         <result column="phone" property="phone" jdbcType="VARCHAR"/>
         <result column="content" property="content" jdbcType="VARCHAR"/>
-        <result column="file_num" property="fileNum" jdbcType="INTEGER"/>
+        <result column="file_num" property="fileNum" jdbcType="VARCHAR"/>
         <result column="stamp_type" property="stampType" jdbcType="VARCHAR"/>
         <result column="purpose" property="purpose" jdbcType="VARCHAR"/>
         <result column="consignee" property="consignee" jdbcType="VARCHAR"/>
@@ -202,10 +202,10 @@
             <if test="accessory != null">
                 accessory,
             </if>
-            <if test="processid != null">
+            <if test="processid != 0">
                 processid,
             </if>
-            <if test="processUserid != null">
+            <if test="processUserid != 0">
                 process_userid,
             </if>
             <if test="processState != null">
@@ -255,10 +255,10 @@
             <if test="accessory != null">
                 #{accessory},
             </if>
-            <if test="processid != null">
+            <if test="processid != 0">
                 #{processid},
             </if>
-            <if test="processUserid != null">
+            <if test="processUserid != 0">
                 #{processUserid},
             </if>
             <if test="processState != null">
@@ -291,7 +291,7 @@
             <if test="content != null">
                 content = #{content},
             </if>
-            <if test="fileNum != 0">
+            <if test="fileNum != null">
                 file_num = #{fileNum},
             </if>
             <if test="stampType != null">
@@ -312,23 +312,23 @@
             <if test="processid != 0">
                 processid = #{processid},
             </if>
-            <if test="processUserid != null">
+            <if test="processUserid != 0">
                 process_userid = #{processUserid},
             </if>
             <if test="processState != null">
                 process_state = #{processState},
             </if>
             <if test="projectid != 0">
-                #{projectid},
+                projectid=#{projectid},
             </if>
             <if test="purpose != null">
-                #{purpose},
+                purpose=#{purpose},
             </if>
             <if test="expressageName != null">
-                #{expressage_name},
+                expressage_name=#{expressageName},
             </if>
             <if test="expressageWaybill != null">
-                #{expressage_waybill},
+                expressage_waybill=#{expressageWaybill},
             </if>
         </set>
         where id=#{id}

@@ -33,7 +33,7 @@
 <body>
 
 <div id="content-in">
-    <form id="center">
+    <form action="/mc/dispatched/approvalDetailed" id="center">
 
         <div id="Approval">
 

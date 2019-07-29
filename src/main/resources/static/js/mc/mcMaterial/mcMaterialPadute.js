@@ -22,7 +22,10 @@ function w() {
             $("#center textarea").eq(1).text(data.purpose);
 
             $(".department option").eq(0).text(data.dept.name);
+            $(".department option").eq(0).val(data.dept.id);
+
             $(".projectname option").eq(0).text(data.projectName);
+            $(".projectname option").eq(0).val(data.projectid);
 
 
 

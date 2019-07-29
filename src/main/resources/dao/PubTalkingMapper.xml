@@ -98,12 +98,21 @@
         FROM `pub_talking`
         where `state`="未读"
       and  `originator` !=#{userId}
+
     </select>
     <select id="getNewContent" resultMap="BaseResultMap">
-         SELECT  *
-        FROM `pub_talking`
+         SELECT    *
+        FROM  `pub_talking`
         where `state`="未读"
         and  `originator` !=#{userId}
+            ORDER BY `time` DESC
+    </select>
+    <select id="getOldContent" resultType="com.beans.PubTalking">
+        SELECT    *
+        FROM `pub_talking`
+        where `state`="已读"
+        and  `originator` !=#{userId}
+            ORDER BY `time` DESC
     </select>
 
 

@@ -30,10 +30,10 @@ function w() {
             $(".department option").eq(0).text(data[0].deptName);
             $(".department option").eq(0).val(data[0].deptid);
 
-            $(".recordsType option").eq(0).text(data[0].recordsState);
-            $(".recordsType option").eq(0).val(data[0].recordsState);
-            $(".recordsState option").eq(0).text(data[0].recordsType);
-            $(".recordsState option").eq(0).val(data[0].recordsType);
+            $(".recordsType option").eq(0).text(data[0].recordsType);
+            $(".recordsType option").eq(0).val(data[0].recordsType);
+            $(".recordsState option").eq(0).text(data[0].recordsState);
+            $(".recordsState option").eq(0).val(data[0].recordsState);
             $(".caBorrow option").eq(0).text(data[0].caBorrow);
             $(".caBorrow option").eq(0).val(data[0].caBorrow);
 

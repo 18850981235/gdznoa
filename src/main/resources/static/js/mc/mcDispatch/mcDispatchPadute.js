@@ -14,6 +14,7 @@ function w() {
         success:function (data) {
             $("#center input").eq(0).val(data.id);
             $("#center input").eq(1).val(data.user.name);
+            $("#center input").eq(2).val(data.user.id);
             $("#center input").eq(3).val(data.demand);
             $("#center input").eq(4).val(data.evectionTime);
             $("#center input").eq(5).val(data.personnelCondition);
@@ -25,7 +26,10 @@ function w() {
             $("#center input").eq(11).val(data.travelCost);
 
             $(".projectname option").eq(0).text(data.project.abbreviation);
+            $(".projectname option").eq(0).val(data.project.id);
+
             $(".department option").eq(0).text(data.dept.name);
+            $(".department option").eq(0).val(data.dept.id);
 
         }
     });

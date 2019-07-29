@@ -23,7 +23,17 @@
 }
 /*分页*/
 /*是否删除*/
-#content-in .confirm{
+#content-in .confirm0,
+#content-in .confirm1,
+#content-in .confirm2,
+#content-in .confirm3,
+#content-in .confirm4,
+#content-in .confirm5,
+#content-in .confirm6,
+#content-in .confirm7,
+#content-in .confirm8,
+#content-in .confirm9
+{
     display:none;
     width: 300px ;
     height: 150px;
@@ -36,11 +46,11 @@
     left: 400px;
     padding: 6px;
 }
-#content-in .confirm .confirm-ok{
+#content-in  .confirm-ok{
     width: 40px;display: inline-block;line-height: 25px ;text-align: center ;
     background-color: #9d9d9d; height: 25px;border-radius: 6px;  margin-left: 20px;
 }
-#content-in .confirm .confirm-no{
+#content-in  .confirm-no{
     width: 40px;
     display: inline-block;
     line-height: 25px ;

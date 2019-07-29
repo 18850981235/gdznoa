@@ -72,7 +72,10 @@ public class BdProjectServiceImpl implements BdProjectService {
      * @return 是否添加成功
      */
     @Override
-    public int addProjectApproval(SysApprovalDetailed detailed) {
+    public int
+
+
+    addProjectApproval(SysApprovalDetailed detailed) {
         detailed.setApprovalName("项目立项");
         try {
             approvalDetailedMapper.add(detailed);
@@ -200,6 +203,10 @@ public class BdProjectServiceImpl implements BdProjectService {
     @Override
     public List<BdProject> getallPeoject() {
         return bdProjectMapper.getallProject();
+    }
+    @Override
+    public int  deleteProject(int id) {
+        return bdProjectMapper.deleteById(id);
     }
 
 }

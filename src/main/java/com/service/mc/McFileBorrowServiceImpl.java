@@ -66,11 +66,12 @@ public class McFileBorrowServiceImpl implements McFileBorrowService{
             if(fb.getProcessNode()==1){
                 processUserid =Integer.parseInt(userArr[0]);
             }
+
             if(fb.getProcessNode()==2){
-                processUserid =Integer.parseInt(userArr[1]);
+                processUserid = userMapper.DeptroleUser(fb.getDeptid()).get(0).getId();
             }
             if(fb.getProcessNode()==3){
-                processUserid = userMapper.DeptroleUser(fb.getDeptid()).get(0).getId();
+                processUserid =Integer.parseInt(userArr[2]);
             }
             if(fb.getProcessNode()==4){
                 processUserid=fb.getUserid();

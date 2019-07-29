@@ -11,8 +11,8 @@
                `email`,
                `deptid`,
                `roleid`,
-               `sys_dept`.`name` AS company,
-               `sys_role`.`name` AS role,
+               `sys_dept`.`name` AS companyname,
+               `sys_role`.`name` AS rolename,
                `createtime`
         FROM `sys_user`,
              `sys_dept`,

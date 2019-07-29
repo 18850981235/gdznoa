@@ -67,6 +67,12 @@ public class McQualificationServiceImpl implements McQualificationService {
             return 0;
         }
     }
+
+    @Override
+    public List<McQualificationCertificate> queryAll() {
+        return  mcQualificationMapper.queryAll();
+    }
+
     //增加资质证书
     public int addQualificationCertificate(McQualificationCertificate mcQualificationCertificate, HttpServletRequest request) {
         int num = 0;

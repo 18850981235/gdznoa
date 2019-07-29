@@ -25,12 +25,16 @@
     <script src="<%=basePath%>/js/jquery-3.3.1.js" type="text/javascript"></script>
     <script src="<%=basePath%>/js/bootstrap.js" type="text/javascript"></script>
     <script src="<%=basePath%>/layui/lay/modules/laydate.js" type="text/javascript"></script>
+
+    <script src="<%=basePath%>/layuiAdmin.std-v1.0.0/src/layuiadmin/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="<%=basePath%>/js/xadmin.js"></script>
     <script src="<%=basePath%>/js/public/jump.js" type="text/javascript"></script>
     <script src="<%=basePath%>/js/public/responsible.js" type="text/javascript"></script>
     <script src="<%=basePath%>/js/public/see.js" type="text/javascript"></script>
     <script src="<%=basePath%>/js/public/company.js" type="text/javascript"></script>
     <script src="<%=basePath%>/js/public/region.js" type="text/javascript"></script>
     <script src="<%=basePath%>/js/public/department.js" type="text/javascript"></script>
+    <script src="<%=basePath%>/js/public/pipelineNumber.js" type="text/javascript"></script>
 </head>
 <body>
 
@@ -142,7 +146,7 @@
                 </tr>
                 <tr style="height:45px ">
                     <td class="Color" style="width: 150px ">项目编号</td>
-                    <td style="width: 300px "><input style="width: 250px " required  name="code"></td>
+                    <td style="width: 300px "><input id="number" style="width: 250px "  name="code" readonly></td>
                     <td class="Color" style="width: 150px ">项目简称</td>
                     <td style="width: 300px "><input style="width: 250px " required name="abbreviation" required></td>
                 </tr>
@@ -153,6 +157,7 @@
                 <tr style="height: 45px ">
                     <td class="Color">项目类别</td>
                     <td>
+                        <%--<a  onclick="+xadmin.add_tab('我的工作','<%=basePath%>/showMyWork')"><b>aaaaaaaaa</b></a>--%>
                         <select  style="height: 25px " required required name="type">
                             <option value="">请选择</option>
                             <option >政府公建</option>

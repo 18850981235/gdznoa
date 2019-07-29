@@ -33,7 +33,7 @@
 
 
 <div id="content-in">
-    <form id="center">
+    <form action="/bd/project/approvalDetailed" id="center">
 
         <div id="Approval">
 

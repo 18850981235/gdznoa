@@ -2,13 +2,11 @@ package com.action;
 
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
-import com.beans.BdClient;
-import com.beans.BdClientContacts;
-import com.beans.BdProject;
-import com.beans.SysApprovalDetailed;
+import com.beans.*;
 import com.service.bd.BdClientContactsService;
 import com.service.bd.BdClientService;
 import com.service.bd.BdProjectService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,6 +36,8 @@ public class BdAction {
     private BdClientContactsService bdClientContactsService;
     @Resource(name = "bdProjectService")
     private BdProjectService bdProjectService;
+
+
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {
@@ -192,7 +192,7 @@ public class BdAction {
                               @RequestParam(required = false) Date start,
                               @RequestParam(required = false) Date end,
                               @RequestParam(required = false, defaultValue = "0") int pageIndex,
-                              HttpSession session) {
+                              HttpServletRequest request ) {
         if (projectName == null || projectName == "") {
             projectName = null;
         }
@@ -203,9 +203,10 @@ public class BdAction {
             principalName = null;
         }
 
-        int userid = (int) session.getAttribute("userId");
-        if (userid==1){
-            userid=0;
+        SysUser user = (SysUser) request.getSession().getAttribute("user");
+        int userid=user.getId();
+        if (userid==1||user.getAccount().equals("18959261777")){
+             userid=0;
         }
 
         return JSONObject.toJSONString(bdProjectService.getlist(userid,projectName, deptid, stage, areaManager,principalName, start, end, pageIndex)
@@ -224,6 +225,13 @@ public class BdAction {
         return "redirect:/bd/project/query";
     }
 
+
+
+    @RequestMapping("/project/DeleteProject")
+    public String DeleteProject(@Param("id")int id) {
+        bdProjectService.deleteProject(id);
+        return "redirect:/bd/project/query";
+    }
     @RequestMapping("/project/update")
     public String showProjectUpdate(@RequestParam int id, Model model) {
         return "/bd/project/projectUpdate";
@@ -258,6 +266,9 @@ public class BdAction {
     @RequestMapping("/project/approvalDetailed")
     public String projectParticular(SysApprovalDetailed approvalDetailed,HttpServletRequest request) {
         int userid = (int)request.getSession().getAttribute("userId");
+        SysUser user= (SysUser)request.getSession().getAttribute("user");
+        System.err.println("user+++++++>"+user);
+        approvalDetailed.setApprovalIdentity(user.getRolename());
         approvalDetailed.setApprovalUser(userid);
         approvalDetailed.setApprovalDate(new Date());
         bdProjectService.addProjectApproval(approvalDetailed);

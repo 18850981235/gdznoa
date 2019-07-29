@@ -26,7 +26,7 @@ public class McPerformanceDateServiceImp implements McPerformanceDateService{
     @Override
     public int addPerformanceDate(McPerformanceDate mcPerformanceDate, HttpServletRequest request) {
         try {
-        String bidFile= FileUtils.uploadFile(request,"bidFile");
+        String bidFile= FileUtils.uploadFile(request,"didFile");
         if (bidFile!=null&&!bidFile.equals("")){
             mcPerformanceDate.setBiddingNotice(bidFile);
         }

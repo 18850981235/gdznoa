@@ -11,6 +11,8 @@ import java.util.Date;
 public class McPerformanceDate {
     private  int  id;
     private  int projectId;
+
+    private  String  projectName;
     private  String   biddingNotice;
     @JsonFormat(pattern = "yyyy-MM-dd")
     @JSONField(format = "yyyy-MM-dd")

@@ -5,7 +5,7 @@
 $.ajax({
     type:"post",
     dataType:"json",
-    url:"http://192.168.1.236:8080/util/areaManagerUser",
+    url:"/util/areaManagerUser",
     success:function (data) {
         var names=data;
         $.each(names,function (index,obj) {

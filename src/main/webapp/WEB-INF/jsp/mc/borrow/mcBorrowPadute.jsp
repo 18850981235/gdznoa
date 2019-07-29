@@ -24,8 +24,10 @@
     <script src="<%=basePath%>/js/jquery-3.3.1.js"></script>
     <script src="<%=basePath%>/js/bootstrap.js"></script>
     <script src="<%=basePath%>/js/bootstrap-paginator.js"></script>
+    <script src="<%=basePath%>/layui/lay/modules/laydate.js" type="text/javascript"></script>
     <script src="<%=basePath%>/js/public/jump.js"></script>
     <script src="<%=basePath%>/js/public/department.js"></script>
+    <script src="<%=basePath%>/js/public/projectName.js"></script>
     <script src="<%=basePath%>/js/public/responsible.js"></script>
     <script src="<%=basePath%>/js/mc/mcBorrow/mcBorrowPadute.js"></script>
 </head>
@@ -85,10 +87,122 @@
 <div id="content-in">
     <div id="center">
         <form action="/mc/borrow/update.html" method="post"  enctype="multipart/form-data">
+               <table border="1">    
+
+               <tr style="height: 40px ;background-color: #efefef">    
+                   <td colspan="4" style="text-align: center">    
+                       <b>文件借用修改</b>    
+                       <input class="" style="display: none"  name="id" >
+                       </td>    
+                   </tr>    
+               <tr style="height:40px;">    
+                   <td  class="Color" style="width:150px  ">    
+                       <span>项目名称</span>    
+                       </td>    
+                   <td colspan="3" style="width:300px ;">    
+                       <select  required class="projectname" style="height: 30px ; " name="projectid">    
+
+                           </select>    
+                       </td>    
+                   </tr>    
+               <tr style="height:40px;">    
+                   <td class="Color" style="width:150px ">    
+                       <span>申请部门:</span>    
+                       </td>    
+                   <td style="width:300px ;">    
+                       <select id="dept" class="department" style="width: 100px;height: 30px " name="deptid">
+
+                           </select>    
+                       </td>    
+                   <td class="Color" style="width:150px ">申请日期:</td>    
+                   <td style="width:300px ;">    
+                       <input type="text" class="demo-input" placeholder="请选择日期" id="test1" style="width:280px " name="createtime"  >
+                       </td>    
+                   </tr>    
+               <tr id="my"  style="height:40px;">    
+                   <td  class="Color"  style="width:150px  ">申请人</td>    
+                   <td >    
+                       <input class="" readonly  >
+                       <input class="" style="display: none"  name="userid" >
+                       </td>    
+                   <td class="Color" style="width:150px  ">联系电话 </td>    
+                   <td style="width:300px ;">    
+                       <input style="width:280px " name="phone" >
+                       </td>    
+                   </tr>    
+               <tr style="height:40px;">    
+                   <td class="Color" style="width:150px  ">申请原件内容</td>    
+                   <td colspan="3">    
+                       <textarea class="content"  style="width: 700px ;height: 30px " name="content" ></textarea>
+                       </td>    
+                   </tr>    
+               <tr style="height:40px;">    
+                   <td class="Color" style="width:150px  ">原件借用用途</td>    
+                   <td colspan="3">    
+                       <textarea class="purpose" style="width: 700px ;height: 40px " name="purpose"></textarea>
+                       </td>    
+                   </tr>    
+               <tr style="height:40px;">    
+                   <td class="Color"  style="width:150px  " >收件人</td>    
+                   <td  ><input style="width: 280px " name="consignee" ></td>
+                   <td class="Color" style="width:150px  ">收件人电话</td>    
+                   <td ><input style="width: 280px " name="consigneePhone" ></td>
+                   </tr>    
+               <tr style="height:40px;">    
+                   <td class="Color" style="width:150px  ">原件寄往地址</td>    
+                   <td colspan="3">    
+                       <input style="width: 700px " name="sendAddress" >
+                       </td>    
+                   </tr>    
+               <tr style="height:40px;">    
+                   <td class="Color"  style="width:150px  ">快递公司（归还）</td>    
+                   <td  ><input style="width: 280px " name="returnExpressageName" ></td>
+                   <td class="Color" style="width:150px  ">快递单号（归还）</td>    
+                   <td ><input style="width: 280px " name="returnExpressageWaybill" ></td>
+                   </tr>    
+               <tr style="height: 40px ;background-color: #efefef">    
+                   <td colspan="4" style="text-align: center">    
+                       <span>(以下非申请人填写)</span>    
+                       </td>    
+                   </tr>    
+               <tr style="height:40px;">    
+                   <td class="Color" style="width:150px  ">原件名称</td>    
+                   <td colspan="3">    
+                       <textarea class="Eliminate4" style="width: 600px ;height: 30px "name="name" ></textarea>
+                       <a target="_blank " class="add-to4">添加</a>    
+                        <a class="clear-to4" >    
+                           <input value="清空" class="input44"  onClick="" type="button">    
+                           </a>    
+                       </td>    
+
+                   </tr>    
+               <tr style="height:40px;">    
+                   <td class="Color"  style="width:150px  ">快递公司（寄出）</td>    
+                   <td  ><input style="width: 280px " name="sendExpressageName" ></td>
+                   <td class="Color" style="width:150px  ">快递单号（寄出）</td>    
+                   <td ><input style="width: 280px " name="sendExpressageWaybill" ></td>
+                   </tr>    
+               <tr style="height:40px;">    
+                   <td class="Color"  style="width:150px  ">原件寄出时间</td>    
+               <td colspan="3" ><input style="width: 280px " type="text" class="demo-input" placeholder="请选择日期" id="test2" name="sendtime"></td>
+
+                   </tr>    
+
+               <tr style="height:40px;">    
+                   <td class="Color" style="width:150px  ">原件归还时间</td>    
+                   <td style="width:300px ;" colspan="3">    
+                    <input  style="width:280px "   type="text" class="demo-input" placeholder="请选择日期" id="test3" name="returntime" >
+                       </td>    
+                   </tr>    
+
+               </table>    
             <input id="ok"  type="submit" value="确定" style="margin-left:400px ">
             <a href="/mc/borrow/query" id="no"  >取消</a>
         </form>
     </div>
 </div>
+<script>
+
+</script>
 </body>
 </html>

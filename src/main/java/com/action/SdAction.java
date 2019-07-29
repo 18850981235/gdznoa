@@ -72,6 +72,7 @@ public class SdAction {
                 SerializerFeature.DisableCircularReferenceDetect,
                 SerializerFeature.WriteNullStringAsEmpty);
 
+
     }
 
     @RequestMapping("/SdSalesContract/AddProjectPage")
@@ -82,10 +83,13 @@ public class SdAction {
     //添加合同
     @RequestMapping(value = "/SdSalesContract/addContract", produces = "application/json; charset=utf-8")
     public String addContract(SdSalesContract sdSalesContract,HttpServletRequest reques) {
+        System.err.println("进来新增了！");
         int i = sdSalesContractservice.addSdSalesContract(sdSalesContract,reques);
         if (i > 0) {
+            System.err.println("新增成功");
             return " ";
         } else {
+            System.err.println("新增失败");
             return " ";
         }
     };
@@ -257,10 +261,26 @@ public class SdAction {
                 SerializerFeature.DisableCircularReferenceDetect,
                 SerializerFeature.WriteNullStringAsEmpty);
     }
+    //删除某条清单
     @RequestMapping("/Inventory/AddnventorybyidPage")
     public String AddnventorybyidPage() {
         return "/sale/detailed/detailedAdd";
     }
+
+    //添加清单
+    @RequestMapping(value = "/Inventory/addInvenbywight", produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public String  addInven(SdSalesContractInventory salesContractInventory, List<SdSalesInventory> list) throws Exception{
+
+        int i=sdSalesContractInventoryService.addInventory(salesContractInventory, list);
+        if (i==0){
+            System.err.println("添加成功");
+            return " ";}
+        else{
+            return "" ;
+        }
+    };
+
     //添加Excel上传的；
     //条件查询清单
     @RequestMapping(value = "/Inventory/addInven", produces = "application/json; charset=utf-8")
@@ -285,20 +305,8 @@ public class SdAction {
         out.close();
     return " ";
     };
-
-
-    @RequestMapping(value = "/Inventory/addInvenbywight", produces = "application/json; charset=utf-8")
+    @RequestMapping(value = "/Inventory/outExcel", produces = "application/json; charset=utf-8")
     @ResponseBody
-    public String  addInven(SdSalesContractInventory salesContractInventory, List<SdSalesInventory> list) throws Exception{
-
-        int i=sdSalesContractInventoryService.addInventory(salesContractInventory, list);
-        if (i==0){
-             return " ";}
-        else{
-             return "" ;
-        }
-
-    };
     public String  queryDaily(HttpServletRequest request, HttpServletResponse response,
                            HttpSession session,SdSalesContractInventory sdSalesContractInventory) throws IllegalArgumentException, IllegalAccessException, InvocationTargetException, ClassNotFoundException, IntrospectionException, ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddhhmmssms");

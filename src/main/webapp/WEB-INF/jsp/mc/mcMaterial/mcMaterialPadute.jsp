@@ -39,12 +39,12 @@
         <form action="/mc/materials/update.html" method="post"  enctype="multipart/form-data">
             <table border="1">
                 <tr style="text-align: center;height: 45px ">
-                    <td colspan="4" style="width: 900px;background-color: #efefef "><b>商务材料申请</b></td>
+                    <td colspan="4" style="width: 900px;background-color: #efefef "><b>商务材料修改</b></td>
                 </tr>
                 <tr style="height: 45px ">
                     <td style="width:150px ;background-color: #efefef;">
                         <span>申请部门</span>
-                        <input style="display: none">
+                        <input style="display: none" name="id">
                     </td>
                     <td style="width:300px ;">
                         <select class="department" style="width: 100px;height: 30px " name="deptid">
@@ -108,7 +108,7 @@
                         <span>附件</span>
                     </td>
                     <td colspan="3" >
-                        <input type="file"   style="width:700px "name="file">
+                        <input type="file"   style="width:700px " name="file">
                     </td>
                 </tr>
             </table>

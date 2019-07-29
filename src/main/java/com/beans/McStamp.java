@@ -26,7 +26,7 @@ public class McStamp {
 
   private String content;
 
-  private int fileNum;
+  private String fileNum;
 
   private String stampType;
 

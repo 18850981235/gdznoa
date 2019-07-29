@@ -81,7 +81,7 @@ public class McAction {
                             @RequestParam(required = false) Date start,
                             @RequestParam(required = false) Date end,
                             @RequestParam(required = false, defaultValue = "0") int pageIndex,
-                            HttpSession session) {
+                            HttpServletRequest request ) {
         if (projectName == null || projectName == "") {
             projectName = null;
         }
@@ -94,8 +94,11 @@ public class McAction {
         if (purpose == null || purpose == "") {
             purpose = null;
         }
-        int userid=(int) session.getAttribute("userId");
-//        int userid = 1;
+        SysUser user = (SysUser) request.getSession().getAttribute("user");
+        int userid=user.getId();
+        if (userid==1||user.getAccount().equals("18959261777")){
+            userid=0;
+        }
         return JSONObject.toJSONString(mcStampService.getList(projectName, userid, stampType, deptid, content, purpose, start, end, pageIndex),
                 SerializerFeature.DisableCircularReferenceDetect,
                 SerializerFeature.WriteNullStringAsEmpty);
@@ -185,7 +188,11 @@ public class McAction {
         if (projectName == null || projectName == "") {
             projectName = null;
         }
-        int userid = (int) request.getSession().getAttribute("userId");
+        SysUser user = (SysUser) request.getSession().getAttribute("user");
+        int userid=user.getId();
+        if (userid==1||user.getAccount().equals("18959261777")){
+            userid=0;
+        }
         return JSONObject.toJSONString(mcFileBorrowService.getList(projectName, name, deptid, start, end, userid, pageIndex),
                 SerializerFeature.DisableCircularReferenceDetect,
                 SerializerFeature.WriteNullStringAsEmpty);
@@ -209,6 +216,7 @@ public class McAction {
 
     @RequestMapping("/borrow/update.html")
     public String UpdateFileBorrow(McFileBorrow mcFileBorrow) {
+        mcFileBorrowService.update(mcFileBorrow);
         return "redirect:/mc/borrow/query";
     }
 
@@ -275,11 +283,15 @@ public class McAction {
                                 @RequestParam(required = false) Date start,
                                 @RequestParam(required = false) Date end,
                                 @RequestParam(required = false, defaultValue = "0") int pageIndex,
-                                HttpSession session) {
+                                HttpServletRequest request) {
         if (offerTpye == null || offerTpye == "") {
             offerTpye = null;
         }
-        int userid = (int) session.getAttribute("userId");
+        SysUser user = (SysUser) request.getSession().getAttribute("user");
+        int userid=user.getId();
+        if (userid==1||user.getAccount().equals("18959261777")){
+            userid=0;
+        }
         return JSONObject.toJSONString(mcMaterialsSevice.getList(offerTpye, deptid, start, end, userid, pageIndex),
                 SerializerFeature.DisableCircularReferenceDetect,
                 SerializerFeature.WriteNullStringAsEmpty);
@@ -360,7 +372,7 @@ public class McAction {
                                  @RequestParam(required = false) Date start,
                                  @RequestParam(required = false) Date end,
                                  @RequestParam(required = false, defaultValue = "0") int pageIndex,
-                                 HttpSession session) {
+                                 HttpServletRequest request) {
         if (projectName == null || projectName == "") {
             projectName = null;
         }
@@ -368,7 +380,11 @@ public class McAction {
             personnelCondition = null;
         }
 
-        int userid = (int) session.getAttribute("userId");
+        SysUser user = (SysUser) request.getSession().getAttribute("user");
+        int userid=user.getId();
+        if (userid==1||user.getAccount().equals("18959261777")){
+            userid=0;
+        }
         return JSONObject.toJSONString(mcPersonnelDispatchedService.getList(projectName, personnelCondition, deptid, userid, start, end, pageIndex),
                 SerializerFeature.DisableCircularReferenceDetect,
                 SerializerFeature.WriteNullStringAsEmpty);
@@ -451,12 +467,15 @@ public class McAction {
                             @RequestParam(required = false) Date start,
                             @RequestParam(required = false) Date end,
                             @RequestParam(required = false, defaultValue = "0") int pageIndex,
-                            HttpSession session) {
+                            HttpServletRequest request ) {
         if (projectName == null || projectName == "") {
             projectName = null;
         }
-        int userid = (int) session.getAttribute("userId");
-        //int userid=1;
+        SysUser user = (SysUser) request.getSession().getAttribute("user");
+        int userid=user.getId();
+        if (userid==1||user.getAccount().equals("18959261777")){
+            userid=0;
+        }
         return JSONObject.toJSONString(mcDatumCostService.getList(projectName, deptid, start, end, userid, pageIndex),
                 SerializerFeature.DisableCircularReferenceDetect,
                 SerializerFeature.WriteNullStringAsEmpty);
@@ -475,7 +494,7 @@ public class McAction {
     }
 
     @RequestMapping("/datum/update")
-    public String showUpdateDatum() {
+    public String showUpdateDatum(McDatumCost mcDatumCost) {
         return "/mc/mcCost/mcCostPadute";
     }
 
@@ -637,6 +656,16 @@ public class McAction {
     // endregion
 
     //region ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~资质证书~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    //根据ID查询
+    @RequestMapping(value = "/qualification/queryAll")
+    @ResponseBody
+    public String queryAll() {
+        return JSONObject.toJSONString(mcQualificationService.queryAll(),
+                SerializerFeature.DisableCircularReferenceDetect,
+                SerializerFeature.WriteNullStringAsEmpty);
+    }
+
+
 //资历证书PDF导出：
     @RequestMapping("/qualification/pdf")
     public void  pdfout(HttpServletRequest request, HttpServletResponse response)throws DocumentException, IOException {
@@ -676,7 +705,7 @@ public class McAction {
     //跳转到资历证书增加界面
     @RequestMapping("/qualification/add")
     public String addQualificationPage() {
-        return "mc/mcCertificate/mcCertificateAdd";
+        return "/mc/mcCertificate/mcCertificateAdd";
     }
 
     //资质证书添加
@@ -685,9 +714,9 @@ public class McAction {
         int sum;
         sum = mcQualificationService.addQualificationCertificate(mcQualificationCertificate, reques);
         if (sum > 0) {
-            return "mc/mcCertificate/mcCertificateList";
+            return "/mc/mcCertificate/mcCertificateList";
         } else {
-            return "mc/mcCertificate/mcCertificateAdd";
+            return "/mc/mcCertificate/mcCertificateAdd";
         }
     }
 
@@ -712,9 +741,9 @@ public class McAction {
         int sum;
         sum = mcQualificationService.updateMcQualification(mcQualificationCertificate);
         if (sum > 0) {
-            return "mc/mcCertificate/mcCertificateList";
+            return "/mc/mcCertificate/mcCertificateList";
         } else {
-            return "mc/mcCertificate/mcCertificatePadute";
+            return "/mc/mcCertificate/mcCertificatePadute";
         }
     }
 
@@ -775,7 +804,7 @@ public class McAction {
     @RequestMapping(value = "/qualification/delete", produces = "application/json; charset=utf-8")
     public String deleteQualification(@RequestParam int id) {
         int sum = mcQualificationService.delete(id);
-        return "mc/mcCertificate/meCertificateParticular.";
+        return "/mc/mcCertificate/mcCertificateList";
     }
     @RequestMapping("/SdSalesContract/QualificationParticular")
     public String QualificationParticular(SysApprovalDetailed approvalDetailed, HttpServletRequest request) {

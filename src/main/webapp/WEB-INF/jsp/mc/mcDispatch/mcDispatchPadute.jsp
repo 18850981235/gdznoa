@@ -64,7 +64,7 @@
                 <tr style="height: 40px ;background-color: #efefef">
                     <td colspan="4" style="text-align: center">
                         <b>人员派遣修改</b>
-                        <input style="display: none">
+                        <input style="display: none" name="id">
                     </td>
                 </tr>
                 <tr style="height:40px;">
@@ -105,7 +105,7 @@
                     <td style="width:150px ;background-color: #efefef;">预计出差时间</td>
                     <td ><input style="width: 280px " type="text" class="demo-input" placeholder="请选择日期" id="test1" name="evectionTime"></td>
                     <td style="width:150px ;background-color: #efefef;">派遣人员情况</td>
-                    <td ><input style="width: 300px " name="evectionCost"></td>
+                    <td ><input style="width: 300px " name="personnelCondition"></td>
                 </tr>
                 <tr style="height:40px;">
                     <td style="width:150px ;background-color: #efefef;">人员费用标准</td>

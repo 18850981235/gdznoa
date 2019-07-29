@@ -14,7 +14,7 @@ public interface TalkingService {
 
     Map<String, Object> queryoriginator(@Param("userId") int userId);
 
-    List<PubTalking> getNewContent(@Param("userId") int userId);
+    Map<String, Object> getNewContent(@Param("userId") int userId);
 
     int addAdminTalk(PubTalking pubTalking);
 }

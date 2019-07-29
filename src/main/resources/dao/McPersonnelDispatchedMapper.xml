@@ -8,11 +8,18 @@
         <result column="projectid" property="projectid" jdbcType="INTEGER"/>
         <result column="demand" property="demand" jdbcType="VARCHAR"/>
         <result column="userid" property="userid" jdbcType="INTEGER"/>
+        <result column="personnel_condition" property="personnelCondition" jdbcType="VARCHAR"/>
+        <result column="cost_standard" property="costStandard" jdbcType="DECIMAL"/>
+        <result column="evection_budget" property="evectionBudget" jdbcType="DECIMAL"/>
+        <result column="practical_time" property="practicalTime" jdbcType="TIMESTAMP"/>
         <result column="evection_time" property="evectionTime" jdbcType="VARCHAR"/>
+        <result column="evection_condition" property="evectionCondition" jdbcType="VARCHAR"/>
+        <result column="travel_cost" property="travelCost" jdbcType="DECIMAL"/>
         <result column="evection_cost" property="evectionCost" jdbcType="DECIMAL"/>
         <result column="processid" property="processid" jdbcType="INTEGER"/>
         <result column="process_userid" property="processUserid" jdbcType="INTEGER"/>
         <result column="process_state" property="processState" jdbcType="VARCHAR"/>
+        <result column="process_node" property="processNode" jdbcType="INTEGER"/>
         <association property="project" javaType="com.beans.BdProject" column="projectid"
                      select="com.dao.bd.BdProjectMapper.getProjectById">
         </association>
@@ -180,7 +187,7 @@
             <if test="processid != 0" >
                 processid,
             </if>
-            <if test="processUserid != null" >
+            <if test="processUserid != 0" >
                 process_userid,
             </if>
             <if test="processState != null" >
@@ -233,7 +240,7 @@
             <if test="processid != 0" >
                 #{processid},
             </if>
-            <if test="processUserid != null" >
+            <if test="processUserid != 0" >
                 #{processUserid},
             </if>
             <if test="processState != null" >
@@ -289,7 +296,7 @@
             <if test="processid != 0" >
                 processid = #{processid},
             </if>
-            <if test="processUserid != null" >
+            <if test="processUserid != 0" >
                 process_userid = #{processUserid},
             </if>
             <if test="processState != null" >
@@ -299,7 +306,7 @@
                 process_node = #{processNode}
             </if>
         </set>
-          WHERE id={id}
+          WHERE id=#{id}
     </update>
     <select id="getListById" resultMap="BaseResultMap">
         SELECT `mc_personnel_dispatched`.*,`bd_project`.`name` AS projectName

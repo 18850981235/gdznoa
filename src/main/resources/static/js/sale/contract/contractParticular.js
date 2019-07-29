@@ -10,116 +10,77 @@ function w() {
         dataType:"json",
         url:url,
         // date:{"id":id},
-        success:function (data) {
-            var SdSalesContract=data.SdSalesContract;
+        success:function (obj) {
+            var data=obj.SdSalesContract;
             var SysApprovalDetailed=data.SysApprovalDetailed;
             var html="";
-            console.log(data.SdSalesContract)
-            html +=' <input style="display: none" value='+SdSalesContract.id+' name="id">';
-            html+='<table border="1">';
-            html+='<tr style="height: 40px ;background-color: #efefef">';
-            html+='<td colspan="4" style="text-align: center"><b>销售合同修改</b></td>';
-            html+='</tr>';
-            html+='<tr style="height:40px;">';
-            html+='<td style="width:150px ;background-color: #efefef;"><span>项目名称</span></td>';
-            html+='<td  style="width:300px ;">';
-            html+='<select id="ap" style="height: 30px " name="projectid">';
-            html+='<option value='+SdSalesContract.project.id+'>'+SdSalesContract.project.name+'</option>';
-            html+='</select>';
-            html+='</td>';
-            html+='</td>';
-            html+='<td style="width:150px ;background-color: #efefef;"><span>客户名称</span></td>';
-            html+='<td  style="width:300px ;">';
-            html+='<input style="width: 250px " value='+SdSalesContract.project.client.name+' >';
-            html+='<input style="display: none" name="clientid " value='+SdSalesContract.project.client.id+'>';
-            html+='</td>';
-            html+='</tr>';
-            html+='<tr  style="height:40px;">';
-            html+='<td style="width:150px ;;background-color: #efefef">项目编号</td>';
-            html+='<td style="width:300px ;">';
-            html+='<input  style="width: 250px ;display: inline-block" name="projectcode" value='+SdSalesContract.project.code+'>';
-            html+='</td>';
-            html+='<td style="width:150px ;background-color: #efefef;">合同编号</td>';
-            html+='<td >';
-            html+='<input   style="width: 250px ;display: inline-block" name="code" value='+SdSalesContract.code+'>';
-            html+='</td>';
-            html+='</tr>';
-            html+='<tr  style="height:40px;">';
-            html+='<td style="width:150px ;;background-color: #efefef">所属机构</td>';
-            html+='<td style="width:300px ;">';
-            html+='<input style="width: 250px ;" value='+SdSalesContract.dept.name+'>';
-            html+='<input   style="width: 250px ;display: none" name="deptid" value='+SdSalesContract.dept.id+'>';
 
-            html+='</td>';
-            html+='<td style="width:150px ;background-color: #efefef;">业务负责人</td>';
-            html+='<td >';
-            html+='<input style="width: 250px ;" value='+SdSalesContract.project.principalUser.name+'>';
-            html+='<input   style="width: 250px ;display: none" name="principal" value='+SdSalesContract.project.principalUser.id+'>';
-            html+='</td>';
-            html+='</tr>';
-            html+='<tr  style="height:40px;">';
-            html+='<td style="width:150px ;;background-color: #efefef">分公司负责人</td>';
-            html+='<td style="width:300px ;">';
-            html+='<input style="width: 250px ;" value='+SdSalesContract.project.branchuser.mame+'>';
-            html+='<input  style="width:250px ;display: none" name="branchuser" value='+SdSalesContract.project.branchuser.id+'>';
-            html+='</td>';
-            html+='<td style="width:150px ;background-color: #efefef;">区域负责人</td>';
-            html+='<td >';
-            html+='<input style="width: 250px ;" value='+SdSalesContract.project.areaManagerUser.name+'>';
-            html+='<input   style="width: 250px ;display: none" name="areaManager" value='+SdSalesContract.project.areaManagerUser.id+'>';
-            html+='</td>';
-            html+='</tr>';
-            html+='<tr  style="height:40px;">';
-            html+='<td style="width:150px ;;background-color: #efefef">税务发票类型</td>';
-            html+='<td style="width:300px ;">';
-            html+='<select style="height: 30px " name="invoiceType">';
-            html+='<option>'+SdSalesContract.invoiceType+'</option>';
-            html+='<option>普通发票</option>';
-            html+='<option>专业发票</option>';
-            html+='</select>';
-            html+='</td>';
-            html+='<td style="width:150px ;background-color: #efefef;">合同金额</td>';
-            html+='<td >';
-            html+='<input   style="width: 170px ;display: inline-block" name="contractAmount" value='+SdSalesContract.contractAmount+'>';
-            html+='</td>';
-            html+='</tr>';
-            html+='<tr  style="height:40px;">';
-            html+='<td style="width:150px ;;background-color: #efefef">增加金额</td>';
-            html+='<td style="width:300px ;">';
-            html+='<input name="addAmount" value='+SdSalesContract.addAmount+'>';
-            html+='</td>';
-            html+='<td style="width:150px ;background-color: #efefef;">增加清单</td>';
-            html+='<td >';
-            html+='<select style="height: 30px " name="addList"></select>';
-            html+='</td>';
-            html+='</tr>';
-            html+='<tr  style="height:40px;">';
-            html+='<td style="width:150px ;;background-color: #efefef">减少金额</td>';
-            html+='<td style="width:300px ;">';
-            html+='<input name="reductionAmount" value='+SdSalesContract.reductionAmount+'>';
-            html+='</td>';
-            html+='<td style="width:150px ;background-color: #efefef;">减少清单</td>';
-            html+='<td >';
-            html+='<select style="height:30px" name="reductionList"></select>';
-            html+='</td>';
-            html+='</tr>';
-            html+='<tr  style="height:40px;">';
-            html+='<td style="width:150px ;;background-color: #efefef">管理费费率</td>';
-            html+='<td style="width:300px ;">';
-            html+='<input name="managementRate" value='+SdSalesContract.managementRate+'>';
-            html+='</td>';
-            html+='<td style="width:150px ;background-color: #efefef;">中标时间</td>';
-            html+='<td >';
-            html+='<input type="text"  placeholder="请选择日期" id="test1" name="bidiingTime" value='+SdSalesContract.bidiingTime+'>';
-            html+='</td>';
-            html+='</tr>';
-            html+='<tr  style="height:40px;">';
-            html+='<td style="width:150px ;;background-color: #efefef">附件</td>';
-            if(SdSalesContract.accessory==undefined){
+         html += ' <table border="1">';
+             html += '<tr style="height: 40px ;background-color: #efefef">';
+             html += '<td colspan="4" style="text-align: center">';
+             html += '<b>销售合同新增</b>';
+            html += '<input style="display:none;" name="id">';
+             html += '</td>';
+             html += '</tr>';
+             html += '<tr style="height:40px;">';
+             html += '<td style="width:150px ;background-color: #efefef;">';
+             html += '<span>项目名称</span>';
+             html += '</td>';
+             html += '<td  style="width:300px ;">'+data.project.name+'</td>';
+             html += '<td style="width:150px ;background-color: #efefef;">';
+             html += '<span>客户名称</span>';
+             html += '</td>';
+             html += '<td style="width:300px;">'+data.project.client.name+'</td>';
+             html += '</tr>';
+             html += '<tr  style="height:40px;">';
+             html += '<td style="width:150px ;;background-color: #efefef">项目编号</td>';
+             html += '<td style="width:300px ;">'+data.project.code+'</td>';
+            html += ' <td style="width:150px ;background-color: #efefef;">合同编号</td>';
+             html += '<td >'+data.code+'</td>';
+             html += '</tr>';
+             html += '<tr  style="height:40px;">';
+             html += '<td style="width:150px ;;background-color: #efefef">所属机构</td>';
+             html += '<td style="width:300px ; ">'+data.dept.name+'</td>';
+             html += '<td style="width:150px ;background-color: #efefef;">业务负责人</td>';
+             html += '<td >'+data.principalUser.name+'</td>';
+             html += '</tr>';
+             html += '<tr  style="height:40px;">';
+             html += '<td style="width:150px ;;background-color: #efefef">分公司负责人</td>';
+             html += '<td style="width:300px ;">'+data.branchUseruser.name+'</td>';
+             html += '<td style="width:150px ;background-color: #efefef;">区域负责人</td>';
+             html += '<td >'+data.areaManagerUser.name+'</td>';
+             html += '</tr>';
+             html += '<tr  style="height:40px;">';
+             html += '<td style="width:150px ;;background-color: #efefef">税务发票类型</td>';
+             html += '<td style="width:300px ;">'+data.invoiceType+'</td>';
+             html += '<td style="width:150px ;background-color: #efefef;">合同金额</td>';
+             html += '<td >'+data.contractAmount+'</td>';
+             html += '</tr>';
+             html += '<tr  style="height:40px;">';
+             html += '<td style="width:150px ;;background-color: #efefef">增加金额</td>';
+             html += '<td style="width:300px ;">'+data.addAmount+'</td>';
+             html += '<td style="width:150px ;background-color: #efefef;">增加清单</td>';
+             html += '<td>'+data.addList+'</td>';
+             html += '</tr>';
+             html += '<tr  style="height:40px;">';
+             html += '<td style="width:150px ;;background-color: #efefef">减少金额</td>';
+             html += '<td style="width:300px ;">'+data.reductionAmount+'</td>';
+             html += '<td style="width:150px ;background-color: #efefef;">减少清单</td>';
+             html += '<td >'+data.reductionList+'</td>';
+             html += '</tr>';
+             html += '<tr  style="height:40px;">';
+             html += '<td style="width:150px ;;background-color: #efefef">管理费费率</td>';
+             html += '<td style="width:300px ;">'+data.managementRate+'</td>';
+             html += '<td style="width:150px ;background-color: #efefef;">中标时间</td>';
+             html += '<td >'+data.bidiingTime+'</td>';
+             html += '</tr>';
+             html += '<tr  style="height:40px;">';
+             html += '<td style="width:150px ;;background-color: #efefef">附件</td>';
+            if(data.accessory==undefined||data.accessory==null||data.accessory==""){
                 html += '<td colspan="3" >' + "无" + '</td>';
             }else {
                 var strs= new Array(); //定义一数组
-                strs=SdSalesContract.accessory.split(","); //字符分割
+                strs=data.accessory.split(","); //字符分割
                 html += '<td colspan="3" style="width: 600px " >'
                 for(i=0;i<strs.length;i++){
                     if(strs[i]!="") {
@@ -131,23 +92,26 @@ function w() {
                 }
                 html +='</td>';
             }
-            html+='</tr>';
-            html+='</table>';
+             // html += '<td colspan="3" style="width:300px ;"></td>';
+             html += '</tr>';
+            html += '</table>';
+
+
 
             html += ' <table class="approval " style="width: 900px ">';
-            html += '<tr style="height: 40px;width:900px  " >';
-            html += '<td colspan="6" style="text-align: center;width: 900px ">';
+            html += '<tr style="height: 40px;width:900px" >';
+            html += '<td colspan="6" style="text-align:center;width:900px">';
             html += '<b>审批流程</b>';
             // html += '<a style="float: right;color: red">'+project.processState+'</a>';
             html += '</td>';
             html += '</tr>';
-            html += '<tr style="text-align: center;background-color: #0099ff;width:900px ;height: 40px ">';
-            html += '<td style="width: 20px  ">序号</td>';
-            html += '<td style="width: 50px  ">审批部门</td>';
-            html += '<td style="width: 50px  ">审批人员</td>';
-            html += '<td style="width: 50px  ">审批时间</td>';
-            html += '<td style="width: 200px  ">审批意见</td>';
-            html += '<td style="width: 50px  ">审核状态</td>';
+            html += '<tr style="text-align:center;background-color: #0099ff;width:900px ;height: 40px ">';
+            html += '<td style="width:20px">序号</td>';
+            html += '<td style="width:50px">审批部门</td>';
+            html += '<td style="width:50px">审批人员</td>';
+            html += '<td style="width:50px">审批时间</td>';
+            html += '<td style="width:200px">审批意见</td>';
+            html += '<td style="width:50px">审核状态</td>';
             html += '</tr>';
             $.each(SysApprovalDetailed, function (index, list) {
                 html += '<tr style="text-align: center;width:900px ;height: 40px">';

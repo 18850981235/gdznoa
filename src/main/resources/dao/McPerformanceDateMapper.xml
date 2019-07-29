@@ -4,6 +4,7 @@
     <resultMap id="BaseResultMap" type="com.beans.McPerformanceDate">
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="project_id" property="projectId" jdbcType="INTEGER"/>
+        <result column="projectName" property="projectName" jdbcType="VARCHAR"/>
         <result column="bidding_notice" property="biddingNotice" jdbcType="VARCHAR"/>
         <result column="bidding_time" property="biddingTime" jdbcType="TIMESTAMP"/>
         <result column="performance_contract" property="performanceContract" jdbcType="INTEGER"/>
@@ -238,8 +239,8 @@
         </if>
     </select>
     <select id="queryall" resultMap="BaseResultMap">
-   SELECT * FROM `mc_performance_date`,`bd_project`
-
+   SELECT `mc_performance_date`.* ,`bd_project`.`name` as projectName
+        FROM`mc_performance_date`,`bd_project`
         <trim prefix="where" prefixOverrides="and">
             `mc_performance_date`.`project_id`=`bd_project`.`id`
             <if test="projectName != null">

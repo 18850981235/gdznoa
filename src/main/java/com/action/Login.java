@@ -174,7 +174,7 @@ public class Login {
     public String quit(HttpSession session) {
         session.removeAttribute("user");
         session.removeAttribute("userId");
-        return "redirect:/index";
+        return "/index";
     }
 
     /**

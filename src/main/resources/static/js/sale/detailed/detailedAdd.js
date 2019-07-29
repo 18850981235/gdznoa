@@ -28,7 +28,10 @@ $.ajax({
 });
 $(document).ready(function () {
     $("body").on("click","#add",function () {
-        var text=' <tr style="height: 40px  "> <td style="width: 100px "><input name=""></td> <td style="width: 150px "><input name="code"></td> <td style="width: 150px "><input name="name"></td> <td style="width: 100px "><input name="model"></td> <td style="width: 100px "><input name="parameter"></td> <td style="width: 100px "><select class="brand" name="trademarkid"><option>请选择</option></select></td> <td style="width: 100px "><input name="unit"></td> <td style="width: 100px "><input name="num"></td> <td style="width: 100px "><input name="unitCost"></td> <td style="width: 100px "><input name="subtotal"></td> <td style="width: 100px "><input name="remarks"></td> </tr>'
-        $("#con").append(text);
+        var text='<tr style="height: 40px; "><td style="width: 150px; "><input style="width: 140px "name="code"></td><td style="width: 151px;"><input style="width: 143px " name="name"></td><td style="width: 100px; "><input style="width: 95px " name="model"></td><td style="width: 100px; "><input  style="width: 95px " name="parameter"></td><td style="width: 150px; ;padding: 3px "><select style="width: 140px ;height: 30px;margin-right: auto;margin-left:auto" id="trademarkid" name="trademark"><option value="">请选择</option></select></td><td style="width: 100px; "><input style="width: 95px " name="unit"> </td><td style="width: 100px "><input style="width: 95px " name="num"></td><td style="width: 100px; "><input style="width: 95px " name="unitCost"></td><td style="width: 100px; "><input style="width: 95px " name="subtotal"></td><td style="width: 150px; "><input style="width: 140px " name="remarks"></td></tr>'
+        $("#con tbody").append(text);
+    })
+    $("body").on("click","#remove",function () {
+        $("#con tr:last").remove();
     })
 })

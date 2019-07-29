@@ -42,12 +42,11 @@
                 <tr style="height: 45px ">
                     <td style="width:150px ; " class="Color">
                         <span>申请部门</span>
+                        <input id="id" name="id" style="display: none">
                     </td>
                     <td style="width:300px ;">
-                        <select id="dept" class="department" style="width: 100px;height: 30px " name="deptid" required>
-                            <option value="">
-                                请选择
-                            </option>
+                        <select id="dept" class="department" style="width: 100px;height: 30px " name="deptid" >
+                            <option value="">请选择</option>
                         </select>
                     </td>
                     <td style="width:150px ;" class="Color">
@@ -63,7 +62,8 @@
                         <span>申请人</span>
                     </td>
                     <td style="width:300px ;">
-                        <input style="width:280px " name="userid" required>
+                        <input style="width:280px "  required>
+                        <input style="display: none" name="userid">
                     </td>
                     <td style="width:150px ;" class="Color">
                         <span>联系电话</span>
@@ -77,10 +77,9 @@
                         <span>项目名称</span>
                     </td>
                     <td  colspan="3" style="width:300px ;">
-                        <select class="projectname" style="height: 20px" name="projectid" required>
+                        <select class="projectname" style="height: 20px" name="projectid" >
                             <option value="">请选择</option>
                         </select>
-
                     </td>
                 </tr>
                 <tr style="height: 45px ">
@@ -113,7 +112,7 @@
                         <span>盖章用途说明</span>
                     </td>
                     <td colspan="3" >
-                        <textarea style="width: 730px ;height: 35px" name="purpose"></textarea>
+                        <textarea class="text" style="width: 730px ;height: 35px" name="purpose"></textarea>
                     </td>
                 </tr>
                 <tr style="height: 45px ">
@@ -152,9 +151,9 @@
                         <input style="width:280px " name="expressageWaybill">
                     </td>
                 </tr>
-                <tr style="height: 45px "class="Color">
+                <tr style="height: 45px " class="Color">
                     <td >添加附件</td>
-                    <td colspan="3">
+                    <td colspan="3" style="background-color: #ffffff">
                         <input type="file" name="file">
                     </td>
                 </tr>

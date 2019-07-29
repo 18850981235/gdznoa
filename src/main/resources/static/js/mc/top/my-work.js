@@ -35,7 +35,7 @@ function lo(z) {
                 // html += '<td style="width: 100px ">' + obj1.fileNum + '</td>';
                 html += '<td style="width: 110px ">';
                 html += '<a href='+obj1.process.url+'?id='+obj1.id+' style="color:#dea97d; margin-left: 4px  ">审批</a>';
-                console.log(obj1.process);
+
                 html += '</td>';
                 html += '</tr>';
             });
@@ -64,11 +64,48 @@ function lo(z) {
 $(document).ready(function () {
     lo();
 })
-$(document).on("click",".del",function () {
-    $("#confirm").show();
+$(document).on("click",".del1",function () {
+    $(".confirm1").show();
 })
+$(document).on("click",".del2",function () {
+    $(".confirm2").show();
+})
+$(document).on("click",".del3",function () {
+    $(".confirm3").show();
+})
+$(document).on("click",".del4",function () {
+    $(".confirm4").show();
+})
+$(document).on("click",".del5",function () {
+    $(".confirm5").show();
+})
+$(document).on("click",".del6",function () {
+    $(".confirm6").show();
+})
+$(document).on("click",".del7",function () {
+    $(".confirm7").show();
+})
+$(document).on("click",".del8",function () {
+    $(".confirm8").show();
+})
+$(document).on("click",".del9",function () {
+    $(".confirm9").show();
+})
+$(document).on("click",".del0",function () {
+    $(".confirm0").show();
+})
+
 $(document).on("click",".confirm-no",function () {
-    $("#confirm").hide();
+    $(".confirm0").hide();
+    $(".confirm1").hide();
+    $(".confirm2").hide();
+    $(".confirm3").hide();
+    $(".confirm4").hide();
+    $(".confirm5").hide();
+    $(".confirm6").hide();
+    $(".confirm7").hide();
+    $(".confirm8").hide();
+    $(".confirm9").hide();
 })
 $(document).on("click",".query",function () {
 

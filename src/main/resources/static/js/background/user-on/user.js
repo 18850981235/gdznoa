@@ -1,7 +1,7 @@
 (function () {
 
 
-        // $.getJSON("http://192.168.1.236:8080/user/useraction/getallMenuanduser?quesid=2&userid=15",
+        // $.getJSON("user/useraction/getallMenuanduser?quesid=2&userid=15",
         // function (date) {
         //
         //     var sysmenu=date.ListAuthority.sysmenu;
@@ -370,8 +370,8 @@
                         $("#con-5").addClass("dian");
                         $(".con-5").siblings().hide();
                         $("#con-5").siblings().removeClass("dian");
-                        $("#con5").removeClass(".con10");
-                        $("#con5").addClass(".con5");
+                        $("#con5").removeClass("con10");
+                        $("#con5").addClass("con5");
                     }
                 }
             });
@@ -435,10 +435,18 @@
             var content=$(".con-5 .content").val();
             $.ajax({
                 type: "post",
-                url: "/user/useraction/updateUser",
-                dataType: "json",
+                url: "/Talking/Talking/sentTalking",
+                dataType: "text",
                 data:{"content":content},
-                success: function (date) {
+                success: function (data) {
+                    console.log(data)
+                    if(data=="1"){
+                        alert("发送成功")
+
+                    }else {
+                        alert("发送失败")
+
+                    }
 
 
                 },
@@ -456,7 +464,7 @@
                 dataType: "text",
                 data:{"receive":id,"content":content},
                 success: function(data) {
-                    if(data=="1"){
+                    if(data=="yes"){
                         alert("发送成功")
 
                     }else {

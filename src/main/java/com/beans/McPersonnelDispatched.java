@@ -1,7 +1,10 @@
 package com.beans;
 
 
+import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -16,11 +19,15 @@ public class McPersonnelDispatched {
   private int deptid;
 
   private int userid;
-
+  @JsonFormat(pattern = "yyyy-MM-dd  ")
+  @JSONField(format = "yyyy-MM-dd  ")
+  @DateTimeFormat(pattern = "yyyy-MM-dd  ")
   private Date createtime;
 
   private String demand;
-
+  @JsonFormat(pattern = "yyyy-MM-dd  ")
+  @JSONField(format = "yyyy-MM-dd  ")
+  @DateTimeFormat(pattern = "yyyy-MM-dd  ")
   private Date evectionTime;
 
   private String personnelCondition;
@@ -28,7 +35,9 @@ public class McPersonnelDispatched {
   private BigDecimal costStandard;
 
   private BigDecimal evectionBudget;
-
+  @JsonFormat(pattern = "yyyy-MM-dd  ")
+  @JSONField(format = "yyyy-MM-dd  ")
+  @DateTimeFormat(pattern = "yyyy-MM-dd  ")
   private Date practicalTime;
 
   private String evectionCondition;

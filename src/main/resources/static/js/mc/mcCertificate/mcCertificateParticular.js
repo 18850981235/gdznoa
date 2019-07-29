@@ -35,7 +35,7 @@ function w() {
             html+='<td style="width:150px ;;background-color: #efefef">证书类型</td>';
             html+='<td style="width:300px ;">'+list[0].type+'</td>';
             html+='<td style="width:150px ;background-color: #efefef;">证书管理部门</td>';
-            html+='<td >'+list[0].user.dept+'</td>';
+            html+='<td >'+list[0].user.company+'</td>';
             html+='</tr>';
             html+='<tr style="height:40px;">';
             html+='<td style="width:150px ;background-color: #efefef;">级别内容</td>';

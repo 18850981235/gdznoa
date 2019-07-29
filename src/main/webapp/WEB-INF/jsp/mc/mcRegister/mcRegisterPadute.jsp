@@ -37,7 +37,7 @@
 <div id="choice" style="display: none">
     <p class="title">
         <img src="<%=basePath%>/imgs/root.png" height="40" width="40"/>
-        福建省广电智能系统集成工贸有限公司
+        广电智能
     </p>
     <ul class="yiji-no">
         <li style="display:none;">

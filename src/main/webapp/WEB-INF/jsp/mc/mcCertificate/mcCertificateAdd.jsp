@@ -129,7 +129,7 @@
                     </select></td>
                     <td style="width:150px ;background-color: #efefef;">证书状态</td>
                     <td >
-                        <select style="width: 100px;height: 30px " name="state">
+                        <select style="width: 100px;height: 30px " name="borrow">
                             <option value="" >请选择</option>
                             <option>类型1</option>
 
@@ -140,7 +140,7 @@
 
                 <tr style="height:40px;">
                     <td style="width:150px ;background-color: #efefef;">证书借用情况</td>
-                    <td ><input style="width: 280px " name="borrow"></td>
+                    <td ><input style="width: 280px " name="state"></td>
                     <td style="width:150px ;background-color: #efefef;">年审时间</td>
                     <td  ><input style="width: 280px "  type="text"   placeholder="请选择日期" id="test1" name="annualTime"></td>
 

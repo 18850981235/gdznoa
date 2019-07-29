@@ -57,6 +57,9 @@
             <if test="recordsState != null" >
                 records_state,
             </if>
+            <if test="dataConditions != null" >
+                data_conditions,
+            </if>
             <if test="caBorrow != null" >
                 ca_borrow,
             </if>
@@ -103,6 +106,9 @@
             </if>
             <if test="recordsState != null" >
                 #{recordsState},
+            </if>
+            <if test="dataConditions != null" >
+                #{dataConditions},
             </if>
             <if test="caBorrow != null" >
                 #{caBorrow},
@@ -177,7 +183,7 @@
             <if test="processid != 0">
                 processid = #{processid},
             </if>
-            <if test="processUserid != null">
+            <if test="processUserid != 0">
                 process_userid = #{processUserid},
             </if>
             <if test="processState != null">

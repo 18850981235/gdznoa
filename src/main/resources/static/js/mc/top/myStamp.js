@@ -15,6 +15,7 @@ function w() {
             var mcStamp=data.mcStamp;
             var list=data.list;
             // html+='<input style="display: none" value='+data.id+' name="id">';
+            html += '<input style="display: none" value=' + mcStamp.id + ' name="id">';
             html += '   <table border="1" >'
             html += '<tr style="text-align: center;height: 45px ">';
             html += '<td colspan="4" style="width: 900px;background-color: #efefef "><b>商务盖章详情</b></td>';
@@ -29,7 +30,7 @@ function w() {
             html += '</td>';
             html += '<td style="width:300px ;">'+mcStamp.createtime+'</td>';
             html += '</tr>';
-            html += '<tr style="height:45px ">';
+            html += '<tr style="height: 45px ">';
 
             html += '<td style="width:150px ;" class="Color">';
             html += '<span>申请人</span>';
@@ -91,7 +92,7 @@ function w() {
             html += '<td style="width:150px ; " class="Color">';
             html += '<span>快递公司</span>';
             html += '</td>';
-            if(data.expressageName==undefined){
+            if(mcStamp.expressageName==undefined){
                 html += '<td style="width:300px ;">'+""+'</td>';
             }else {
                 html += '<td style="width:300px ;">'+mcStamp.expressageName+'</td>';
@@ -99,7 +100,7 @@ function w() {
             html += '<td style="width:150px ; " class="Color">';
             html += '<span>快递单号</span>';
             html += '</td>';
-            if(data.expressageWaybill==undefined){
+            if(mcStamp.expressageWaybill==undefined){
                 html += '<td style="width:300px ;">'+""+'</td>';
             }else {
                 html += '<td style="width:300px ;">'+mcStamp.expressageWaybill+'</td>';
@@ -132,7 +133,7 @@ function w() {
             html += '<tr style="height: 40px;width:900px  " >';
             html += '<td colspan="6" style="text-align: center;width: 900px ">';
             html += '<b>审批流程</b>';
-            // html += '<a style="float: right;color: red">'+project.processState+'</a>';
+// html += '<a style="float: right;color: red">'+project.processState+'</ a>';
             html += '</td>';
             html += '</tr>';
             html += '<tr style="text-align: center;background-color: #0099ff;width:900px ;height: 40px ">';
@@ -145,51 +146,41 @@ function w() {
             html += '</tr>';
             $.each(list, function (index, list) {
                 html += '<tr style="text-align: center;width:900px ;height: 40px">';
-                html += '<td style="width: 20px  ">' + (index+1) + '</td>';
-                html += '<td style="width: 50px  ">' + list.approvalIdentity + '</td>';
-                html += '<td style="width: 50px  ">' + list.user.name + '</td>';
-                html += '<td style="width: 50px  ">' + list.approvalDate + '' +
-                    '</td>';
-                html += '<td style="width: 200px  ">' + list.opinion + '</td>';
-                html += '<td style="width: 50px  ">' + list.state + '</td>';
+                html += '<td style="width: 50px  ">' + (index+1) + '</td>';
+                html += '<td style="width: 150px  ">' + list.approvalIdentity + '</td>';
+                html += '<td style="width: 150px  ">' + list.user.name + '</td>';
+                html += '<td style="width: 150px  ">' + list.approvalDate +'</td>';
+                html += '<td style="width: 250px ">' + list.opinion + '</td>';
+                html += '<td style="width: 150px  ">' + list.state + '</td>';
                 html += '</tr>';
             });
             html += '<tr style="background-color: transparent;text-align: center">';
-            html += '<td style="width: 20px  "><input style="text-align: center;border: 1px solid">';
-            html += '<input style="display:none" value='+mcStamp.id+'>';
+            html += '<td style="width: 50px  ">'+mcStamp.processNode+'<input style="display:none" value='+mcStamp.id+' name="approvalId">';
+            html += '</td>';
+
+
             if(mcStamp.processNode==1){
-                html += '<input style="display:none" value="商务部审核">';
+                html += '<td style="width: 150px;text-align: center  ">商务部审核</td>';
+                // html += '<input style="display:block;width: 200px ;text-align: center;margin: 0px " value="商务部审核">';
             }else if(mcStamp.processNode==2){
-                html += '<input style="display:none" value="信息中心复核">';
+                html += '<td style="width: 150px;text-align: center  ">分公司总经理审准</td>';
+                // html += '<input style="display:block;width: 200px ;text-align: center;margin: 0px" value="分公司总经理审准">';
             }else if(mcStamp.processNode==3){
-                html += '<input style="display:none" value="分公司总经理审准">';
+                html += '<td style="width: 150px;text-align: center  ">信息中心复核</td>';
+                // html += '<input style="display:block;width: 200px ;text-align: center;margin: 0px" value="信息中心复核">';
             }else if(mcStamp.processNode==4){
-                html += '<input style="display:none" value="公司分管领导审批">';
+                html += '<td style="width: 150px;text-align: center  ">申请人归还</td>';
+                // html += '<input style="display:block;width: 200px ;text-align: center;margin: 0px" value="申请人归还">';
             }else if(mcStamp.processNode==5){
-                html += '<input style="display:none" value="公司领导批准">';
-            }else if(mcStamp.processNode==6){
-                html += '<input style="display:none" value="经办盖印办理">';
+                html += '<td style="width: 150px;text-align: center  ">信息中心确认</td>';
+                // html += '<input style="display:block;width: 200px ;text-align: center;margin: 0px" value="信息中心确认">';
             }
 
-            html += '</td>';
-
-            html += '<td style="width: 50px  ">' ;
-            html +=  '<select style="height: 27px">';
-            html += '<option>请选择</option>';
-            html += '<option>商务部审核</option>';
-            html += '<option>信息中心复核</option>';
-            html += '<option>分公司总经理审准</option>';
-            html += '<option>公司分管领导审批</option>';
-            html += '<option>公司领导批准</option>';
-            html += '<option>经办盖印办理</option>';
-            html += '</select>';
-            html += '</td>';
-            html += '<td style="width: 50px  "><input style="text-align:center;border: 1px solid"></td>';
-            html += '<td style="width: 50px  "><input type="text"  id="test1" style="text-align: center"></td>';
-            html += '<td style="width: 200px  "><input style="width: 180px;text-align: center;border: 1px solid "></td>';
-            html += '<td style="width: 50px  "><select style="height: 27px"><option>通过</option><option>转交</option></select></td>';
+            html += '<td style="width: 150px  ">'+mcStamp.processUser.name+'<input style="display:none" value='+mcStamp.processUser.id+' name="approvalUser"></td>';
+            html += '<td style="width: 150px  "><input type="text"  id="test1" style="text-align: center" ></td>';
+            html += '<td style="width: 250px  "><input style="width: 180px;text-align: center;border: 1px solid " name="opinion"></td>';
+            html += '<td style="width: 150px  "><select style="height: 27px" name="state"><option value="同意">同意</option><option value="退回">退回</option></select></td>';
             html += '</tr>';
-            html += '</table>';
 
             $("#center").prepend(html);//append() 方法在被选元素的结尾插入指定内容。//prepend()方法在被选元素的开头插入指定内容
             // })

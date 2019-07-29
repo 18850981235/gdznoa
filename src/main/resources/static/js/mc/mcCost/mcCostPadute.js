@@ -11,19 +11,21 @@ function w() {
         url:url,
         // date:{"id":id},
         success:function (data) {
-
-            $("#center input").eq(0).val(data.budget);
-            $("#center input").eq(1).val(data.user.name);
-            $("#center input").eq(2).val(data.user.id);
+            $("#center input").eq(0).val(data.id);
+            $("#center input").eq(1).val(data.budget);
+            $("#center input").eq(2).val(data.user.name);
+            $("#center input").eq(3).val(data.user.id);
             // $("#center input").eq(3).val(data.budget);
-            $("#center input").eq(4).val(data.createtime);
-            $("#center input").eq(5).val(data.mcVerifyCost);
-            $("#center input").eq(6).val(data.principalCost);
-            $("#center input").eq(7).val(data.accessory);
+            $("#center input").eq(5).val(data.createtime);
+            $("#center input").eq(6).val(data.mcVerifyCost);
+            $("#center input").eq(7).val(data.principalCost);
+            $("#center input").eq(8).val(data.accessory);
             $(".projectname option").eq(0).text(data.projectName);
+            $(".projectname option").eq(0).val(data.projectid);
 
-            $(".department option").eq(0).text(data.user.dept);
-            console.log(data.user.dept);
+            $(".department option").eq(0).text(data.dept.name);
+            $(".department option").eq(0).val(data.dept.id);
+
 
         }
     });

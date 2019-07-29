@@ -40,4 +40,8 @@ public class SdSalesContract {
   private BdProject project;
   private SysApprovalProcess process;
 
+  private SysUser branchUseruser;
+  private SysUser principalUser;
+  private SysUser areaManagerUser;
+
 }

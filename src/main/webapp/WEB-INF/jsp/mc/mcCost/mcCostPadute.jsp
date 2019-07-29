@@ -64,6 +64,7 @@
                 <tr style="height: 40px ;background-color: #efefef">
                     <td colspan="4" style="text-align: center">
                         <b>资料费管理修改</b>
+                        <input style="display: none" name="id">
                     </td>
                 </tr>
                 <tr style="height:40px;">

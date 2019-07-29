@@ -14,8 +14,8 @@ function w() {
             // $.each(data,function (index,project) {
             var mcStamp=data.mcStamp;
             var list=data.list;
-
-            html += '   <table border="1" >'
+            html += '<input style="display: none" value=' + mcStamp.id + ' name="id">';
+                 html += '   <table border="1" >'
                html += '<tr style="text-align: center;height: 45px ">';
                html += '<td colspan="4" style="width: 900px;background-color: #efefef "><b>商务盖章详情</b></td>';
                html += '</tr>';
@@ -91,7 +91,7 @@ function w() {
                html += '<td style="width:150px ; " class="Color">';
                html += '<span>快递公司</span>';
                html += '</td>';
-            if(data.expressageName==undefined){
+            if(mcStamp.expressageName==undefined){
                 html += '<td style="width:300px ;">'+""+'</td>';
             }else {
                 html += '<td style="width:300px ;">'+mcStamp.expressageName+'</td>';
@@ -99,7 +99,7 @@ function w() {
                html += '<td style="width:150px ; " class="Color">';
                html += '<span>快递单号</span>';
                html += '</td>';
-            if(data.expressageWaybill==undefined){
+            if(mcStamp.expressageWaybill==undefined){
                 html += '<td style="width:300px ;">'+""+'</td>';
             }else {
                 html += '<td style="width:300px ;">'+mcStamp.expressageWaybill+'</td>';

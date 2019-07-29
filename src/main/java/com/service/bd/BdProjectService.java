@@ -24,5 +24,6 @@ public interface BdProjectService {
     List<BdProject> getProjectName();
 
     List<BdProject>  getallPeoject();
+    int deleteProject(int id);
 
 }

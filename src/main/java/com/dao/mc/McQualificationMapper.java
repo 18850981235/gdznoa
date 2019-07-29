@@ -24,4 +24,6 @@ public interface McQualificationMapper {
     int delete( @Param("id") int id);
 
     List<McQualificationCertificate> queryall(@Param("projectName")String projectName);
+
+    List<McQualificationCertificate> queryAll();
 }

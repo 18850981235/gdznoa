@@ -75,7 +75,7 @@ public class FileUtils {
         //第三部：通过输出流将文件写入项目static路径并关闭流
         BufferedOutputStream stream = null;
         try {
-            stream = new BufferedOutputStream(new FileOutputStream(filePath +"\\"+ fileName));
+            stream = new BufferedOutputStream(new FileOutputStream(filePath +"/"+ fileName));
             stream.write(file.getBytes());
             stream.flush();
         } catch (IOException e) {

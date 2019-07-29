@@ -130,10 +130,10 @@
             <if test="accessory != null" >
                 accessory = #{accessory},
             </if>
-            <if test="processid != null" >
+            <if test="processid != 0" >
                 processid = #{processid},
             </if>
-            <if test="processUserid != null" >
+            <if test="processUserid != 0" >
                 process_userid = #{processUserid},
             </if>
             <if test="processState != null" >

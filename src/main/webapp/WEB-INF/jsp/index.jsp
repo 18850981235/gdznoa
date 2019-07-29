@@ -32,7 +32,7 @@
         html, body {
             height: 100%;
             width: 100%;
-            background:url("../imgs/ob.jpg")no-repeat center ;
+            background:url("/imgs/ob.jpg")no-repeat center ;
             z-index: 0;
             background-size: 100% 100%;
             position: relative;
@@ -65,7 +65,7 @@
     </style>
 </head>
 <body onload="checkForm()">
-<input name="message" value="${login}" hidden="hidden">
+<input name="message" value="${error}" hidden="hidden">
 <div id="github-iframe"></div>
 <div id="logo"><img src="../imgs/logo.png"></div>
 <div id="top">
@@ -78,18 +78,18 @@
                         <img src="../imgs/user1.png" />
                     </div>
                     <input placeholder="请输入用户名" name="account" value="${account}">
-                    <!--<c:if test="${error=='没有该账号'}">-->
-                    <!--<span class="co"> * 没有该账号</span>-->
-                    <!--</c:if>-->
+                   <c:if test="${error=='没有该账号'}">
+                    <span class="co"> * 没有该账号</span>
+                    </c:if>
                 </div>
                 <div class="conduct">
                     <div class="back-img">
                         <img src="../imgs/password.png" />
                     </div>
                     <input placeholder="请输入密码"  style="color: #000000" type="password"  name="password" >
-                    <!--<c:if test="${error=='密码错误'}">-->
-                    <!--<span class="co1">*密码错误</span>-->
-                    <!--</c:if>-->
+                  <c:if test="${error=='密码错误'}">
+                   <span class="co1">*密码错误</span>
+                    </c:if>
                 </div>
                 <div class="drag">
                     <div class="bg"></div>

@@ -32,7 +32,6 @@ function w() {
             html+='<td class="Color" style="width:150px ">';
             html+='<span>申请部门:</span>';
             html+='</td>';
-            console.log(borrow.dept.name)
             html+='<td style="width:300px ;" class="department-1">'+borrow.dept.name+'</td>';
             html+='<td class="Color" style="width:150px ">申请日期:</td>';
             html+='<td style="width:300px ;">'+borrow.createtime+'</td>';
@@ -85,12 +84,22 @@ function w() {
             html+='</tr>';
             html+='<tr style="height:40px;">';
             html+='<td class="Color"  style="width:150px  ">原件寄出时间</td>';
-            html+='<td colspan="3" >'+borrow.sendtime+'</td>';
+            if(borrow.sendtime==""||borrow.sendtime==null||borrow.sendtime==undefined){
+                html+='<td colspan="3" ></td>';
+            }else {
+                html+='<td colspan="3" >'+borrow.sendtime+'</td>';
+            }
+
             html+='</tr>';
 
             html+='<tr style="height:40px;">';
             html+='<td class="Color" style="width:150px  ">原件归还时间</td>';
-            html+='<td style="width:300px ;" colspan="3">'+borrow.returntime+'</td>';
+            if(borrow.returntime==""||borrow.returntime==null||borrow.returntime==undefined){
+                html+='<td style="width:300px ;" colspan="3"></td>';
+            }else {
+                html+='<td style="width:300px ;" colspan="3">'+borrow.returntime+'</td>';
+            }
+
             html+='</tr>';
             html += '</table>';
 

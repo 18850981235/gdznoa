@@ -38,5 +38,7 @@ public class McQualificationCertificate {
   private SysUser user;
   private SysUser annualUser;
   private SysApprovalProcess process;
+  private SysDept dept;
+
 
 }

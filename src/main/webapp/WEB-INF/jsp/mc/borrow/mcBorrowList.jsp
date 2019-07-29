@@ -78,8 +78,8 @@
                     <td style="width: 110px ">操作</td>
                 </tr>
             </table>
-            <table  class="paging-in1">
-                <tr class="paging-in"></tr>
+            <table  class="paging-in">
+                <%--<tr class="paging-in"></tr>--%>
             </table>
         </div>
         <div id="paginator-test" style="margin-left: 600px "></div>

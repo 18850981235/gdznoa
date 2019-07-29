@@ -28,4 +28,6 @@ public interface McQualificationService {
 
     int addProjectApproval(SysApprovalDetailed detailed);
 
+    List<McQualificationCertificate> queryAll();
+
 }

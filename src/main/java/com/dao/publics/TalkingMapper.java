@@ -20,5 +20,7 @@ public interface TalkingMapper {
     List<PubTalking> getNewContent(@Param("userId") int userId);
 
 
+    List<PubTalking> getOldContent(@Param("userId") int userId);
+
     int updateState(@Param("oriId") int oriId,@Param("recId") int recId);
 }

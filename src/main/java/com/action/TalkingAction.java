@@ -55,7 +55,7 @@ public String UserPage() {
     // 进入发送信息
     @RequestMapping(value="/Talking/sentTalking" , produces = "text/html;charset=UTF-8")
     @ResponseBody
-    public String sentTalking(HttpServletRequest request,String  content){
+    public String sentTalking(HttpServletRequest request,String content){
         int userId = (int)request.getSession().getAttribute("userId");
         PubTalking pubTalking=new PubTalking();
         pubTalking.setContent(content);
@@ -63,9 +63,7 @@ public String UserPage() {
         pubTalking.setOriginator(userId);
 
 
-        if( pubTalking.getReceive()==0){
             pubTalking.setReceive(1);
-        }
         pubTalking.setTime(new Date());
        int i= talkingService.addTalk(pubTalking);
         if(i>0){

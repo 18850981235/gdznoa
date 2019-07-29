@@ -33,7 +33,7 @@
 <body>
 
 <div id="content-in">
-    <form id="center">
+    <form action="/mc/borrow/approvalDetailed" id="center">
         <div id="Approval">
         </div>
         <input id="ok"  type="submit" value="确定" style="margin-left:400px ">

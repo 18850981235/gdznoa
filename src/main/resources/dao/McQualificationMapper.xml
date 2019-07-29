@@ -31,6 +31,10 @@
         <collection property="process" javaType="SysApprovalProcess" column="processid"
                      select="com.dao.sys.ApprovalProcessMapper.getProcessById">
         </collection>
+
+        <collection property="dept" javaType="SysDept" column="deptid"
+                    select="com.dao.sys.DeptMapper.getListById">
+        </collection>
     </resultMap>
 
     <insert id="addMcQualification" >
@@ -195,8 +199,8 @@
             <if test="processState != null">
                 process_state = #{processState},
             </if>
-            <if test="pdf_Outtime != null">
-                pdf_outtime = #{pdf_Outtime},
+            <if test="pdf_outtime != null">
+                pdf_outtime = #{pdf_outtime},
             </if>
         </set>
         where id=#{id}
@@ -276,6 +280,10 @@
                 and `name` like CONCAT('%',#{projectName},'%')
             </if>
         </trim>
+    </select>
+    <select id="queryAll" resultType="com.beans.McQualificationCertificate">
+         select `mc_qualification_certificate`.*
+        from `mc_qualification_certificate`
     </select>
 
 

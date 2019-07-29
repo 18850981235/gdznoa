@@ -75,10 +75,10 @@
             <p>业绩证书</p>
         </a>
     </div>
-    <div class="noe-no" style="display: none">
+    <div class="noe-no" style="display: block">
 
     </div>
-    <div class="tow-no">
+    <div class="tow-no" style="display: none">
 
     </div>
     <div class="on" style="text-align: center"></div>
@@ -190,7 +190,7 @@
                 <tr style="height:40px;">
                     <td class="Color"  style="width:150px  ">原件寄出时间</td>
                     <td colspan="3" >
-                        <input style="width: 280px " type="text" class="demo-input" placeholder="请选择日期" id="test2"name="sendtime">
+                        <input style="width: 280px " type="text" class="demo-input" placeholder="请选择日期" id="test2" name="sendtime">
                     </td>
                 </tr>
 

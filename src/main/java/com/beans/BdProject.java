@@ -75,6 +75,8 @@ public class BdProject {
   //区域负责人
   private SysUser areaManagerUser;
 
+  private SysUser processUser;
+
   private SysApprovalProcess process;
 
   private SysUser branchuser;

@@ -11,144 +11,46 @@ function w() {
         url:url,
         // date:{"id":id},
         success:function (data) {
+            $("#center input").eq(0).val(data.id);
+            $("#center input").eq(1).val(data.createtime);
+            $("#center input").eq(2).val(data.user.name);
+            $("#center input").eq(3).val(data.user.id);
+            $("#center input").eq(4).val( data.user.phone);
 
+            $("#center input").eq(5).val(data.consignee);
+            $("#center input").eq(6).val(data.consigneePhone);
+            $("#center input").eq(7).val(data.sendAddress);
+            $("#center input").eq(8).val(data.returnExpressageName);
+            $("#center input").eq(9).val(data.returnExpressageWaybill);
+            $("#center input").eq(11).val(data.sendExpressageName);
+            $("#center input").eq(12).val(data.sendExpressageWaybill);
+            if(data.sendtime==""||data.sendtime==null||data.sendtime==undefined){
+
+            }else {
+                $("#center input").eq(13).val(data.sendtime);
+            }
+            if(data.returntime==""||data.returntime==null||data.returntime==undefined){
+
+            }else {
+                $("#center input").eq(14).val(data.returntime);
+            }
+
+            $(".projectname option").eq(0).text(data.project.abbreviation);
+            $(".projectname option").eq(0).val(data.project.id);
+
+            $("#dept option").eq(0).text(data.dept.name);
+            $("#dept option").eq(0).val(data.dept.id);
+
+
+            $(".content").text(data.content);
+            // $(".content option").eq(0).val(data.dept.id);
+
+            $(".purpose").text(data.purpose);
+
+            $(".Eliminate4").text(data.name);
             var html="";
             // $.each(data,function (index,project) {
-          html+='<table border="1">';
 
-              html+='<tr style="height: 40px ;background-color: #efefef">';
-              html+='<td colspan="4" style="text-align: center">';
-              html+='<b>文件借用修改</b>';
-              html+='</td>';
-              html+='</tr>';
-              html+='<tr style="height:40px;">';
-              html+='<td  class="Color" style="width:150px  ">';
-              html+='<span>项目名称</span>';
-              html+='</td>';
-              html+='<td colspan="3" style="width:300px ;">';
-              html+='<select  required class="projectname" style="height: 30px ; " name="projectid">';
-              html+='<option value='+data.project.id+'>'+data.project.abbreviation+ '</option>';
-              html+='</select>';
-              html+='</td>';
-              html+='</tr>';
-              html+='<tr style="height:40px;">';
-              html+='<td class="Color" style="width:150px ">';
-              html+='<span>申请部门:</span>';
-          html+='</td>';
-          html+='<td style="width:300px ;">';
-              html+='<select class="department" style="width: 100px;height: 30px " name="deptid">';
-            $.ajax({
-                type:"post",
-                dataType:"json",
-                url:"/util/getDept",
-                success:function (date) {
-                    var names=date.list;
-                    $.each(names,function (index,obj) {
-                        if(data.dept.id=obj.id){
-                            html+='<option value='+obj.id+'select>';
-                            html+='<span>'+obj.name+'</span>';
-                            html+='</option>';
-                        }else{html+='<option value='+obj.id+'>';
-                            html+='<span>'+obj.name+'</span>';
-                            html+='</option>';}
-                        $(".department").append(html);//append() 方法在被选元素的结尾插入指定内容。//prepend()方法在被选元素的开头插入指定内容
-                    });
-                }
-            });
-              html+='</select>';
-              html+='</td>';
-              html+='<td class="Color" style="width:150px ">申请日期:</td>';
-          html+='<td style="width:300px ;">';
-              html+='<input type="text" class="demo-input" placeholder="请选择日期" id="test1" style="width:280px " name="createtime" value='+data.createtime+' >';
-              html+='</td>';
-              html+='</tr>';
-              html+='<tr  style="height:40px;">';
-
-
-            $.ajax({
-                type: "get",
-                url: "/util/getUser",
-                dataType: "json",
-                success: function (data) {
-                    html+='<td  class="Color"  style="width:150px  ">申请人</td>';
-                    html+='<td >';
-                    html+='<input class="" readonly value='+data.name+' >';
-                    html+='<input class="" style="display: none"  name="userid" value='+data.id+'>';
-                    html+='</td>';
-                    html+='<td class="Color" style="width:150px  ">联系电话 </td>';
-                    html+='<td style="width:300px ;">';
-                    html+='<input style="width:280px " name="phone" value='+data.account+'>';
-                    html+='</td>';
-                }
-            })
-
-
-              html+='</tr>';
-              html+='<tr style="height:40px;">';
-              html+='<td class="Color" style="width:150px  ">申请原件内容</td>';
-              html+='<td colspan="3">';
-              html+='<textarea  style="width: 700px ;height: 30px " name="content" >'+data.content+'</textarea>';
-              html+='</td>';
-              html+='</tr>';
-              html+='<tr style="height:40px;">';
-              html+='<td class="Color" style="width:150px  ">原件借用用途</td>';
-              html+='<td colspan="3">';
-              html+='<textarea style="width: 700px ;height: 40px " name="purpose">'+data.purpose+'</textarea>';
-              html+='</td>';
-              html+='</tr>';
-              html+='<tr style="height:40px;">';
-              html+='<td class="Color"  style="width:150px  " >收件人</td>';
-              html+='<td  ><input style="width: 280px " name="consignee" value='+data.consignee+'></td>';
-              html+='<td class="Color" style="width:150px  ">收件人电话</td>';
-              html+='<td ><input style="width: 280px " name="consigneePhone" value='+data.consigneePhone+'></td>';
-              html+='</tr>';
-              html+='<tr style="height:40px;">';
-              html+='<td class="Color" style="width:150px  ">原件寄往地址</td>';
-              html+='<td colspan="3">';
-              html+='<input style="width: 700px " name="sendAddress" value='+data.sendAddress+'>';
-              html+='</td>';
-              html+='</tr>';
-              html+='<tr style="height:40px;">';
-              html+='<td class="Color"  style="width:150px  ">快递公司（归还）</td>';
-          html+='<td  ><input style="width: 280px " name="returnExpressageName" value='+data.returnExpressageName+'></td>';
-              html+='<td class="Color" style="width:150px  ">快递单号（归还）</td>';
-          html+='<td ><input style="width: 280px " name="returnExpressageWaybill" value='+data.returnExpressageWaybill+'></td>';
-              html+='</tr>';
-              html+='<tr style="height: 40px ;background-color: #efefef">';
-              html+='<td colspan="4" style="text-align: center">';
-              html+='<span>(以下非申请人填写)</span>';
-              html+='</td>';
-              html+='</tr>';
-              html+='<tr style="height:40px;">';
-              html+='<td class="Color" style="width:150px  ">原件名称</td>';
-              html+='<td colspan="3">';
-              html+='<textarea class="Eliminate4" style="width: 600px ;height: 30px "name="name" vocab='+data.name+'></textarea>';
-            html+='<a target="_blank " class="add-to4">添加</a>';
-            html+=' <a class="clear-to4" >';
-            html+='<input value="清空" class="input44"  onClick="" type="button">';
-            html+='</a>';
-              html+='</td>';
-
-              html+='</tr>';
-              html+='<tr style="height:40px;">';
-              html+='<td class="Color"  style="width:150px  ">快递公司（寄出）</td>';
-          html+='<td  ><input style="width: 280px " name="sendExpressageName" value='+data.sendExpressageName+'></td>';
-              html+='<td class="Color" style="width:150px  ">快递单号（寄出）</td>';
-          html+='<td ><input style="width: 280px " name="sendExpressageWaybill" value='+data.sendExpressageWaybill+'></td>';
-              html+='</tr>';
-              html+='<tr style="height:40px;">';
-              html+='<td class="Color"  style="width:150px  ">原件寄出时间</td>';
-              html+='<td colspan="3" ><input style="width: 280px " type="text" class="demo-input" placeholder="请选择日期" id="test2" name="sendtime" value='+data.sendtime+'></td>';
-              html+='</tr>';
-
-              html+='<tr style="height:40px;">';
-              html+='<td class="Color" style="width:150px  ">原件归还时间</td>';
-              html+='<td style="width:300px ;" colspan="3">';
-              html+='<input  style="width:280px "   type="text" class="demo-input" placeholder="请选择日期" id="test3" name="returntime" value='+data.returntime+'>';
-          html+='</td>';
-          html+='</tr>';
-
-          html+='</table>';
             
             
             
@@ -162,6 +64,21 @@ function w() {
 // w();
 $(document).ready(function () {
     w();
+    laydate.render({
+        elem: '#test1', //指定元素
+        event: 'click',
+        format: 'yyyy-MM-dd'
+    });
+    laydate.render({
+        elem: '#test2', //指定元素
+        event: 'click',
+        format: 'yyyy-MM-dd'
+    });
+    laydate.render({
+        elem: '#test3', //指定元素
+        event: 'click',
+        format: 'yyyy-MM-dd'
+    });
 })
 function q(name){
     var search = document.location.search;

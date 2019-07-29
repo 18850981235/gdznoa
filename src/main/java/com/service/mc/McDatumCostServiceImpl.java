@@ -61,10 +61,12 @@ public class McDatumCostServiceImpl implements McDatumCostService {
                 processUserid =Integer.parseInt(userArr[0]);
             }
             if(pd.getProcessNode()==2){
-                processUserid = userMapper.DeptroleUser(pd.getDeptid()).get(0).getId();
+//                processUserid = userMapper.DeptroleUser(pd.getDeptid()).get(0).getId();
+                processUserid =Integer.parseInt(userArr[1]);
             }
             if(pd.getProcessNode()==3){
-                processUserid=pd.getUserid();
+//                processUserid=pd.getUserid();
+                processUserid =Integer.parseInt(userArr[2]);
             }
             if(pd.getProcessNode()==4){
                 processUserid =Integer.parseInt(userArr[3]);

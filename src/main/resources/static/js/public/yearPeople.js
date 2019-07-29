@@ -8,7 +8,7 @@
 $.ajax({
     type:"post",
     dataType:"json",
-    url:"http://192.168.1.236:8080/util/getDeptUsers",
+    url:"/util/getDeptUsers",
     success:function (data) {
         // var users=data.names.users;
         $.each(data,function (index,obj) {

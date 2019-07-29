@@ -96,7 +96,7 @@
             <if test="processid != null">
                 #{processid},
             </if>
-            <if test="processUserid != null">
+            <if test="processUserid != 0">
                 #{processUserid},
             </if>
             <if test="processState != null">

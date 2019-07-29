@@ -29,6 +29,11 @@
         <association property="principalUser" javaType="com.beans.SysUser" column="principal"
                      select="com.dao.sys.UserMapper.getByID">
         </association>
+
+        <association property="processUser" javaType="com.beans.SysUser" column="process_userid"
+                     select="com.dao.sys.UserMapper.getByID">
+        </association>
+
         <association property="areaManagerUser" javaType="com.beans.SysUser" column="area_manager"
                      select="com.dao.sys.UserMapper.getByID">
         </association>
@@ -251,7 +256,7 @@
             <if test="processid != 0" >
                 processid = #{processid},
             </if>
-            <if test="processUserid != null" >
+            <if test="processUserid != 0" >
                 process_userid = #{processUserid},
             </if>
             <if test="processState != null" >
