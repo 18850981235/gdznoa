@@ -46,4 +46,6 @@ public interface BdProjectMapper {
 
     BdProject getProjectById(@Param("id") int id);
 
+    List<BdProject> getByuseridAndAreaManager(@Param("id") int id);
+
 }

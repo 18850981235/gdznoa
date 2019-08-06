@@ -1,7 +1,12 @@
 package com;
 
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.beans.GaOuterTubePass;
 import com.beans.SysApprovalDetailed;
 import com.service.bd.BdProjectService;
+import com.service.ga.GaOuterTubePassService;
+import com.service.ga.GaPaymentService;
 import com.service.mc.McStampService;
 import com.service.sys.AuthorityService;
 import org.junit.Test;
@@ -22,6 +27,10 @@ public class OaApplicationTests {
     private McStampService mcStampService;
     @Resource(name = "bdProjectService")
     private BdProjectService bdProjectService;
+    @Resource(name = "gaOuterTubePassService")
+    private GaOuterTubePassService gaOuterTubePassService;
+    @Resource(name = "gaPaymentService")
+    private GaPaymentService gaPaymentService;
 
     @Test
     public void contextLoads() {
@@ -52,5 +61,11 @@ public class OaApplicationTests {
         a.setApprovalDate(new Date());
         a.setOpinion("通过");
         mcStampService.addProjectApproval(a);
+    }
+    @Test
+    public void add1(){
+        System.out.println(JSONObject.toJSONString(gaOuterTubePassService.getById(2),
+                SerializerFeature.DisableCircularReferenceDetect,
+                SerializerFeature.WriteNullStringAsEmpty));
     }
 }

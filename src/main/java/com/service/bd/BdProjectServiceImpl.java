@@ -15,10 +15,7 @@ import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author 李鹏熠
@@ -39,6 +36,7 @@ public class BdProjectServiceImpl implements BdProjectService {
 
     /**
      * 新增项目立项
+     *
      * @param project 项目立项类
      * @return 是否添加成功
      */
@@ -97,7 +95,7 @@ public class BdProjectServiceImpl implements BdProjectService {
                 if (flag) {
                     processUserid = Integer.parseInt(userArr[1]);
                 }
-                project_update.setProcessNode(project.getProcessNode()+1);
+                project_update.setProcessNode(project.getProcessNode() + 1);
                 project_update.setProcessUserid(processUserid);
                 project_update.setProcessState(state);
                 project_update.setId(detailed.getApprovalId());
@@ -115,7 +113,7 @@ public class BdProjectServiceImpl implements BdProjectService {
                         }
                     }
                 }
-                project_update.setProcessNode(project.getProcessNode()-1);
+                project_update.setProcessNode(project.getProcessNode() - 1);
                 project_update.setProcessUserid(processUserid);
                 project_update.setId(detailed.getApprovalId());
             }
@@ -139,7 +137,7 @@ public class BdProjectServiceImpl implements BdProjectService {
     @Override
     public Map<String, Object> getlist(int userid, String projectName, int deptid,
                                        String stage, int areaManager,
-                                       String principalName,Date start,
+                                       String principalName, Date start,
                                        Date end, int pageIndex) {
         Map<String, Object> map = new HashMap<>();
         Page page = new Page();
@@ -147,10 +145,10 @@ public class BdProjectServiceImpl implements BdProjectService {
             if (pageIndex == 0) {
                 pageIndex = 1;
             }
-            page.setTotalCount(bdProjectMapper.getCount(userid, projectName, deptid, stage, areaManager,principalName, start, end));
+            page.setTotalCount(bdProjectMapper.getCount(userid, projectName, deptid, stage, areaManager, principalName, start, end));
             page.setPageSize(10);
             page.setCurrentPageNo(pageIndex);
-            List<BdProject> list = bdProjectMapper.getList(userid, projectName, deptid, stage, areaManager,principalName, start, end, (page.getCurrentPageNo() - 1) * page.getPageSize(), page.getPageSize());
+            List<BdProject> list = bdProjectMapper.getList(userid, projectName, deptid, stage, areaManager, principalName, start, end, (page.getCurrentPageNo() - 1) * page.getPageSize(), page.getPageSize());
             map.put("page", page);
             map.put("list", list);
         } catch (Exception e) {
@@ -195,6 +193,26 @@ public class BdProjectServiceImpl implements BdProjectService {
     @Override
     public List<BdProject> getProjectName() {
         return bdProjectMapper.getProjectName();
+    }
+
+    @Override
+    public List<BdProject> getGCProject(int id) {
+        String usersId = approvalProcessMapper.getProcessById(1).getUsersid();
+        String[] arr = usersId.split(",");
+        boolean flag = false;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == String.valueOf(id)) {
+                flag = true;
+                break;
+            }
+        }
+        List<BdProject> list=null;
+        if (flag){
+            list=bdProjectMapper.getProjectName();
+        }else{
+            list=bdProjectMapper.getByuseridAndAreaManager(id);
+        }
+        return list;
     }
 
 }

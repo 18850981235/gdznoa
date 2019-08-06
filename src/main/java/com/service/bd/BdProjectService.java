@@ -22,5 +22,6 @@ public interface BdProjectService {
     int update(BdProject project);
 
     List<BdProject> getProjectName();
+    List<BdProject> getGCProject(int id);
 
 }

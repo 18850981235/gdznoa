@@ -102,4 +102,14 @@ public class UtilAciton {
                 SerializerFeature.DisableCircularReferenceDetect,
                 SerializerFeature.WriteNullStringAsEmpty);
     }
+
+    //查看财务模块项目权限
+    @RequestMapping(value = "/getGCProject",produces = "text/html;charset=UTF-8")
+    @ResponseBody
+    public String getGCProject(HttpSession session){
+        int userid=(int)session.getAttribute("userId");
+        return JSONObject.toJSONString(bdProjectService.getGCProject(userid),
+                SerializerFeature.DisableCircularReferenceDetect,
+                SerializerFeature.WriteNullStringAsEmpty);
+    }
 }

@@ -338,4 +338,7 @@
     <select id="getProjectById" resultType="com.beans.BdProject">
         select id,`abbreviation` from bd_project where id=#{id}
     </select>
+    <select id="getByuseridAndAreaManager" resultType="com.beans.BdProject">
+        select id,`abbreviation` from bd_project where  userid=#{id} OR  `area_manager`=#{id}
+    </select>
 </mapper>
