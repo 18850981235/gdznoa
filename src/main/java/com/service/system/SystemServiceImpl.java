@@ -30,7 +30,7 @@ public class SystemServiceImpl implements systemService {
     }
 
     @Override
-    public List<system> querybyid(int id) {
+    public system querybyid(int id) {
         return systemMapper.querybyid(id);
     }
 
@@ -41,15 +41,7 @@ public class SystemServiceImpl implements systemService {
 
 
 
-    @Override
-    public  Map<String ,Object> query() {
-        Map<String ,Object> map =new HashMap<>();
-    List<SupplierTrademark> list=supplierTrademarkMapper.allSupplierTrademark();
-    List<system> list1= systemMapper.query();
-        map.put("Trademark",list);
-        map.put("system",list1);
-        return map;
-    }
+
 
     @Override
     public List<system> allsystem() {

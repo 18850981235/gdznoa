@@ -98,6 +98,7 @@ public class McMaterialsSeviceImpl implements McMaterialsSevice {
         return num;
     }
 
+
     @Override
     public int update(McMaterials materials) {
         return mcMaterialsMapper.updateById(materials);

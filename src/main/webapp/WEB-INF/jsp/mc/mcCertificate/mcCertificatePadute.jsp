@@ -57,7 +57,7 @@
 </div>
 <div id="choice6" style="display: none">
     <p class="title">
-        <img src="../../../imgs/root.png" height="40" width="40"/>
+        <img src="<%=basePath%>/imgs/root.png" height="40" width="40"/>
         广电智能
     </p >
     <ul class="yiji-no6">

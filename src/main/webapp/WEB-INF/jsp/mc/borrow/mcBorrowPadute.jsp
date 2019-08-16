@@ -154,13 +154,7 @@
                        <input style="width: 700px " name="sendAddress" >
                        </td>    
                    </tr>    
-               <tr style="height:40px;">    
-                   <td class="Color"  style="width:150px  ">快递公司（归还）</td>    
-                   <td  ><input style="width: 280px " name="returnExpressageName" ></td>
-                   <td class="Color" style="width:150px  ">快递单号（归还）</td>    
-                   <td ><input style="width: 280px " name="returnExpressageWaybill" ></td>
-                   </tr>    
-               <tr style="height: 40px ;background-color: #efefef">    
+
                    <td colspan="4" style="text-align: center">    
                        <span>(以下非申请人填写)</span>    
                        </td>    
@@ -181,8 +175,15 @@
                    <td  ><input style="width: 280px " name="sendExpressageName" ></td>
                    <td class="Color" style="width:150px  ">快递单号（寄出）</td>    
                    <td ><input style="width: 280px " name="sendExpressageWaybill" ></td>
-                   </tr>    
-               <tr style="height:40px;">    
+                   </tr>
+                   <tr style="height:40px;">
+                       <td class="Color"  style="width:150px  ">快递公司（归还）</td>
+                       <td  ><input style="width: 280px " name="returnExpressageName" ></td>
+                       <td class="Color" style="width:150px  ">快递单号（归还）</td>
+                       <td ><input style="width: 280px " name="returnExpressageWaybill" ></td>
+                   </tr>
+                   <tr style="height: 40px ;background-color: #efefef">
+                   <tr style="height:40px;">
                    <td class="Color"  style="width:150px  ">原件寄出时间</td>    
                <td colspan="3" ><input style="width: 280px " type="text" class="demo-input" placeholder="请选择日期" id="test2" name="sendtime"></td>
 

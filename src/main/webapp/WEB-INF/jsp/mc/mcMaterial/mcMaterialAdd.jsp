@@ -44,7 +44,7 @@
                 </tr>
                 <tr style="height: 45px ">
                     <td style="width:150px ;background-color: #efefef;">
-                        <span>申请部门</span>
+                        <span>申请部门(*)</span>
                         <input style="display: none">
                     </td>
                     <td style="width:300px ;">
@@ -53,7 +53,7 @@
                         </select>
                     </td>
                     <td style="width:150px ;;background-color: #efefef">
-                        <span>申请日期</span>
+                        <span>申请日期(*)</span>
                     </td>
                     <td style="width:300px ;">
                         <input style="width: 280px " type="text" class="demo-input" placeholder="请选择日期" id="test1"name="createtime">
@@ -79,7 +79,7 @@
                 <tr  style="height: 45px ">
 
                     <td style="width:150px ;background-color: #efefef;">
-                        <span>项目名称</span>
+                        <span>项目名称(*)</span>
                     </td>
                     <td colspan="3"   style="width:300px ;">
                         <select class="projectname" style="width:500px;height: 30px " name="projectid" required>

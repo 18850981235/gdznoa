@@ -3,6 +3,8 @@
 <mapper namespace="com.dao.sd.SdSalesInventoryMapper">
     <resultMap id="BaseResultMap" type="com.beans.SdSalesInventory">
         <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="serialnum" property="serialnum" jdbcType="VARCHAR"/>
+        <result column="contractid" property="contractid" jdbcType="INTEGER"/>
         <result column="code" property="code" jdbcType="VARCHAR"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
         <result column="model" property="model" jdbcType="VARCHAR"/>
@@ -18,7 +20,12 @@
     <insert id="addInventory">
         insert into sd_sales_inventory
         <trim prefix="(" suffix=")" suffixOverrides=",">
-
+            <if test="serialnum != null">
+                serialnum,
+            </if>
+            <if test="contractid != 0">
+                `contractid`,
+            </if>
             <if test="code != null">
                 code,
             </if>
@@ -31,7 +38,7 @@
             <if test="parameter != null">
                 parameter,
             </if>
-            <if test="trademark != 0">
+            <if test="trademark != null">
                 trademark,
             </if>
             <if test="unit != null">
@@ -50,12 +57,14 @@
             <if test="remarks != null">
                 remarks,
             </if>
-
-
-
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-
+            <if test="serialnum != null">
+                #{serialnum},
+            </if>
+            <if test="contractid != 0">
+                #{contractid},
+            </if>
 
             <if test="code != null">
                 #{code},
@@ -69,7 +78,7 @@
             <if test="parameter != null">
                 #{parameter},
             </if>
-            <if test="trademark != 0">
+            <if test="trademark != null">
                 #{trademark},
             </if>
             <if test="unit != null">
@@ -92,16 +101,16 @@
         </trim>
     </insert>
     <delete id="deleteInventory">
-        delete
+             delete
         from sd_sales_inventory
-        where contractid=#{id};
+        where contractid=#{contractid};
     </delete>
 
 
     <select id="querySdSalesInventory" resultMap="BaseResultMap">
         select *
         from sd_sales_inventory
-        where contractid = #{contractid}
+        where contractid = #{id}
     </select>
     <select id="getInstancebyid" resultMap="BaseResultMap">
          select *

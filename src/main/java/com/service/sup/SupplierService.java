@@ -11,7 +11,7 @@ import java.util.Map;
 * 2019.04.17*/
 public interface SupplierService {
     //增加供应商信息
-    int addSupplier(Supplier supplier, HttpServletRequest request);
+    int addSupplier(Supplier supplier,String trademark, HttpServletRequest request);
 
     //删除供应商信息
     int deleteSupplier(@Param("id") int id);
@@ -24,4 +24,6 @@ public interface SupplierService {
 
     //模糊查询供应商信息
     Map<String,Object> querybysome(@Param("code") String code, @Param("name") String name, @Param("traname") String traname, @Param("pageIndex") int pageIndex);
+
+    List<Supplier> queryAll();
 }

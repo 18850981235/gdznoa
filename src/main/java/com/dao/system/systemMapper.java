@@ -10,7 +10,7 @@ import java.util.List;
 public interface systemMapper {
     int  addsystem(system system);
     int  updatesystrm(system system);
-    List<system> querybyid(@Param("id")int id);
+    system querybyid(@Param("id")int id);
 
     List<system> querybyfid(@Param("fid")int fid);
     List<system> queryfid();

@@ -1,5 +1,6 @@
 package com.action;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.beans.Supplier;
@@ -10,18 +11,19 @@ import com.service.sup.SupplierEvaluateService;
 import com.service.sup.SupplierService;
 import com.service.sup.SupplierStaffService;
 import com.service.sup.SupplierTrademarkService;
+import com.service.system.systemService;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 /*
 许思明
@@ -38,6 +40,8 @@ public class SupplierAction {
     private SupplierService supplierService;
     @Resource(name="SupplierEvaluateService")
     private SupplierEvaluateService supplierEvaluateService;
+    @Resource(name = "systemService")
+    private systemService systemService;
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {
@@ -48,40 +52,63 @@ public class SupplierAction {
     }
 
 
-    //region
+    //region``````````````````````````````````````````````````````品牌开始~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    @RequestMapping(value="/trademark/getAllSysytem" , produces = "text/html;charset=UTF-8")
+    @ResponseBody
+    public String  getAllSysytem(){
+        return JSONObject.toJSONString( systemService.allsystem(),
+                SerializerFeature.DisableCircularReferenceDetect,
+                SerializerFeature.WriteNullStringAsEmpty);
+
+    }
     //增加品牌
     @RequestMapping(value="/trademark/addtrademarkpage" , produces = "text/html;charset=UTF-8")
     public String  addtrademarkpage(){
-        return "添加界面";
+        return "/supplier/brand/brandAdd";
     }
     @RequestMapping(value="/trademark/add" , produces = "text/html;charset=UTF-8")
-    public int addTrademark(SupplierTrademark supplierTrademark){
-        return supplierTrademarkService.addSupplierTrademark(supplierTrademark);
+    public String addTrademark(SupplierTrademark supplierTrademark){
+
+        int a= supplierTrademarkService.addSupplierTrademark(supplierTrademark);
+        if(a>0){
+            return "/supplier/brand/brandList";
+        }else{
+            return "/supplier/brand/brandAdd";
+        }
     }
     //删除品牌
-
 
     @RequestMapping(value="/trademark/delete",produces ="text/html;charset=UTF-8" )
     public int deleteTrademark(@RequestParam int id){
       return supplierTrademarkService.deleteTrademark(id);
+      //0为删除失败，要么就是有关联，要么就是没删除成功！非0即成功
+
     };
-    //更改信息
+    //更改品牌信息
 
     @RequestMapping(value="/trademark/updateTrademarkpage" , produces = "text/html;charset=UTF-8")
     public String  updateTrademarkpage(){
-        return "添加界面";
+        return "/supplier/brand/brandPadute";
     }
+
     @RequestMapping(value="/trademark/updateTrademark",produces ="text/html;charset=UTF-8" )
-    public int  updateTrademark(SupplierTrademark supplierTrademark){
-      return supplierTrademarkService.updateTrademark(supplierTrademark);
+    public String  updateTrademark(SupplierTrademark supplierTrademark){
+      int a= supplierTrademarkService.updateTrademark(supplierTrademark);
+      if (a>0){
+          return "/supplier/brand/brandList";
+        }else{
+          return "/supplier/brand/brandAdd";
+      }
+
     };
     //根据ID查询
 
     @RequestMapping(value="/trademark/queryTrademarkpage" , produces = "text/html;charset=UTF-8")
     public String  queryTrademarkpage(){
-        return "添加界面";
+        return "/supplier/brand/brandPaticular";
     }
     @RequestMapping(value = "/trademark/QueryTrademarkByid",produces = "application/json; charset=utf-8")
+    @ResponseBody
     public String QueryTrademarkByid(@RequestParam int id)
     {
         return JSONObject.toJSONString(supplierTrademarkService.querybyid(id),
@@ -90,11 +117,12 @@ public class SupplierAction {
     };
     //模糊搜索
 
-    @RequestMapping(value="/trademark/QueryTrademarkpage" , produces = "text/html;charset=UTF-8")
+    @RequestMapping(value="/trademark/query" , produces = "text/html;charset=UTF-8")
     public String  QueryTrademarkpage(){
-        return "添加界面";
+        return "/supplier/brand/brandList";
     }
     @RequestMapping(value = "/trademark/QueryTrademark",produces = "application/json; charset=utf-8")
+    @ResponseBody
     public String QueryTrademark(@RequestParam(required = false) String Name, @RequestParam(required = false) String product,@RequestParam(required = false) String enterpriseName,@RequestParam(required = false, defaultValue = "0") int pageIndex) {
 
         if (Name == null || Name == "") {
@@ -116,34 +144,63 @@ public class SupplierAction {
     //region~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~联系人管理~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     @RequestMapping(value="/staff/addStaffpage" , produces = "text/html;charset=UTF-8")
     public String  addStaffpage(){
-        return "添加界面";
+        return "/supplier/contacts/contactsAdd";
     }
 
     @RequestMapping(value="/staff/addstaff" , produces = "text/html;charset=UTF-8")
-    public int addStaff(SupplierStaff SupplierStaff){
-        return supplierStaffService.addstaff(SupplierStaff);
+    public String addStaff(@RequestBody String  list){
+
+        System.err.println("List===>"+list);
+        Map<String,Object> aa= JSON.parseObject(list);
+        //JSONArray arrays= JSONArray.parseArray(list);
+        //List<SdSalesInventory> List= JSONObject.parseArray(arrays.toJSONString(),SdSalesInventory.class);
+        //System.err.println("List===>"+List);
+        List<SupplierStaff> list1=JSON.parseArray(aa.get("list").toString(),SupplierStaff.class);
+//        List<SdSalesInventory> listsd=new ArrayList<>();
+//        for(int s=0;s<lists.size();s++){
+//            listsd.add((SdSalesInventory)lists.get(s));
+//        }
+        int supplierid=(int ) aa.get("supplierid");
+        System.err.println("listnnnn===>"+list1);
+        System.err.println("supplierid===>"+supplierid);
+//        return supplierEvaluateService.addSupplierEvaluate(supplierEvaluate);
+//        return 1;
+        if( supplierStaffService.addstaff(list1,supplierid)>0){
+
+            return "/supplier/contacts/contactsList";
+        }else{
+            return "/supplier/contacts/contactsAdd";
+        }
+
     }
     //删除联系人
     @RequestMapping(value="/staff/deletestaff",produces ="text/html;charset=UTF-8" )
-    public int deleteStaff(@RequestParam int id){
-        return supplierStaffService.deleteStaff(id);
+    public String deleteStaff(@RequestParam int id){
+         supplierStaffService.deleteStaff(id);
+         return "/supplier/contacts/contactsList";
     };
     //更改信息
     @RequestMapping(value="/staff/updaStaffpage" , produces = "text/html;charset=UTF-8")
     public String  updaStaffpage(){
-        return "添加界面";
+        return "/supplier/contacts/contactsPadute";
     }
 
     @RequestMapping(value="/staff/updatestaff",produces ="text/html;charset=UTF-8" )
-    public int  updateStaff(SupplierStaff supplierStaff){
-        return supplierStaffService.updateStaff(supplierStaff)  ;
+    public String  updateStaff(SupplierStaff supplierStaff){
+        int a= supplierStaffService.updateStaff(supplierStaff) ;
+                if(a>0){
+                    return "/supplier/contacts/contactsList";
+                }else {
+                    return "/supplier/contacts/contactsPadute";
+                }
     };
     //根据ID查询
     @RequestMapping(value="/staff/QueryStaffbyidPage" , produces = "text/html;charset=UTF-8")
     public String  QueryStaffbyidPage(){
-        return "添加界面";
+        return "/supplier/contacts/contactsParticular";
     }
     @RequestMapping(value = "/staff/querystaffbyid",produces = "application/json; charset=utf-8")
+    @ResponseBody
     public String QueryStaffbyid(@RequestParam int id)
     {
         return JSONObject.toJSONString(supplierStaffService.querybyid(id),
@@ -151,11 +208,12 @@ public class SupplierAction {
                 SerializerFeature.WriteNullStringAsEmpty);
     };
     //模糊搜索
-    @RequestMapping(value="/staff/queryStaffpage" , produces = "text/html;charset=UTF-8")
+    @RequestMapping(value="/supplier_staff/query" , produces = "text/html;charset=UTF-8")
     public String  queryStaffpage(){
-        return "添加界面";
+        return "/supplier/contacts/contactsList";
     }
     @RequestMapping(value = "/staff/querystaff",produces = "application/json; charset=utf-8")
+    @ResponseBody
     public String queryStaffbysome(@RequestParam(required = false) String Name, @RequestParam(required = false) String supname,@RequestParam(required = false, defaultValue = "0") int pageIndex) {
 
         if (Name == null || Name == "") {
@@ -172,24 +230,56 @@ public class SupplierAction {
     }
     //endregion
     //region~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~供应商~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+    //查询所有供应商信息
+    @RequestMapping(value="/supplier/getAllSupplier" , produces = "text/html;charset=UTF-8")
+    @ResponseBody
+    public String  getAllSupplier(){
+        return JSONObject.toJSONString( supplierService.queryAll(),
+                SerializerFeature.DisableCircularReferenceDetect,
+                SerializerFeature.WriteNullStringAsEmpty);
+
+    }
+
+
+
+   //查询所有品牌信息
+   @RequestMapping(value="/trademark/getAllTrademark" , produces = "text/html;charset=UTF-8")
+   @ResponseBody
+   public String  getAllTrademark(){
+       return JSONObject.toJSONString( supplierTrademarkService.allSupplierTrademark(),
+               SerializerFeature.DisableCircularReferenceDetect,
+               SerializerFeature.WriteNullStringAsEmpty);
+
+   }
+
     //添加供应商信息
     @RequestMapping(value="/supplier2/addSupplierPage" , produces = "text/html;charset=UTF-8")
     public String  addSupplierPage(){
-        return "添加界面";
+        return "/supplier/merchant/merchantAdd";
     }
+
     @RequestMapping(value="/supplier2/addSupplier" , produces = "text/html;charset=UTF-8")
-    public int addSupplier(Supplier Supplier, HttpServletRequest request){
-        return supplierService.addSupplier(Supplier,request);
+    public String  addSupplier(Supplier Supplier,    @RequestParam(required = false) String trademark, HttpServletRequest request){
+        int a= supplierService.addSupplier(Supplier,trademark,request);
+        if(a>0){
+            return "/supplier/merchant/merchantList";
+        }else {
+          return "/supplier/merchant/merchantAdd";
+        }
     }
     //删除供应商
     @RequestMapping(value="/supplier2/delete",produces ="text/html;charset=UTF-8" )
-    public int deleteSupplier(@RequestParam int id){
-        return supplierService.deleteSupplier(id);
+    public String  deleteSupplier(@RequestParam int id){
+        if( supplierService.deleteSupplier(id)>0){
+            return "/supplier/merchant/merchantList";
+        }else{
+            return "/supplier/merchant/merchantList";
+        }
     };
     //更改供应商信息
     @RequestMapping(value="/supplier2/updateSupplierPage" , produces = "text/html;charset=UTF-8")
     public String  updateSupplierPage(){
-        return "添加界面";
+        return "/supplier/merchant/merchantPadute";
     }
     @RequestMapping(value="/supplier2/updateSupplier",produces ="text/html;charset=UTF-8" )
     public int  updateSupplier(Supplier supplier){
@@ -198,9 +288,10 @@ public class SupplierAction {
     //根据ID查询供应商
     @RequestMapping(value="/supplier2/QuerySupplierByIdPage" , produces = "text/html;charset=UTF-8")
     public String  QuerySupplierByIdPage(){
-        return "添加界面";
+        return "/supplier/merchant/merchantParticular";
     }
     @RequestMapping(value = "/supplier2/QuerySupplierById",produces = "application/json; charset=utf-8")
+    @ResponseBody
     public String QuerySupplierById(@RequestParam int id)
     {
         return JSONObject.toJSONString(supplierService.querybyid(id),
@@ -208,11 +299,12 @@ public class SupplierAction {
                 SerializerFeature.WriteNullStringAsEmpty);
     };
     //模糊搜索供应商
-    @RequestMapping(value="/supplier2/querySupplierPage" , produces = "text/html;charset=UTF-8")
+    @RequestMapping(value="/supplier2/query" , produces = "text/html;charset=UTF-8")
     public String  querySupplierPage(){
-        return "添加界面";
+        return "/supplier/merchant/merchantList";
     }
     @RequestMapping(value = "/supplier2/querySupplier",produces = "application/json; charset=utf-8")
+    @ResponseBody
     public String querySupplier(@RequestParam(required = false) String code, @RequestParam(required = false) String traname,@RequestParam(required = false) String name,@RequestParam(required = false, defaultValue = "0") int pageIndex) {
 
         if (code == null || code == "") {

@@ -9,11 +9,11 @@ import java.util.Map;
 public interface systemService {
     int  addsystem(system system);
     int  updatesystrm(system system);
-    List<system> querybyid(@Param("id")int id);
+    system querybyid(@Param("id")int id);
 
     List<system> querybyfid(@Param("fid")int fid);
 
-    Map<String ,Object> query();
+
 
     List<system> allsystem();
 

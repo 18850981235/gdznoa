@@ -254,7 +254,8 @@ a:visited{
  .add-to3,
  .add-to4,
  .add-to5,
- .add-to6
+ .add-to6,
+ .add-to7
  {
     color: blue;
 }
@@ -264,7 +265,8 @@ a:visited{
 .add-to3,
 .add-to4,
 .add-to5,
-.add-to6
+.add-to6,
+.add-to7
 {
     width: 40px ;
     height: 16px ;
@@ -280,7 +282,8 @@ a:visited{
 .clear-to3,
 .clear-to4,
 .clear-to5,
-.clear-to6{
+.clear-to6,
+.clear-to7{
     color: #8c8c8c;
     width: 40px ;
     height: 16px ;
@@ -296,7 +299,8 @@ a:visited{
 .clear-to3:hover,
 .clear-to4:hover,
 .clear-to5:hover,
-.clear-to6:hover{
+.clear-to6:hover,
+.clear-to7:hover{
     color: blue;
     background: url("../imgs/org_select.png") no-repeat;
     background-position:0px -36px  ;
@@ -307,7 +311,8 @@ a:visited{
 .clear-to3 input,
 .clear-to4 input,
 .clear-to5 input,
-.clear-to6 input
+.clear-to6 input,
+.clear-to7 input
 {
     background-color: #ffffff;
 }
@@ -319,7 +324,8 @@ a:visited{
 #choice3,
 #choice4,
 #choice5,
-#choice6
+#choice6,
+#choice7
 {
     width: 400px ;
     /*height: 100% ;*/
@@ -339,8 +345,8 @@ a:visited{
 #choice3 .title,
 #choice4 .title,
 #choice5 .title,
-#choice6 .title{
-
+#choice6 .title,
+#choice7 .title{
     font-size: 30px ;
     width: 100%;
     height: 60px ;
@@ -355,7 +361,8 @@ a:visited{
 #choice2 .name2 li,
 #choice3 .name3 li,
 #choice5 .name5 li,
-#choice6 .name6 li{
+#choice6 .name6 li,
+#choice7 .name7 li{
     font-size: 16px ;
     width: 100%;
     height: 30px ;
@@ -370,7 +377,8 @@ a:visited{
 #choice2 .yiji-no2 a,
 #choice3 .co3 a,
 #choice5 .co5 a,
-#choice6 .co6 a{
+#choice6 .co6 a,
+#choice7 .co7 a{
     height: 30px ;
     line-height: 30px ;
 }
@@ -379,7 +387,8 @@ a:visited{
 #choice2 .yiji-no2 li,
 #choice3 .co3,
 #choice5 .yiji-no5 li,
-#choice6 .yiji-no6 li{
+#choice6 .yiji-no6 li,
+#choice7 .yiji-no7 li{
     background-color: #dae9bb;
     text-align: center;
 }
@@ -388,7 +397,8 @@ a:visited{
 #choice2 .click,
 #choice3 .click,
 #choice5 .click,
-#choice6 .click{
+#choice6 .click,
+#choice7 .click{
     border-bottom:1px solid #000000 ;
     background-color: #dae9bb;
 }
@@ -397,15 +407,17 @@ a:visited{
 #choice2 .name2 li>a,
 #choice3 .name3 li>a,
 #choice5 .name5 li>a,
-#choice6 .name6 li>a{
+#choice6 .name6 li>a,
+#choice7 .name7 li>a{
     border-bottom: 1px dashed #3c3c3c;
 }
 #choice .name li>a:hover,
 #choice1 .name1 li>a:hover,
-#choice2 .name2 li>a:hover
+#choice2 .name2 li>a:hover,
 #choice3 .name3 li>a:hover,
 #choice5 .name5 li>a:hover,
-#choice6 .name6 li>a:hover{
+#choice6 .name6 li>a:hover,
+#choice7 .name7 li>a:hover{
     background-color: #dae9bb;
 }
 #close,
@@ -414,7 +426,8 @@ a:visited{
 #close3,
 #close4,
 #close5,
-#close6{
+#close6,
+#close7{
     width: 100%;
     position: relative;
     height: 60px ;
@@ -426,7 +439,8 @@ a:visited{
 #close3 .close-in,
 #close4 .close-in,
 #close5 .close-in,
-#close6 .close-in{
+#close6 .close-in,
+#close7 .close-in{
     font-size: 20px ;
     /*width: 300px ;*/
     width: 100%;

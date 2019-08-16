@@ -11,7 +11,7 @@ import java.util.Map;
  */
 public interface SupplierStaffService {
     //增加联系人
-    int addstaff(SupplierStaff supplierStaff);
+    int addstaff(List<SupplierStaff> supplierStaff,int supplierid);
     //删除联系人
     int deleteStaff(@Param("id") int id);
     //更改联系人

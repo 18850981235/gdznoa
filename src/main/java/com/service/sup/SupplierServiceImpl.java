@@ -1,7 +1,10 @@
 package com.service.sup;
 
 import com.beans.Supplier;
+import com.beans.SupplierTrademark;
+import com.dao.sup.MiddleMapper;
 import com.dao.sup.SupplierMapper;
+import com.dao.sup.SupplierTrademarkMapper;
 import com.util.FileUtils;
 import com.util.Page;
 import org.apache.ibatis.annotations.Param;
@@ -22,16 +25,41 @@ public class SupplierServiceImpl implements SupplierService {
 
     @Resource
     SupplierMapper supplierMapper;
+    @Resource
+    SupplierTrademarkMapper trademarkMapper;
+    @Resource
+    MiddleMapper middleMapper;
     //增加供应商信息
 
     @Override
-    public int addSupplier(Supplier supplier, HttpServletRequest request) {
+    public int addSupplier(Supplier supplier,String trademark, HttpServletRequest request) {
+        try {
+
         String accessory= FileUtils.uploadFile(request,"file");
         if (accessory!=null&&!accessory.equals("")){
             supplier.setCredentialAccessory(accessory);
         }
-        return supplierMapper.addSupplier(supplier);
+            int userId = (int) request.getSession().getAttribute("userId");
+        supplier.setRecorder(userId);
+         int a=supplierMapper.addSupplier(supplier);
+          String[] temp = trademark.split(",");
+        for (int i = 0; i < temp.length; i++) {
+            if (!"".equals(temp[i]) && temp[i] != null){
+                int supplierId=supplier.getId();
+                System.err.println("supplierId====>"+supplierId);
+                int staffid=Integer.valueOf(temp[i]);
+                System.err.println("staffid====>"+staffid);
+                middleMapper.addMeddle(supplierId,staffid);
+            }
+        }
+        return 1;
+    }catch (Exception e) {
+        TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+        e.printStackTrace();
+        return 0;
     }
+
+    };
 //删除供应商消息
     @Override
     public int deleteSupplier(@Param("id") int id) {
@@ -45,7 +73,9 @@ public class SupplierServiceImpl implements SupplierService {
 //根据ID查询信息
     @Override
     public Supplier querybyid(@Param("id") int id) {
+
         return supplierMapper.querybyid(id);
+
     }
 //根据条件模糊查询供应商信息
     @Override
@@ -67,5 +97,10 @@ public class SupplierServiceImpl implements SupplierService {
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return map;
+    }
+
+    @Override
+    public List<Supplier> queryAll() {
+        return supplierMapper.queryAll();
     }
 }

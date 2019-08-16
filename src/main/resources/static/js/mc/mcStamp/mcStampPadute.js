@@ -16,21 +16,25 @@ function w() {
             $("#center input").eq(2).val(data.user.name);
             $("#center input").eq(3).val(data.user.id);
             $("#center input").eq(4).val(data.user.phone);
-            $("#center input").eq(5).val(data.content);
-            $("#center input").eq(6).val(data.fileNum);
-            $("#center input").eq(7).val(data.stampType);
-            $("#center input").eq(8).val(data.consigneeAddress);
-            $("#center input").eq(9).val(data.consignee);
-            $("#center input").eq(10).val(data.consigneePhone);
+
+            // $("#center input").eq(5).val(data.content);
+            $(".content option").eq(0).text(data.content);
+            $(".content option").eq(0).val(data.content);
+
+            $("#center input").eq(5).val(data.fileNum);
+            $("#center input").eq(6).val(data.stampType);
+            $("#center input").eq(7).val(data.consigneeAddress);
+            $("#center input").eq(8).val(data.consignee);
+            $("#center input").eq(9).val(data.consigneePhone);
             if(data.expressageName==undefined){
-                $("#center input").eq(11).val("");
+                $("#center input").eq(10).val("");
             }else {
-                $("#center input").eq(11).val(data.expressageName);
+                $("#center input").eq(10).val(data.expressageName);
             }
             if(data.expressageWaybill==undefined){
-                $("#center input").eq(12).val("");
+                $("#center input").eq(11).val("");
             }else {
-                $("#center input").eq(12).val(data.expressageWaybill);
+                $("#center input").eq(11).val(data.expressageWaybill);
             }
 
 

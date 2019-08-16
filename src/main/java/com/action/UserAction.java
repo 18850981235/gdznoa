@@ -85,8 +85,8 @@ import java.util.List;
     @RequestMapping(value = "/useraction/getLoginUser", produces = "application/json; charset=utf-8")
     @ResponseBody
     public String getLoginUser(HttpServletRequest request) {
-        int userId = (int) request.getSession().getAttribute("userId");
-//        int userId=15;
+//        int userId = (int) request.getSession().getAttribute("userId");
+        int userId=1;
         return JSONObject.toJSONString(sysUserService.querybyId(userId),
                 SerializerFeature.DisableCircularReferenceDetect,
                 SerializerFeature.WriteNullStringAsEmpty);

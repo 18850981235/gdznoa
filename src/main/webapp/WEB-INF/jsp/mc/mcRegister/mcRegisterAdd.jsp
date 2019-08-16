@@ -90,7 +90,7 @@
 
                 <tr style="height:40px;">
                     <td style="width:150px ;background-color: #efefef;">
-                        <span>申请部门</span>
+                        <span>申请部门(*)</span>
                     </td>
                     <td style="width:300px ;">
                         <select class="department" style="width: 100px;height: 30px " name="deptid" required>
@@ -99,7 +99,7 @@
                             </option>
                         </select>
                     </td>
-                    <td style="width:150px ;;background-color: #efefef">申请日期</td>
+                    <td style="width:150px ;;background-color: #efefef">申请日期(*)</td>
                     <td style="width:300px ;">
 
                         <input style="width: 280px " type="text" class="demo-input" placeholder="请选择日期" id="test1"name="createtime">
@@ -111,13 +111,13 @@
                         <input class="" readonly  >
                         <input class="" style="display: none"  name="principal" required>
                     </td>
-                    <td   style="width:150px ;background-color: #efefef ">联系电话 </td>
+                    <td   style="width:150px ;background-color: #efefef ">联系电话</td>
                     <td style="width:300px ;">
                         <input style="width:280px " name="phone">
                     </td>
                 </tr>
                 <tr style="height:40px;">
-                    <td style="width:150px ;background-color: #efefef;">备案名称</td>
+                    <td style="width:150px ;background-color: #efefef;">备案名称(*)</td>
                     <td colspan="3"><input   style="width: 700px " name="recordsName"></td>
                 </tr>
                 <tr  style="height:40px;">
@@ -131,7 +131,7 @@
                             <option>其他</option>
                         </select>
                     </td>
-                    <td   style="width:150px;background-color: #efefef">管理人员 </td>
+                    <td   style="width:150px;background-color: #efefef">管理人员(*) </td>
                     <td style="width:300px ;">
                         <input class="Eliminate-5" readonly>
                         <input style="display: none" class="Eliminate-no-5" name="manager" required>
@@ -166,7 +166,7 @@
                 </tr>
 
                 <tr  style="height:40px;">
-                    <td     style="width:150px;background-color: #efefef  ">年审负责人</td>
+                    <td     style="width:150px;background-color: #efefef  ">年审负责人(*)</td>
                     <td >
                         <input class="Eliminate" readonly>
                         <input style="display: none" class="Eliminate-no" name="annualPrincipal" required>
@@ -176,7 +176,7 @@
                         </a>
                     </td>
 
-                    <td   style="width:150px;background-color: #efefef">年审时间 </td>
+                    <td   style="width:150px;background-color: #efefef">年审时间(*)</td>
                     <td style="width:300px ;">
                         <input style="width: 280px " type="text" class="demo-input" placeholder="请选择日期" id="test2"name="annualTime">
                     </td>

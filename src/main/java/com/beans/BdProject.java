@@ -45,6 +45,8 @@ public class BdProject {
 //区域负责人
   private int areaManager;
 
+  private String projectManager;
+
   private String content;
   @JsonFormat(pattern = "yyyy-MM-dd")
   @JSONField(format = "yyyy-MM-dd")

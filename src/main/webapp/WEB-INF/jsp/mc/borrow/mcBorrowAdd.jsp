@@ -98,7 +98,7 @@
                 </tr>
                 <tr style="height:40px;">
                     <td  class="Color" style="width:150px  " required>
-                        <span>项目名称</span>
+                        <span>项目名称(*)</span>
                     </td>
                     <td colspan="3" style="width:300px ;">
                         <select class="projectname" style="height: 30px ; " name="projectid" required >
@@ -110,7 +110,7 @@
                 </tr>
                 <tr style="height:40px;">
                     <td class="Color" style="width:150px ">
-                        <span>申请部门:</span>
+                        <span>申请部门(*)</span>
                     </td>
                     <td style="width:300px ;">
                         <select class="department" style="width: 100px;height: 30px " name="deptid" required >
@@ -119,7 +119,7 @@
                             </option>
                         </select>
                     </td>
-                    <td class="Color" style="width:150px ">申请日期:</td>
+                    <td class="Color" style="width:150px ">申请日期(*)</td>
                     <td style="width:300px ;">
                         <input type="text" class="demo-input" placeholder="请选择日期" id="test1" style="width:280px " name="createtime" require  >
                     </td>
@@ -159,12 +159,6 @@
                         <input style="width: 700px " name="sendAddress">
                     </td>
                 </tr>
-                <tr style="height:40px;">
-                    <td class="Color"  style="width:150px  ">快递公司（归还）</td>
-                    <td  ><input style="width: 280px " name="returnExpressageName"></td>
-                    <td class="Color" style="width:150px  ">快递单号（归还）</td>
-                    <td ><input style="width: 280px " name="returnExpressageWaybill" ></td>
-                </tr>
                 <tr style="height: 40px ;background-color: #efefef">
                     <td colspan="4" style="text-align: center">
                         <span>(以下非申请人填写)</span>
@@ -186,6 +180,12 @@
                     <td  ><input style="width: 280px " name="sendExpressageName"></td>
                     <td class="Color" style="width:150px  ">快递单号（寄出）</td>
                     <td ><input style="width: 280px " name="sendExpressageWaybill" ></td>
+                </tr>
+                <tr style="height:40px;">
+                    <td class="Color"  style="width:150px  ">快递公司（归还）</td>
+                    <td  ><input style="width: 280px " name="returnExpressageName"></td>
+                    <td class="Color" style="width:150px  ">快递单号（归还）</td>
+                    <td ><input style="width: 280px " name="returnExpressageWaybill" ></td>
                 </tr>
                 <tr style="height:40px;">
                     <td class="Color"  style="width:150px  ">原件寄出时间</td>

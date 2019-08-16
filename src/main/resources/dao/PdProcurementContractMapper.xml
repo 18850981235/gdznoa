@@ -1,0 +1,614 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.pd.PdProcurementMapper">
+    <resultMap id="BaseResultMap" type="com.beans.PdProcurementContract">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="projectid" property="projectid" jdbcType="INTEGER"/>
+        <result column="code" property="code" jdbcType="VARCHAR"/>
+        <result column="serialnumber" property="serialnumber" jdbcType="VARCHAR"/>
+        <result column="createtime" property="createtime" jdbcType="TIMESTAMP"/>
+        <result column="userid" property="userid" jdbcType="INTEGER"/>
+        <result column="address" property="address" jdbcType="VARCHAR"/>
+
+        <result column="demander" property="demander" jdbcType="VARCHAR"/>
+        <result column="supplierid" property="supplierid" jdbcType="INTEGER"/>
+        <result column="invoicetype" property="invoicetype" jdbcType="VARCHAR"/>
+        <result column="check_time" property="checkTime" jdbcType="TIMESTAMP"/>
+        <result column="demander_name" property="demanderName" jdbcType="VARCHAR"/>
+        <result column="advance" property="advance" jdbcType="DECIMAL"/>
+        <result column="paymenttype" property="paymenttype" jdbcType="VARCHAR"/>
+        <result column="arrival_time" property="arrivalTime" jdbcType="TIMESTAMP"/>
+        <result column="delivery_time" property="deliveryTime" jdbcType="TIMESTAMP"/>
+        <result column="consignee" property="consignee" jdbcType="VARCHAR"/>
+        <result column="consignee_phone" property="consigneePhone" jdbcType="VARCHAR"/>
+        <result column="carriage_assume" property="carriageAssume" jdbcType="VARCHAR"/>
+        <result column="accompanying" property="accompanying" jdbcType="VARCHAR"/>
+        <result column="supplier_install" property="supplierInstall" jdbcType="VARCHAR"/>
+        <result column="warranty_period" property="warrantyPeriod" jdbcType="INTEGER"/>
+        <result column="start_time" property="startTime" jdbcType="TIMESTAMP"/>
+        <result column="else_matter" property="elseMatter" jdbcType="VARCHAR"/>
+        <result column="technical_standard" property="technicalStandard" jdbcType="VARCHAR"/>
+        <result column="solution" property="solution" jdbcType="VARCHAR"/>
+        <result column="total" property="total" jdbcType="DECIMAL"/>
+        <result column="demander_address" property="demanderAddress" jdbcType="VARCHAR"/>
+        <result column="demander_legal_person" property="demanderLegalPerson" jdbcType="VARCHAR"/>
+        <result column="demander_consignor" property="demanderConsignor" jdbcType="VARCHAR"/>
+        <result column="demander_phone" property="demanderPhone" jdbcType="VARCHAR"/>
+        <result column="demander_fax" property="demanderFax" jdbcType="VARCHAR"/>
+        <result column="demander_duty" property="demanderDuty" jdbcType="VARCHAR"/>
+        <result column="demander_bank" property="demanderBank" jdbcType="VARCHAR"/>
+        <result column="demander_account" property="demanderAccount" jdbcType="VARCHAR"/>
+        <result column="demander_file" property="demanderFile" jdbcType="VARCHAR"/>
+        <result column="supplier_name" property="supplierName" jdbcType="DECIMAL"/>
+        <result column="supplier_address" property="supplierAddress" jdbcType="VARCHAR"/>
+        <result column="supplier_legal_person" property="supplierLegalPerson" jdbcType="VARCHAR"/>
+        <result column="supplier_consignor" property="supplierConsignor" jdbcType="VARCHAR"/>
+        <result column="supplier_phone" property="supplierPhone" jdbcType="VARCHAR"/>
+        <result column="supplier_fax" property="supplierFax" jdbcType="VARCHAR"/>
+        <result column="supplier_duty" property="supplierDuty" jdbcType="VARCHAR"/>
+        <result column="supplier_bank" property="supplierBank" jdbcType="VARCHAR"/>
+        <result column="supplier_account" property="supplierAccount" jdbcType="VARCHAR"/>
+        <result column="supplier_file" property="supplierFile" jdbcType="VARCHAR"/>
+        <result column="accessory" property="accessory" jdbcType="VARCHAR"/>
+        <result column="processid" property="processid" jdbcType="INTEGER"/>
+        <result column="process_userid" property="processUserid" jdbcType="INTEGER"/>
+        <result column="process_node" property="processNode" jdbcType="INTEGER"/>
+        <result column="process_state" property="processState" jdbcType="VARCHAR"/>
+
+
+        <association property="project" javaType="com.beans.BdProject" column="projectid"
+                     select="com.dao.bd.BdProjectMapper.getProjectAllById">
+        </association>
+        <association property="user" javaType="com.beans.SysUser" column="userid"
+                     select="com.dao.sys.UserMapper.getByID">
+        </association>
+        <association property="processUser" javaType="com.beans.SysUser" column="process_userid"
+                     select="com.dao.sys.UserMapper.getByID">
+        </association>
+
+        <association property="supplier" javaType="com.beans.Supplier" column="supplierid"
+                     select="com.dao.sup.SupplierMapper.querybyid">
+        </association>
+
+
+
+
+    </resultMap>
+    <insert id="addprocurement"  parameterType="com.beans.PdProcurementContract" useGeneratedKeys="true" keyProperty="id">
+        insert into `pd_procurement_contract`
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="projectid != 0">
+                `projectid`,
+            </if>
+            <if test="code != null">
+                `code`,
+            </if>
+            <if test="serialnumber != null">
+                `serialnumber`,
+            </if>
+            <if test="createtime != null">
+                createtime,
+            </if>
+            <if test="userid != 0">
+                userid,
+            </if>
+            <if test="address != null">
+                address,
+            </if>
+            <if test="demander != null">
+                `demander`,
+            </if>
+            <if test="supplierid != 0">
+                supplierid,
+            </if>
+            <if test="invoicetype != null">
+                invoicetype,
+            </if>
+            <if test="total != null">
+                total,
+            </if>
+            <if test="checkTime != null">
+                check_time,
+            </if>
+            <if test="advance != null">
+                `advance`,
+            </if>
+            <if test="paymenttype != null">
+                `paymenttype`,
+            </if>
+            <if test="arrivalTime != null">
+                arrival_time,
+            </if>
+            <if test="deliveryTime != null">
+                delivery_time,
+            </if>
+            <if test="consignee != null">
+                consignee,
+            </if>
+            <if test="consigneePhone != null">
+                `consignee_phone`,
+            </if>
+            <if test="carriageAssume != null">
+                carriage_assume,
+            </if>
+            <if test="accompanying != null">
+                accompanying,
+            </if>
+            <if test="supplierInstall != null">
+                supplier_install,
+            </if>
+            <if test="warrantyPeriod != null">
+                `warranty_period`,
+            </if>
+            <if test="startTime != null">
+                start_time,
+            </if>
+            <if test="elseMatter != null">
+                else_matter,
+            </if>
+            <if test="technicalStandard != null">
+               `technical_standard`,
+            </if>
+            <if test="solution != null">
+                solution,
+            </if>
+            <if test="demanderName != null">
+                demander_name,
+            </if>
+            <if test="demanderAddress != null">
+                demander_address,
+            </if>
+            <if test="demanderLegalPerson != null">
+               `demander_legal_person`,
+            </if>
+            <if test="demanderConsignor != null">
+                demander_consignor,
+            </if>
+            <if test="demanderPhone != null">
+                demander_phone,
+            </if>
+            <if test="demanderFax != null">
+                demander_fax,
+            </if>
+            <if test="demanderDuty != null">
+                demander_duty,
+            </if>
+            <if test="demanderBank != null">
+                `demander_bank`,
+            </if>
+            <if test="demanderAccount != null">
+                demander_account,
+            </if>
+            <if test="demanderFile != null">
+                demander_file,
+            </if>
+            <if test="supplierName != null">
+                supplier_name,
+            </if>
+            <if test="supplierAddress != null">
+                `supplier_address`,
+            </if>
+            <if test="supplierLegalPerson != null">
+                `supplier_legal_person`,
+            </if>
+            <if test="supplierConsignor != null">
+                supplier_consignor,
+            </if>
+            <if test="supplierPhone != null">
+                supplier_phone,
+            </if>
+            <if test="supplierFax != null">
+                supplier_fax,
+            </if>
+            <if test="supplierDuty != null">
+                `supplier_duty`,
+            </if>
+            <if test="supplierBank != null">
+                supplier_bank,
+            </if>
+            <if test="supplierAccount != null">
+                supplier_account,
+            </if>
+            <if test="supplierFile != null">
+                `supplier_file`,
+            </if>
+            <if test="accessory != null">
+                `accessory`,
+            </if>
+            <if test="processid != 0">
+                processid,
+            </if>
+            <if test="processUserid != 0">
+                process_userid,
+            </if>
+            <if test="processNode != 0">
+                process_node,
+            </if>
+            <if test="processState != null">
+                process_state,
+            </if>
+
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="projectid != 0">
+                #{projectid},
+            </if>
+            <if test="code != null">
+                #{code},
+            </if>
+            <if test="serialnumber != null">
+                #{serialnumber},
+            </if>
+            <if test="createtime != null">
+                #{createtime},
+            </if>
+            <if test="userid != 0">
+                #{userid},
+            </if>
+            <if test="address != null">
+                #{address},
+            </if>
+            <if test="demander != null">
+                #{demander},
+            </if>
+            <if test="supplierid != 0">
+                #{supplierid},
+            </if>
+            <if test="invoicetype != null">
+                #{invoicetype},
+            </if>
+            <if test="total != null">
+                #{total},
+            </if>
+            <if test="checkTime != null">
+                #{checkTime},
+            </if>
+            <if test="advance != null">
+                #{advance},
+            </if>
+            <if test="paymenttype != null">
+                #{paymenttype},
+            </if>
+            <if test="arrivalTime != null">
+                #{arrivalTime},
+            </if>
+            <if test="deliveryTime != null">
+                #{deliveryTime},
+            </if>
+            <if test="consignee != null">
+                #{consignee},
+            </if>
+            <if test="consigneePhone != null">
+                #{consigneePhone},
+            </if>
+            <if test="carriageAssume != null">
+                #{carriageAssume},
+            </if>
+            <if test="accompanying != null">
+                #{accompanying},
+            </if>
+            <if test="supplierInstall != null">
+                #{supplierInstall},
+            </if>
+            <if test="warrantyPeriod != null">
+                #{warrantyPeriod},
+            </if>
+            <if test="startTime != null">
+                #{startTime},
+            </if>
+            <if test="elseMatter != null">
+                #{elseMatter},
+            </if>
+            <if test="technicalStandard != null">
+                #{technicalStandard},
+            </if>
+            <if test="solution != null">
+                #{solution},
+            </if>
+            <if test="demanderName != null">
+                #{demanderName},
+            </if>
+            <if test="demanderAddress != null">
+                #{demanderAddress},
+            </if>
+            <if test="demanderLegalPerson != null">
+                #{demanderLegalPerson},
+            </if>
+            <if test="demanderConsignor != null">
+                #{demanderConsignor},
+            </if>
+            <if test="demanderPhone != null">
+                #{demanderPhone},
+            </if>
+            <if test="demanderFax != null">
+                #{demanderFax},
+            </if>
+            <if test="demanderDuty != null">
+                #{demanderDuty},
+            </if>
+            <if test="demanderBank != null">
+                #{demanderBank},
+            </if>
+            <if test="demanderAccount != null">
+                #{demanderAccount},
+            </if>
+            <if test="demanderFile != null">
+                #{demanderFile},
+            </if>
+            <if test="supplierName != null">
+                #{supplierName},
+            </if>
+            <if test="supplierAddress != null">
+                #{supplierAddress},
+            </if>
+            <if test="supplierLegalPerson != null">
+                #{supplierLegalPerson},
+            </if>
+            <if test="supplierConsignor != null">
+                #{supplierConsignor},
+            </if>
+            <if test="supplierPhone != null">
+                #{supplierPhone},
+            </if>
+            <if test="supplierFax != null">
+                #{supplierFax},
+            </if>
+            <if test="supplierDuty != null">
+                #{supplierDuty},
+            </if>
+            <if test="supplierBank != null">
+                #{supplierBank},
+            </if>
+            <if test="supplierAccount != null">
+                #{supplierAccount},
+            </if>
+            <if test="supplierFile != null">
+                #{supplierFile},
+            </if>
+            <if test="accessory != null">
+                #{accessory},
+            </if>
+            <if test="processid != 0">
+                #{processid},
+            </if>
+            <if test="processUserid != 0">
+                #{processUserid},
+            </if>
+            <if test="processNode != 0">
+                #{processNode},
+            </if>
+
+            <if test="processState != null">
+                #{processState},
+            </if>
+        </trim>
+    </insert>
+
+
+    <update id="updatePdProcurement">
+        update pd_procurement_contract
+        <set>
+            <if test="projectid != 0">
+                projectid = #{projectid},
+            </if>
+            <if test="code != null">
+                `code` = #{code},
+            </if>
+            <if test="serialnumber != null">
+                `serialnumber` = #{serialnumber},
+            </if>
+            <if test="createtime != null">
+                `createtime` = #{createtime},
+            </if>
+            <if test="userid != 0">
+                userid = #{userid},
+            </if>
+            <if test="address != null">
+                address = #{address},
+            </if>
+            <if test="demander != null">
+                demander = #{demander},
+            </if>
+            <if test="supplierid != 0">
+                supplierid = #{supplierid},
+            </if>
+            <if test="invoicetype != null">
+                `invoicetype` = #{invoicetype},
+            </if>
+            <if test="total != 0">
+                total = #{total},
+            </if>
+            <if test="checkTime != null">
+                `check_time` = #{checkTime},
+            </if>
+            <if test="advance != null">
+                advance = #{advance},
+            </if>
+            <if test="paymenttype != null">
+                paymenttype = #{paymenttype},
+            </if>
+            <if test="arrivalTime != null">
+                arrival_time = #{arrivalTime},
+            </if>
+            <if test="deliveryTime != null">
+                delivery_time = #{deliveryTime},
+            </if>
+            <if test="consignee != null">
+                `consignee` = #{consignee},
+            </if>
+            <if test="consigneePhone != null">
+                consignee_phone = #{consigneePhone},
+            </if>
+            <if test="carriageAssume != null">
+                carriage_assume = #{carriageAssume},
+            </if>
+            <if test="accompanying != null">
+                accompanying = #{accompanying},
+            </if>
+            <if test="supplierInstall != null">
+                supplier_install = #{supplierInstall},
+            </if>
+            <if test="warrantyPeriod != null">
+                `warranty_period` = #{warrantyPeriod},
+            </if>
+            <if test="startTime != null">
+                start_time = #{startTime},
+            </if>
+            <if test="elseMatter != null">
+                else_matter = #{elseMatter},
+            </if>
+            <if test="technicalStandard != null">
+                technical_standard = #{technicalStandard},
+            </if>
+            <if test="solution != null">
+                solution = #{solution},
+            </if>
+            <if test="demanderName != null">
+                `demander_name` = #{demanderName},
+            </if>
+            <if test="demanderAddress != null">
+                demander_address = #{demanderAddress},
+            </if>
+            <if test="demanderLegalPerson != null">
+                demander_legal_person = #{demanderLegalPerson},
+            </if>
+            <if test="demanderConsignor != null">
+                demander_consignor = #{demanderConsignor},
+            </if>
+            <if test="demanderPhone != null">
+                `demander_phone` = #{demanderPhone},
+            </if>
+            <if test="demanderFax != null">
+                `demander_fax` = #{demanderFax},
+            </if>
+            <if test="demanderDuty != null">
+                demander_duty = #{demanderDuty},
+            </if>
+            <if test="demanderBank != null">
+                demander_bank = #{demanderBank},
+            </if>
+            <if test="demanderAccount != null">
+                demander_account = #{demanderAccount},
+            </if>
+            <if test="demanderFile != null">
+                demander_file = #{demanderFile},
+            </if>
+            <if test="supplierName != null">
+                `supplier_name` = #{supplierName},
+            </if>
+            <if test="supplierAddress != null">
+                supplier_address = #{supplierAddress},
+            </if>
+            <if test="supplierLegalPerson != null">
+                supplier_legal_person = #{supplierLegalPerson},
+            </if>
+            <if test="supplierConsignor != null">
+                supplier_consignor = #{supplierConsignor},
+            </if>
+            <if test="supplierPhone != null">
+                supplier_phone = #{supplierPhone},
+            </if>
+            <if test="consignee != null">
+                `supplier_fax` = #{consignee},
+            </if>
+            <if test="supplierDuty != null">
+                supplier_duty = #{supplierDuty},
+            </if>
+            <if test="supplierBank != null">
+                supplier_bank = #{supplierBank},
+            </if>
+            <if test="supplierAccount != null">
+                supplier_account = #{supplierAccount},
+            </if>
+            <if test="supplierFile != null">
+                supplier_file = #{supplierFile},
+            </if>
+            <if test="accessory != null">
+                `accessory` = #{accessory},
+            </if>
+            <if test="processid != null">
+                processid = #{processid},
+            </if>
+            <if test="processUserid != null">
+                process_userid = #{processUserid},
+            </if>
+            <if test="processNode != null">
+                process_node = #{processNode},
+            </if>
+            <if test="processState != null">
+                process_state = #{processState},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <update id="deletePdProcurement">
+        update  pd_procurement_contract set `delete`=0 where `id`=#{id}
+
+    </update>
+
+    <select id="querybyid" resultMap="BaseResultMap">
+        select *
+        from pd_procurement_contract
+        where id = #{id} and `delete`!=0
+    </select>
+    <select id="queryBySome" resultMap="BaseResultMap">
+        select  *
+        from pd_procurement_contract
+        <trim prefix="where" prefixOverrides="and">
+          `delete`!=0
+            <if test="projectid!=0">
+               and  projectid= #{projectid}
+            </if>
+            <if test="serialnumber!=null">
+                and  serialnumber like CONCAT('%',#{serialnumber},'%')
+            </if>
+            <if test="code!=null">
+                and code like CONCAT('%',#{code},'%')
+            </if>
+            <if test="supplierid!=0">
+                and  supplierid= #{supplierid}
+            </if>
+            <if test="userid!=0">
+                and projectid in (select id from bd_project where process_userid =#{userid}
+                or principal =#{userid}  or userid =#{userid}
+                )
+
+            </if>
+        </trim>
+        <if test="pageIndex!=null and pageSize!=0">
+            LIMIT #{pageIndex},#{pageSize}
+        </if>
+    </select>
+    <select id="querycountBySome" resultType="java.lang.Integer">
+        select count(1)
+        from pd_procurement_contract
+        <trim prefix="where" prefixOverrides="and">
+             `delete`!=0
+            <if test="projectid!=0">
+                and  projectid= #{projectid}
+            </if>
+            <if test="serialnumber!=null">
+                and  serialnumber like CONCAT('%',#{serialnumber},'%')
+            </if>
+            <if test="code!=null">
+                and code like CONCAT('%',#{code},'%')
+            </if>
+            <if test="supplierid!=0">
+                and  supplierid= #{supplierid}
+            </if>
+            <if test="userid!=0">
+                and projectid in (select id from bd_project where process_userid =#{userid}
+                or principal =#{userid}  or userid =#{userid}
+                )
+
+            </if>
+        </trim>
+
+    </select>
+
+
+
+
+
+</mapper>

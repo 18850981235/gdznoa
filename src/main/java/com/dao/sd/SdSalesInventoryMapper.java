@@ -11,9 +11,10 @@ import java.util.List;
 public interface SdSalesInventoryMapper {
    int addInventory(SdSalesInventory sdSalesInventory);
 
-   int deleteInventory(int id);
 
-   List<SdSalesInventory> querySdSalesInventory(@Param("contractid")int contractid);
+   int deleteInventory(@Param("contractid") int contractid);
+
+   List<SdSalesInventory> querySdSalesInventory(@Param("id")int id);
 
    SdSalesInventory getInstancebyid(@Param("id")int id);
 

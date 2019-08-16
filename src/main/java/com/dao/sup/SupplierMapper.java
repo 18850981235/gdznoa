@@ -23,4 +23,6 @@ public interface SupplierMapper {
     //模糊查询供应商信息
     List<Supplier> querybysome(@Param("code") String code, @Param("name") String name, @Param("traname") String traname, @Param("pageIndex") int pageIndex, @Param("pageSize") int pageSize);
     int querycount(@Param("code") String code, @Param("name") String name, @Param("traname") String traname);
+
+    List<Supplier> queryAll();
 }

@@ -60,12 +60,7 @@ function w() {
             html+='<td class="Color" style="width:150px  ">原件寄往地址</td>';
             html+='<td colspan="3">'+borrow.sendAddress+'</td>';
             html+='</tr>';
-            html+='<tr style="height:40px;">';
-            html+='<td class="Color"  style="width:150px  ">快递公司（归还）</td>';
-            html+='<td  >'+borrow.returnExpressageName+'</td>';
-            html+='<td class="Color" style="width:150px  ">快递单号（归还）</td>';
-            html+='<td >'+borrow.returnExpressageWaybill+'</td>';
-            html+='</tr>';
+
             html+='<tr style="height: 40px ;background-color: #efefef">';
             html+='<td colspan="4" style="text-align: center">';
             html+='<span>(以下非申请人填写)</span>';
@@ -81,6 +76,12 @@ function w() {
             html+='<td  >'+borrow.sendExpressageName+'</td>';
             html+='<td class="Color" style="width:150px  ">快递单号（寄出）</td>';
             html+='<td >'+borrow.sendExpressageWaybill+'</td>';
+            html+='</tr>';
+            html+='<tr style="height:40px;">';
+            html+='<td class="Color"  style="width:150px  ">快递公司（归还）</td>';
+            html+='<td  >'+borrow.returnExpressageName+'</td>';
+            html+='<td class="Color" style="width:150px  ">快递单号（归还）</td>';
+            html+='<td >'+borrow.returnExpressageWaybill+'</td>';
             html+='</tr>';
             html+='<tr style="height:40px;">';
             html+='<td class="Color"  style="width:150px  ">原件寄出时间</td>';

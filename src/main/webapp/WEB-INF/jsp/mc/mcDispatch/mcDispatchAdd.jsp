@@ -68,7 +68,7 @@
                     </td>
                 </tr>
                 <tr style="height:40px;">
-                    <td style="width:150px ;;background-color: #efefef">项目名</td>
+                    <td style="width:150px ;;background-color: #efefef">项目名(*)</td>
                     <td colspan="3" style="width:300px ;">
                         <select class="projectname" style="width:600px;height: 30px " name="projectid" required>
                             <option>请选择</option>
@@ -79,7 +79,7 @@
                 </tr>
                 <tr style="height:40px;">
                     <td style="width:150px ;background-color: #efefef;">
-                        <span>申请部门</span>
+                        <span>申请部门(*)</span>
                     </td>
                     <td style="width:300px ;">
                         <select class="department" style="width: 100px;height: 30px " name="deptid" required>
@@ -108,24 +108,24 @@
                     <td ><input style="width: 300px " name="personnelCondition"></td>
                 </tr>
                 <tr style="height:40px;">
-                    <td style="width:150px ;background-color: #efefef;">人员费用标准</td>
-                    <td ><input style="width: 300px " name="costStandard"></td>
-                    <td style="width:150px ;background-color: #efefef;">人员费用预算</td>
-                    <td ><input style="width: 300px " name="evectionBudget"></td>
+                    <td style="width:150px ;background-color: #efefef;">人员费用标准(元)</td>
+                    <td ><input style="width: 300px " class="costStandard" name="costStandard" placeholder="申请人不可填写"></td>
+                    <td style="width:150px ;background-color: #efefef;">人员费用预算(元)</td>
+                    <td ><input style="width: 300px "  name="evectionBudget"></td>
                 </tr>
                 <tr style="height:40px;">
                     <td style="width:150px ;background-color: #efefef;">实际出差时间</td>
                     <td >
-                        <input style="width: 280px " type="text" class="demo-input" placeholder="请选择日期" id="test2" name="practicalTime">
+                        <input style="width: 280px " type="text" class="demo-input" placeholder="申请人不可填写" id="test2" name="practicalTime">
                     </td>
                     <td style="width:150px ;background-color: #efefef;">出差情况确认</td>
                     <td ><input style="width: 300px " name="evectionCondition"></td>
                 </tr>
                 <tr style="height:40px;">
-                    <td style="width:150px ;background-color: #efefef;">人员费用结算</td>
-                    <td ><input style="width: 300px " name="evectionCost"></td>
-                    <td style="width:150px ;background-color: #efefef;">差旅费用结算</td>
-                    <td ><input style="width: 300px " name="travelCost"></td>
+                    <td style="width:150px ;background-color: #efefef;">人员费用结算(元)</td>
+                    <td ><input style="width: 300px " name="evectionCost" class="evectionCost" placeholder="申请人不可填写"></td>
+                    <td style="width:150px ;background-color: #efefef;">差旅费用结算(元)</td>
+                    <td ><input style="width: 300px " name="travelCost" class="travelCost" placeholder="申请人不可填写"></td>
                 </tr>
 
             </table>

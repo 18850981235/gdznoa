@@ -209,6 +209,10 @@
             $('.Eliminate-6').val("");
             $('.Eliminate-no-6').val("");
         });
+        $(document).on("click",".input7",function() {
+            $('.Eliminate-7').val("");
+            $('.Eliminate-no-7').val("");
+        });
 
 
     });
@@ -233,6 +237,7 @@
             $("#choice4").hide();
             $("#choice5").hide();
                 $("#choice6").hide();
+                $("#choice7").hide();
             });
 
             $(document).on("click",".add-to",function () {
@@ -256,7 +261,9 @@
         $(document).on("click",".add-to6",function () {
             $("#choice6").show();
         });
-
+        $(document).on("click",".add-to7",function () {
+            $("#choice7").show();
+        });
         $(document).on("click",".upload",function () {
 
             var name=$(this).find(".name-block").text();
@@ -333,5 +340,23 @@
         })
 
     })
+    $(document).on("click",".upload7",function () {
+        var c2,f2,d2,d1;
+        var name2=$(this).find(".name-block7").text();
+        var id2=$(this).find(".name-none7").text();
+        d2=$(".Eliminate-7").val();
+        d1=$(".Eliminate-no-7").val();
+        if(d2==""){
+            $(".Eliminate-7").val(name2);
+            $(".Eliminate-no-7").val(id2);
+        }else {
+            c2= d2+","+name2;
+            f2= d1+","+id2;
+            $(".Eliminate-7").val(c2);
+            $(".Eliminate-no-7").val(f2);
+        }
+    })
+
+
 
 })();

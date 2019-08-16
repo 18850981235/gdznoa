@@ -16,7 +16,6 @@
         <result column="url" property="url" jdbcType="VARCHAR" />
         <result column="type" property="type" jdbcType="VARCHAR" />
         <result column="grade" property="grade" jdbcType="VARCHAR" />
-        <result column="trademark" property="trademark" jdbcType="VARCHAR" />
         <result column="cooperation_records" property="cooperationRecords" jdbcType="VARCHAR" />
         <result column="credential_accessory" property="credentialAccessory" jdbcType="VARCHAR" />
         <result column="credential_explain" property="credentialExplain" jdbcType="VARCHAR" />
@@ -27,93 +26,160 @@
         <result column="cash_account" property="cashAccount" jdbcType="VARCHAR" />
         <result column="cash_account_name" property="cashAccountName" jdbcType="VARCHAR" />
         <result column="recorder" property="recorder" jdbcType="INTEGER" />
-        <association property="supplierTrademark" javaType="com.beans.SupplierTrademark" column="trademark"
-                     select="com.dao.sup.SupplierTrademarkMapper.querybyid">
-        </association>
-        <association property="sysUser" javaType="com.beans.SysUser" column="recorder"
+        <collection property="supplierTrademarks"  javaType="java.util.ArrayList" ofType="com.beans.SupplierStaffMiddle" column="id"
+                     select="com.dao.sup.MiddleMapper.querybysupplierId">
+        </collection>
+        <collection property="sysUser" javaType="com.beans.SysUser" column="recorder"
                      select="com.dao.sys.UserMapper.getByID">
-        </association>
+        </collection>
     </resultMap>
 
-    <insert id="addSupplier" >
-        insert into supplier_staff
+    <insert id="addSupplier"  parameterType="com.beans.Supplier" useGeneratedKeys="true" keyProperty="id">
+        insert into supplier
         <trim prefix="(" suffix=")" suffixOverrides="," >
-            <if test="supplierid != 0" >
-                supplierid,
-            </if>
-            <if test="dept != null" >
-                dept,
-            </if>
-            <if test="role != null" >
-                role,
+            <if test="id != 0" >
+                id,
             </if>
             <if test="name != null" >
                 `name`,
             </if>
+            <if test="code != null" >
+                `code`,
+            </if>
+            <if test="establishTime != null" >
+                establish_time,
+            </if>
+            <if test="registeredCapital != null" >
+                registered_capital,
+            </if>
+            <if test="legalPerson != null" >
+                legal_person,
+            </if>
+            <if test="registeredAddress != null" >
+                registered_address,
+            </if>
             <if test="phone != null" >
                 phone,
-            </if>
-            <if test="mobile != null" >
-                mobile,
             </if>
             <if test="fax != null" >
                 fax,
             </if>
-            <if test="address != null" >
-                address,
+            <if test="postalCode != null" >
+                postal_code,
             </if>
             <if test="email != null" >
                 email,
             </if>
-            <if test="qq != null" >
-                qq,
+            <if test="url != null" >
+                url,
             </if>
-            <if test="wechat != null" >
-                wechat,
+            <if test="type != null" >
+                `type`,
+             </if>
+            <if test="grade != null" >
+                `grade`,
             </if>
-            <if test="jobContent != null" >
-                job_content
+            <if test="cooperationRecords != null" >
+                `cooperation_records`,
+            </if>
+            <if test="credentialAccessory != null" >
+                credential_accessory,
+            </if>
+            <if test="credentialExplain != null" >
+                credential_explain,
+            </if>
+            <if test="tfn != null" >
+                tfn,
+            </if>
+            <if test="bankaccount != null" >
+                bankaccount,
+            </if>
+            <if test="bankname != null" >
+                bankname,
+            </if>
+            <if test="bankaddress != null" >
+                bankaddress,
+            </if>
+            <if test="cashAccount != null" >
+                cash_account,
+            </if>
+            <if test="cashAccountName != null" >
+                cashAccount_name,
             </if>
             <if test="recorder != 0" >
                 recorder
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides="," >
-            <if test="supplierid != 0" >
-                #{supplierid},
-            </if>
-            <if test="dept != null" >
-                #{dept},
-            </if>
-            <if test="role != null" >
-                #{role},
+            <if test="id != 0" >
+                #{id},
             </if>
             <if test="name != null" >
                 #{name},
             </if>
+            <if test="code != null" >
+                #{code},
+            </if>
+            <if test="establishTime != null" >
+                #{establishTime},
+            </if>
+            <if test="registeredCapital != null" >
+                #{registeredCapital},
+            </if>
+            <if test="legalPerson != null" >
+                #{legalPerson},
+            </if>
+            <if test="registeredAddress != null" >
+                #{registeredAddress},
+            </if>
             <if test="phone != null" >
                 #{phone},
-            </if>
-            <if test="mobile != null" >
-                #{mobile},
             </if>
             <if test="fax != null" >
                 #{fax},
             </if>
-            <if test="address != null" >
-                #{address},
+            <if test="postalCode != null" >
+                #{postalCode},
             </if>
             <if test="email != null" >
                 #{email},
             </if>
-            <if test="qq != null" >
-                #{qq},
+            <if test="url != null" >
+                #{url},
             </if>
-            <if test="wechat != null" >
-                #{wechat},
+            <if test="type != null" >
+                #{type},
             </if>
-            <if test="jobContent != null" >
-                #{jobContent},
+            <if test="grade != null" >
+                #{grade},
+            </if>
+
+            <if test="cooperationRecords != null" >
+                #{cooperationRecords},
+            </if>
+            <if test="credentialAccessory != null" >
+                #{credentialAccessory},
+            </if>
+            <if test="credentialExplain != null" >
+                #{credentialExplain},
+            </if>
+            <if test="tfn != null" >
+                #{tfn},
+            </if>
+            <if test="bankaccount != null" >
+                #{bankaccount},
+            </if>
+            <if test="bankname != null" >
+                #{bankname},
+            </if>
+            <if test="bankaddress != null" >
+                #{bankaddress},
+            </if>
+            <if test="cashAccount != null" >
+                #{cashAccount},
+            </if>
+            <if test="cashAccountName != null" >
+                #{cashAccountName},
             </if>
             <if test="recorder != 0" >
                 #{recorder}
@@ -122,46 +188,77 @@
     </insert>
 
 
-    <update id="deleteSupplier">
-            update supplier_staff
+    <update id="updateSupplier">
+            update supplier
             <set>
-                <if test="supplierid != 0">
-                    supplierid = #{supplierid},
-                </if>
-                <if test="dept != null">
-                    dept = #{dept},
-                </if>
-                <if test="role != null">
-                    role = #{role},
-                </if>
                 <if test="name != null">
-                   `name`= #{name},
+                    `name` = #{name},
+                </if>
+                <if test="code != null">
+                    code = #{code},
+                </if>
+                <if test="establishTime != null">
+                    establish_time = #{establishTime},
+                </if>
+                <if test="registeredCapital != null">
+                   `registered_capital`= #{registeredCapital},
+                </if>
+                <if test="legalPerson != null">
+                    legal_person = #{legalPerson},
+                </if>
+                <if test="registeredAddress != null">
+                    registered_address = #{registeredAddress},
                 </if>
                 <if test="phone != null">
                     phone = #{phone},
                 </if>
-                <if test="mobile != null">
-                    mobile = #{mobile},
-                </if>
                 <if test="fax != null">
                     fax = #{fax},
                 </if>
-                <if test="address != null">
-                    address = #{address},
+                <if test="postalCode != null">
+                    postal_code = #{postalCode},
                 </if>
                 <if test="email != null">
                     email = #{email},
                 </if>
-                <if test="qq != null">
-                    qq = #{qq},
+                <if test="url != null">
+                    url = #{url},
                 </if>
-                <if test="wechat != null">
-                    wechat = #{wechat},
+                <if test="type != null">
+                    `type` = #{type},
                 </if>
-                <if test="jobContent != null">
-                    job_content = #{jobContent},
+                <if test="grade != null">
+                    grade = #{grade},
                 </if>
-                <if test="recorder != null">
+
+                <if test="cooperationRecords != null">
+                    cooperation_records = #{cooperationRecords},
+                </if>
+                <if test="credentialAccessory != null">
+                    credentialaccessory = #{credentialAccessory},
+                </if>
+                <if test="credentialExplain != null">
+                    `credential_explain`= #{credentialExplain},
+                </if>
+                <if test="tfn != null">
+                    tfn = #{tfn},
+                </if>
+                <if test="bankaccount != null">
+                    bankaccount = #{bankaccount},
+                </if>
+                <if test="bankname != null">
+                    bankname = #{bankname},
+                </if>
+                <if test="bankaddress != null">
+                    bankaddress = #{bankaddress},
+                </if>
+                <if test="cashAccount != null">
+                    cashAccount = #{cashAccount},
+                </if>
+                <if test="cashAccountName != null">
+                    cashAccountName = #{cashAccountName},
+                </if>
+                <if test="recorder != 0">
                     recorder = #{recorder},
                 </if>
             </set>
@@ -169,23 +266,27 @@
 
     </update>
 
-    <delete id="updateSupplier">
+    <delete id="deleteSupplier">
         delete
-        from supplier_staff
+        from supplier
         where id = #{id}
     </delete>
 
     <select id="querybysome" resultMap="BaseResultMap">
-        select `supplier_staff`.*,`supplier`.`name`as supname
-        from `supplier_staff`,`supplier`
+        SELECT * FROM supplier
         <trim prefix="where" prefixOverrides="and">
+
             <if test="name != null">
-                and `supplier_staff`.`name` like CONCAT('%',#{name},'%')
+                and `supplier`.`name` like CONCAT('%',#{name},'%')
             </if>
-            <if test="supname != null">
-                and `supplier_staff`.`supplierid` in (
-                select `supplier`.`id` from `supplier` where
-                `supplier`.`name` like CONCAT('%',#{supname},'%'))
+            <if test="code != null">
+                and `supplier`.`code` like CONCAT('%',#{code},'%')
+            </if>
+            <if test="traname != null">
+                AND id IN(
+                SELECT DISTINCT  supplier_id FROM`supplier_staff_middle` WHERE staff IN(  SELECT id
+                FROM supplier_trademark
+                WHERE supplier_trademark.`name` LIKE    CONCAT('%',#{traname},'%')))
             </if>
         </trim>
         <if test="pageSize!=0">
@@ -193,23 +294,29 @@
         </if>
     </select>
     <select id="querycount" resultType="java.lang.Integer">
-        SELECT count(*)
-        from `supplier_staff`,`supplier`
+        SELECT COUNT(*) FROM supplier
         <trim prefix="where" prefixOverrides="and">
 
             <if test="name != null">
-                and `supplier_staff`.`name` like CONCAT('%',#{name},'%')
+                and `supplier`.`name` like CONCAT('%',#{name},'%')
             </if>
-            <if test="supname != null">
-                and `supplier_staff`.`supplierid` in (
-                select `supplier`.`id` from `supplier` where
-                `supplier`.`name` like CONCAT('%',#{supname},'%'))
+            <if test="code != null">
+                and `supplier`.`code` like CONCAT('%',#{code},'%')
+            </if>
+            <if test="traname != null">
+                AND id IN(
+                SELECT DISTINCT  supplier_id FROM`supplier_staff_middle` WHERE staff IN(  SELECT id
+                FROM supplier_trademark
+                WHERE supplier_trademark.`name` LIKE    CONCAT('%',#{traname},'%')))
             </if>
         </trim>
     </select>
     <select id="querybyid" resultMap="BaseResultMap">
-        SELECT `supplier_staff`.*,`supplier`.`name`as supname  FROM `supplier_staff`,`supplier`
-         where `supplier_staff`.`id` = #{id} and `supplier_staff`.`supplierid`=`supplier`.`id`
+        SELECT * FROM supplier
+         where `supplier`.`id`=#{id};
+    </select>
+    <select id="queryAll" resultMap="BaseResultMap">
+        SELECT * FROM supplier
     </select>
 
 </mapper>

@@ -146,7 +146,7 @@
                 </tr>
                 <tr style="height:45px ">
                     <td class="Color" style="width: 150px ">项目编号</td>
-                    <td style="width: 300px "><input id="number" style="width: 250px "  name="code" readonly></td>
+                    <td style="width: 300px "><input id="xdataLX" style="width: 250px "  name="code" readonly></td>
                     <td class="Color" style="width: 150px ">项目简称</td>
                     <td style="width: 300px "><input style="width: 250px " required name="abbreviation" required></td>
                 </tr>

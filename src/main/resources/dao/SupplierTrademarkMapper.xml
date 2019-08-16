@@ -19,7 +19,7 @@
     <insert id="addSrademark" >
         insert into supplier_trademark
         <trim prefix="(" suffix=")" suffixOverrides="," >
-            <if test="systemName != null" >
+            <if test="systemName != 0" >
                 `system_name`,
             </if>
             <if test="name != null" >
@@ -43,10 +43,10 @@
 
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides="," >
-            <if test="systemName != null" >
+            <if test="systemName != 0" >
                 #{systemName},
             </if>
-            <if test="system_name != null" >
+            <if test="name != null" >
                 #{name},
             </if>
             <if test="product != null" >
@@ -137,7 +137,6 @@
                 <if test="product != null">
                     and `product` like CONCAT('%',#{product},'%')
                 </if>
-
                     <if test="enterpriseName != null">
                         and `enterprise_name` like CONCAT('%',#{enterpriseName},'%')
                     </if>

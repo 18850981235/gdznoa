@@ -1,7 +1,10 @@
 package com.action;
 
-import com.alibaba.fastjson.JSONObject;
+
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.alibaba.fastjson.JSONObject;
 import com.beans.*;
 import com.service.bd.BdProjectService;
 import com.service.sd.SdSalesContractInventoryService;
@@ -9,18 +12,13 @@ import com.service.sd.SdSalesContractservice;
 import com.service.sd.SdSalesInventoryService;
 import com.service.sup.SupplierTrademarkService;
 import com.service.system.systemService;
+
 import org.apache.ibatis.annotations.Param;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -31,10 +29,7 @@ import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequestMapping("/sd")
@@ -59,6 +54,9 @@ public class SdAction {
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
         //true:允许输入空值，false:不能为空值
     }
+
+
+
 
     //region ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~销售合同~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -123,6 +121,8 @@ public class SdAction {
     public String detailProjectPage() {
         return "/sale/contract/contractParticular";
     }
+
+
     @RequestMapping(value = "/SdSalesContract/querydetailsbyid", produces = "application/json; charset=utf-8")
     @ResponseBody
     public String Querydetailsbyid(@RequestParam int id) {
@@ -165,66 +165,22 @@ public class SdAction {
     //endregion ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~销售合同结束~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   //region~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~合同清单~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-    @RequestMapping("/Inventory/getContractbyprojectPage")
-    public String getContractbyprojectPage() {
-        return "/sale/detailed/detailedParticular";
-    }
-    //根据工程ID查询中间表
-  @RequestMapping(value = "/Inventory/getContractbyproject", produces = "application/json; charset=utf-8")
-  @ResponseBody
-   public String getContractbyproject(@RequestParam(required = false,defaultValue = "0") int projectId, @RequestParam(required = false, defaultValue = "0")int pageIndex) {
-      return JSONObject.toJSONString(sdSalesContractInventoryService.querybyProjectid(projectId,pageIndex),
-              SerializerFeature.DisableCircularReferenceDetect,
-              SerializerFeature.WriteNullStringAsEmpty);
-   }
-    @RequestMapping("/Inventory/getInventorybyprojectPage")
-    public String getInventorybyprojectPage() {
-        return "/sale/detailed/detailedParticular";
-    }
-//直接根据ID查询详情表和清单表
-    @RequestMapping(value = "/Inventory/getInventorybyproject", produces = "application/json; charset=utf-8")
+//获取该工程所有清单的
+    @RequestMapping(value = "/Inventory/getbyprojectidandInt", produces = "application/json; charset=utf-8")
     @ResponseBody
-    public String getInventorybyproject(@Param("id")int id) {
-        return JSONObject.toJSONString(sdSalesContractInventoryService.queryContractInventorbyid(id),
+    public String getbyprojectidandInt(@RequestParam("id")int id) {
+        return JSONObject.toJSONString(sdSalesContractInventoryService.getbyprojectidandInt(id),
                 SerializerFeature.DisableCircularReferenceDetect,
                 SerializerFeature.WriteNullStringAsEmpty);
     }
 
-    @RequestMapping("/Inventory/getInventorybyidPage")
-    public String getInventorybyidPage() {
-        return "/sale/detailed/detailedParticular";
-    }
-   //直接根据ID查询详情表和清单表
-    @RequestMapping(value = "/Inventory/getInventorybyid", produces = "application/json; charset=utf-8")
-    @ResponseBody
-    public String getInventorybyid(@Param("id")int id) {
-        return JSONObject.toJSONString(sdSalesInventoryService.getInventorybyId(id),
-                SerializerFeature.DisableCircularReferenceDetect,
-                SerializerFeature.WriteNullStringAsEmpty);
+
+    @RequestMapping("/salesinventory/query")
+    public String toaddPage() {
+        return "/sale/detailed/detailedAdd";
     }
 
-    //删除详情表和清单表
-    @RequestMapping(value = "/Inventory/deleteInventorybyproject", produces = "application/json; charset=utf-8")
-    public String deleteInventorybyproject(@Param("id")int id) {
-        int s=sdSalesContractInventoryService.deletecontractInven(id);
-        if(s>0){
-            return " ";
-        }else{
-        return " ";}
-    }
-
-
-    //查詢供应商系统的名称
-    @RequestMapping(value = "/Inventory/getInventory", produces = "application/json; charset=utf-8")
-    @ResponseBody
-    public String getTrademarksystem() {
-        return JSONObject.toJSONString(systemService.query(),
-                SerializerFeature.DisableCircularReferenceDetect,
-                SerializerFeature.WriteNullStringAsEmpty);
-    }
-    //查詢项目系统的名称
+    //查詢所有的项目系统的名称
     @RequestMapping(value = "/Inventory/getallsystem", produces = "application/json; charset=utf-8")
     @ResponseBody
     public String getallsystem() {
@@ -232,79 +188,92 @@ public class SdAction {
                 SerializerFeature.DisableCircularReferenceDetect,
                 SerializerFeature.WriteNullStringAsEmpty);
     }
+    //根据项目ID查询是这个项目的合同
+    @RequestMapping(value = "/Inventory/getContractByPid", produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public String getContractByPid(@RequestParam("id")int id) {
+        return JSONObject.toJSONString(sdSalesContractservice.querybyProjectId(id),
+                SerializerFeature.DisableCircularReferenceDetect,
+                SerializerFeature.WriteNullStringAsEmpty);
+    }
 
-    @RequestMapping(value = "/Inventory/getSupplierTrademark", produces = "application/json; charset=utf-8")
-    @ResponseBody
-    //获取供应商品牌
-    public String getSupplierTrademark() {
-        List<SupplierTrademark> ListTrademark=supplierTrademarkService.allSupplierTrademark();
-        return JSONObject.toJSONString(ListTrademark,
-                SerializerFeature.DisableCircularReferenceDetect,
-                SerializerFeature.WriteNullStringAsEmpty);
-    };
-    @RequestMapping("/salesinventory/query")
-    public String InventorybyidPage() {
-        return "/sale/detailed/detailedList";
-    }
-//条件查询清单
-    @RequestMapping(value = "/Inventory/quyry", produces = "application/json; charset=utf-8")
-    @ResponseBody
-    public String quyry(  @RequestParam(required = false, defaultValue = "0") int projectId,
-                            @RequestParam(required = false) String branchName,
-                            @RequestParam(required = false,defaultValue = "0") int systemId,
-                            @RequestParam(required = false,defaultValue = "0") int  subitemId,
-                            @RequestParam(required = false, defaultValue = "0")int pageIndex) {
-        if(branchName==null||branchName==""){
-            branchName=null;
-        }
-        return JSONObject.toJSONString( sdSalesContractInventoryService.queryInventory(projectId,branchName, systemId, subitemId, pageIndex),
-                SerializerFeature.DisableCircularReferenceDetect,
-                SerializerFeature.WriteNullStringAsEmpty);
-    }
-    //删除某条清单
-    @RequestMapping("/Inventory/AddnventorybyidPage")
-    public String AddnventorybyidPage() {
-        return "/sale/detailed/detailedAdd";
+    //第一次添加提交的！！返回数据的
+    @RequestMapping(value = "/Inventory/addContractInventory", produces = "application/json; charset=utf-8")
+    public void addContractInventory(@RequestParam("projectId")int projectId,
+                                       @RequestParam("system")int system,
+                                       @RequestParam("type")String type,
+                                       HttpServletRequest request,
+                                       HttpServletResponse response) {
+      sdSalesContractInventoryService.addContractInventory(projectId,  system, type, request, response);
+
     }
 
     //添加清单
     @RequestMapping(value = "/Inventory/addInvenbywight", produces = "application/json; charset=utf-8")
     @ResponseBody
-    public String  addInven(SdSalesContractInventory salesContractInventory, List<SdSalesInventory> list) throws Exception{
+    public String  addInven(@RequestBody String  list) {
+        Map<String,Object> aa=JSON.parseObject(list);
+        //JSONArray arrays= JSONArray.parseArray(list);
+       //List<SdSalesInventory> List= JSONObject.parseArray(arrays.toJSONString(),SdSalesInventory.class);
+        //System.err.println("List===>"+List);
+        List<SdSalesInventory> list1=JSON.parseArray(aa.get("list").toString(),SdSalesInventory.class);
+//        List<SdSalesInventory> listsd=new ArrayList<>();
+//        for(int s=0;s<lists.size();s++){
+//            listsd.add((SdSalesInventory)lists.get(s));
+//        }
+       int contractid=(int ) aa.get("contractid");
+        System.err.println("listnnnn===>"+list1);
+        System.err.println("contractid===>"+contractid);
+        int a=sdSalesContractInventoryService.addInventory(list1, contractid);
 
-        int i=sdSalesContractInventoryService.addInventory(salesContractInventory, list);
-        if (i==0){
-            System.err.println("添加成功");
-            return " ";}
-        else{
-            return "" ;
-        }
+      if(a>0){
+          return "yes";
+      }else{
+          return "no";
+      }
     };
+
 
     //添加Excel上传的；
-    //条件查询清单
-    @RequestMapping(value = "/Inventory/addInven", produces = "application/json; charset=utf-8")
-    @ResponseBody
-    public String  addInven(HttpServletRequest request, HttpServletResponse response,
-                        SdSalesContractInventory sdSalesContractInventory) throws Exception{
-        MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
-        MultipartFile file = multipartRequest.getFile("upfile");
-        if(file.isEmpty()){
-            throw new Exception("文件不存在！");
-        }
 
-        InputStream in = file.getInputStream();
-//        addInventory.addInventory(in,file);
-        sdSalesContractInventoryService.addInventory(sdSalesContractInventory,in,file);
-        in.close();
-        PrintWriter out = null;
-        response.setCharacterEncoding("utf-8");  //防止ajax接受到的中文信息乱码
-        out = response.getWriter();
-        out.print("文件导入成功！");
-        out.flush();
-        out.close();
-    return " ";
+    @RequestMapping(value = "/Inventory/Excelto", produces = "application/json; charset=utf-8")
+
+    public void  Excelto(HttpServletRequest request, HttpServletResponse response ) {
+        String s;
+        try {
+            s = sdSalesInventoryService.ExceltoSdSalesContractInventory(request, response);
+
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
     };
+    //模糊查询的清单列表
+    @RequestMapping(value = "/Inventory/queryContractInventory", produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public String  queryContractInventory(     @RequestParam(required = false, defaultValue = "0") int projectId,
+                                               @RequestParam(required = false, defaultValue = "0") int system,
+                                               @RequestParam(required = false) String type,
+                                               @RequestParam(required = false, defaultValue = "0")  int pageIndex) {
+      if(type==null||type==""){
+          type=null;
+      }
+        return JSONObject.toJSONString(sdSalesContractInventoryService.queryContractInventory(projectId, system,type,  pageIndex),
+                SerializerFeature.DisableCircularReferenceDetect,
+                SerializerFeature.WriteNullStringAsEmpty);
+    };
+
+
+
+    //查询一条中间表的清单
+    @RequestMapping(value = "/Inventory/Inventorydetail", produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public String  Inventorydetail(@RequestParam("id")int id) {
+
+        return JSONObject.toJSONString(sdSalesContractInventoryService.Inventorydetail(id),
+                SerializerFeature.DisableCircularReferenceDetect,
+                SerializerFeature.WriteNullStringAsEmpty);
+    };
+
     @RequestMapping(value = "/Inventory/outExcel", produces = "application/json; charset=utf-8")
     @ResponseBody
     public String  queryDaily(HttpServletRequest request, HttpServletResponse response,

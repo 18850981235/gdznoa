@@ -312,8 +312,11 @@
             </if>
         </trim>
     </select>
-
-
+    <select id="querybyProjectId" resultMap="BaseResultMap">
+         select *
+        from sd_sales_contract
+        where projectid=#{id}
+    </select>
 
 
 </mapper>

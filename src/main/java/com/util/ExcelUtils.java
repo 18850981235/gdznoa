@@ -55,15 +55,28 @@ public class ExcelUtils {
             if(sheet==null){continue;}
 
             //遍历当前sheet中的所有行
-            for (int j = sheet.getFirstRowNum(); j < sheet.getLastRowNum(); j++) {
+            for (int j = sheet.getFirstRowNum(); j <=sheet.getLastRowNum(); j++) {
+                int cellNum=11;
+                int FirstCellNum=0;
+                if(j==2){
+                     cellNum= row.getLastCellNum();
+                    FirstCellNum=row.getFirstCellNum();
+                };
                 row = sheet.getRow(j);
                 if(row==null||row.getFirstCellNum()==j){continue;}
 
                 //遍历所有的列
                 List<Object> li = new ArrayList<Object>();
-                for (int y = row.getFirstCellNum(); y < row.getLastCellNum(); y++) {
-                    cell = row.getCell(y);
-                    li.add(getCellValue(cell));
+                for (int y = FirstCellNum; y <cellNum; y++) {
+
+                        cell = row.getCell(y);
+
+                    if(cell!=null&&cell.getCellType() != Cell.CELL_TYPE_BLANK){
+                        li.add(getCellValue(cell));
+
+                    }else {
+                        li.add("") ;
+                    }
                 }
                 list.add(li);
             }

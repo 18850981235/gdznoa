@@ -16,6 +16,7 @@ public class SupplierTrademark {
   private String enterpriseName;
   private String originPlace;
   private String url;
+
   private system system;
 
 

@@ -15,45 +15,75 @@ public class PdServiceContract {
 
   private int id;
   private int projectid;
+  private String projectaddres;
   private String code;
-  private String name;
-  private String firstParty;
+  private String serialnumber;
+  private int userid;
+  @JsonFormat(pattern = "yyyy-MM-dd")
+  @JSONField(format = "yyyy-MM-dd")
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
+  private Date createtime;
+  private String address;
+  private String  fristParty;
   private String secondParty;
-  private String constructionRange;
-  private String constructionAddress;
-  private double contractAmount;
-  private int reportDay;
-  private int auditTime;
-  private int auditDay;
-  private double paymentCost;
-  private int allAccomplishDay;
-  private double allPaymentCost;
-  private int residueCostDay;
-  private String secondPartyBankaccount;
-  private String secondPartyBankname;
-  private String secondPartyName;
-  private int unqualifiedDay;
+
+
+  private String  fristRepresentative;
+  private String   fristName;
+  private String  fristAddress;
+  private String  fristLegalPerson;
+  private String  fristConsignor;
+  private String  fristPhone;
+  private String  fristFax;
+  private String  fristDuty;
+  private String  fristBank;
+  private String  fristAccount;
+  private String  fristFile;
+  private String secondRepresentative;
+  private String secondName;
+  private String secondAddress;
+  private String secondLegalPerson;
+  private String secondConsignor;
+  private String secondPhone;
+  private String secondFax;
+  private String secondDuty;
+  private String secondBank;
+  private String secondAccount;
+  private String secondFile;
+
+  private String invoicetype;
+  private String paymenttype;
+  private double advance;
+  private String resultsType;
+  private String  satisfaction;
   @JsonFormat(pattern = "yyyy-MM-dd")
   @JSONField(format = "yyyy-MM-dd")
   @DateTimeFormat(pattern = "yyyy-MM-dd")
-  private Date projectStartTime;
+  private Date servicetime;
+  private String results;
+  private String technicalStandard;
+  private String acceptanceCriteria;
+
+  private int warrantyPeriod;
   @JsonFormat(pattern = "yyyy-MM-dd")
   @JSONField(format = "yyyy-MM-dd")
   @DateTimeFormat(pattern = "yyyy-MM-dd")
-  private Date projectOverTime;
-  private String firstPartyRepresentative;
-  private String secondPartyRepresentative;
-  private double projectDelayOne;
-  private int deregulationDay;
-  private int contractNum;
-  private int bothContractNum;
+  private Date startTime;
   private String solution;
-  private String accessoryName;
-  private String firstPartyAddress;
-  private String secondPartyIdentityCard;
+  private String elseMatter;
+
+
   private String accessory;
   private int processid;
   private int processUserid;
+  private int processNode;
   private String processState;
+
+  private  BdProject project;
+  private  SysUser user;
+  private SysUser processUser;
+
+  private SysApprovalProcess process;
+
 
 }

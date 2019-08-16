@@ -5,6 +5,7 @@ import lombok.Data;
 
 
 import java.util.Date;
+import java.util.List;
 
 
 @Data
@@ -24,7 +25,6 @@ public class Supplier {
   private String url;
   private String type;
   private String grade;
-  private String trademark;
   private String cooperationRecords;
   private String credentialAccessory;
   private String credentialExplain;
@@ -37,6 +37,6 @@ public class Supplier {
   private int recorder;
   private SysUser sysUser;
 
-  private SupplierTrademark supplierTrademark;
+  private List<SupplierStaffMiddle> supplierTrademarks;
 
 }

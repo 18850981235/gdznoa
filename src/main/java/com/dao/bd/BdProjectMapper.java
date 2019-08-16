@@ -7,8 +7,8 @@ import org.apache.ibatis.annotations.Param;
 import java.util.Date;
 import java.util.List;
 
-@Mapper
-public interface BdProjectMapper {
+    @Mapper
+    public interface BdProjectMapper {
     //按id查询立项信息
     BdProject getListById(@Param("id") int id);
     //按id修改立项信息
@@ -46,6 +46,10 @@ public interface BdProjectMapper {
 
     List<BdProject> getallProject();
 
+    BdProject getProjectAllById(@Param("id") int id);
+
     BdProject getProjectById(@Param("id") int id);
+
+
 
 }

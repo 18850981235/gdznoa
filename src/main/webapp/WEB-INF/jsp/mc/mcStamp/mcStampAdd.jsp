@@ -43,7 +43,7 @@
                 </tr>
                 <tr style="height: 45px ">
                     <td style="width:150px ; " class="Color">
-                        <span>申请部门</span>
+                        <span>申请部门(*)</span>
                     </td>
                     <td style="width:300px ;">
                         <select id="dept" class="department" style="width: 100px;height: 30px " name="deptid" required>
@@ -53,7 +53,7 @@
                         </select>
                     </td>
                     <td style="width:150px ;" class="Color">
-                        <span>申请日期</span>
+                        <span>申请日期(*)</span>
                     </td>
                     <td style="width:300px ;">
                         <input type="text" class="demo-input" placeholder="请选择日期" id="test1" style="width:280px " name="createtime">
@@ -77,7 +77,7 @@
                 </tr>
                 <tr style="height: 45px ">
                     <td style="width:150px ; " class="Color">
-                        <span>项目名称</span>
+                        <span>项目名称(*)</span>
                     </td>
                     <td  colspan="3" style="width:300px ;">
                         <select class="projectname" style="height: 20px" name="projectid" required>
@@ -91,7 +91,7 @@
                         <span>盖章申请内容</span>
                     </td>
                     <td colspan="3" >
-                        <input style="width:700px " name="content">
+                        <textarea class="content" style="width:700px;height: 25px  " name="content"></textarea>
                     </td>
 
                 </tr>

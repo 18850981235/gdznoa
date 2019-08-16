@@ -20,6 +20,12 @@
         <association property="supplierTrademark" javaType="com.beans.SupplierTrademark" column="trademark"
                      select="com.dao.sup.SupplierTrademarkMapper.querybyid">
         </association>
+
+        <association property="supplier" javaType="com.beans.Supplier" column="supplierid"
+                     select="com.dao.sup.SupplierMapper.querybyid">
+        </association>
+
+
     </resultMap>
 
     <insert id="addstaff" >
@@ -150,10 +156,11 @@
         from supplier_staff
         where id = #{id}
     </delete>
-    <select id="querybysome" resultType="com.beans.SupplierStaff">
-        select `supplier_staff`.*,`supplier`.`name`as supname
+    <select id="querybysome" resultMap="BaseResultMap">
+        select `supplier_staff`.*
         from `supplier_staff`,`supplier`
         <trim prefix="where" prefixOverrides="and">
+            `supplier_staff`.`supplierid`=`supplier`.`id`
             <if test="name != null">
                 and `supplier_staff`.`name` like CONCAT('%',#{name},'%')
             </if>
@@ -171,7 +178,7 @@
         SELECT count(*)
         from `supplier_staff`,`supplier`
         <trim prefix="where" prefixOverrides="and">
-
+            `supplier_staff`.`supplierid`=`supplier`.`id`
             <if test="name != null">
                 and `supplier_staff`.`name` like CONCAT('%',#{name},'%')
             </if>
@@ -182,9 +189,9 @@
             </if>
         </trim>
     </select>
-    <select id="querybyid" resultType="com.beans.SupplierStaff">
+    <select id="querybyid"  resultMap="BaseResultMap">
         SELECT `supplier_staff`.*,`supplier`.`name`as supname  FROM `supplier_staff`,`supplier`
-         where `supplier_staff`.`id` = #{id} and `supplier_staff`.`supplierid`=`supplier`.`id`
+         where `supplier_staff`.`supplierid` = #{id} and `supplier_staff`.`supplierid`=`supplier`.`id`
     </select>
 
 </mapper>

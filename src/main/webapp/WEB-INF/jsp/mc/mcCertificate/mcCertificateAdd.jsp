@@ -57,7 +57,7 @@
 </div>
 <div id="choice6" style="display: none">
     <p class="title">
-        <img src="../../../imgs/root.png" height="40" width="40"/>
+        <img src="<%=basePath%>/imgs/root.png" height="40" width="40"/>
         广电智能
     </p >
     <ul class="yiji-no6">
@@ -88,12 +88,12 @@
                 </tr>
                 <tr style="height:40px;">
                     <td style="width:150px ;background-color: #efefef;">
-                        <span>证书名称</span>
+                        <span>证书名称(*)</span>
                     </td>
                     <td style="width:300px ;">
                         <input style="width: 280px " name="name">
                     </td>
-                    <td style="width:150px ;background-color: #efefef;">管理负责人</td>
+                    <td style="width:150px ;background-color: #efefef;">管理负责人(*)</td>
                     <td >
                         <input class="Eliminate" readonly >
                         <input style="display: none" class="Eliminate-no" name="userid">
@@ -113,7 +113,7 @@
                             <option>类型2</option>
                         </select>
                     </td>
-                    <td style="width:150px ;background-color: #efefef;">证书管理部门</td>
+                    <td style="width:150px ;background-color: #efefef;">证书管理部门(*)</td>
                     <td >
                         <select class="department" style="width: 100px;height: 30px " name="deptid">
                             <option value="">请选择</option>
@@ -141,12 +141,12 @@
                 <tr style="height:40px;">
                     <td style="width:150px ;background-color: #efefef;">证书借用情况</td>
                     <td ><input style="width: 280px " name="state"></td>
-                    <td style="width:150px ;background-color: #efefef;">年审时间</td>
+                    <td style="width:150px ;background-color: #efefef;">年审时间(*)</td>
                     <td  ><input style="width: 280px "  type="text"   placeholder="请选择日期" id="test1" name="annualTime"></td>
 
                 </tr>
                 <tr style="height:40px;">
-                    <td style="width:150px ;background-color: #efefef;">年审负责人</td>
+                    <td style="width:150px ;background-color: #efefef;">年审负责人(*)</td>
                     <td colspan="3">
                         <%--<input style="width: 280px " name="annualPrincipal">--%>
                             <input class="Eliminate-6" readonly >

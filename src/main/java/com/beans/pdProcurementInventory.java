@@ -3,7 +3,7 @@ package com.beans;
 import lombok.Data;
 
 @Data
-public class SdSalesInventory {
+public class pdProcurementInventory {
     private int id;
     private  String serialnum;
     private int contractid;

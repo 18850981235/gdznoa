@@ -4,8 +4,11 @@ import com.beans.SdSalesContractInventory;
 import com.beans.SdSalesInventory;
 import org.apache.ibatis.annotations.Param;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.beans.IntrospectionException;
 import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
@@ -15,23 +18,30 @@ import java.util.Map;
 
 public interface SdSalesContractInventoryService {
 
-    int  addInventory(SdSalesContractInventory salesContractInventory, InputStream in, MultipartFile file)throws Exception;
 
-    int addInventory(SdSalesContractInventory salesContractInventory, List<SdSalesInventory> list);
+    void addContractInventory(@RequestParam("projectId")int projectId,
+                             @RequestParam("system")int system,
+                             @RequestParam("type")String type,
+                              HttpServletRequest request,
+                              HttpServletResponse response);
+
+     Map<String,Object>  queryContractInventory(@RequestParam("projectId")int projectId,
+                                                          @RequestParam("system")int system,
+                                                          @RequestParam("type")String type,
+                                                          int pageIndex);
+
+    Map<String,Object>  Inventorydetail(@RequestParam("id")int id );
+
+
+    int addInventory( List<SdSalesInventory> list,int contractid);
 
     XSSFWorkbook queryDaily(SdSalesContractInventory sdSalesContractInventory)throws IllegalArgumentException, IllegalAccessException,
             InvocationTargetException, ClassNotFoundException, IntrospectionException, ParseException;
 
-    int  updateInventory(SdSalesContractInventory salesContractInventory);
 
-    int deletecontractInven(int id);
+    List<SdSalesContractInventory> getbyprojectidandInt(@Param("id") int id);
 
-    Map<String, Object> querybyProjectid(@Param("projectId")int projectId,int pageIndex);
 
-    Map<String, Object> queryContractInventorbyid(@Param("id")int id );
 
-    List<SdSalesContractInventory> queryInventoryby(@Param("branchName") String  branch_name);
-
-    Map<String, Object> queryInventory(@Param("projectId")int projectId, @Param("branchName")String branchName, @Param("systemId")int systemId, @Param("subitemId")int subitemId, int pageIndex);
 
 }

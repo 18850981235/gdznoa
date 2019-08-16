@@ -3,6 +3,7 @@ package com.dao.sd;
 import com.beans.SdSalesContract;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Date;
 import java.util.List;
@@ -25,5 +26,7 @@ public interface SdSalesContractMapper {
                    @Param("deptId")int deptId, @Param("didtimestart")Date didtimestart,
                    @Param("didtimeend")Date didtimeend,@Param("areauser")int areauser,
                    @Param("vocational")int vocational);
+
+     List<SdSalesContract> querybyProjectId(@RequestParam("id")int id);
 
 }

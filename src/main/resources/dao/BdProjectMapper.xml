@@ -17,6 +17,7 @@
         <result column="deptid" property="deptid" jdbcType="INTEGER" />
         <result column="principal" property="principal" jdbcType="INTEGER" />
         <result column="area_manager" property="areaManager" jdbcType="INTEGER" />
+        <result column="project_manager" property="projectManager" jdbcType="VARCHAR" />
         <result column="content" property="content" jdbcType="VARCHAR" />
         <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
         <result column="accessory" property="accessory" jdbcType="VARCHAR" />
@@ -78,7 +79,7 @@
                 site,
             </if>
             <if test="type != null" >
-                type,
+                `type`,
             </if>
             <if test="stage != null" >
                 stage,
@@ -106,6 +107,9 @@
             </if>
             <if test="areaManager != 0" >
                 area_manager,
+            </if>
+            <if test="projectManager != null" >
+                project_manager,
             </if>
             <if test="content != null" >
                 content,
@@ -172,6 +176,9 @@
             <if test="areaManager != 0" >
                 #{areaManager},
             </if>
+            <if test="projectManager != null" >
+                #{projectManager},
+            </if>
             <if test="content != null" >
                 #{content},
             </if>
@@ -212,7 +219,7 @@
                 site = #{site},
             </if>
             <if test="type != null" >
-                type = #{type},
+                `type` = #{type},
             </if>
             <if test="stage != null" >
                 stage = #{stage},
@@ -240,6 +247,9 @@
             </if>
             <if test="areaManager != 0" >
                 area_manager = #{areaManager},
+            </if>
+            <if test="projectManager != null" >
+                project_manager = #{projectManager},
             </if>
             <if test="content != null" >
                 content = #{content},
@@ -351,9 +361,12 @@
         WHERE `process_userid` = #{processUserId}
     </select>
     <select id="getProjectName" resultType="com.beans.BdProject">
-        select id,`abbreviation` from bd_project
+        select id,`abbreviation`,`name` from bd_project
     </select>
     <select id="getProjectById" resultType="com.beans.BdProject">
-        select id,`abbreviation` from bd_project where id=#{id}
+        select id,`abbreviation`,`name` from bd_project where id=#{id}
+    </select>
+    <select id="getProjectAllById" resultType="com.beans.BdProject">
+        select * from bd_project where id=#{id}
     </select>
 </mapper>

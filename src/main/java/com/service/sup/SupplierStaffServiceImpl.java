@@ -21,8 +21,31 @@ public class SupplierStaffServiceImpl implements SupplierStaffService{
      @Resource
     private SupplierStaffMapper supplierStaffMapper;
     @Override
-    public int addstaff(SupplierStaff supplierStaff) {
-        return supplierStaffMapper.addstaff(supplierStaff) ;
+    public int addstaff(List<SupplierStaff> list, int supplierid) {
+        int a=0;
+      try {
+          for (int i=0;i<list.size();i++){
+              SupplierStaff supplierStaff=list .get(i);
+             int sid=supplierid;
+              supplierStaff.setSupplierid(sid);
+
+              int s= supplierStaffMapper.addstaff(supplierStaff) ;
+              if(s>0){
+                  a++;
+              }
+
+
+            }
+            if(a>=list.size()){
+                return 1;
+            }else {
+                return 0;}
+        }catch (Exception e) {
+            e.printStackTrace();
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return 0;
+        }
+
     }
 
     @Override

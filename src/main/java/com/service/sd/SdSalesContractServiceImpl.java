@@ -128,4 +128,9 @@ public class SdSalesContractServiceImpl implements SdSalesContractservice {
             return map;
         }
 
+    @Override
+    public List<SdSalesContract> querybyProjectId(int id) {
+        return sdSalesContractMapper.querybyProjectId(id);
     }
+
+}

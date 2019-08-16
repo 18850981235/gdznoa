@@ -67,14 +67,14 @@
                     </td>
                 </tr>
                 <tr style="height:40px;">
-                    <td style="width:150px ;background-color: #efefef;">项目名:</td>
+                    <td style="width:150px ;background-color: #efefef;">项目名(*)</td>
                     <td colspan="3">
                         <select class="projectname" style="width: 500px ;height: 35px " name="projectid" required></select>
                     </td>
                 </tr>
                 <tr style="height:40px;">
                     <td style="width:150px ;background-color: #efefef;">
-                        <span>申请部门:</span>
+                        <span>申请部门(*)</span>
                     </td>
                     <td style="width:300px ;">
                         <select class="department" style="width: 100px;height: 30px " name="deptid" required>
@@ -83,13 +83,13 @@
                             </option>
                         </select>
                     </td>
-                    <td style="width:150px ;background-color: #efefef;">项目预算:</td>
+                    <td style="width:150px ;background-color: #efefef;">项目预算(元)</td>
                     <td style="width:300px ;">
                         <input  style="width:280px " name="budget" required>
                     </td>
                 </tr>
                 <tr  style="height:40px;">
-                    <td style="width:150px ;background-color: #efefef;">项目负责人:</td>
+                    <td style="width:150px ;background-color: #efefef;">项目负责人(*)</td>
                     <td >
                         <input class="Eliminate" readonly >
                         <input style="display: none" class="Eliminate-no" name="userid" required>
@@ -98,16 +98,16 @@
                             <input value="清空" class="input"  onClick="" type="button">
                         </a>
                     </td>
-                    <td style="width:150px ;;background-color: #efefef">申请日期:</td>
+                    <td style="width:150px ;;background-color: #efefef">申请日期</td>
                     <td style="width:300px ;">
                         <input type="text" class="demo-input" placeholder="请选择日期" id="test1" style="width:280px "  name="createtime">
                     </td>
 
                 </tr>
                 <tr style="height:40px;">
-                    <td style="width:150px ;background-color: #efefef;">商务部按标准核定费用:</td>
+                    <td style="width:150px ;background-color: #efefef;">商务部按标准核定费用(元)</td>
                     <td ><input style="width: 300px "name="mcVerifyCost" ></td>
-                    <td style="width:150px ;background-color: #efefef;">管理负责人审批金额:</td>
+                    <td style="width:150px ;background-color: #efefef;">管理负责人审批金额(元)</td>
                     <td ><input style="width: 300px " name="principalCost"></td>
                 </tr>
 
