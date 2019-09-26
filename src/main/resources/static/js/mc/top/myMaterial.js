@@ -21,7 +21,7 @@ function w() {
             html += '</tr>';
             html += '<tr style="height: 45px ">';
             html += '<td style="width:150px ;background-color: #efefef;"><span>申请部门</span></td>';
-            html += '<td style="width:300px ;">'+materials.user.dept+'</td>';
+            html += '<td style="width:300px ;">'+materials.dept.name+'</td>';
             html += '<td style="width:150px ;;background-color: #efefef"><span>申请日期</span></td>';
             html += '<td style="width:300px ;">'+materials.createtime+'</td>';
             html += '</tr>';
@@ -47,7 +47,7 @@ function w() {
             html += '<td colspan="3"   style="width:300px ;">'+materials.purpose+'</td>';
             html += '</tr>';
             html += '<tr style="height: 45px ">';
-            html += '<td style="width:150px ;background-color: #efefef;">附件22222222222222222222</td>';
+            html += '<td style="width:150px ;background-color: #efefef;">附件</td>';
             if(materials.accessory==undefined){
                 html += '<td colspan="3" >' + "无" + '</td>';
             }else {

@@ -19,12 +19,12 @@ public interface SdSalesContractMapper {
 
     List<SdSalesContract> querybysome(@Param("projectId")int projectId, @Param("clientId")int clientId,
                                       @Param("deptId")int deptId, @Param("didtimestart")Date didtimestart,
-                                      @Param("didtimeend")Date didtimeend,@Param("areauser")int areauser,@Param("vocational")int vocational,
+                                      @Param("areauser")int areauser,@Param("vocational")int vocational,
                                       @Param("pageIndex") int pageIndex, @Param("pageSize") int pageSize);
 
     int querycount(@Param("projectId")int projectId, @Param("clientId")int clientId,
                    @Param("deptId")int deptId, @Param("didtimestart")Date didtimestart,
-                   @Param("didtimeend")Date didtimeend,@Param("areauser")int areauser,
+                   @Param("areauser")int areauser,
                    @Param("vocational")int vocational);
 
      List<SdSalesContract> querybyProjectId(@RequestParam("id")int id);

@@ -298,6 +298,7 @@
                 and `bd_project`.deptid=#{deptid}
             </if>
             <if test="stage != null">
+
                 and `bd_project`.`stage`=#{stage}
             </if>
             <if test="areaManager != 0">
@@ -307,10 +308,10 @@
                 and `sys_user`.`name` like CONCAT('%',#{principalName},'%')
             </if>
             <if test="start != null">
-                and `createtime` &gt;= #{start}
+                and `bd_project`.`createtime` &gt;= #{start}
             </if>
             <if test="end != null">
-                and `createtime` &lt;= #{end}
+                and `bd_project`.`createtime` &lt;= #{end}
             </if>
         </trim>
         ORDER BY `bd_project`.`createtime` DESC
@@ -322,29 +323,29 @@
         select count(1) FROM `bd_project`,`sys_user`
         <trim prefix="where" prefixOverrides="and">
             `bd_project`.`principal`=`sys_user`.id
-            <if test="userid!=null">
+            <if test="userid!=0">
                 and  userid=#{userid}
             </if>
             <if test="projectName != null">
                 and `bd_project`.`name` like CONCAT('%',#{projectName},'%')
             </if>
-            <if test="deptid != null">
+            <if test="deptid != 0">
                 and `bd_project`.deptid=#{deptid}
             </if>
             <if test="stage != null">
                 and `bd_project`.`stage`=#{stage}
             </if>
-            <if test="areaManager != null">
+            <if test="areaManager != 0">
                 and `bd_project`.`area_manager`=#{areaManager}
             </if>
             <if test="principalName != null">
                 and `sys_user`.`name` like CONCAT('%',#{principalName},'%')
             </if>
             <if test="start != null">
-                and `createtime` &gt;= #{start}
+                and `bd_project`.`createtime` &gt;= #{start}
             </if>
             <if test="end != null">
-                and `createtime` &lt;= #{end}
+                and `bd_project`.`createtime` &lt;= #{end}
             </if>
         </trim>
     </select>
@@ -361,7 +362,7 @@
         WHERE `process_userid` = #{processUserId}
     </select>
     <select id="getProjectName" resultType="com.beans.BdProject">
-        select id,`abbreviation`,`name` from bd_project
+        select id,`abbreviation`,`name` ,`code`from bd_project
     </select>
     <select id="getProjectById" resultType="com.beans.BdProject">
         select id,`abbreviation`,`name` from bd_project where id=#{id}
@@ -369,4 +370,7 @@
     <select id="getProjectAllById" resultType="com.beans.BdProject">
         select * from bd_project where id=#{id}
     </select>
+    <select id="getByuseridAndAreaManager" resultType="com.beans.BdProject">
+    select id,`abbreviation`,`name` ,`code` from bd_project where  userid=#{id} OR  `area_manager`=#{id}
+</select>
 </mapper>

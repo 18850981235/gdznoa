@@ -54,4 +54,5 @@ public class LoginConfiguration implements WebMvcConfigurer {
                 return true;
         }
     }
+
 }

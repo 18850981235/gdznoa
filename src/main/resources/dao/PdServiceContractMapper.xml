@@ -1,0 +1,618 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.pd.PdServiceContractMapper">
+    <resultMap id="BaseResultMap" type="com.beans.PdServiceContract">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="projectid" property="projectid" jdbcType="INTEGER"/>
+        <result column="serialnumber" property="serialnumber" jdbcType="VARCHAR"/>
+        <result column="projectaddres" property="projectaddres" jdbcType="VARCHAR"/>
+        <result column="code" property="code" jdbcType="VARCHAR"/>
+        <result column="userid" property="userid" jdbcType="INTEGER"/>
+        <result column="createtime" property="createtime" jdbcType="TIMESTAMP"/>
+        <result column="address" property="address" jdbcType="VARCHAR"/>
+        <result column="fristParty" property="fristParty" jdbcType="VARCHAR"/>
+        <result column="secondParty" property="secondParty" jdbcType="INTEGER"/>
+        <result column="frist_representative" property="fristRepresentative" jdbcType="VARCHAR"/>
+        <result column="frist_name" property="fristName" jdbcType="VARCHAR"/>
+        <result column="frist_address" property="fristAddress" jdbcType="VARCHAR"/>
+        <result column="frist_legal_person" property="fristLegalPerson" jdbcType="VARCHAR"/>
+        <result column="frist_consignor" property="fristConsignor" jdbcType="VARCHAR"/>
+        <result column="frist_phone" property="fristPhone" jdbcType="VARCHAR"/>
+        <result column="frist_fax" property="fristFax" jdbcType="VARCHAR"/>
+        <result column="frist_duty" property="fristDuty" jdbcType="VARCHAR"/>
+        <result column="frist_bank" property="fristBank" jdbcType="VARCHAR"/>
+        <result column="frist_account" property="fristAccount" jdbcType="VARCHAR"/>
+        <result column="frist_file" property="fristFile" jdbcType="VARCHAR"/>
+        <result column="second_representative" property="secondRepresentative" jdbcType="VARCHAR"/>
+        <result column="second_name" property="secondName" jdbcType="VARCHAR"/>
+        <result column="second_address" property="secondAddress" jdbcType="VARCHAR"/>
+        <result column="second_legal_person" property="secondLegalPerson" jdbcType="VARCHAR"/>
+        <result column="second_consignor" property="secondConsignor" jdbcType="INTEGER"/>
+        <result column="second_phone" property="secondPhone" jdbcType="VARCHAR"/>
+        <result column="second_fax" property="secondFax" jdbcType="VARCHAR"/>
+        <result column="second_duty" property="secondDuty" jdbcType="VARCHAR"/>
+        <result column="second_bank" property="secondBank" jdbcType="VARCHAR"/>
+        <result column="second_account" property="secondAccount" jdbcType="VARCHAR"/>
+        <result column="second_file" property="secondFile" jdbcType="VARCHAR"/>
+        <result column="total" property="total" jdbcType="DECIMAL"/>
+        <result column="invoicetype" property="invoicetype" jdbcType="VARCHAR"/>
+        <result column="paymenttype" property="paymenttype" jdbcType="VARCHAR"/>
+        <result column="advance" property="advance" jdbcType="DECIMAL"/>
+        <result column="results_type" property="resultsType" jdbcType="VARCHAR"/>
+        <result column="satisfaction" property="satisfaction" jdbcType="VARCHAR"/>
+        <result column="servicetime" property="servicetime" jdbcType="TIMESTAMP"/>
+        <result column="results" property="results" jdbcType="VARCHAR"/>
+        <result column="technical_standard" property="technicalStandard" jdbcType="VARCHAR"/>
+        <result column="acceptance_criteria" property="acceptanceCriteria" jdbcType="VARCHAR"/>
+        <result column="warranty_period" property="warrantyPeriod" jdbcType="INTEGER"/>
+        <result column="start_time" property="startTime" jdbcType="TIMESTAMP"/>
+        <result column="solution" property="solution" jdbcType="VARCHAR"/>
+        <result column="else_matter" property="elseMatter" jdbcType="VARCHAR"/>
+        <result column="accessory" property="accessory" jdbcType="VARCHAR"/>
+        <result column="processid" property="processid" jdbcType="INTEGER"/>
+        <result column="process_userid" property="processUserid" jdbcType="INTEGER"/>
+        <result column="process_node" property="processNode" jdbcType="INTEGER"/>
+        <result column="process_state" property="processState" jdbcType="VARCHAR"/>
+
+
+        <association property="project" javaType="com.beans.BdProject" column="projectid"
+                     select="com.dao.bd.BdProjectMapper.getProjectAllById">
+        </association>
+        <association property="user" javaType="com.beans.SysUser" column="userid"
+                     select="com.dao.sys.UserMapper.getByID">
+        </association>
+        <association property="processUser" javaType="com.beans.SysUser" column="processUserid"
+                     select="com.dao.sys.UserMapper.getByID">
+        </association>
+        <association property="consignorUser" javaType="com.beans.SysUser" column="second_consignor"
+                     select="com.dao.sys.UserMapper.getByID">
+        </association>
+        <association property="supplier" javaType="com.beans.Supplier" column="secondParty"
+                     select="com.dao.sup.SupplierMapper.querybyid">
+        </association>
+
+    </resultMap>
+    <insert id="AddPdServiceContract"  parameterType="com.beans.PdServiceContract" useGeneratedKeys="true" keyProperty="id">
+        insert into pd_service_contract
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="projectid != 0">
+                projectid,
+            </if>
+            <if test="serialnumber != null">
+                `serialnumber`,
+            </if>
+            <if test="projectaddres != null">
+                projectaddres,
+            </if>
+
+            <if test="code != null">
+                code,
+            </if>
+            <if test="userid != 0">
+                userid,
+            </if>
+            <if test="createtime != null">
+                `createtime`,
+            </if>
+            <if test="address != null">
+                address,
+            </if>
+            <if test="fristParty != null">
+                fristParty,
+            </if>
+            <if test="secondParty != 0">
+                secondParty,
+            </if>
+            <if test="fristRepresentative != null">
+                frist_representative,
+            </if>
+            <if test="fristName != null">
+                frist_name,
+            </if>
+            <if test="fristAddress != null">
+                `frist_address`,
+            </if>
+            <if test="fristLegalPerson != null">
+                frist_legal_person,
+            </if>
+            <if test="fristConsignor != null">
+                frist_consignor,
+            </if>
+            <if test="fristPhone != null">
+                frist_phone,
+            </if>
+            <if test="fristFax != null">
+                frist_fax,
+            </if>
+            <if test="fristDuty != null">
+                `frist_duty`,
+            </if>
+            <if test="fristBank != null">
+                frist_bank,
+            </if>
+            <if test="fristAccount != null">
+                frist_account,
+            </if>
+            <if test="fristFile != null">
+                frist_file,
+            </if>
+            <if test="secondRepresentative != null">
+                second_representative,
+            </if>
+            <if test="secondName != null">
+                `second_name`,
+            </if>
+            <if test="secondAddress != null">
+                second_address,
+            </if>
+            <if test="secondLegalPerson != null">
+                second_legal_person,
+            </if>
+            <if test="secondConsignor != 0">
+                second_consignor,
+            </if>
+            <if test="secondPhone != null">
+                `second_phone`,
+            </if>
+            <if test="secondFax != null">
+                second_fax,
+            </if>
+            <if test="secondDuty != null">
+                second_duty,
+            </if>
+            <if test="secondBank != null">
+                second_bank,
+            </if>
+            <if test="secondAccount != null">
+                second_account,
+            </if>
+            <if test="secondFile != null">
+                second_file,
+            </if>
+            <if test="total != null">
+                `total`,
+            </if>
+            <if test="invoicetype != null">
+                `invoicetype`,
+            </if>
+            <if test="paymenttype != null">
+                paymenttype,
+            </if>
+            <if test="advance != null">
+                advance,
+            </if>
+            <if test="resultsType != null">
+                results_type,
+            </if>
+            <if test="satisfaction != null">
+                satisfaction,
+            </if>
+            <if test="servicetime != null">
+                servicetime,
+            </if>
+            <if test="results != null">
+                `results`,
+            </if>
+            <if test="technicalStandard != null">
+                technical_standard,
+            </if>
+            <if test="acceptanceCriteria != null">
+                acceptance_criteria,
+            </if>
+            <if test="warrantyPeriod != null">
+                warranty_period,
+            </if>
+            <if test="startTime != null">
+                start_time,
+            </if>
+            <if test="solution != null">
+                `solution`,
+            </if>
+            <if test="elseMatter != null">
+                else_matter,
+            </if>
+            <if test="accessory != null">
+                accessory,
+            </if>
+            <if test="processid != 0">
+                processid,
+            </if>
+            <if test="processUserid != 0">
+                process_userid,
+            </if>
+            <if test="processNode != 0">
+                process_node,
+            </if>
+            <if test="processState != null">
+                process_state,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="projectid != 0">
+                #{projectid},
+            </if>
+            <if test="serialnumber != null">
+                #{serialnumber},
+            </if>
+            <if test="projectaddres != null">
+                #{projectaddres},
+            </if>
+            <if test="code != null">
+                #{code},
+            </if>
+            <if test="userid != 0">
+                #{userid},
+            </if>
+            <if test="createtime != null">
+                #{createtime},
+            </if>
+            <if test="address != null">
+                #{address},
+            </if>
+            <if test="fristParty != null">
+                #{fristParty},
+            </if>
+            <if test="secondParty != 0">
+                #{secondParty},
+            </if>
+            <if test="fristRepresentative != null">
+                #{fristRepresentative},
+            </if>
+            <if test="fristName != null">
+                #{fristName},
+            </if>
+            <if test="fristAddress != null">
+                #{fristAddress},
+            </if>
+            <if test="fristLegalPerson != null">
+                #{fristLegalPerson},
+            </if>
+            <if test="fristConsignor != null">
+                #{fristConsignor},
+            </if>
+            <if test="fristPhone != null">
+                #{fristPhone},
+            </if>
+            <if test="fristFax != null">
+                #{fristFax},
+            </if>
+            <if test="fristDuty != null">
+                #{fristDuty},
+            </if>
+            <if test="fristBank != null">
+                #{fristBank},
+            </if>
+            <if test="fristAccount != null">
+                #{fristAccount},
+            </if>
+            <if test="fristFile != null">
+                #{fristFile},
+            </if>
+            <if test="secondRepresentative != null">
+                #{secondRepresentative},
+            </if>
+            <if test="secondName != null">
+                #{secondName},
+            </if>
+            <if test="secondAddress != null">
+                #{secondAddress},
+            </if>
+            <if test="secondLegalPerson != null">
+                #{secondLegalPerson},
+            </if>
+            <if test="secondConsignor != null">
+                #{secondConsignor},
+            </if>
+            <if test="secondPhone != null">
+                #{secondPhone},
+            </if>
+            <if test="secondFax != null">
+                #{secondFax},
+            </if>
+            <if test="secondDuty != null">
+                #{secondDuty},
+            </if>
+            <if test="secondBank != null">
+                #{secondBank},
+            </if>
+            <if test="secondAccount != null">
+                #{secondAccount},
+            </if>
+            <if test="secondFile != null">
+                #{secondFile},
+            </if>
+            <if test="total != null">
+                #{total},
+            </if>
+            <if test="invoicetype != null">
+                #{invoicetype},
+            </if>
+            <if test="paymenttype != null">
+                #{paymenttype},
+            </if>
+            <if test="advance != null">
+                #{advance},
+            </if>
+            <if test="resultsType != null">
+                #{resultsType},
+            </if>
+            <if test="satisfaction != null">
+                #{satisfaction},
+            </if>
+            <if test="servicetime != null">
+                #{servicetime},
+            </if>
+            <if test="results != null">
+                #{results},
+            </if>
+            <if test="technicalStandard != null">
+                #{technicalStandard},
+            </if>
+            <if test="acceptanceCriteria != null">
+                #{acceptanceCriteria},
+            </if>
+            <if test="warrantyPeriod != null">
+                #{warrantyPeriod},
+            </if>
+            <if test="startTime != null">
+                #{startTime},
+            </if>
+            <if test="solution != null">
+                #{solution},
+            </if>
+            <if test="elseMatter != null">
+                #{elseMatter},
+            </if>
+            <if test="accessory != null">
+                #{accessory},
+            </if>
+            <if test="processid != 0">
+                #{processid},
+            </if>
+            <if test="processUserid != 0">
+                #{processUserid},
+            </if>
+            <if test="processNode != 0">
+                #{processNode},
+            </if>
+            <if test="processState != null">
+                #{processState},
+            </if>
+        </trim>
+    </insert>
+
+
+    <update id="UpdatePdServiceContract">
+        update pd_service_contract
+        <set>
+            <if test="projectid != 0">
+                projectid = #{projectid},
+            </if>
+            <if test="serialnumber != null">
+                serialnumber = #{serialnumber},
+            </if>
+            <if test="projectaddres != null">
+                `projectaddres` = #{projectaddres},
+            </if>
+            <if test="code != null">
+                code = #{code},
+            </if>
+            <if test="userid != null">
+                userid = #{userid},
+            </if>
+            <if test="createtime != null">
+                createtime = #{createtime},
+            </if>
+            <if test="address != null">
+                address = #{address},
+            </if>
+            <if test="fristParty != null">
+                `fristParty` = #{fristParty},
+            </if>
+            <if test="secondParty != 0">
+                secondParty = #{secondParty},
+            </if>
+            <if test="fristRepresentative != null">
+                frist_representative = #{fristRepresentative},
+            </if>
+            <if test="fristName != null">
+                frist_name = #{fristName},
+            </if>
+            <if test="fristAddress != null">
+                frist_address = #{fristAddress},
+            </if>
+            <if test="fristLegalPerson != null">
+                `frist_legal_person` = #{fristLegalPerson},
+            </if>
+            <if test="fristConsignor != null">
+                frist_consignor = #{fristConsignor},
+            </if>
+            <if test="fristPhone != null">
+                frist_phone = #{fristPhone},
+            </if>
+            <if test="fristFax != null">
+                frist_fax = #{fristFax},
+            </if>
+            <if test="fristDuty != null">
+                frist_duty = #{fristDuty},
+            </if>
+            <if test="fristBank != null">
+                `frist_bank` = #{fristBank},
+            </if>
+            <if test="fristAccount != null">
+                frist_account = #{fristAccount},
+            </if>
+            <if test="fristFile != null">
+                frist_file = #{fristFile},
+            </if>
+            <if test="secondRepresentative != null">
+                second_representative = #{secondRepresentative},
+            </if>
+            <if test="secondName != null">
+                second_name = #{secondName},
+            </if>
+            <if test="secondAddress != null">
+                `second_address` = #{secondAddress},
+            </if>
+            <if test="secondLegalPerson != null">
+                second_legal_person = #{secondLegalPerson},
+            </if>
+            <if test="secondConsignor != 0">
+                second_consignor = #{secondConsignor},
+            </if>
+            <if test="secondPhone != null">
+                second_phone = #{secondPhone},
+            </if>
+            <if test="secondFax != null">
+                second_fax = #{secondFax},
+            </if>
+            <if test="secondDuty != null">
+                `second_duty` = #{secondDuty},
+            </if>
+            <if test="secondBank != null">
+                second_bank = #{secondBank},
+            </if>
+            <if test="secondAccount != null">
+                second_account = #{secondAccount},
+            </if>
+            <if test="secondFile != null">
+                second_file = #{secondFile},
+            </if>
+            <if test="total != null">
+                `total` = #{total},
+            </if>
+            <if test="invoicetype != null">
+                invoicetype = #{invoicetype},
+            </if>
+            <if test="paymenttype != null">
+                `paymenttype` = #{paymenttype},
+            </if>
+            <if test="advance != null">
+                advance = #{advance},
+            </if>
+            <if test="satisfaction != null">
+                results_type = #{satisfaction},
+            </if>
+            <if test="servicetime != null">
+                servicetime = #{servicetime},
+            </if>
+            <if test="results != null">
+                results = #{results},
+            </if>
+            <if test="technicalStandard != null">
+                `technical_standard` = #{technicalStandard},
+            </if>
+            <if test="acceptanceCriteria != null">
+                acceptance_criteria = #{acceptanceCriteria},
+            </if>
+            <if test="warrantyPeriod != null">
+                warranty_period = #{warrantyPeriod},
+            </if>
+            <if test="startTime != null">
+                start_time = #{startTime},
+            </if>
+            <if test="servicetime != null">
+                servicetime = #{servicetime},
+            </if>
+            <if test="solution != null">
+                solution = #{solution},
+            </if>
+            <if test="elseMatter != null">
+                `else_matter` = #{elseMatter},
+            </if>
+            <if test="accessory != null">
+                accessory = #{accessory},
+            </if>
+            <if test="processid != 0">
+                processid = #{processid},
+            </if>
+            <if test="processUserid != 0">
+                process_userid = #{processUserid},
+            </if>
+            <if test="processNode != 0">
+                process_node = #{processNode},
+            </if>
+            <if test="processState != null">
+                `process_state` = #{processState},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+    <update id="deletePdService">
+       update pd_service_contract set `delete`=0
+      where id=#{id}
+
+    </update>
+    <select id="queryOneByid" resultMap="BaseResultMap">
+        select *
+        from pd_service_contract
+        where id = #{id}
+        and `delete`=1;
+    </select>
+
+    <select id="queryCount" resultType="java.lang.Integer">
+        select  count(*)
+        from pd_service_contract
+        <trim prefix="where" prefixOverrides="and">
+            `delete`!=0
+            <if test="projectid!=0">
+                and  projectid= #{projectid}
+            </if>
+            <if test="serialnumber!=null">
+                and  serialnumber like CONCAT('%',#{serialnumber},'%')
+            </if>
+            <if test="code!=null">
+                and code like CONCAT('%',#{code},'%')
+            </if>
+            <if test="secondName!=null">
+                and  second_name= #{secondName}
+            </if>
+            <if test="userid!=0">
+                and projectid in (select id from bd_project where process_userid =#{userid}
+                or principal =#{userid}  or userid =#{userid}
+                )
+
+            </if>
+        </trim>
+
+
+    </select>
+    <select id="queryBySome"  resultMap="BaseResultMap">
+        select  *
+        from pd_service_contract
+        <trim prefix="where" prefixOverrides="and">
+            `delete`!=0
+            <if test="projectid!=0">
+                and  projectid= #{projectid}
+            </if>
+            <if test="serialnumber!=null">
+                and  serialnumber like CONCAT('%',#{serialnumber},'%')
+            </if>
+            <if test="code!=null">
+                and code like CONCAT('%',#{code},'%')
+            </if>
+            <if test="secondName!=null">
+                and  second_name= #{secondName}
+            </if>
+            <if test="userid!=0">
+                and projectid in (select id from bd_project where process_userid =#{userid}
+                or principal =#{userid}  or userid =#{userid}
+                )
+
+            </if>
+        </trim>
+        <if test="pageIndex!=null and pageSize!=0">
+            LIMIT #{pageIndex},#{pageSize}
+        </if>
+
+
+    </select>
+    <select id="queryAll"  resultMap="BaseResultMap">
+        select  * from  pd_service_contract
+
+    </select>
+    <select id="queryByProject" resultMap="BaseResultMap">
+          select  id,projectid from  pd_service_contract
+
+    </select>
+</mapper>

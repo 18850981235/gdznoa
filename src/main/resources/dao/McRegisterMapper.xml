@@ -18,6 +18,7 @@
         <result column="accessory" property="accessory" jdbcType="VARCHAR" />
         <result column="processid" property="processid" jdbcType="INTEGER" />
         <result column="process_userid" property="processUserid" jdbcType="INTEGER" />
+        <result column="process_node" property="processNode" jdbcType="INTEGER" />
         <result column="process_state" property="processState" jdbcType="VARCHAR" />
         <result column="deptName" property="deptName" jdbcType="VARCHAR" />
         <collection property="user" column="principal"
@@ -84,6 +85,9 @@
             <if test="processState != null" >
                 process_state,
             </if>
+            <if test="processNode != 0" >
+                process_node,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides="," >
             <if test="deptid != 0" >
@@ -133,6 +137,9 @@
             </if>
             <if test="processState != null" >
                 #{processState},
+            </if>
+            <if test="processNode != null" >
+                #{processNode},
             </if>
         </trim>
     </insert>
@@ -189,7 +196,9 @@
             <if test="processState != null">
                 process_state = #{processState},
             </if>
-
+            <if test="processNode != null">
+                process_node = #{processNode},
+            </if>
         </set>
         where id=#{id}
     </update>

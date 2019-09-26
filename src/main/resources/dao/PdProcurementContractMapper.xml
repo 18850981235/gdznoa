@@ -9,7 +9,6 @@
         <result column="createtime" property="createtime" jdbcType="TIMESTAMP"/>
         <result column="userid" property="userid" jdbcType="INTEGER"/>
         <result column="address" property="address" jdbcType="VARCHAR"/>
-
         <result column="demander" property="demander" jdbcType="VARCHAR"/>
         <result column="supplierid" property="supplierid" jdbcType="INTEGER"/>
         <result column="invoicetype" property="invoicetype" jdbcType="VARCHAR"/>
@@ -42,7 +41,7 @@
         <result column="supplier_name" property="supplierName" jdbcType="DECIMAL"/>
         <result column="supplier_address" property="supplierAddress" jdbcType="VARCHAR"/>
         <result column="supplier_legal_person" property="supplierLegalPerson" jdbcType="VARCHAR"/>
-        <result column="supplier_consignor" property="supplierConsignor" jdbcType="VARCHAR"/>
+        <result column="supplier_consignor" property="supplierConsignor" jdbcType="INTEGER"/>
         <result column="supplier_phone" property="supplierPhone" jdbcType="VARCHAR"/>
         <result column="supplier_fax" property="supplierFax" jdbcType="VARCHAR"/>
         <result column="supplier_duty" property="supplierDuty" jdbcType="VARCHAR"/>
@@ -65,7 +64,9 @@
         <association property="processUser" javaType="com.beans.SysUser" column="process_userid"
                      select="com.dao.sys.UserMapper.getByID">
         </association>
-
+        <association property="consignorUser" javaType="com.beans.SysUser" column="supplier_consignor"
+                     select="com.dao.sys.UserMapper.getByID">
+        </association>
         <association property="supplier" javaType="com.beans.Supplier" column="supplierid"
                      select="com.dao.sup.SupplierMapper.querybyid">
         </association>
@@ -191,7 +192,7 @@
             <if test="supplierLegalPerson != null">
                 `supplier_legal_person`,
             </if>
-            <if test="supplierConsignor != null">
+            <if test="supplierConsignor != 0">
                 supplier_consignor,
             </if>
             <if test="supplierPhone != null">
@@ -502,7 +503,7 @@
             <if test="supplierLegalPerson != null">
                 supplier_legal_person = #{supplierLegalPerson},
             </if>
-            <if test="supplierConsignor != null">
+            <if test="supplierConsignor != 0">
                 supplier_consignor = #{supplierConsignor},
             </if>
             <if test="supplierPhone != null">
@@ -544,6 +545,16 @@
 
     <update id="deletePdProcurement">
         update  pd_procurement_contract set `delete`=0 where `id`=#{id}
+
+    </update>
+    <update id="updatePdPTotal">
+         update  pd_procurement_contract
+        <set>
+        <if test="total != null">
+            `total` = #{total},
+        </if>
+    </set>
+        where `id`=#{contractid}
 
     </update>
 
@@ -606,9 +617,14 @@
         </trim>
 
     </select>
+    <select id="queryAll"  resultMap="BaseResultMap">
+        select * from  pd_procurement_contract
 
-
-
+    </select>
+    <select id="queryByProject" resultMap="BaseResultMap">
+           select id,projectid from  pd_procurement_contract
+          where projectid=#{id}
+    </select>
 
 
 </mapper>

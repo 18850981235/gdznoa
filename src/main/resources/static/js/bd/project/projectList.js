@@ -14,6 +14,9 @@
         var principalName=$(".principalName").val();
         var start=$(".start").val();
         var end=$(".end").val();
+
+        console.log(start)
+        console.log(end)
         $.ajax({
             type: "get",
             url: "/bd/project/query.html",
@@ -34,7 +37,6 @@
                     html += "<td class='content-in' style='text-align: center'>" + obj1.areaManagerUser.name + "</td>";
                     html += "<td class='content-in' style='text-align: center'>" + obj1.createtime + "</td>";
                     html += "<td class='content-in' style='text-align: center'>" + obj1.budget + "</td>";
-
                     html += '<td style="width: 110px ;text-align: center">';
                     html += "<a  href='/bd/project/particular?id="+obj1.id+"'  style='color:blue'>详情</a>";
                     html += '<a href="/bd/project/update?id='+obj1.id+'" style="color:#dea97d; margin-left: 4px  ">编辑</a>';
@@ -63,7 +65,6 @@
             }
         });
     }
-
 
     $(document).ready(function () {
         $(document).on("click",".del1",function () {
@@ -96,7 +97,6 @@
         $(document).on("click",".del0",function () {
             $(".confirm0").show();
         })
-
         $(document).on("click",".confirm-no",function () {
             $(".confirm0").hide();
             $(".confirm1").hide();
@@ -110,8 +110,6 @@
             $(".confirm9").hide();
         })
 
-
-
         // $(".query").click();
         $("body").on("click", ".query", function () {
             lo();
@@ -120,5 +118,18 @@
         })
 
         lo(0);
+        
+        //重置
+        $(document).on("click",".Reset",function () {
+            $(".projectName").val("")
+            $(".Eliminate-3").val("")
+            $(".Eliminate-no-3").val("")
+            $(".Eliminate").val("")
+            $(".principalName").val("")
+            $(".start").val("")
+            $(".end").val("")
+            $(".stage option").eq(0).prop({selected:"true"})
+            $(".department option").eq(0).prop({selected:"true"})
+        })
     })
 })()

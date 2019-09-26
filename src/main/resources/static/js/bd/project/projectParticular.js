@@ -15,7 +15,7 @@ function w() {
             html += '<input style="display: none" value=' + data.id + ' name="id">';
             html +='<table border="1">';
             html +='<tr style="height: 45px ">';
-            html +='<td colspan="4" style="text-align: center;background-color: #efefef">立项详情</td>';
+            html +='<td colspan="4" style="text-align: center;background-color: #efefef">项目立项管理详情表</td>';
             html +='</tr>';
             html +='<tr style="height:45px ">';
             html +='<td style="width: 150px " class="Color">项目编号</td>';

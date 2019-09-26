@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.ga.GaComeGoMapper">
+    <resultMap id="BaseResultMap" type="com.beans.GaComeGO">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="userid" property="userid" jdbcType="INTEGER"/>
+        <result column="projectid" property="projectid" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="unit" property="unit" jdbcType="VARCHAR"/>
+        <result column="payment_money" property="paymentMoney" jdbcType="DECIMAL"/>
+        <result column="type" property="type" jdbcType="VARCHAR"/>
+        <result column="type2" property="type2" jdbcType="VARCHAR"/>
+        <result column="matter" property="matter" jdbcType="VARCHAR"/>
+        <result column="digest" property="digest" jdbcType="VARCHAR"/>
+        <result column="bankname" property="bankname" jdbcType="VARCHAR"/>
+        <result column="bankaccount" property="bankaccount" jdbcType="VARCHAR"/>
+        <result column="processid" property="processid" jdbcType="INTEGER"/>
+        <result column="process_userid" property="processUserid" jdbcType="INTEGER"/>
+        <result column="process_state" property="processState" jdbcType="VARCHAR"/>
+        <result column="process_node" property="processNode" jdbcType="INTEGER"/>
+        <result column="createtime" property="createtime" jdbcType="TIMESTAMP"/>
+        <result column="accessory" property="accessory" jdbcType="VARCHAR"/>
+        <association property="project" javaType="com.beans.BdProject" column="projectid"
+                     select="com.dao.bd.BdProjectMapper.getProjectById">
+        </association>
+        <association property="user" javaType="com.beans.SysUser" column="userid"
+                     select="com.dao.sys.UserMapper.getByID">
+        </association>
+    </resultMap>
+
+    <insert id="add" parameterType="com.beans.GaPayment" useGeneratedKeys="true" keyProperty="id">
+        insert into ga_comego
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="projectid != null">
+                projectid,
+            </if>
+            <if test="userid != null">
+                userid,
+            </if>
+            <if test="name != null">
+                `name`,
+            </if>
+            <if test="unit != null">
+                unit,
+            </if>
+            <if test="paymentMoney != null">
+                payment_money,
+            </if>
+            <if test="type != null">
+                `type`,
+            </if>
+            <if test="type2 != null">
+                `type2`,
+            </if>
+            <if test="matter != null">
+                matter,
+            </if>
+            <if test="digest != null">
+                digest,
+            </if>
+            <if test="bankname != null">
+                bankname,
+            </if>
+            <if test="bankaccount != null">
+                bankaccount,
+            </if>
+            <if test="processid != null">
+                processid,
+            </if>
+            <if test="processUserid != null">
+                process_userid,
+            </if>
+            <if test="processState != null">
+                process_state,
+            </if>
+            <if test="processNode != null">
+                process_node,
+            </if>
+            <if test="createtime != null">
+                createtime,
+            </if>
+            <if test="accessory != null">
+                accessory,
+            </if>
+
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="projectid != null">
+                #{projectid,jdbcType=INTEGER},
+            </if>
+            <if test="userid != null">
+                #{userid,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="unit != null">
+                #{unit,jdbcType=VARCHAR},
+            </if>
+            <if test="paymentMoney != null">
+                #{paymentMoney,jdbcType=DECIMAL},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="type2 != null">
+                #{type2,jdbcType=VARCHAR},
+            </if>
+            <if test="matter != null">
+                #{matter,jdbcType=VARCHAR},
+            </if>
+            <if test="digest != null">
+                #{digest,jdbcType=VARCHAR},
+            </if>
+            <if test="bankname != null">
+                #{bankname,jdbcType=VARCHAR},
+            </if>
+            <if test="bankaccount != null">
+                #{bankaccount,jdbcType=VARCHAR},
+            </if>
+            <if test="processid != null">
+                #{processid,jdbcType=INTEGER},
+            </if>
+            <if test="processUserid != null">
+                #{processUserid,jdbcType=INTEGER},
+            </if>
+            <if test="processState != null">
+                #{processState,jdbcType=VARCHAR},
+            </if>
+            <if test="processNode != null">
+                #{processNode,jdbcType=INTEGER},
+            </if>
+            <if test="createtime != null">
+                #{createtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="accessory != null">
+                #{accessory},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateById">
+        update ga_comego
+        <set>
+            <if test="projectid != null">
+                projectid = #{projectid,jdbcType=INTEGER},
+            </if>
+            <if test="userid != null">
+                userid = #{userid,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                `name` = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="unit != null">
+                unit = #{unit,jdbcType=VARCHAR},
+            </if>
+            <if test="paymentMoney != null">
+                payment_money = #{paymentMoney,jdbcType=DECIMAL},
+            </if>
+            <if test="type != null">
+                `type` = #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="type2 != null">
+                `type2` = #{type2,jdbcType=VARCHAR},
+            </if>
+            <if test="matter != null">
+                matter = #{matter,jdbcType=VARCHAR},
+            </if>
+            <if test="digest != null">
+                digest = #{digest,jdbcType=VARCHAR},
+            </if>
+            <if test="bankname != null">
+                bankname = #{bankname,jdbcType=VARCHAR},
+            </if>
+            <if test="bankaccount != null">
+                bankaccount = #{bankaccount,jdbcType=VARCHAR},
+            </if>
+            <if test="processid != null">
+                processid = #{processid,jdbcType=INTEGER},
+            </if>
+            <if test="processUserid != null">
+                process_userid = #{processUserid,jdbcType=INTEGER},
+            </if>
+            <if test="processState != null">
+                process_state = #{processState,jdbcType=VARCHAR},
+            </if>
+            <if test="processNode != null">
+                process_node = #{processNode,jdbcType=INTEGER},
+            </if>
+            <if test="createtime != null">
+                createtime = #{createtime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+          where id=#{id}
+    </update>
+    <select id="getListById" resultMap="BaseResultMap">
+        select *
+        from ga_comego
+        where id = #{id}
+    </select>
+    <select id="getList" resultMap="BaseResultMap">
+        select *
+        from ga_comego
+        where projectid = #{projectid}
+        and matter = #{matter}
+        <if test="type">
+            and `type`=#{type}
+        </if>
+        <if test="type2">
+            and `type2`=#{type2}
+        </if>
+        LIMIT #{pageIndex},#{pageSize}
+    </select>
+    <select id="getCount" resultType="int">
+        select count(1)
+        from ga_comego
+        where
+        projectid = #{projectid}
+        <if test="type">
+            and `type`=#{type}
+        </if>
+        <if test="type2">
+            and `type2`=#{type2}
+        </if>
+        and matter = #{matter}
+    </select>
+</mapper>

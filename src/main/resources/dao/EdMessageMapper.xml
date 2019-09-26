@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.ed.EdMessageMapper">
+    <resultMap id="BaseResultMap" type="com.beans.EdMessage" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="projectid" property="projectid" jdbcType="INTEGER" />
+        <result column="construction_unit" property="constructionUnit" jdbcType="VARCHAR" />
+        <result column="agent_construct_unit" property="agentConstructUnit" jdbcType="VARCHAR" />
+        <result column="supervising_unit" property="supervisingUnit" jdbcType="VARCHAR" />
+        <result column="deptid" property="deptid" jdbcType="INTEGER" />
+        <result column="frist_deputy" property="fristDeputy" jdbcType="VARCHAR" />
+        <result column="frist_phone" property="fristPhone" jdbcType="VARCHAR" />
+        <result column="agent_deputy" property="agentDeputy" jdbcType="VARCHAR" />
+        <result column="agent_phone" property="agentPhone" jdbcType="VARCHAR" />
+        <result column="supervisor" property="supervisor" jdbcType="VARCHAR" />
+        <result column="supervisor_phone" property="supervisorPhone" jdbcType="VARCHAR" />
+        <result column="accessory" property="accessory" jdbcType="VARCHAR" />
+        <result column="processid" property="processid" jdbcType="INTEGER" />
+        <result column="process_userid" property="processUserid" jdbcType="INTEGER" />
+        <result column="process_node" property="processNode" jdbcType="INTEGER" />
+        <result column="process_state" property="processState" jdbcType="VARCHAR" />
+        <result column="isdelete" property="isdelete" jdbcType="INTEGER" />
+
+
+
+        <association property="project" javaType="com.beans.BdProject" column="projectid"
+                     select="com.dao.bd.BdProjectMapper.getProjectAllById">
+        </association>
+        <association property="dept" javaType="com.beans.SysDept" column="deptid"
+                     select="com.dao.sys.DeptMapper.getListById">
+        </association>
+        <association property="client" javaType="com.beans.BdClient" column="construction_unit"
+                     select="com.dao.bd.BdClientMapper.getClientById">
+        </association>
+        <association property="processUser" javaType="com.beans.SysUser" column="processUserid"
+                     select="com.dao.sys.UserMapper.getByID">
+        </association>
+
+    </resultMap>
+
+    <insert id="addMessageMapper">
+        insert into ed_message
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="projectid != 0">
+                projectid,
+            </if>
+            <if test="constructionUnit != null">
+                `construction_unit`,
+            </if>
+            <if test="agentConstructUnit != null">
+                agent_construct_unit,
+            </if>
+            <if test="supervisingUnit != null">
+                supervising_unit,
+            </if>
+            <if test="deptid != 0">
+                deptid,
+            </if>
+            <if test="fristDeputy != null">
+                `frist_deputy`,
+            </if>
+            <if test="fristPhone != null">
+                frist_phone,
+            </if>
+            <if test="agentDeputy != null">
+                agent_deputy,
+            </if>
+            <if test="agentPhone != null">
+                `agent_phone`,
+            </if>
+            <if test="supervisor != null">
+                supervisor,
+            </if>
+            <if test="supervisorPhone != null">
+                supervisor_phone,
+            </if>
+            <if test="accessory != null">
+                accessory,
+            </if>
+            <if test="processid != 0">
+                processid,
+            </if>
+            <if test="processUserid != 0">
+                process_userid,
+            </if>
+            <if test="processNode != 0">
+                process_node,
+            </if>
+            <if test="processState != null">
+                process_state,
+            </if>
+            <if test="isdelete != 0">
+                isdelete,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+        <if test="projectid != 0">
+            #{projectid},
+        </if>
+        <if test="constructionUnit != null">
+            #{constructionUnit},
+        </if>
+        <if test="agentConstructUnit != null">
+            #{agentConstructUnit},
+        </if>
+        <if test="supervisingUnit != null">
+            #{supervisingUnit},
+        </if>
+        <if test="deptid != 0">
+                #{deptid},
+        </if>
+        <if test="fristDeputy != null">
+                #{fristDeputy},
+        </if>
+        <if test="fristPhone != null">
+                #{fristPhone},
+        </if>
+        <if test="agentDeputy != null">
+                #{agentDeputy},
+        </if>
+            <if test="agentPhone != null">
+                #{agentPhone},
+            </if>
+            <if test="supervisor != null">
+                #{supervisor},
+            </if>
+            <if test="supervisorPhone != null">
+                #{supervisorPhone},
+            </if>
+
+        <if test="accessory != null">
+            #{accessory},
+        </if>
+        <if test="processid != 0">
+            #{processid},
+        </if>
+        <if test="processUserid != 0">
+            #{processUserid},
+        </if>
+        <if test="processNode != 0">
+            #{processNode},
+        </if>
+        <if test="processState != null">
+            #{processState},
+        </if>
+        <if test="isdelete != 0">
+                #{isdelete},
+        </if>
+        </trim>
+    </insert>
+
+    <update id="updateMessage">
+    update ed_message
+    <set>
+        <if test="projectid != 0">
+            projectid = #{projectid},
+        </if>
+        <if test="constructionUnit != null">
+            construction_unit = #{constructionUnit},
+        </if>
+        <if test="agentConstructUnit != null">
+            agent_construct_unit = #{agentConstructUnit},
+        </if>
+        <if test="supervisingUnit != null">
+            supervising_unit = #{supervisingUnit},
+        </if>
+        <if test="deptid != 0">
+            deptid = #{deptid},
+        </if>
+        <if test="fristDeputy != null">
+            frist_deputy = #{fristDeputy},
+        </if>
+        <if test="fristPhone != null">
+            frist_phone = #{fristPhone},
+        </if>
+        <if test="agentDeputy != null">
+            agent_deputy = #{agentDeputy},
+        </if>
+        <if test="agentPhone != null">
+            agent_phone = #{agentPhone},
+        </if>
+        <if test="supervisor != null">
+            supervisor = #{supervisor},
+        </if>
+        <if test="supervisorPhone != null">
+            supervisor_phone = #{supervisorPhone},
+        </if>
+        <if test="accessory != null">
+            accessory = #{accessory},
+        </if>
+        <if test="processUserid != 0">
+            process_userid = #{processUserid},
+        </if>
+        <if test="processNode != 0">
+            process_node = #{processNode},
+        </if>
+        <if test="processState != null">
+            `process_state` = #{processState},
+        </if>
+        <if test="isdelete != 0">
+            isdelete = #{isdelete},
+        </if>
+
+    </set>
+        where id=#{id}
+    </update>
+    <update id="deleteMassage">
+        update  ed_message set `isdelete`=0 where id=#{id}
+
+    </update>
+    <select id="queryAllById" resultMap="BaseResultMap">
+        select * from ed_message
+         where `id`=#{id}
+        and `isdelete`!=0;
+    </select>
+    <select id="queryAllBySome" resultMap="BaseResultMap">
+        select  *
+        from ed_message
+        <trim prefix="where" prefixOverrides="and">
+            `isdelete`!=0
+            <if test="projectid!=0">
+                and  projectid= #{projectid}
+            </if>
+            <if test="deptid!=0">
+                and  deptid =#{deptid}
+            </if>
+            <if test="clientid!=0">
+                and  construction_unit= #{clientid}
+            </if>
+            <if test="site!=null">
+                and projectid in (select id from bd_project where site like CONCAT('%',#{site},'%'))
+            </if>
+            <if test="userid!=0">
+                and projectid in (select id from bd_project where process_userid =#{userid}
+                or principal =#{userid}  or userid =#{userid}
+                )
+            </if>
+
+        </trim>
+
+        <if test="pageIndex!=null and pageSize!=0">
+            LIMIT #{pageIndex},#{pageSize}
+        </if>
+    </select>
+
+    <select id="querycountBySome" resultType="java.lang.Integer">
+        select  count(*)
+        from ed_message
+        <trim prefix="where" prefixOverrides="and">
+            `isdelete`!=0
+            <if test="projectid!=0">
+                and  projectid= #{projectid}
+            </if>
+            <if test="deptid!=0">
+                and  deptid =#{deptid}
+            </if>
+            <if test="clientid!=0">
+                and  construction_unit= #{clientid}
+            </if>
+            <if test="site!=null">
+                and projectid in (select id from bd_project where site like CONCAT('%',#{site},'%'))
+            </if>
+            <if test="userid!=0">
+                and projectid in (select id from bd_project where process_userid =#{userid}
+                or principal =#{userid}  or userid =#{userid}
+                )
+
+            </if>
+        </trim>
+    </select>
+
+</mapper>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+    <title></title>
+</head>
+<body>
+<form id="uploadForm" enctype="multipart/form-data" action="http://localhost:8088/mc/qualification/pdf" method="post">
+    文件:<input id="file" type="file" name="file"/>
+    <!--<input name="projectId">-->
+    <!--<input name="system">-->
+    <!--<input name="type">-->
+    <input id="upfile" type="submit">上传文件</input>
+</form>
+<body>
+<!--<form action="UploadFile.ashx" method="post" enctype="multipart/form-data">-->
+    <!--<input type="file" name="fileUpload" />-->
+    <!--<input type="submit" value="上传文件" />-->
+<!--</form>-->
+</body>
+
+</body>
+<!--<script type="text/javascript">-->
+    <!--$(function () {-->
+        <!--$("#upfile").click(function () {-->
+            <!--var formData = new FormData($('#uploadForm')[0]);-->
+            <!--$.ajax({-->
+                <!--type: 'post',-->
+                <!--url: "/sd/Inventory/addContractInventory",-->
+                <!--data: formData,-->
+                <!--dataType:"json",-->
+                <!--cache: false,-->
+                <!--processData: false,-->
+                <!--contentType: false,-->
+            <!--}).success(function (data) {-->
+                <!--alert(data);-->
+                <!--console.log(data);-->
+                <!--console.log(data.List)-->
+                <!--console.log(data.id)-->
+            <!--}).error(function () {-->
+                <!--alert("上传失败");-->
+            <!--});-->
+        <!--});-->
+    <!--});-->
+<!--</script>-->
+</html>

@@ -24,4 +24,8 @@ public interface PdServiceContractMapper {
                                         @Param("pageIndex") int pageIndex,
                                         @Param("pageSize") int pageSize);
 
+    List<PdServiceContract> queryAll();
+
+    List<PdServiceContract> queryByProject(@Param("id")int id);
+
 }

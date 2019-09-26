@@ -90,10 +90,10 @@
     </delete>
 
 
-    <select id="querycountProjectid" resultType="int">
-        select count(1)
+    <select id="queryProjectid" resultMap="BaseResultMap">
+        select *
         from sd_sales_contract_inventory
-        where project_id = #{projectId}
+        where project_id = #{id}
 
     </select>
 
@@ -113,20 +113,12 @@
 
     <select id="querybysome" resultType="com.beans.SdSalesContractInventory">
             select * from `sd_sales_contract_inventory`
-        <trim prefix="where" prefixOverrides="and">
-            <if test="projectId != 0">
-                and  project_id = #{projectId}
-            </if>
-
-            <if test="system != 0">
+             where  project_id = #{projectId}
                 and `system` = #{system}
-            </if>
-            <if test="type != null">
                 and `type`=#{type}
-            </if>
-
-          </trim>
     </select>
+
+
     <select id="query" resultMap="BaseResultMap">
         select * from `sd_sales_contract_inventory`
         <trim prefix="where" prefixOverrides="and">
@@ -178,6 +170,46 @@
         SELECT *
         FROM `sd_sales_inventory`
         WHERE `contractid` = #{id}
+    </select>
+
+    <select id="queryCounts" resultType="java.lang.Integer">
+        select count(*) from `sd_sales_contract_inventory`
+        <trim prefix="where" prefixOverrides="and">
+            <if test="projectId != 0">
+                and  project_id = #{projectId}
+            </if>
+
+            <if test="system != 0">
+                and `system` = #{system}
+            </if>
+
+
+            and `type`!="新建清单"
+        </trim>
+
+
+
+    </select>
+    <select id="querys"  resultMap="BaseResultMap">
+        select * from `sd_sales_contract_inventory`
+        <trim prefix="where" prefixOverrides="and">
+            <if test="projectId != 0">
+                and  project_id = #{projectId}
+            </if>
+
+            <if test="system != 0">
+                and `system` = #{system}
+            </if>
+
+            and `type`!="新建清单"
+
+        </trim>
+        <if test="pageSize!=0">
+
+            LIMIT #{pageIndex},#{pageSize}
+        </if>
+
+
     </select>
 
 </mapper>

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.ga.GaSalaryMapper" >
+  <resultMap id="BaseResultMap" type="com.beans.GaSalary" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="projectid" property="projectid" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="post" property="post" jdbcType="VARCHAR" />
+    <result column="clockin_in" property="clockinIn" jdbcType="VARCHAR" />
+    <result column="salary" property="salary" jdbcType="VARCHAR" />
+    <result column="time" property="time" jdbcType="VARCHAR" />
+    <result column="social_security" property="socialSecurity" jdbcType="VARCHAR" />
+    <result column="leave" property="leave" jdbcType="VARCHAR" />
+    <result column="insurance" property="insurance" jdbcType="VARCHAR" />
+    <result column="rests" property="rests" jdbcType="VARCHAR" />
+    <result column="net_pay" property="netPay" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <insert id="add"  >
+    insert into ga_salary
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="projectid != null" >
+        projectid,
+      </if>
+      <if test="name != null" >
+        `name`,
+      </if>
+      <if test="post != null" >
+        post,
+      </if>
+      <if test="clockinIn != null" >
+        clockin_in,
+      </if>
+      <if test="salary != null" >
+        salary,
+      </if>
+      <if test="time != null" >
+        `time`,
+      </if>
+      <if test="socialSecurity != null" >
+        social_security,
+      </if>
+      <if test="leave != null" >
+        `leave`,
+      </if>
+      <if test="insurance != null" >
+        insurance,
+      </if>
+      <if test="rests != null" >
+        rests,
+      </if>
+      <if test="netPay != null" >
+        net_pay,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="projectid != null" >
+        #{projectid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="post != null" >
+        #{post,jdbcType=VARCHAR},
+      </if>
+      <if test="clockinIn != null" >
+        #{clockinIn,jdbcType=VARCHAR},
+      </if>
+      <if test="salary != null" >
+        #{salary,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=VARCHAR},
+      </if>
+      <if test="socialSecurity != null" >
+        #{socialSecurity,jdbcType=VARCHAR},
+      </if>
+      <if test="leave != null" >
+        #{leave,jdbcType=VARCHAR},
+      </if>
+      <if test="insurance != null" >
+        #{insurance,jdbcType=VARCHAR},
+      </if>
+      <if test="rests != null" >
+        #{rests,jdbcType=VARCHAR},
+      </if>
+      <if test="netPay != null" >
+        #{netPay,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="updateById"  >
+    update ga_salary
+    <set >
+      <if test="projectid != null" >
+        projectid = #{projectid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="post != null" >
+        post = #{post,jdbcType=VARCHAR},
+      </if>
+      <if test="clockinIn != null" >
+        clockin_in = #{clockinIn,jdbcType=VARCHAR},
+      </if>
+      <if test="salary != null" >
+        salary = #{salary,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        `time` = #{time,jdbcType=VARCHAR},
+      </if>
+      <if test="socialSecurity != null" >
+        social_security = #{socialSecurity,jdbcType=VARCHAR},
+      </if>
+      <if test="leave != null" >
+        `leave` = #{leave,jdbcType=VARCHAR},
+      </if>
+      <if test="insurance != null" >
+        insurance = #{insurance,jdbcType=VARCHAR},
+      </if>
+      <if test="rests != null" >
+        rests = #{rests,jdbcType=VARCHAR},
+      </if>
+      <if test="netPay != null" >
+        net_pay = #{netPay,jdbcType=VARCHAR},
+      </if>
+    </set>
+      where
+      id=#{id}
+  </update>
+
+  <select id="getListById" resultMap="BaseResultMap">
+      select * from ga_salary where id=#{id}
+  </select>
+
+  <select id="getList" resultMap="BaseResultMap">
+      select  * from ga_salary where projectid=#{projectid}
+        LIMIT #{pageIndex},#{pageSize}
+  </select>
+
+  <select id="getCount" resultType="int">
+    select  count(*) from ga_salary where  projectid=#{projectid}
+  </select>
+  </mapper>

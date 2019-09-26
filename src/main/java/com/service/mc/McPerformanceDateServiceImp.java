@@ -107,11 +107,9 @@ public class McPerformanceDateServiceImp implements McPerformanceDateService{
                 pageIndex = 1;
             }
             page.setPageSize(10);
-
             page.setTotalCount(mcPerformanceDateMapper.querycont(projectName, bidtimeStart, bidtimeEnd, accetimeStart, acctimeEnd, borrow));
             page.setCurrentPageNo(pageIndex);
             list = mcPerformanceDateMapper.queryMcPerformanceDatebysome(projectName, bidtimeStart, bidtimeEnd, accetimeStart, acctimeEnd, borrow, (page.getCurrentPageNo() - 1) * page.getPageSize(), page.getPageSize());
-
             map.put("page", page);
             map.put("list", list);
         } catch (Exception e) {

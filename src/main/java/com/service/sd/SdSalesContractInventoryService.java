@@ -29,17 +29,28 @@ public interface SdSalesContractInventoryService {
                                                           @RequestParam("system")int system,
                                                           @RequestParam("type")String type,
                                                           int pageIndex);
+    Map<String,Object>  queryContractInventory(@RequestParam("projectId")int projectId,
+                                               @RequestParam("system")int system,
+                                               int pageIndex);
+
 
     Map<String,Object>  Inventorydetail(@RequestParam("id")int id );
 
 
-    int addInventory( List<SdSalesInventory> list,int contractid);
+    int addInventory( List<SdSalesInventory> list,int contractid,double total);
 
     XSSFWorkbook queryDaily(SdSalesContractInventory sdSalesContractInventory)throws IllegalArgumentException, IllegalAccessException,
             InvocationTargetException, ClassNotFoundException, IntrospectionException, ParseException;
 
 
-    List<SdSalesContractInventory> getbyprojectidandInt(@Param("id") int id);
+    Map<String,Object> getbyprojectidandInt(@Param("id") int id);
+
+    List<SdSalesContractInventory> getbyprojecti(@Param("id") int id);
+
+
+    List<SdSalesInventory>  QuerydetailsbyInt(@Param("id")int id);
+
+
 
 
 

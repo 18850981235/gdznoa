@@ -106,7 +106,8 @@ public class FileUtils {
         OutputStream os = null;
         BufferedOutputStream bos = null;
         try {
-            File file = new File(filePath+"/"+showFileName); //:文件的声明
+            File file = new File(filePath+"/"+showFileName);//:文件的声明
+
             String fileName = file.getName();
             is = new FileInputStream(file);  //:文件流的声明
             os = response.getOutputStream(); // 重点突出

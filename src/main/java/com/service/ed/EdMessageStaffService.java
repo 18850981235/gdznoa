@@ -16,7 +16,7 @@ public interface EdMessageStaffService {
 
     EdMessageStaff queryOneById(@Param("id")int id);
 
-    Map<String, Object> queryBySome(@Param("projectid")int projectid, @Param("id")String  name, @Param("id") int userid,
+    Map<String, Object> queryBySome(@Param("projectid")int projectid, @Param("name")String  name, @Param("userid") int userid,
                                     @Param("identityCard")String identityCard, @Param("staffRole")String staffRole,
                                     @Param("pageIndex")  int pageIndex);
 }

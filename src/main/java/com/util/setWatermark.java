@@ -35,13 +35,13 @@ public class setWatermark {
                     //            设置颜色笔划
 
 
-//          content.setColorStroke(BaseColor.WHITE);
+          content.setColorStroke(BaseColor.WHITE);
             //颜色填充
             content.setColorFill(BaseColor.LIGHT_GRAY);
             //设置字体和大小
-            content.setFontAndSize(base, 50);
+            content.setFontAndSize(base, 100);
             //设置文本矩阵
-            content.setTextMatrix(70, 200);
+            content.setTextMatrix(200, 1000);
             //显示文本对齐
             content.showTextAligned(Element.ALIGN_CENTER, watermark, 300,350, 55);//旋转
 //            Image image = Image.getInstance("D:/fish.jpg");

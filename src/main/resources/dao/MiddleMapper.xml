@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.sup.MiddleMapper">
+    <resultMap id="BaseResultMap" type="com.beans.SupplierStaffMiddle" >
+        <id column="supplier_id" property="supplierId" jdbcType="INTEGER" />
+        <result column="staff" property="staff" jdbcType="VARCHAR" />
+
+     <association property="supplierTrademark" javaType="com.beans.SupplierStaff" column="staff"
+                        select="com.dao.sup.SupplierTrademarkMapper.querybyid">
+    </association>
+
+    </resultMap>
+    <insert id="addMeddle">
+        insert  into supplier_staff_middle (supplier_id,staff)value (#{supplierId},#{staff})
+
+    </insert>
+    <select id="querybysupplierId" resultMap="BaseResultMap">
+      select *
+      from  supplier_staff_middle
+      where supplier_id=#{supplierId}
+
+    </select>
+    <select id="queryCountbyStaff" resultType="java.lang.Integer">
+        select count(*)
+      from  supplier_staff_middle
+      where staff=#{id}
+
+
+    </select>
+
+
+</mapper>

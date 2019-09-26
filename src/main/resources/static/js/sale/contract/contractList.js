@@ -9,15 +9,16 @@ function lo(z) {
     // $(".paging-in").html("");
     $(".sea2").html(value="");
 
-    var projectName=$(".projectName").val();
-    var name=$(".name").val();
+    var projectName=$("#ap").val();
+    var clientId=$(".Eliminate-no-1").val()
     var deptid=$(".department").val();
-    var start=$(".start").val();
-    var end=$(".end").val();
+    var didtimestart=$("#test1").val();
+    var areauser=$(".Eliminate-no-3").val();
+    var vocational=$(".Eliminate-no").val();
     $.ajax({
         type: "get",
         url: "/sd/SdSalesContract/queryContract",
-        data: {"projectName":projectName,"name":name,"deptid":deptid,"start":start,"end":end,"pageIndex":z},
+        data: {"projectId":projectName,"clientId":clientId,"deptid":deptid,"didtimestart":didtimestart,"areauser":areauser,"vocational":vocational,"pageIndex":z},
         dataType: "json",
         success: function (data) {
             var list = data.list;
@@ -37,7 +38,7 @@ function lo(z) {
                 html += '<td style="width: 100px ">'+obj1.invoiceType+'</td>';
 
                 html += '<td style="width: 140px ">';
-                html += '<a style="color:#ff061c;margin-right: 3px "  href="/mc/borrow/particular?id='+obj1.id+'">清单</a>';
+                html += '<a style="color:#ff061c;margin-right: 3px "  href="/sd/sales/todetailPage?id='+obj1.project.id+'">清单</a>';
                 html += '<a style="color:blue" href="/sd/SdSalesContract/detailProjectPage?id='+obj1.id+'">详情</a>';
                 html += '<a style="color:#dea97d; margin-left: 4px  " href="/sd/SdSalesContract/UpdateProjectPage?id='+obj1.id+'">编辑</a>';
                 html += '<a class='+"del"+index1+' style="color:#a6d1c0; margin-left: 4px ">删除</a>';
@@ -77,7 +78,7 @@ $(document).ready(function () {
     $.ajax({
         type:"post",
         dataType:"json",
-        url:"/sd/SdSalesContract/getProject",
+        url:"/util/getGCProject",
         success:function (data) {
             $.each(data,function (index,obj) {
                 var html="";

@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.ed.EdMessageStaffMapper">
+    <resultMap id="BaseResultMap" type="com.beans.EdMessageStaff" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="phone" property="phone" jdbcType="VARCHAR" />
+        <result column="messageid" property="messageid" jdbcType="INTEGER" />
+        <result column="staff_role" property="staffRole" jdbcType="VARCHAR" />
+        <result column="idfile" property="idfile" jdbcType="VARCHAR" />
+        <result column="identity_card" property="identityCard" jdbcType="VARCHAR" />
+        <result column="photo" property="photo" jdbcType="VARCHAR" />
+        <result column="buy_state" property="buyState" jdbcType="VARCHAR" />
+        <result column="buyfile" property="buyfile" jdbcType="VARCHAR" />
+        <result column="attendance_time" property="attendanceTime" jdbcType="VARCHAR" />
+        <result column="security" property="security" jdbcType="VARCHAR" />
+        <result column="securityfile" property="securityfile" jdbcType="VARCHAR" />
+        <result column="contracts" property="contracts" jdbcType="VARCHAR" />
+        <result column="contractsfile" property="contractsfile" jdbcType="VARCHAR" />
+        <result column="chargeer" property="chargeer" jdbcType="VARCHAR" />
+        <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+        <result column="isdelete" property="isdelete" jdbcType="INTEGER" />
+
+        <association property="project" javaType="com.beans.BdProject" column="messageid"
+                     select="com.dao.bd.BdProjectMapper.getProjectAllById">
+        </association>
+
+
+    </resultMap>
+
+    <insert id="addMessagestaffMapper">
+        insert into ed_message_staff
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null">
+                `name`,
+            </if>
+            <if test="phone != null">
+                `phone`,
+            </if>
+            <if test="messageid != 0">
+                messageid,
+            </if>
+            <if test="staffRole != null">
+                staff_role,
+            </if>
+            <if test="idfile != null">
+                idfile,
+            </if>
+            <if test="identityCard != null">
+                identity_card,
+            </if>
+            <if test="photo != null">
+                `photo`,
+            </if>
+            <if test="buyState != null">
+                buy_state,
+            </if>
+            <if test="buyfile != null">
+                buyfile,
+            </if>
+            <if test="attendanceTime != null">
+                attendance_time,
+            </if>
+            <if test="security != null">
+                `security`,
+            </if>
+            <if test="securityfile != null">
+                `securityfile`,
+            </if>
+            <if test="contracts != null">
+                contracts,
+            </if>
+            <if test="contractsfile != null">
+                contractsfile,
+            </if>
+            <if test="chargeer != null">
+                chargeer,
+            </if>
+            <if test="remarks != null">
+                remarks,
+            </if>
+            <if test="isdelete != 0">
+                isdelete,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+        <if test="name != null">
+            #{name},
+        </if>
+        <if test="phone != null">
+            #{phone},
+        </if>
+        <if test="messageid != 0">
+            #{messageid},
+        </if>
+        <if test="staffRole != null">
+            #{staffRole},
+        </if>
+        <if test="idfile != null">
+                #{idfile},
+        </if>
+        <if test="identityCard != null">
+                #{identityCard},
+        </if>
+        <if test="photo != null">
+                #{photo},
+        </if>
+        <if test="buyState != null">
+                #{buyState},
+        </if>
+        <if test="buyfile != null">
+                #{buyfile},
+        </if>
+        <if test="attendanceTime != null">
+                #{attendanceTime},
+        </if>
+        <if test="security != null">
+                #{security},
+        </if>
+        <if test="securityfile != null">
+                #{securityfile},
+        </if>
+        <if test="contracts != null">
+                #{contracts},
+        </if>
+        <if test="contractsfile != null">
+                #{contractsfile},
+        </if>
+        <if test="chargeer != null">
+                #{chargeer},
+        </if>
+        <if test="remarks != null">
+            #{remarks},
+        </if>
+            <if test="isdelete != 0">
+                #{isdelete},
+            </if>
+        </trim>
+    </insert>
+
+
+    <update id="updateMessagestaffMapper">
+    update  ed_message_staff
+    <set>
+        <if test="name != null">
+            `name` = #{name},
+        </if>
+        <if test="phone != null">
+            phone = #{phone},
+        </if>
+        <if test="messageid != 0">
+            messageid = #{messageid},
+        </if>
+        <if test="staffRole != null">
+            staff_role = #{staffRole},
+        </if>
+        <if test="idfile != null">
+            idfile = #{idfile},
+        </if>
+        <if test="identityCard != null">
+            identity_card = #{identityCard},
+        </if>
+        <if test="photo != null">
+            photo = #{photo},
+        </if>
+
+        <if test="buyState != null">
+            buy_state = #{buyState},
+        </if>
+        <if test="buyfile != null">
+            buyfile = #{buyfile},
+        </if>
+        <if test="attendanceTime != null">
+            attendance_time = #{attendanceTime},
+        </if>
+        <if test="security != null">
+            security = #{security},
+        </if>
+        <if test="securityfile != null">
+            securityfile = #{securityfile},
+        </if>
+        <if test="contracts != null">
+            contracts = #{contracts},
+        </if>
+        <if test="contractsfile != null">
+            contractsfile = #{contractsfile},
+        </if>
+        <if test="chargeer != null">
+            chargeer = #{chargeer},
+        </if>
+        <if test="remarks != null">
+            remarks = #{remarks},
+        </if>
+        <if test="isdelete != 0">
+            isdelete = #{isdelete},
+        </if>
+    </set>
+        where id=#{id}
+    </update>
+
+    <update id="deleteMassageStaff">
+        update  ed_message_staff set `isdelete`=0 where id=#{id}
+
+    </update>
+    <select id="queryAllById" resultMap="BaseResultMap">
+        select * from ed_message_staff
+         where `id`=#{id}
+        and `isdelete`!=0;
+    </select>
+    <select id="queryAllBySome" resultMap="BaseResultMap">
+        select  *
+        from ed_message_staff
+        <trim prefix="where" prefixOverrides="and">
+            `isdelete`!=0
+            <if test="projectid!=0">
+                and  messageid = #{projectid}
+            </if>
+            <if test="name!=null">
+                and  `name` like CONCAT('%',#{name},'%')
+            </if>
+            <if test="identityCard!=null">
+                and  identity_card like CONCAT('%',#{identityCard},'%')
+            </if>
+            <if test="staffRole!=null">
+                and staff_role like CONCAT('%',#{staffRole},'%')
+            </if>
+            <if test="userid!=0">
+                and projectid in (select id from bd_project where process_userid =#{userid}
+                or principal =#{userid}  or userid =#{userid}
+                )
+            </if>
+        </trim>
+
+        <if test="pageIndex!=null and pageSize!=0">
+            LIMIT #{pageIndex},#{pageSize}
+        </if>
+    </select>
+
+    <select id="querycountBySome" resultType="java.lang.Integer">
+        select  count(*)
+        from ed_message_staff
+        <trim prefix="where" prefixOverrides="and">
+            `isdelete`!=0
+            <if test="projectid!=0">
+                and  messageid = #{projectid}
+            </if>
+            <if test="name!=null">
+                and  `name` like CONCAT('%',#{name},'%')
+            </if>
+            <if test="identityCard!=null">
+                and  identity_card like CONCAT('%',#{identityCard},'%')
+            </if>
+            <if test="staffRole!=null">
+                and staff_role like CONCAT('%',#{staffRole},'%')
+            </if>
+
+            <if test="userid!=0">
+                and messageid in (select id from bd_project where process_userid =#{userid}
+                or principal =#{userid}  or userid =#{userid}
+                )
+            </if>
+            ORDER BY messageid
+
+        </trim>
+    </select>
+
+</mapper>

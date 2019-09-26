@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.pd.PdProcurementInventoryMapper">
+    <resultMap id="BaseResultMap" type="com.beans.SdSalesInventory">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="serialnum" property="serialnum" jdbcType="VARCHAR"/>
+        <result column="contractid" property="contractid" jdbcType="INTEGER"/>
+        <result column="code" property="code" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="model" property="model" jdbcType="VARCHAR"/>
+        <result column="parameter" property="parameter" jdbcType="VARCHAR"/>
+        <result column="trademark" property="trademark" jdbcType="VARCHAR"/>
+        <result column="unit" property="unit" jdbcType="VARCHAR"/>
+        <result column="num" property="num" jdbcType="INTEGER"/>
+        <result column="unit_cost" property="unitCost" jdbcType="DOUBLE"/>
+        <result column="subtotal" property="subtotal" jdbcType="DOUBLE"/>
+        <result column="remarks" property="remarks" jdbcType="VARCHAR"/>
+
+    </resultMap>
+    <insert id="addInventory">
+        insert into pd_procurement_inventory
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="serialnum != null">
+                serialnum,
+            </if>
+            <if test="contractid != 0">
+                `contractid`,
+            </if>
+            <if test="code != null">
+                code,
+            </if>
+            <if test="name != null">
+                `name`,
+            </if>
+            <if test="model != null">
+                `model`,
+            </if>
+            <if test="parameter != null">
+                parameter,
+            </if>
+            <if test="trademark != null">
+                trademark,
+            </if>
+            <if test="unit != null">
+                unit,
+            </if>
+            <if test="num != 0">
+                num,
+            </if>
+            <if test="unitCost != null">
+                unit_cost,
+            </if>
+
+            <if test="subtotal != null">
+                subtotal,
+            </if>
+            <if test="remarks != null">
+                remarks,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="serialnum != null">
+                #{serialnum},
+            </if>
+            <if test="contractid != 0">
+                #{contractid},
+            </if>
+
+            <if test="code != null">
+                #{code},
+            </if>
+            <if test="name != null">
+                #{name},
+            </if>
+            <if test="model != null">
+                #{model},
+            </if>
+            <if test="parameter != null">
+                #{parameter},
+            </if>
+            <if test="trademark != null">
+                #{trademark},
+            </if>
+            <if test="unit != null">
+                #{unit},
+            </if>
+            <if test="num != 0">
+                #{num},
+            </if>
+            <if test="unitCost != null">
+                #{unitCost},
+            </if>
+
+            <if test="subtotal != null">
+                #{subtotal},
+            </if>
+            <if test="remarks != null">
+                #{remarks},
+            </if>
+
+        </trim>
+    </insert>
+    <delete id="deleteInventory">
+             delete
+        from pd_procurement_inventory
+        where contractid=#{contractid};
+    </delete>
+
+
+    <select id="querySdSalesInventory" resultMap="BaseResultMap">
+        select *
+        from pd_procurement_inventory
+        where contractid = #{id}
+    </select>
+    <select id="getInstancebyid" resultMap="BaseResultMap">
+         select *
+        from pd_procurement_inventory
+        where id = #{id}
+    </select>
+
+
+</mapper>

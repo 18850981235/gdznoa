@@ -2,10 +2,8 @@ package com.service.sd;
 
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
-import com.beans.ExcelBean;
-import com.beans.McDatumCost;
-import com.beans.SdSalesContractInventory;
-import com.beans.SdSalesInventory;
+import com.beans.*;
+import com.dao.bd.BdProjectMapper;
 import com.dao.sd.SdSalesContractInventoryMapper;
 import com.dao.sd.SdSalesInventoryMapper;
 import com.util.ExcelUtils;
@@ -39,6 +37,9 @@ public class SdSalesContractInventoryServiceImpl implements SdSalesContractInven
     private SdSalesContractInventoryMapper ContractInventoryMapper;
     @Resource
     private SdSalesInventoryMapper sdSalesInventoryMapper;
+
+    @Resource
+    private BdProjectMapper bdProjectMapper;
 
     @Override
     public void addContractInventory(@RequestParam("projectId")int projectId,
@@ -139,6 +140,27 @@ public class SdSalesContractInventoryServiceImpl implements SdSalesContractInven
     }
 
     @Override
+    public Map<String, Object> queryContractInventory(int projectId, int system, int pageIndex) {
+        Map<String, Object> map=new HashMap<>();
+        Page page=new Page();
+        try {
+            if (pageIndex == 0) {
+                pageIndex = 1;
+            }
+            page.setPageSize(10);
+            page.setTotalCount(ContractInventoryMapper.queryCounts(projectId,system));
+            page.setCurrentPageNo(pageIndex);
+            List<SdSalesContractInventory> list=  ContractInventoryMapper.querys(projectId, system,(page.getCurrentPageNo()-1)*page.getPageSize(),page.getPageSize());
+            map.put("page",page);
+            map.put("list",list);
+        } catch (Exception e) {
+            e.printStackTrace();
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+        }
+        return map;
+    }
+
+    @Override
     public  Map<String,Object> Inventorydetail(int id) {
         Map<String,Object> map=new HashMap<>();
         List<SdSalesContractInventory> Listcontract=ContractInventoryMapper.queryContractInventorbyid(id);
@@ -156,8 +178,12 @@ public class SdSalesContractInventoryServiceImpl implements SdSalesContractInven
 
 
     @Override
-    public int addInventory( List<SdSalesInventory> list,int contractid) {
+    public int addInventory( List<SdSalesInventory> list,int contractid,double total) {
+        SdSalesContractInventory contractIn=new SdSalesContractInventory();
+        contractIn.setTotal(total);
+        contractIn.setId(contractid);
         try{
+            ContractInventoryMapper.updateInventory(contractIn);
             sdSalesInventoryMapper.deleteInventory(contractid);
         for (int i = 0; i < list.size(); i++) {
 
@@ -196,8 +222,26 @@ public class SdSalesContractInventoryServiceImpl implements SdSalesContractInven
     }
 
     @Override
-    public List<SdSalesContractInventory> getbyprojectidandInt(int id) {
-        return ContractInventoryMapper.getbyprojectidandInt(id);
+    public  Map<String,Object> getbyprojectidandInt(int id) {
+        Map<String,Object> map=new HashMap<>();
+        BdProject project=bdProjectMapper.getProjectAllById(id);
+        List<SdSalesContractInventory> list= ContractInventoryMapper.getbyprojectidandInt(id);
+        map.put("project",project);
+        map.put("list",list);
+        return map;
+
+    }
+
+    @Override
+    public List<SdSalesContractInventory> getbyprojecti(int id) {
+        return ContractInventoryMapper.queryProjectid(id);
+    }
+
+    @Override
+    public  List<SdSalesInventory>  QuerydetailsbyInt(int id) {
+
+        List<SdSalesInventory> listInventory = sdSalesInventoryMapper.querySdSalesInventory(id);
+        return listInventory;
     }
 
 

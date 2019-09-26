@@ -70,7 +70,7 @@ public class PdProcurementContract {
   private String supplierName;
   private String supplierAddress;
   private String supplierLegalPerson;
-  private String supplierConsignor;
+  private int supplierConsignor;
   private String supplierPhone;
   private String supplierFax;
   private String supplierDuty;
@@ -88,6 +88,7 @@ public class PdProcurementContract {
   private  SysUser user;
   private SysUser processUser;
   private SysApprovalProcess process;
+  private  SysUser consignorUser;
 
   private  Supplier supplier;
 }

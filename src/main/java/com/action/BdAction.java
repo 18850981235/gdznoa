@@ -46,7 +46,7 @@ public class BdAction {
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
         //true:允许输入空值，false:不能为空值
     }
-
+    //region ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~客户~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     @RequestMapping("/client/query")
     public String getBdClient() {
         return "bd/client/clientList";
@@ -96,8 +96,6 @@ public class BdAction {
         } else {
             model.addAttribute("error", "添加失败");
             return "/bd/client/add";
-
-
 
         }
     }
@@ -176,7 +174,8 @@ public class BdAction {
         model.addAttribute("clientContacts", bdClientContactsService.getListById(id));
         return "/bd/clientContacts/clientContactsParticular";
     }
-
+    //endregion ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~客户结束~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    //region ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~项目~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     @RequestMapping("/project/query")
     public String showProjectList() {
         return "/bd/project/projectList";
@@ -203,11 +202,13 @@ public class BdAction {
             principalName = null;
         }
 
-        SysUser user = (SysUser) request.getSession().getAttribute("user");
-        int userid=user.getId();
-        if (userid==1||user.getAccount().equals("18959261777")){
-             userid=0;
-        }
+//        SysUser user = (SysUser) request.getSession().getAttribute("user");
+
+//        int userid=user.getId();
+//        if (user.getRoleid()==8){
+//             userid=0;
+//        }
+        int userid=0;
 
         return JSONObject.toJSONString(bdProjectService.getlist(userid,projectName, deptid, stage, areaManager,principalName, start, end, pageIndex)
                 , SerializerFeature.DisableCircularReferenceDetect,
@@ -224,9 +225,6 @@ public class BdAction {
         bdProjectService.add(project, httpServletRequest);
         return "redirect:/bd/project/query";
     }
-
-
-
     @RequestMapping("/project/DeleteProject")
     public String DeleteProject(@Param("id")int id) {
         bdProjectService.deleteProject(id);
@@ -262,12 +260,12 @@ public class BdAction {
         return JSONObject.toJSONString(bdProjectService.getProjectById(id),
                 SerializerFeature.DisableCircularReferenceDetect,
                 SerializerFeature.WriteNullStringAsEmpty);
+
     }
     @RequestMapping("/project/approvalDetailed")
     public String projectParticular(SysApprovalDetailed approvalDetailed,HttpServletRequest request) {
         int userid = (int)request.getSession().getAttribute("userId");
         SysUser user= (SysUser)request.getSession().getAttribute("user");
-        System.err.println("user+++++++>"+user);
         approvalDetailed.setApprovalIdentity(user.getRolename());
         approvalDetailed.setApprovalUser(userid);
         approvalDetailed.setApprovalDate(new Date());
@@ -275,4 +273,12 @@ public class BdAction {
         return "redirect:/showMyWork";
     }
 
+    @RequestMapping(value = "/project/queryAllSome.json", produces = "text/html;charset=UTF-8")
+    @ResponseBody
+    public String queryAllSome(@RequestParam int id) {
+        return JSONObject.toJSONString(bdProjectService.queryAllSome(id)
+                , SerializerFeature.DisableCircularReferenceDetect,
+                SerializerFeature.WriteNullStringAsEmpty);
+    }
+    //endregion ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~项目结束~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 }

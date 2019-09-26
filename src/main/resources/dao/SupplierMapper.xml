@@ -25,6 +25,7 @@
         <result column="bankaddress" property="bankaddress" jdbcType="VARCHAR" />
         <result column="cash_account" property="cashAccount" jdbcType="VARCHAR" />
         <result column="cash_account_name" property="cashAccountName" jdbcType="VARCHAR" />
+        <result column="template" property="template" jdbcType="VARCHAR" />
         <result column="recorder" property="recorder" jdbcType="INTEGER" />
         <collection property="supplierTrademarks"  javaType="java.util.ArrayList" ofType="com.beans.SupplierStaffMiddle" column="id"
                      select="com.dao.sup.MiddleMapper.querybysupplierId">
@@ -109,6 +110,9 @@
             <if test="recorder != 0" >
                 recorder
             </if>
+            <if test="template != null" >
+                template
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides="," >
             <if test="id != 0" >
@@ -183,6 +187,9 @@
             </if>
             <if test="recorder != 0" >
                 #{recorder}
+            </if>
+            <if test="template != null" >
+                #{template}
             </if>
         </trim>
     </insert>
@@ -260,6 +267,9 @@
                 </if>
                 <if test="recorder != 0">
                     recorder = #{recorder},
+                </if>
+                <if test="template != null">
+                    template = #{template},
                 </if>
             </set>
             where id=#{id}

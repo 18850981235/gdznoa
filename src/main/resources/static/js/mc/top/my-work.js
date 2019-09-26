@@ -33,7 +33,7 @@ function lo(z) {
                 // html += '<td style="width: 250px ">' + obj1.content + '</td>';
                 // html += '<td style="width: 150px ">' + obj1.phone + '</td>';
                 // html += '<td style="width: 100px ">' + obj1.fileNum + '</td>';
-                html += '<td style="width: 110px ">';
+                html += '<td style="width:110px ">';
                 html += '<a href='+obj1.process.url+'?id='+obj1.id+' style="color:#dea97d; margin-left: 4px  ">审批</a>';
 
                 html += '</td>';
@@ -57,6 +57,7 @@ function lo(z) {
             }
             $("#paginator-test").bootstrapPaginator(options);
         }
+
         // });
 
     })

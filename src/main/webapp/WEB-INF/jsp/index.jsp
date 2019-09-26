@@ -100,7 +100,7 @@
             </form>
             <div class="jump">
                 <a href="/page/register">注册账号</a>
-                <a class="retrieve">忘记密码</a>
+                <a class="retrieve" href="/page/forgetPage">忘记密码</a>
             </div>
         </div>
         <!--<p class="bottom">福建省广电智能系统集成工贸有限公司@版权所有</p>-->

@@ -5,6 +5,7 @@ import com.beans.SysApprovalDetailed;
 import org.apache.ibatis.annotations.Param;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Map;
 
@@ -29,5 +30,7 @@ public interface McQualificationService {
     int addProjectApproval(SysApprovalDetailed detailed);
 
     List<McQualificationCertificate> queryAll();
+
+    void PDfOut(HttpServletResponse response,HttpServletRequest request, String showFileName,String WaterName);
 
 }

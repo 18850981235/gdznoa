@@ -205,6 +205,7 @@ public class SysAction {
                         user= sysUserService.querybyId(a);
                         }
                         list.add(user);
+
                     }else {
                         user=null;
                     }

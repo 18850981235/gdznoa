@@ -49,11 +49,13 @@ public class PdProcurementContractServiceImpl implements PdProcurementContractSe
                 pd.setProcessNode(pd.getProcessNode()-1);
             }
             if(pd.getProcessNode()==1){
-                processUserid =Integer.parseInt(userArr[0]);
+//                processUserid =Integer.parseInt(userArr[0]);
+                processUserid =pd.getSupplierConsignor();
             }
             if(pd.getProcessNode()==2){
 //                processUserid = userMapper.DeptroleUser(pd.getDeptid()).get(0).getId();
-                processUserid =Integer.parseInt(userArr[1]);
+//                processUserid =Integer.parseInt(userArr[1]);
+                processUserid =pd.getUserid();
             }
             if(pd.getProcessNode()==3){
 //                processUserid=pd.getUserid();
@@ -61,6 +63,22 @@ public class PdProcurementContractServiceImpl implements PdProcurementContractSe
             }
             if(pd.getProcessNode()==4){
                 processUserid =Integer.parseInt(userArr[3]);
+            }
+            if(pd.getProcessNode()==5){
+//                processUserid =Integer.parseInt(userArr[0]);
+                processUserid =Integer.parseInt(userArr[4]);
+            }
+            if(pd.getProcessNode()==6){
+//                processUserid = userMapper.DeptroleUser(pd.getDeptid()).get(0).getId();
+//                processUserid =Integer.parseInt(userArr[1]);
+                processUserid =Integer.parseInt(userArr[5]);
+            }
+            if(pd.getProcessNode()==7){
+//                processUserid=pd.getUserid();
+                processUserid =pd.getUserid();
+            }
+            if(pd.getProcessNode()==8){
+                processUserid =pd.getSupplierConsignor();
             }
 
             update.setProcessNode(pd.getProcessNode());
@@ -91,7 +109,7 @@ public class PdProcurementContractServiceImpl implements PdProcurementContractSe
                 }
                 String[] arr = process.getUsersid().split(",");
                 procurementContract.setProcessid(13);
-                procurementContract.setProcessUserid(Integer.parseInt(arr[0]));
+                procurementContract.setProcessUserid(procurementContract.getSupplierConsignor());
                 procurementContract.setProcessState("未审批");
                 int s = pdProcurementMapper.addprocurement(procurementContract);
                 if (s>0){
@@ -151,6 +169,16 @@ public class PdProcurementContractServiceImpl implements PdProcurementContractSe
     }
 
     @Override
+    public Map<String, Object> querydetailbyid(int id) {
+        Map<String,Object> map=new HashMap<>();
+        PdProcurementContract procurementContract=pdProcurementMapper.querybyid(id);
+        List<SysApprovalDetailed>lists=approvalDetailedMapper.getListByapprovalId(id,"采购合同审批");
+        map.put("procurementContract",procurementContract);
+        map .put("SysApprovalDetailed",lists);
+        return map;
+    }
+
+    @Override
     public Map<String, Object> queryBySome(int projectid, String serialnumber, String code, int supplierid,int userid, int pageIndex) {
         Map<String, Object> map = new HashMap<>();
         Page page = new Page();
@@ -165,5 +193,17 @@ public class PdProcurementContractServiceImpl implements PdProcurementContractSe
         map.put("page",page);
         map.put("list",List);
         return map;
+    }
+
+    @Override
+    public List<PdProcurementContract> queryAll() {
+
+        return pdProcurementMapper.queryAll();
+    }
+
+    @Override
+    public List<PdProcurementContract> queryByProject (int id) {
+
+        return pdProcurementMapper.queryByProject(id);
     }
 }

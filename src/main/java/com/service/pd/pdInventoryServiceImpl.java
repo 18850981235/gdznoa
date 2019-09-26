@@ -1,8 +1,12 @@
 package com.service.pd;
 
+import com.beans.PdProcurementContract;
+import com.beans.SdSalesContractInventory;
 import com.beans.SdSalesInventory;
 import com.beans.pdProcurementInventory;
 import com.dao.pd.PdProcurementInventoryMapper;
+import com.dao.pd.PdProcurementMapper;
+import com.dao.sd.SdSalesContractInventoryMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
@@ -13,10 +17,13 @@ import java.util.List;
 public class pdInventoryServiceImpl implements pdInventoryService {
     @Resource
     private PdProcurementInventoryMapper PdInventoryMapper;
+    @Resource
+    private PdProcurementMapper pdProcurementMapper;
 
     @Override
-    public int AddpdInventory(List<pdProcurementInventory> list, int contractid) {
+    public int AddpdInventory(List<pdProcurementInventory> list, int contractid,double total) {
         try{
+            pdProcurementMapper.updatePdPTotal( contractid, total);
             PdInventoryMapper.deleteInventory(contractid);
             for (int i = 0; i < list.size(); i++) {
 

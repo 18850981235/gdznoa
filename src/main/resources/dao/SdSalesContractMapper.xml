@@ -19,6 +19,8 @@
         <result column="reduction_list" property="reductionList" jdbcType="VARCHAR"/>
         <result column="management_rate" property="managementRate" jdbcType="DOUBLE"/>
         <result column="bidiing_time" property="bidiingTime" jdbcType="TIMESTAMP"/>
+        <result column="bank" property="bank" jdbcType="VARCHAR"/>
+        <result column="bank_account" property="bankAccount" jdbcType="VARCHAR"/>
         <result column="accessory" property="accessory" jdbcType="VARCHAR"/>
         <result column="processid" property="processid" jdbcType="INTEGER"/>
         <result column="process_userid" property="processUserid" jdbcType="INTEGER"/>
@@ -94,6 +96,12 @@
             <if test="bidiingTime != null">
                 bidiing_time,
             </if>
+            <if test="bank != null">
+                `bank`,
+            </if>
+            <if test="bankAccount != null">
+                `bank_account`,
+            </if>
             <if test="accessory != null">
                 accessory,
             </if>
@@ -159,6 +167,12 @@
             <if test="bidiingTime != null">
                 #{bidiingTime},
             </if>
+            <if test="bank != null">
+                #{bank},
+            </if>
+            <if test="bankAccount != null">
+                #{bankAccount},
+            </if>
             <if test="accessory != null">
                 #{accessory},
             </if>
@@ -185,9 +199,7 @@
             <if test="projectid != 0">
                 projectid = #{projectid},
             </if>
-            <if test="userid != 0">
-                userid = #{userid},
-            </if>
+
             <if test="clientid != 0">
                 clientid = #{clientid},
             </if>
@@ -232,8 +244,14 @@
             <if test="bidiingTime != null">
                 bidiing_time = #{bidiingTime},
             </if>
-            <if test="accessory != null">
-                accessory = #{accessory},
+            <if test="managementRate != null">
+                management_rate = #{managementRate},
+            </if>
+            <if test="bank != null">
+                `bank` = #{bank},
+            </if>
+            <if test="bankAccount != null">
+                bank_account = #{bankAccount},
             </if>
             <if test="processid != 0">
                 processid = #{processid},
@@ -269,17 +287,15 @@
                 and deptid=#{deptId}
             </if>
             <if test="areauser != 0">
-                and areauser=#{areauser}
+                and area_manager=#{areauser}
             </if>
             <if test="vocational != 0">
-                and vocational=#{vocational}
+                and branchuser=#{vocational}
             </if>
             <if test="didtimestart != null">
-                and `bidiing_time` &gt;= #{didtimestart}
+                and `bidiing_time` = #{didtimestart}
             </if>
-            <if test="didtimeend != null">
-                and `bidiing_time` &lt;= #{didtimeend}
-            </if>
+
         </trim>
         <if test="pageSize!=0">
             LIMIT #{pageIndex},#{pageSize}
@@ -299,17 +315,15 @@
                 and deptid=#{deptId}
             </if>
             <if test="areauser != 0">
-                and areauser=#{areauser}
+                and area_manager=#{areauser}
             </if>
             <if test="vocational != 0">
-                and vocational=#{vocational}
+                and branchuser=#{vocational}
             </if>
             <if test="didtimestart != null">
-                and `bidiing_time` &gt;= #{didtimestart}
+                and `bidiing_time` = #{didtimestart}
             </if>
-            <if test="didtimeend != null">
-                and `bidiing_time` &lt;= #{didtimeend}
-            </if>
+
         </trim>
     </select>
     <select id="querybyProjectId" resultMap="BaseResultMap">

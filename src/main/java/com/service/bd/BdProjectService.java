@@ -26,4 +26,9 @@ public interface BdProjectService {
     List<BdProject>  getallPeoject();
     int deleteProject(int id);
 
+    List<BdProject> getGCProject(int id);
+
+
+    Map<String,Object>  queryAllSome(int id);
+
 }

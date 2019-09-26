@@ -153,6 +153,9 @@ function w() {
             }else if(borrow.processNode==5){
                 html += '<td style="width: 150px;text-align: center  ">信息中心确认</td>';
                 // html += '<input style="display:block;width: 200px ;text-align: center;margin: 0px" value="信息中心确认">';
+            }else if(borrow.processNode==0){
+                html += '<td style="width: 150px;text-align: center  "></td>';
+                // html += '<input style="display:block;width: 200px ;text-align: center;margin: 0px" value="分公司总经理审准">';
             }
 
             html += '<td style="width: 150px  ">'+borrow.processUser.name+'<input style="display:none" value='+borrow.processUser.id+' name="approvalUser"></td>';

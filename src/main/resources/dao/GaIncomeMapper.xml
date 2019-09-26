@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.ga.GaIncomeMapper" >
+  <resultMap id="BaseResultMap" type="com.beans.GaIncome" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="projectid" property="projectid" jdbcType="INTEGER" />
+    <result column="payer" property="payer" jdbcType="VARCHAR" />
+    <result column="purpose" property="purpose" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="money" property="money" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="accessory" property="accessory" jdbcType="VARCHAR" />
+    <result column="processid" property="processid" jdbcType="INTEGER" />
+    <result column="process_userid" property="processUserid" jdbcType="INTEGER" />
+    <result column="process_state" property="processState" jdbcType="VARCHAR" />
+    <result column="process_node" property="processNode" jdbcType="INTEGER" />
+  </resultMap>
+  <insert id="add"  >
+    insert into ga_income
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="projectid != null" >
+        projectid,
+      </if>
+      <if test="payer != null" >
+        payer,
+      </if>
+      <if test="purpose != null" >
+        purpose,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="money != null" >
+        money,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="accessory != null" >
+        accessory,
+      </if>
+      <if test="processid != null" >
+        processid,
+      </if>
+      <if test="processUserid != null" >
+        process_userid,
+      </if>
+      <if test="processState != null" >
+        process_state,
+      </if>
+      <if test="processNode != null" >
+        process_node,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="projectid != null" >
+        #{projectid,jdbcType=INTEGER},
+      </if>
+      <if test="payer != null" >
+        #{payer,jdbcType=VARCHAR},
+      </if>
+      <if test="purpose != null" >
+        #{purpose,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="money != null" >
+        #{money,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="accessory != null" >
+        #{accessory,jdbcType=VARCHAR},
+      </if>
+      <if test="processid != null" >
+        #{processid,jdbcType=INTEGER},
+      </if>
+      <if test="processUserid != null" >
+        #{processUserid,jdbcType=INTEGER},
+      </if>
+      <if test="processState != null" >
+        #{processState,jdbcType=VARCHAR},
+      </if>
+      <if test="processNode != null" >
+        #{processNode,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateById"  >
+    update ga_income
+    <set >
+      <if test="id != null" >
+        id = #{id,jdbcType=INTEGER},
+      </if>
+      <if test="projectid != null" >
+        projectid = #{projectid,jdbcType=INTEGER},
+      </if>
+      <if test="payer != null" >
+        payer = #{payer,jdbcType=VARCHAR},
+      </if>
+      <if test="purpose != null" >
+        purpose = #{purpose,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        `type` = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="money != null" >
+        money = #{money,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="accessory != null" >
+        accessory = #{accessory,jdbcType=VARCHAR},
+      </if>
+      <if test="processid != null" >
+        processid = #{processid,jdbcType=INTEGER},
+      </if>
+      <if test="processUserid != null" >
+        process_userid = #{processUserid,jdbcType=INTEGER},
+      </if>
+      <if test="processState != null" >
+        process_state = #{processState,jdbcType=VARCHAR},
+      </if>
+      <if test="processNode != null" >
+        process_node = #{processNode,jdbcType=INTEGER},
+      </if>
+    </set>
+  </update>
+
+  <select id="getListById" resultMap="BaseResultMap">
+    select *
+    from ga_income
+    where id = #{id}
+  </select>
+  <select id="getList" resultMap="BaseResultMap">
+    select *
+    from ga_income
+    where projectid = #{projectid}
+    <if test="type">
+      and `type`=#{type}
+    </if>
+    <if test="pageSize!=0">
+      LIMIT #{pageIndex},#{pageSize}
+    </if>
+
+  </select>
+
+  <select id="getCount" resultType="int">
+    select count(1)
+    from ga_income
+    where
+    projectid = #{projectid}
+    <if test="type">
+      and `type`=#{type}
+    </if>
+  </select>
+
+
+
+  <resultMap id="ResultMap" type="com.beans.bankflow">
+    <id column="id" property="id" jdbcType="INTEGER"/>
+    <result column="userid" property="userid" jdbcType="INTEGER"/>
+    <result column="name" property="name" jdbcType="VARCHAR"/>
+    <result column="payment_money" property="payment_money" jdbcType="DECIMAL"/>
+    <result column="unit" property="unit" jdbcType="VARCHAR"/>
+    <result column="type" property="type" jdbcType="VARCHAR"/>
+    <result column="matter" property="matter" jdbcType="VARCHAR"/>
+    <result column="digest" property="digest" jdbcType="VARCHAR"/>
+    <result column="bankname" property="bankname" jdbcType="VARCHAR"/>
+    <result column="out" property="out" jdbcType="VARCHAR"/>
+    <result column="out" property="inorout" jdbcType="VARCHAR"/>
+    <result column="bankaccount" property="bankaccount" jdbcType="VARCHAR"/>
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP"/>
+    <result column="paid" property="paid" jdbcType="DECIMAL"/>
+    <result column="ticket" property="ticket" jdbcType="DECIMAL"/>
+
+    <association property="user" javaType="com.beans.SysUser" column="userid"
+                 select="com.dao.sys.UserMapper.getByID">
+    </association>
+  </resultMap>
+
+
+  <select id="bankFlow"  resultMap="ResultMap">
+    SELECT id,`name`,`unit`,`payment_money`,`type`,`type` as out, userid,`matter`,digest,bankname,bankaccount,contract_money,createtime
+
+    FROM `ga_comego`
+
+    where projectid = #{projectid}
+    <if test="type != null">
+      and `type` = #{type}
+    </if>
+  </select>
+</mapper>

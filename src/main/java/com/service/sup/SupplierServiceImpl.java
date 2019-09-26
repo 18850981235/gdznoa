@@ -39,6 +39,10 @@ public class SupplierServiceImpl implements SupplierService {
         if (accessory!=null&&!accessory.equals("")){
             supplier.setCredentialAccessory(accessory);
         }
+            String template= FileUtils.uploadFile(request,"template");
+            if (template!=null&&!template.equals("")){
+                supplier.setTemplate(template);
+            }
             int userId = (int) request.getSession().getAttribute("userId");
         supplier.setRecorder(userId);
          int a=supplierMapper.addSupplier(supplier);
@@ -46,9 +50,7 @@ public class SupplierServiceImpl implements SupplierService {
         for (int i = 0; i < temp.length; i++) {
             if (!"".equals(temp[i]) && temp[i] != null){
                 int supplierId=supplier.getId();
-                System.err.println("supplierId====>"+supplierId);
                 int staffid=Integer.valueOf(temp[i]);
-                System.err.println("staffid====>"+staffid);
                 middleMapper.addMeddle(supplierId,staffid);
             }
         }

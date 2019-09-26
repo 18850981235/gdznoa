@@ -24,7 +24,11 @@ public interface SdSalesContractservice {
     Map<String,Object> querydetailbyid(@Param("id")int id);
 
     Map<String,Object> query(@Param("projectId")int projectId, @Param("clientId")int clientId, @Param("deptId")int deptId, @Param("didtimestart") Date didtimestart,
-                            @Param("didtimeend")Date didtimeend, @Param("areauser")int areauser, @Param("vocational")int vocational, int pageIndex);
+                             @Param("areauser")int areauser, @Param("vocational")int vocational, int pageIndex);
 
     List<SdSalesContract> querybyProjectId(@RequestParam("id")int id);
+
+
+
+
 }

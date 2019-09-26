@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.pd.PdServiceInventoryMapper">
+    <resultMap id="BaseResultMap" type="com.beans.PdServiceInventory">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="contractid" property= "contractid" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="worknum" property= "worknum" jdbcType="INTEGER"/>
+        <result column="job" property="job" jdbcType="VARCHAR"/>
+        <result column="insurance" property="insurance" jdbcType="VARCHAR"/>
+        <result column="wages" property="wages" jdbcType="VARCHAR"/>
+
+    </resultMap>
+    <insert id="addInventory">
+        insert into pd_service_inventory
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="contractid != 0">
+                `contractid`,
+            </if>
+            <if test="name != null">
+                `name`,
+            </if>
+            <if test="worknum != 0">
+                `worknum`,
+            </if>
+            <if test="job != null">
+                job,
+            </if>
+            <if test="insurance != null">
+                `insurance`,
+            </if>
+            <if test="wages != null">
+                `wages`,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="contractid != 0">
+                #{contractid},
+            </if>
+            <if test="name != null">
+                #{name},
+            </if>
+            <if test="worknum != 0">
+                #{worknum},
+            </if>
+
+            <if test="job != null">
+                #{job},
+            </if>
+            <if test="insurance != null">
+                #{insurance},
+            </if>
+            <if test="wages != null">
+                #{wages},
+            </if>
+
+        </trim>
+    </insert>
+    <delete id="deleteInventory">
+        delete
+        from pd_service_inventory
+        where contractid=#{contractid};
+    </delete>
+
+
+    <select id="querySdSalesInventory" resultMap="BaseResultMap">
+        select *
+        from pd_service_inventory
+        where contractid = #{id}
+    </select>
+    <select id="getInstancebyid" resultMap="BaseResultMap">
+         select *
+        from pd_service_inventory
+        where id = #{id}
+    </select>
+
+
+
+</mapper>

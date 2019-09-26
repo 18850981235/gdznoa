@@ -74,6 +74,12 @@ function w() {
              html += '<td style="width:150px ;background-color: #efefef;">中标时间</td>';
              html += '<td >'+data.bidiingTime+'</td>';
              html += '</tr>';
+            html += '<tr  style="height:40px;">';
+            html += '<td style="width:150px ;;background-color: #efefef">银行账号名称</td>';
+            html += '<td style="width:300px ;">'+data.bank+'</td>';
+            html += '<td style="width:150px ;background-color: #efefef;">账户</td>';
+            html += '<td >'+data.bankAccount+'</td>';
+            html += '</tr>';
              html += '<tr  style="height:40px;">';
              html += '<td style="width:150px ;;background-color: #efefef">附件</td>';
             if(data.accessory==undefined||data.accessory==null||data.accessory==""){

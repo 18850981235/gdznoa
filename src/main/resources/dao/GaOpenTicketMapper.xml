@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.ga.GaOpenTicketMapper" >
+  <resultMap id="BaseResultMap" type="com.beans.GaOpenTicket" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="projectid" property="projectid" jdbcType="INTEGER" />
+    <result column="userid" property="userid" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="cost" property="cost" jdbcType="DECIMAL" />
+    <result column="explain" property="explain" jdbcType="VARCHAR" />
+    <result column="bankaccount" property="bankaccount" jdbcType="VARCHAR" />
+    <result column="bankname" property="bankname" jdbcType="VARCHAR" />
+    <result column="accountname" property="accountname" jdbcType="VARCHAR" />
+    <result column="clientid" property="clientid" jdbcType="INTEGER" />
+    <result column="contene" property="contene" jdbcType="VARCHAR" />
+    <result column="returned_money_time" property="returnedMoneyTime" jdbcType="TIMESTAMP" />
+    <result column="returned_money" property="returnedMoney" jdbcType="DECIMAL" />
+    <result column="debt" property="debt" jdbcType="DECIMAL" />
+    <result column="accessory" property="accessory" jdbcType="VARCHAR" />
+    <result column="processid" property="processid" jdbcType="INTEGER" />
+    <result column="process_userid" property="processUserid" jdbcType="INTEGER" />
+    <result column="process_state" property="processState" jdbcType="VARCHAR" />
+    <result column="process_node" property="processNode" jdbcType="INTEGER" />
+    <association property="project" javaType="com.beans.BdProject" column="projectid"
+                 select="com.dao.bd.BdProjectMapper.getProjectById">
+    </association>
+    <association property="user" javaType="com.beans.SysUser" column="userid"
+                 select="com.dao.sys.UserMapper.getByID">
+    </association>
+  </resultMap>
+  <insert id="add" >
+    insert into ga_open_ticket
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="projectid != null" >
+        projectid,
+      </if>
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="name != null" >
+        `name`,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="cost != null" >
+        cost,
+      </if>
+      <if test="explain != null" >
+        `explain`,
+      </if>
+      <if test="type != null" >
+        `type`,
+      </if>
+      <if test="bankaccount != null" >
+        bankaccount,
+      </if>
+      <if test="bankname != null" >
+        bankname,
+      </if>
+      <if test="accountname != null" >
+        accountname,
+      </if>
+      <if test="clientid != null" >
+        clientid,
+      </if>
+      <if test="contene != null" >
+        contene,
+      </if>
+      <if test="returnedMoneyTime != null" >
+        returned_money_time,
+      </if>
+      <if test="returnedMoney != null" >
+        returned_money,
+      </if>
+      <if test="debt != null" >
+        debt,
+      </if>
+      <if test="accessory != null" >
+        accessory,
+      </if>
+      <if test="processid != null" >
+        processid,
+      </if>
+      <if test="processUserid != null" >
+        process_userid,
+      </if>
+      <if test="processState != null" >
+        process_state,
+      </if>
+      <if test="processNode != null" >
+        process_node,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="projectid != null" >
+        #{projectid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cost != null" >
+        #{cost,jdbcType=DECIMAL},
+      </if>
+      <if test="explain != null" >
+        #{explain,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="bankaccount != null" >
+        #{bankaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="bankname != null" >
+        #{bankname,jdbcType=VARCHAR},
+      </if>
+      <if test="accountname != null" >
+        #{accountname,jdbcType=VARCHAR},
+      </if>
+      <if test="clientid != null" >
+        #{clientid,jdbcType=INTEGER},
+      </if>
+      <if test="contene != null" >
+        #{contene,jdbcType=VARCHAR},
+      </if>
+      <if test="returnedMoneyTime != null" >
+        #{returnedMoneyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="returnedMoney != null" >
+        #{returnedMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="debt != null" >
+        #{debt,jdbcType=DECIMAL},
+      </if>
+      <if test="accessory != null" >
+        #{accessory,jdbcType=VARCHAR},
+      </if>
+      <if test="processid != null" >
+        #{processid,jdbcType=INTEGER},
+      </if>
+      <if test="processUserid != null" >
+        #{processUserid,jdbcType=INTEGER},
+      </if>
+      <if test="processState != null" >
+        #{processState,jdbcType=VARCHAR},
+      </if>
+      <if test="processNode != null" >
+        #{processNode,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateById" >
+    update ga_open_ticket
+    <set >
+      <if test="projectid != null" >
+        projectid = #{projectid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        userid = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cost != null" >
+        cost = #{cost,jdbcType=DECIMAL},
+      </if>
+      <if test="explain != null" >
+        `explain` = #{explain,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        `type` = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="bankaccount != null" >
+        bankaccount = #{bankaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="bankname != null" >
+        bankname = #{bankname,jdbcType=VARCHAR},
+      </if>
+      <if test="accountname != null" >
+        accountname = #{accountname,jdbcType=VARCHAR},
+      </if>
+      <if test="clientid != null" >
+        clientid = #{clientid,jdbcType=INTEGER},
+      </if>
+      <if test="contene != null" >
+        contene = #{contene,jdbcType=VARCHAR},
+      </if>
+      <if test="returnedMoneyTime != null" >
+        returned_money_time = #{returnedMoneyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="returnedMoney != null" >
+        returned_money = #{returnedMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="debt != null" >
+        debt = #{debt,jdbcType=DECIMAL},
+      </if>
+      <if test="accessory != null" >
+        accessory = #{accessory,jdbcType=VARCHAR},
+      </if>
+      <if test="processid != null" >
+        processid = #{processid,jdbcType=INTEGER},
+      </if>
+      <if test="processUserid != null" >
+        process_userid = #{processUserid,jdbcType=INTEGER},
+      </if>
+      <if test="processState != null" >
+        process_state = #{processState,jdbcType=VARCHAR},
+      </if>
+      <if test="processNode != null" >
+        process_node = #{processNode,jdbcType=INTEGER},
+      </if>
+    </set>
+    where  id=#{id}
+  </update>
+  <select id="getListById" resultMap="BaseResultMap">
+    select * from ga_open_ticket where id=#{id}
+  </select>
+  <select id="getList" resultMap="BaseResultMap">
+    select * from ga_open_ticket where projectid=#{projectid} and `type`=#{type}
+  </select>
+  <select id="getCount" resultType="int">
+    select COUNT(1) from ga_open_ticket where projectid=#{projectid} and `type`=#{type}
+  </select>
+</mapper>

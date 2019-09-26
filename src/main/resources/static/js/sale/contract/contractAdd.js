@@ -4,7 +4,7 @@
 $.ajax({
     type:"post",
     dataType:"json",
-    url:"/sd/SdSalesContract/getProject",
+    url:"/util/getGCProject",
     success:function (data) {
         $.each(data,function (index,obj) {
             var html="";
@@ -68,6 +68,9 @@ $(document).ready(function () {
                     var qo=$("#ap").val()
                     if(obj.id==qo){
                         $("#number").val(obj.code)
+                        $(".Eliminate-1").val(obj.client.name)
+                        $(".Eliminate-no-1").val(obj.client.id)
+
                     }
                 })
             }

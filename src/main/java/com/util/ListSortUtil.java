@@ -77,6 +77,7 @@ public class ListSortUtil {
      * @param field 排序的数据字段名称
      * @param sort  升序 还是 降序，默认升序
      * @param <T>   泛型T
+     *
      * @return List
      */
     public static <T> List<T> sort(List<T> list, final String field, final String sort) {

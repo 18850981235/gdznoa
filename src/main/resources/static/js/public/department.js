@@ -5,7 +5,8 @@
 $.ajax({
     type:"post",
     dataType:"json",
-    url:"/util/getDept",
+    // url:"/util/getDept",
+    url:"/util/areaManagerUser",
     success:function (data) {
         var names=data;
         $.each(names,function (index,obj) {

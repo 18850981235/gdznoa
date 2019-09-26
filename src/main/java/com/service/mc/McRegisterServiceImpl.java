@@ -1,5 +1,6 @@
 package com.service.mc;
 
+import com.beans.McDatumCost;
 import com.beans.McRegisterRecords;
 import com.beans.SysApprovalDetailed;
 import com.beans.SysApprovalProcess;
@@ -39,38 +40,59 @@ public class McRegisterServiceImpl implements McRegisterService{
         detailed.setApprovalName("注册备案");
         try {
             approvalDetailedMapper.add(detailed);
-            McRegisterRecords mcRegisterRecords = new McRegisterRecords();
-
-            if (detailed.getState().equals( "通过")) {
-                String state = "进行中";
-                int processUserid = 0;
-              List<McRegisterRecords> list = mcregistermapper.querybyid(detailed.getApprovalId());
-                 mcRegisterRecords=list.get(0);
-                String users = mcRegisterRecords.getProcess().getUsersid();
-                String[] userArr = users.split(",");
-                for (int i = 0; i < userArr.length; i++) {
-                    if (userArr[i].equals(String.valueOf(mcRegisterRecords.getProcessUserid()))) {
-                        if (i != userArr.length - 1) {
-                            processUserid = Integer.parseInt(userArr[i + 1]);
-                        } else {
-                            state = "已结束";
-                        }
-                    }
+            McRegisterRecords update = new McRegisterRecords();
+            int processUserid = 0;
+            McRegisterRecords pd = mcregistermapper.querybyid(detailed.getApprovalId()).get(0);
+            String state = "审批中";
+            String users = pd.getProcess().getUsersid();
+            String[] userArr = users.split(",");
+            if (detailed.getState().equals("同意")) {
+                pd.setProcessNode(pd.getProcessNode() + 1);
+                if (userArr.length < pd.getProcessNode()) {
+                    state = "审批结束";
+                    pd.setProcessNode(0);
                 }
-                mcRegisterRecords.setProcessUserid(processUserid);
-                mcRegisterRecords.setProcessState(state);
-                mcRegisterRecords.setId(detailed.getApprovalId());
             } else {
-                mcRegisterRecords.setProcessState(detailed.getState());
-                mcRegisterRecords.setId(detailed.getApprovalId());
+                pd.setProcessNode(pd.getProcessNode() - 1);
             }
-            return mcregistermapper.update(mcRegisterRecords);
+            if (pd.getProcessNode() == 1) {
+                processUserid = Integer.parseInt(userArr[0]);
+            }
+            if (pd.getProcessNode() == 2) {
+//                processUserid = userMapper.DeptroleUser(pd.getDeptid()).get(0).getId();
+                processUserid = Integer.parseInt(userArr[1]);
+            }
+            if (pd.getProcessNode() == 3) {
+//                processUserid=pd.getUserid();
+                processUserid = Integer.parseInt(userArr[2]);
+            }
+            if (pd.getProcessNode() == 4) {
+                processUserid = Integer.parseInt(userArr[3]);
+            }
+            if (pd.getProcessNode() == 5) {
+//                processUserid=pd.getUserid();
+                processUserid = Integer.parseInt(userArr[4]);
+            }
+            if (pd.getProcessNode() == 6) {
+                processUserid = Integer.parseInt(userArr[5]);
+            }
+
+            update.setProcessNode(pd.getProcessNode());
+            update.setProcessUserid(processUserid);
+            update.setId(detailed.getApprovalId());
+            update.setProcessState(state);
+            return mcregistermapper.update(update);
         } catch (Exception e) {
             e.printStackTrace();
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return 0;
         }
+
     }
+
+
+
+
 
 //添加注册备案
    public  int addregister(McRegisterRecords mcregisterrecords, HttpServletRequest request){

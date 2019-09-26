@@ -70,6 +70,10 @@ public class SdSalesContractServiceImpl implements SdSalesContractservice {
     @Override
     public int addSdSalesContract(SdSalesContract sdSalesContract, HttpServletRequest request) {
         int num = 0;
+            List<SdSalesContract> sds=sdSalesContractMapper.querybyProjectId(sdSalesContract.getProjectid());
+            if(sds.size()>0){
+                return 3;
+            }
         try {
             SysApprovalProcess process = approvalProcessMapper.getProcessById(15);
             String accessory= FileUtils.uploadFile(request,"file");
@@ -111,7 +115,7 @@ public class SdSalesContractServiceImpl implements SdSalesContractservice {
 
 
     @Override
-    public Map<String,Object> query(@Param("projectId") int projectId, int clientId, int deptId, Date didtimestart, Date didtimeend, int areauser, int vocational, int pageIndex) {
+    public Map<String,Object> query(@Param("projectId") int projectId, int clientId, int deptId, Date didtimestart,int areauser, int vocational, int pageIndex) {
         Map<String, Object> map = new HashMap<>();
         Page page = new Page();
 
@@ -119,10 +123,10 @@ public class SdSalesContractServiceImpl implements SdSalesContractservice {
                 pageIndex = 1;
             }
             page.setPageSize(10);
-            page.setTotalCount(sdSalesContractMapper.querycount(projectId, clientId, deptId, didtimestart, didtimeend, areauser, vocational));
+            page.setTotalCount(sdSalesContractMapper.querycount(projectId, clientId, deptId, didtimestart,  areauser, vocational));
             page.setCurrentPageNo(pageIndex);
 
-            List<SdSalesContract> List = sdSalesContractMapper.querybysome(projectId, clientId, deptId, didtimestart, didtimeend, areauser, vocational, (page.getCurrentPageNo() - 1) * page.getPageSize(), page.getPageSize());
+            List<SdSalesContract> List = sdSalesContractMapper.querybysome(projectId, clientId, deptId, didtimestart,  areauser, vocational, (page.getCurrentPageNo() - 1) * page.getPageSize(), page.getPageSize());
             map.put("page",page);
             map.put("list",List);
             return map;

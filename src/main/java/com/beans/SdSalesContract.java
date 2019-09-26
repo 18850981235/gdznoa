@@ -31,6 +31,8 @@ public class SdSalesContract {
   @JSONField(format = "yyyy-MM-dd")
   @DateTimeFormat(pattern = "yyyy-MM-dd")
   private Date bidiingTime;
+  private String bank;
+  private String bankAccount;
   private String accessory;
   private int processid;
   private int processUserid;

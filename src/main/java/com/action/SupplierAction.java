@@ -148,6 +148,7 @@ public class SupplierAction {
     }
 
     @RequestMapping(value="/staff/addstaff" , produces = "text/html;charset=UTF-8")
+    @ResponseBody
     public String addStaff(@RequestBody String  list){
 
         System.err.println("List===>"+list);
@@ -167,9 +168,9 @@ public class SupplierAction {
 //        return 1;
         if( supplierStaffService.addstaff(list1,supplierid)>0){
 
-            return "/supplier/contacts/contactsList";
+            return "yes";
         }else{
-            return "/supplier/contacts/contactsAdd";
+            return "no";
         }
 
     }
@@ -282,8 +283,13 @@ public class SupplierAction {
         return "/supplier/merchant/merchantPadute";
     }
     @RequestMapping(value="/supplier2/updateSupplier",produces ="text/html;charset=UTF-8" )
-    public int  updateSupplier(Supplier supplier){
-        return supplierService.updateSupplier(supplier)  ;
+    public String  updateSupplier(Supplier supplier){
+        int i= supplierService.updateSupplier(supplier)  ;
+        if(i>0){
+            return "/supplier/merchant/merchantList";
+        }else {
+            return "/supplier/merchant/merchantList ";
+        }
     };
     //根据ID查询供应商
     @RequestMapping(value="/supplier2/QuerySupplierByIdPage" , produces = "text/html;charset=UTF-8")
@@ -305,7 +311,10 @@ public class SupplierAction {
     }
     @RequestMapping(value = "/supplier2/querySupplier",produces = "application/json; charset=utf-8")
     @ResponseBody
-    public String querySupplier(@RequestParam(required = false) String code, @RequestParam(required = false) String traname,@RequestParam(required = false) String name,@RequestParam(required = false, defaultValue = "0") int pageIndex) {
+    public String querySupplier(@RequestParam(required = false) String code,
+                                @RequestParam(required = false) String traname,
+                                @RequestParam(required = false) String name,
+                                @RequestParam(required = false, defaultValue = "0") int pageIndex) {
 
         if (code == null || code == "") {
             code = null;

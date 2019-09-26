@@ -34,8 +34,10 @@ public class McRegisterRecords {
   private String accessory;
   private int processid;
   private int processUserid;
+  private int processNode;
   private String processState;
   private String deptName;
+
   private SysUser annualuser;
   private SysUser user;
   private SysUser managerUser;

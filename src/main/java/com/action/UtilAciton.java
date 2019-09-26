@@ -9,6 +9,7 @@ import com.service.publics.PdfService;
 import com.service.sys.ApprovalProcessService;
 import com.service.sys.DeptService;
 import com.service.sys.UserService;
+import com.util.DeleteFileUtil;
 import com.util.FileUtils;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -87,6 +88,17 @@ public class UtilAciton {
             pdfService.add(user.getName(),file);
         }
     }
+        //文件删除
+    @RequestMapping(value = "/fileDelete")
+    @ResponseBody
+    public String  deleteFile(@RequestParam String file){
+       boolean a= DeleteFileUtil.deleteFile(file);
+        if(a){
+           return "success";
+        }else{
+            return "false";
+        }
+    }
     @RequestMapping(value = "/getProject",produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String getProjectName(){
@@ -118,5 +130,17 @@ public class UtilAciton {
                 SerializerFeature.DisableCircularReferenceDetect,
                 SerializerFeature.WriteNullStringAsEmpty);
     }
+
+    //查看财务模块项目权限
+    @RequestMapping(value = "/getGCProject",produces = "text/html;charset=UTF-8")
+    @ResponseBody
+    public String getGCProject(HttpSession session){
+        int userid=(int)session.getAttribute("userId");
+//        int userid=1;
+        return JSONObject.toJSONString(bdProjectService.getGCProject(userid),
+                SerializerFeature.DisableCircularReferenceDetect,
+                SerializerFeature.WriteNullStringAsEmpty);
+    }
+
 
 }

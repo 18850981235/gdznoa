@@ -50,6 +50,8 @@ import java.util.List;
 
     BdProject getProjectById(@Param("id") int id);
 
+    List<BdProject> getByuseridAndAreaManager(@Param("id") int id);
+
 
 
 }

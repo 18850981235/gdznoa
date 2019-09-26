@@ -3,9 +3,9 @@ spring:
     restart:
       enabled: true #热部署
   datasource:
-    url: jdbc:mysql://112.124.200.22:3306/oa?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8&allowMultiQueries=true
-    username: root
-    password: 123456
+    url: jdbc:mysql://47.112.114.226:33669/oa?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8&allowMultiQueries=true
+    username: ruipu
+    password: RuiPu20190411!!!
   mvc:
     view:
       prefix: /WEB-INF/jsp/
@@ -26,4 +26,4 @@ logging:
   level:
     com.dao: DEBUG
 server:
-  port: 8080
+  port: 8088

@@ -96,7 +96,7 @@ public class McAction {
         }
         SysUser user = (SysUser) request.getSession().getAttribute("user");
         int userid=user.getId();
-        if (userid==1||user.getAccount().equals("18959261777")){
+        if (user.getRoleid()==8){
             userid=0;
         }
         return JSONObject.toJSONString(mcStampService.getList(projectName, userid, stampType, deptid, content, purpose, start, end, pageIndex),
@@ -189,8 +189,9 @@ public class McAction {
             projectName = null;
         }
         SysUser user = (SysUser) request.getSession().getAttribute("user");
-        int userid=user.getId();
-        if (userid==1||user.getAccount().equals("18959261777")){
+        int userid=1;
+//        int userid=user.getId();
+        if (user.getRoleid()==8){
             userid=0;
         }
         return JSONObject.toJSONString(mcFileBorrowService.getList(projectName, name, deptid, start, end, userid, pageIndex),
@@ -289,7 +290,7 @@ public class McAction {
         }
         SysUser user = (SysUser) request.getSession().getAttribute("user");
         int userid=user.getId();
-        if (userid==1||user.getAccount().equals("18959261777")){
+        if (user.getRoleid()==8){
             userid=0;
         }
         return JSONObject.toJSONString(mcMaterialsSevice.getList(offerTpye, deptid, start, end, userid, pageIndex),
@@ -382,7 +383,7 @@ public class McAction {
 
         SysUser user = (SysUser) request.getSession().getAttribute("user");
         int userid=user.getId();
-        if (userid==1||user.getAccount().equals("18959261777")){
+        if (user.getRoleid()==8){
             userid=0;
         }
         return JSONObject.toJSONString(mcPersonnelDispatchedService.getList(projectName, personnelCondition, deptid, userid, start, end, pageIndex),
@@ -473,7 +474,7 @@ public class McAction {
         }
         SysUser user = (SysUser) request.getSession().getAttribute("user");
         int userid=user.getId();
-        if (userid==1||user.getAccount().equals("18959261777")){
+        if (user.getRoleid()==8){
             userid=0;
         }
         return JSONObject.toJSONString(mcDatumCostService.getList(projectName, deptid, start, end, userid, pageIndex),
@@ -701,6 +702,13 @@ public class McAction {
 
     };
 
+    //跳转到资历证书增加界面
+    @RequestMapping("/qualification/pdfs")
+    public void PDFout(HttpServletResponse response,HttpServletRequest request, String showFileName,String WaterName) {
+        mcQualificationService.PDfOut( response, request, showFileName, WaterName); ;
+    }
+
+
 
     //跳转到资历证书增加界面
     @RequestMapping("/qualification/add")
@@ -840,8 +848,9 @@ public class McAction {
         }else{
             return "/mc/mcAchievement/mcAchievementList";
         }
+
     };
-    @RequestMapping("/performanceDate/updatePerformanceDatePage")
+    @RequestMapping("/performanceDate/update")
     public String toupdatePerformanceDate() {
         return "/mc/mcAchievement/mcAchievementPadute" ;
     }
@@ -863,9 +872,9 @@ public class McAction {
             return "/mc/mcAchievement/mcAchievementList";
         }
     };
-    @RequestMapping("/performanceDate/queryPerformanceDatebyidPage")
+    @RequestMapping("/performanceDate/detailed")
     public String toquerybyidPerformanceDate() {
-        return "mc/mcAchievement/mcAchievementList" ;
+        return "mc/mcAchievement/mcAchievementPaticular" ;
     }
 
     @RequestMapping(value = "/performanceDate/querybyid", produces = "text/html;charset=UTF-8")
@@ -875,7 +884,7 @@ public class McAction {
                 SerializerFeature.DisableCircularReferenceDetect,
                 SerializerFeature.WriteNullStringAsEmpty);
     };
-    @RequestMapping("/performanceDate/queryPerformanceDatePage")
+    @RequestMapping("/performanceDate/query")
     public String toqueryPerformanceDate() {
         return "mc/mcAchievement/mcAchievementList" ;
     }

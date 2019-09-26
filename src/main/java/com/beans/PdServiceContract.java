@@ -25,7 +25,7 @@ public class PdServiceContract {
   private Date createtime;
   private String address;
   private String  fristParty;
-  private String secondParty;
+  private int  secondParty;
 
 
   private String  fristRepresentative;
@@ -43,7 +43,7 @@ public class PdServiceContract {
   private String secondName;
   private String secondAddress;
   private String secondLegalPerson;
-  private String secondConsignor;
+  private int secondConsignor;
   private String secondPhone;
   private String secondFax;
   private String secondDuty;
@@ -51,6 +51,7 @@ public class PdServiceContract {
   private String secondAccount;
   private String secondFile;
 
+  private  double total;
   private String invoicetype;
   private String paymenttype;
   private double advance;
@@ -82,6 +83,9 @@ public class PdServiceContract {
   private  BdProject project;
   private  SysUser user;
   private SysUser processUser;
+  private  SysUser consignorUser;
+
+  private  Supplier supplier;
 
   private SysApprovalProcess process;
 

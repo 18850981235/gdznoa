@@ -88,9 +88,22 @@
                 </div>
                 <div class="top2">
                     <span>所属机构：	</span>
-                    <select class="deptid department" style="height: 25px " required>
-                        <option value="">请选择</option>
-                    </select>
+                    <%--<select class="deptid department" style="height: 25px " required>--%>
+                        <%--<option value="">请选择</option>--%>
+                    <%--</select>--%>
+
+                    <%--<input class="Eliminate-3" style="width: 100px;line-height: 40px  " readonly required>--%>
+                    <%--<input style="display: none" class="Eliminate-no-3 deptid" name="deptid">--%>
+                    <%--<a target="_blank "  class="add-to3">添加</a>--%>
+                    <%--<a class="clear-to3" >--%>
+                        <%--<input value="清空" class="input3"  onClick="" type="button">--%>
+                    <%--</a>--%>
+                    <input class="Eliminate-3" readonly>
+                    <input style="display: none" class="Eliminate-no-3 deptid" >
+                    <a target="_blank " class="add-to3" style="margin-top: 10px ;position: relative ;float: left  "><span style="width: 30px ;height:20px ;position: absolute;top: -10px;left: 16px  ">添加</span></a>
+                    <a class="clear-to3" style="position: relative ;float: left;margin-left: 25px ;margin-top: 10px ">
+                    <input style="width: 30px ;height:30px ;position: absolute;top: -10px;left: 16px  " value="清空" class="input3"  onClick="" type="button">
+                    </a>
                 </div>
                 <div class="top3">
                     <span>项目阶段</span>
@@ -107,32 +120,39 @@
             <div class="query-in">
                 <div class="in1">
                     <span>项目负责人：	</span>
-                    <input class=" principalName" readonly>
-
+                    <input class="Eliminate" readonly>
+                    <input style="display: none" class="Eliminate-no principalName" name="principal">
+                    <a target="_blank " class="add-to"  style="margin-top: 10px ;position: relative ;float: left  "><span style="width: 30px ;height:20px ;position: absolute;top: -10px;left: 16px  ">添加</span></a>
+                    <a class="clear-to" style="position: relative ;float: left;margin-left: 25px ;margin-top: 10px ">
+                        <input value="清空" class="input"  onClick="" type="button" style="width: 30px ;height:30px ;position: absolute;top: -10px;left: 16px  " >
+                    </a>
 
                 </div>
                 <div class="in2">
                     <span>区域负责人：	</span>
-                    <input class="Eliminate-3" readonly>
-                    <input style="display: none" class="Eliminate-no-3 areaManager" >
-                    <a target="_blank " class="add-to3" style="margin-top: 10px ;position: relative ;float: left  "><span style="width: 30px ;height:20px ;position: absolute;top: -10px;left: 16px  ">添加</span></a>
-                    <a class="clear-to3" style="position: relative ;float: left;margin-left: 25px ;margin-top: 10px ">
-                        <input style="width: 30px ;height:30px ;position: absolute;top: -10px;left: 16px  " value="清空" class="input3"  onClick="" type="button">
-                    </a>
+                    <select class="department areaManager" style="height: 35px;width: 180px;text-align: center;border: 0px   "  name="areaManager">
+                        <option value="">请选择</option>
+                    </select>
+
+                    <%--<input class="Eliminate-3" readonly>--%>
+                    <%--<input style="display: none" class="Eliminate-no-3 areaManager" >--%>
+                    <%--<a target="_blank " class="add-to3" style="margin-top: 10px ;position: relative ;float: left  "><span style="width: 30px ;height:20px ;position: absolute;top: -10px;left: 16px  ">添加</span></a>--%>
+                    <%--<a class="clear-to3" style="position: relative ;float: left;margin-left: 25px ;margin-top: 10px ">--%>
+                        <%--<input style="width: 30px ;height:30px ;position: absolute;top: -10px;left: 16px  " value="清空" class="input3"  onClick="" type="button">--%>
+                    <%--</a>--%>
                 </div>
                 <div class="in3">
                     <span>项目立项时间：</span>
-                    <!--<input type="date" class="time-x">-->
                     <input  type="text" style="background-color: #ffffff" class="demo-input start" placeholder="请选择日期" id="test1"  >
                     <span style="width: 40px ">-</span>
                     <input  type="text" style="text-align: center" class="demo-input end" placeholder="请选择日期" id="test2"  >
-                    <!--<input type="date" class="time-d">-->
-                    <!--<input  style="display:none;" class="time-z">-->
+
                 </div>
             </div>
             <div class="query-button" >
 
                 <a href="/bd/project/add"  style="text-align: center;line-height: 25px " class="add">新增</a>
+                <a   style="text-align: center;line-height: 25px " class="Reset">重置</a>
                 <input value="快速查询"  type="submit" class="query"/>
 
 

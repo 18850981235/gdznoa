@@ -93,4 +93,27 @@ public class MyWork {
     public String showMyCertificate() {
         return "/mc/top/myCertificate";
     }
+
+    @RequestMapping("/sd/sale/approval")
+    public String showMySale() {
+        return "/mc/top/mySale";
+    }
+
+    @RequestMapping("/pd/Affair/approval")
+    public String showMyAffair() {
+        return "/mc/top/myAffair";
+    }
+
+    @RequestMapping("/pd/Purchase/approval")
+    public String showMyPurchase() {
+        return "/mc/top/MyPurchase";
+    }
+    @RequestMapping("/ed/Engineering/approval")
+    public String showMyEngineering() {
+        return "/mc/top/myEngineering";
+    }
+
+
+
+
 }

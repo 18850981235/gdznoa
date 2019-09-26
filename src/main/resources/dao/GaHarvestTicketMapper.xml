@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.ga.GaHarvestTicketMapper">
+    <resultMap id="BaseResultMap" type="com.beans.GaHarvestTicket">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="projectid" property="projectid" jdbcType="INTEGER"/>
+        <result column="userid" property="userid" jdbcType="INTEGER"/>
+        <result column="company_name" property="companyName" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="content" property="content" jdbcType="VARCHAR"/>
+        <result column="type" property="type" jdbcType="VARCHAR"/>
+        <result column="inorout" property="inorout" jdbcType="VARCHAR"/>
+        <result column="cost" property="cost" jdbcType="DECIMAL"/>
+        <result column="createtime" property="createtime" jdbcType="TIMESTAMP"/>
+        <result column="bankaccount" property="bankaccount" jdbcType="VARCHAR"/>
+        <result column="bankname" property="bankname" jdbcType="VARCHAR"/>
+        <result column="accountname" property="accountname" jdbcType="VARCHAR"/>
+        <result column="accessory" property="accessory" jdbcType="VARCHAR"/>
+        <result column="processid" property="processid" jdbcType="INTEGER"/>
+        <result column="process_userid" property="processUserid" jdbcType="INTEGER"/>
+        <result column="process_state" property="processState" jdbcType="VARCHAR"/>
+        <result column="process_node" property="processNode" jdbcType="INTEGER"/>
+        <result column="phone" property="phone" jdbcType="VARCHAR"/>
+        <result column="contractid" property="contractid" jdbcType="INTEGER"/>
+        <result column="identifyNumber" property="identifyNumber" jdbcType="VARCHAR"/>
+        <result column="payaccount" property="payaccount" jdbcType="VARCHAR"/>
+        <result column="proceedsaccount" property="proceedsaccount" jdbcType="VARCHAR"/>
+        <association property="project" javaType="com.beans.BdProject" column="projectid"
+                     select="com.dao.bd.BdProjectMapper.getProjectById">
+        </association>
+        <association property="user" javaType="com.beans.SysUser" column="userid"
+                     select="com.dao.sys.UserMapper.getByID">
+        </association>
+    </resultMap>
+    <insert id="add">
+        insert into ga_harvest_ticket
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="projectid != null">
+                projectid,
+            </if>
+            <if test="userid != null">
+                userid,
+            </if>
+            <if test="companyName != null">
+                company_name,
+            </if>
+            <if test="name != null">
+                `name`,
+            </if>
+            <if test="content != null">
+                content,
+            </if>
+            <if test="type != null">
+                `type`,
+            </if>
+            <if test="inorout != null">
+                `inorout`,
+            </if>
+            <if test="cost != null">
+                cost,
+            </if>
+            <if test="createtime != null">
+                createtime,
+            </if>
+            <if test="bankaccount != null">
+                bankaccount,
+            </if>
+            <if test="bankname != null">
+                bankname,
+            </if>
+            <if test="accountname != null">
+                accountname,
+            </if>
+            <if test="accessory != null">
+                accessory,
+            </if>
+            <if test="processid != null">
+                processid,
+            </if>
+            <if test="processUserid != null">
+                process_userid,
+            </if>
+            <if test="processState != null">
+                process_state,
+            </if>
+            <if test="processNode != null">
+                process_node,
+            </if>
+            <if test="phone != null">
+                phone,
+            </if>
+            <if test="identifyNumber != null">
+                identifyNumber,
+            </if>
+            <if test="contractid != null">
+                contractid,
+            </if>
+            <if test="payaccount != null">
+                payaccount,
+            </if>
+            <if test="proceedsaccount != null">
+                proceedsaccount,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="projectid != null">
+                #{projectid,jdbcType=INTEGER},
+            </if>
+            <if test="userid != null">
+                #{userid,jdbcType=INTEGER},
+            </if>
+            <if test="companyName != null">
+                #{companyName,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null">
+                #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="inorout != null">
+                #{inorout,jdbcType=VARCHAR},
+            </if>
+            <if test="cost != null">
+                #{cost,jdbcType=DECIMAL},
+            </if>
+            <if test="createtime != null">
+                #{createtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="bankaccount != null">
+                #{bankaccount,jdbcType=VARCHAR},
+            </if>
+            <if test="bankname != null">
+                #{bankname,jdbcType=VARCHAR},
+            </if>
+            <if test="accountname != null">
+                #{accountname,jdbcType=VARCHAR},
+            </if>
+            <if test="accessory != null">
+                #{accessory,jdbcType=VARCHAR},
+            </if>
+            <if test="processid != null">
+                #{processid,jdbcType=INTEGER},
+            </if>
+            <if test="processUserid != null">
+                #{processUserid,jdbcType=INTEGER},
+            </if>
+            <if test="processState != null">
+                #{processState,jdbcType=VARCHAR},
+            </if>
+            <if test="processNode != null">
+                #{processNode,jdbcType=INTEGER},
+            </if>
+            <if test="phone != null">
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="identifyNumber != null">
+                #{identifyNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="contractid != null">
+                #{contractid,jdbcType=INTEGER},
+            </if>
+            <if test="payaccount != null">
+                #{payaccount,jdbcType=VARCHAR},
+            </if>
+            <if test="proceedsaccount != null">
+                #{proceedsaccount,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateById" parameterType="map">
+        update ga_harvest_ticket
+        <set>
+
+            <if test="projectid != null">
+                projectid = #{projectid,jdbcType=INTEGER},
+            </if>
+            <if test="userid != null">
+                userid = #{userid,jdbcType=INTEGER},
+            </if>
+            <if test="companyName != null">
+                company_name = #{companyName,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                `name` = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null">
+                content = #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                `type` = #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="inorout != null">
+                `inorout` = #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="cost != null">
+                cost = #{cost,jdbcType=DECIMAL},
+            </if>
+            <if test="createtime != null">
+                createtime = #{createtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="bankaccount != null">
+                bankaccount = #{bankaccount,jdbcType=VARCHAR},
+            </if>
+            <if test="bankname != null">
+                bankname = #{bankname,jdbcType=VARCHAR},
+            </if>
+            <if test="accountname != null">
+                accountname = #{accountname,jdbcType=VARCHAR},
+            </if>
+            <if test="accessory != null">
+                accessory = #{accessory,jdbcType=VARCHAR},
+            </if>
+            <if test="processid != null">
+                processid = #{processid,jdbcType=INTEGER},
+            </if>
+            <if test="processUserid != null">
+                process_userid = #{processUserid,jdbcType=INTEGER},
+            </if>
+            <if test="processState != null">
+                process_state = #{processState,jdbcType=VARCHAR},
+            </if>
+            <if test="processNode != null">
+                process_node = #{processNode,jdbcType=INTEGER},
+            </if>
+            <if test="phone != null">
+                phone = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="identifyNumber != null">
+                identifyNumber = #{identifyNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="contractid != null">
+                contractid = #{contractid,jdbcType=INTEGER},
+            </if>
+            <if test="payaccount != null">
+                payaccount=#{payaccount,jdbcType=VARCHAR},
+            </if>
+            <if test="proceedsaccount != null">
+                proceedsaccount=#{proceedsaccount,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+    <select id="getListById" resultMap="BaseResultMap">
+        select *
+        from ga_harvest_ticket
+        where id = #{id}
+    </select>
+    <select id="getList" resultMap="BaseResultMap">
+        select *
+        from ga_harvest_ticket
+        where projectid = #{projectid}
+          and `type` = #{type}
+            LIMIT #{pageIndex},#{pageSize}
+    </select>
+
+    <select id="getCount" resultType="int">
+        select COUNT(1)
+        from ga_harvest_ticket
+        where projectid = #{projectid}
+          and `type` = #{type}
+    </select>
+
+    <select id="sumCost" resultType="decimal">
+        SELECT SUM(cost)
+        FROM ga_harvest_ticket
+        where contractid = #{contractid}
+          and `type` = #{type}
+    </select>
+    <select id="sumMoney" resultType="decimal">
+        select sum(cost)
+        from ga_harvest_ticket
+        where projectid = #{projectid}
+          and `inorout` = '开票'
+    </select>
+    <select id="companyName" resultType="string">
+        select `type`
+        from ga_harvest_ticket
+        where projectid = #{projectid}
+          and `inorout` = '开票'
+            LIMIT 0,1
+    </select>
+    <resultMap id="ResultMap" type="com.beans.bankflow">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="userid" property="userid" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="payment_money" property="payment_money" jdbcType="DECIMAL"/>
+        <result column="unit" property="unit" jdbcType="VARCHAR"/>
+        <result column="type" property="type" jdbcType="VARCHAR"/>
+        <result column="matter" property="matter" jdbcType="VARCHAR"/>
+        <result column="digest" property="digest" jdbcType="VARCHAR"/>
+        <result column="bankname" property="bankname" jdbcType="VARCHAR"/>
+        <result column="bankaccount" property="bankaccount" jdbcType="VARCHAR"/>
+        <result column="createtime" property="createtime" jdbcType="TIMESTAMP"/>
+        <result column="paid" property="paid" jdbcType="DECIMAL"/>
+        <result column="ticket" property="ticket" jdbcType="DECIMAL"/>
+        <result column="content" property="content" jdbcType="VARCHAR"/>
+        <result column="inorout" property="inorout" jdbcType="VARCHAR"/>
+        <result column="cost" property="cost" jdbcType="DECIMAL"/>
+        <result column="accountname" property="accountname" jdbcType="VARCHAR"/>
+        <result column="identifyNumber" property="identifyNumber" jdbcType="VARCHAR"/>
+        <result column="payaccount" property="payaccount" jdbcType="VARCHAR"/>
+        <result column="proceedsaccount" property="proceedsaccount" jdbcType="VARCHAR"/>
+
+
+
+        <association property="user" javaType="com.beans.SysUser" column="userid"
+                     select="com.dao.sys.UserMapper.getByID">
+        </association>
+    </resultMap>
+
+
+    <select id="bankFlow"  resultMap="ResultMap">
+        SELECT   id,`name`,  `type`, company_name  AS matter, bankname,bankaccount,createtime,
+        userid,content, inorout,   cost as  payment_money,
+        accountname,   identifyNumber,proceedsaccount,payaccount
+        FROM `ga_harvest_ticket`
+        where projectid = #{projectid}
+
+        <if test="type != null">
+            and `type` = #{type}
+        </if>
+        and inorout="开票"
+    </select>
+</mapper>

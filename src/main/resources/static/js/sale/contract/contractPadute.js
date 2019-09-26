@@ -22,38 +22,40 @@ function w() {
             $("#center input").eq(1).val(data.project.client.name);
             $("#center input").eq(2).val(data.project.client.id);
 
-            $("#center input").eq(4).val(data.project.code);
-            $("#center input").eq(5).val(data.code);
+            $("#center input").eq(3).val(data.project.code);
+            $("#center input").eq(4).val(data.code);
 
             $(".department option").eq(0).text(data.dept.name);
             $(".department option").eq(0).val(data.dept.id)
 
-            $("#center input").eq(6).val(data.principalUser.name);
-            $("#center input").eq(7).val(data.principalUser.id);
+            $("#center input").eq(5).val(data.principalUser.name);
+            $("#center input").eq(6).val(data.principalUser.id);
 
-            $("#center input").eq(9).val(data.branchUseruser.name);
-            $("#center input").eq(10).val(data.branchUseruser.id);
+            $("#center input").eq(8).val(data.branchUseruser.name);
+            $("#center input").eq(9).val(data.branchUseruser.id);
 
-            $("#center input").eq(12).val(data.areaManagerUser.name);
-            $("#center input").eq(13).val(data.areaManagerUser.id);
+            $("#center input").eq(11).val(data.areaManagerUser.name);
+            $("#center input").eq(12).val(data.areaManagerUser.id);
 
             $(".invoiceType option").eq(0).val(data.invoiceType);
             $(".invoiceType option").eq(0).text(data.invoiceType);
 
-            $("#center input").eq(15).val(data.contractAmount);
-            $("#center input").eq(16).val(data.addAmount);
+            $("#center input").eq(14).val(data.contractAmount);
+            $("#center input").eq(15).val(data.addAmount);
 
             $(".addList option").eq(0).val(data.addList);
             $(".addList option").eq(0).text(data.addList);
 
-            $("#center input").eq(17).val(data.reductionAmount);
+            $("#center input").eq(16).val(data.reductionAmount);
             $(".addList option").eq(0).val(data.reductionList);
             $(".addList option").eq(0).text(data.reductionList);
 
-            $("#center input").eq(18).val(data.managementRate);
-            $("#center input").eq(19).val(data.bidiingTime);
+            $("#center input").eq(17).val(data.managementRate);
+            $("#center input").eq(18).val(data.bidiingTime);
 
-            $("#center input").eq(20).val(data.accessory);
+            $("#center input").eq(19).val(data.bank);
+            $("#center input").eq(20).val(data.bankAccount);
+            $("#center input").eq(21).val(data.accessory);
 
 
 
@@ -88,6 +90,9 @@ $(document).ready(function () {
                     var qo=$("#ap").val()
                     if(obj.id==qo){
                         $("#number").val(obj.code)
+                        $(".Eliminate-1").val(obj.client.name)
+                        $(".Eliminate-no-1").val(obj.client.id)
+
                     }
                 })
             }

@@ -48,9 +48,9 @@ public class BdProject {
   private String projectManager;
 
   private String content;
-  @JsonFormat(pattern = "yyyy-MM-dd")
-  @JSONField(format = "yyyy-MM-dd")
-  @DateTimeFormat(pattern = "yyyy-MM-dd")
+  @JsonFormat(pattern = "yyyy-MM-dd  HH:mm:ss")
+  @JSONField(format = "yyyy-MM-dd HH:mm:ss")
+  @DateTimeFormat(pattern = "yyyy-MM-dd  HH:mm:ss")
   private Date createtime;
 
   private String accessory;

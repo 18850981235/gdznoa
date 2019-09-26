@@ -190,7 +190,7 @@ layui.define(['laytpl', 'upload-mobile', 'layer-mobile', 'zepto'], function(expo
           ,'{{ d.title || d.base.title }}<span class="layim-chat-status"></span>'
           ,'{{# if(d.data){ }}'
             ,'{{# if(d.data.type === "group"){ }}'
-              ,'<i class="layui-icon layim-chat-detail" layim-event="detail">&#xe613;</i>'
+              ,'<i class="layui-icon layim-chat-detailed" layim-event="detailed">&#xe613;</i>'
             ,'{{# } }}'
           ,'{{# } }}'
         ,'</p>'

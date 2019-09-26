@@ -11,12 +11,16 @@
         <result column="state" property="state" jdbcType="VARCHAR" />
         <result column="borrow" property="borrow" jdbcType="VARCHAR" />
         <result column="security" property="security" jdbcType="INTEGER" />
-        <result column="annual_time" property="annualTime" jdbcType="VARCHAR" />
+        <result column="annual_time" property="annualTime" jdbcType="TIMESTAMP" />
+        <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
         <result column="annual_principal" property="annualPrincipal" jdbcType="INTEGER" />
+        <result column="applicant" property="applicant" jdbcType="INTEGER" />
+        <result column="applicant_time" property="applicantTime" jdbcType="TIMESTAMP" />
         <result column="filename" property="filename" jdbcType="VARCHAR" />
         <result column="watermark" property="watermark" jdbcType="VARCHAR" />
         <result column="accessory" property="accessory" jdbcType="VARCHAR" />
         <result column="processid" property="processid" jdbcType="INTEGER" />
+        <result column="process_node" property="processNode" jdbcType="INTEGER" />
         <result column="deptName" property="deptName" jdbcType="VARCHAR" />
         <result column="process_userid" property="processUserid" jdbcType="INTEGER" />
         <result column="process_state" property="processState" jdbcType="VARCHAR" />
@@ -67,8 +71,17 @@
             <if test="annualTime != null" >
                 annual_time,
             </if>
+            <if test="endTime != null" >
+                end_time,
+            </if>
             <if test="annualPrincipal != 0" >
                 annual_principal,
+            </if>
+            <if test="applicant != 0" >
+                applicant,
+            </if>
+            <if test="applicantTime != null" >
+                applicant_time,
             </if>
             <if test="filename != null" >
                 filename,
@@ -90,6 +103,9 @@
             </if>
             <if test="pdf_outtime != null" >
                 pdf_outtime,
+            </if>
+            <if test="processNode != null" >
+                process_node,
             </if>
 
         </trim>
@@ -118,11 +134,20 @@
             <if test="annualTime != null" >
                 #{annualTime},
             </if>
+            <if test="endTime != null" >
+                #{endTime},
+            </if>
             <if test="security != 0" >
                 #{security},
             </if>
             <if test="annualPrincipal != 0" >
                 #{annualPrincipal},
+            </if>
+            <if test="applicant != 0" >
+                #{applicant},
+            </if>
+            <if test="applicantTime != null" >
+                #{applicantTime},
             </if>
             <if test="filename != null" >
                 #{filename},
@@ -144,6 +169,9 @@
             </if>
             <if test="pdf_outtime != null" >
                 #{pdf_outtime},
+            </if>
+            <if test="processNode != null" >
+                #{processNode},
             </if>
         </trim>
     </insert>
@@ -178,8 +206,17 @@
             <if test="annualTime != null">
                 annual_Time = #{annualTime},
             </if>
+            <if test="endTime != null">
+                end_Time = #{endTime},
+            </if>
             <if test="annualPrincipal != 0">
                 annual_principal = #{annualPrincipal},
+            </if>
+            <if test="applicant != 0">
+                applicant = #{applicant},
+            </if>
+            <if test="applicantTime != null">
+                applicant_time = #{applicantTime},
             </if>
             <if test="filename != null">
                 filename = #{filename},
@@ -201,6 +238,9 @@
             </if>
             <if test="pdf_outtime != null">
                 pdf_outtime = #{pdf_outtime},
+            </if>
+            <if test="processNode != null">
+                process_node = #{processNode},
             </if>
         </set>
         where id=#{id}

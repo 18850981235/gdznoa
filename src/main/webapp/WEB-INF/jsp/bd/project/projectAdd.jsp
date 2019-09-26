@@ -35,6 +35,7 @@
     <script src="<%=basePath%>/js/public/region.js" type="text/javascript"></script>
     <script src="<%=basePath%>/js/public/department.js" type="text/javascript"></script>
     <script src="<%=basePath%>/js/public/pipelineNumber.js" type="text/javascript"></script>
+    <script src="<%=basePath%>/js/bd/project/projectAdd.js" type="text/javascript"></script>
 </head>
 <body>
 
@@ -142,7 +143,7 @@
         <form  method="post" action="/bd/project/addProject" enctype="multipart/form-data">
             <table border="1">
                 <tr style="height: 45px ">
-                    <td colspan="4" style="text-align: center;background-color: #efefef">项目立项</td>
+                    <td colspan="4" style="text-align: center;background-color: #efefef">项目立项管理申请</td>
                 </tr>
                 <tr style="height:45px ">
                     <td class="Color" style="width: 150px ">项目编号</td>
@@ -158,7 +159,7 @@
                     <td class="Color">项目类别</td>
                     <td>
                         <%--<a  onclick="+xadmin.add_tab('我的工作','<%=basePath%>/showMyWork')"><b>aaaaaaaaa</b></a>--%>
-                        <select  style="height: 25px " required required name="type">
+                        <select  style="height: 35px;width: 200px  " required required name="type">
                             <option value="">请选择</option>
                             <option >政府公建</option>
                             <option  >央企项目</option>
@@ -175,44 +176,46 @@
                 <tr style="height: 45px ">
                     <td class="Color">项目阶段</td>
                     <td>
-                        <select style="height: 25px " name="stage">
+                        <select style="height: 35px;width: 200px  "  name="stage">
                             <option value="">请选择</option>
                             <option >前期业务阶段</option>
-                            <option >签约施工阶段</option>
+                            <option >签约实施阶段</option>
                             <option >售后服务阶段</option>
                             <option>合约完成结束</option>
                             <option >未中标终止</option>
+                            <option>未参与终止</option>
                         </select>
                     </td>
                     <td class="Color">项目预算金额</td>
-                    <td><input style="width: 250px "  name="budget" oninput="value=value.replace(/[^\d]/g,'')"></td>
+                    <td><input style="width: 250px "  name="budget" oninput="value=value.replace(/[^\d]/g,'')" placeholder="元"></td>
 
                 </tr>
                 <tr style="height: 45px ">
                     <td class="Color">项目资金来源</td>
                     <td>
-                        <select style="height: 25px " name="capitalSource">
+                        <select style="height: 35px;width: 200px  " name="capitalSource">
                             <option value="">请选择</option>
                             <option >财政预算投资</option>
                             <option >自筹资金投资</option>
                             <option >银行贷款投资</option>
-                            <option >利用外资</option>
+                            <option >财政分期投资</option>
                         </select>
                     </td>
 
                     <td class="Color">项目招标方式</td>
                     <td>
-                        <select style="height: 25px " name="biddingType">
+                        <select style="height: 35px;width: 200px  "  name="biddingType">
                             <option value="">请选择</option>
                             <option value="公开招标">公开招标</option>
                             <option value="邀请招标">邀请招标</option>
                             <option value="涉密招标">涉密招标</option>
+                            <option value="直接分包">直接分包</option>
                         </select>
                     </td>
 
                 </tr>
                 <tr style="height: 45px ">
-                    <td class="Color">项目负责人</td>
+                    <td class="Color">业务负责人</td>
                     <td >
                         <input class="Eliminate" readonly>
                         <input style="display: none" class="Eliminate-no" name="principal">
@@ -221,7 +224,7 @@
                             <input value="清空" class="input"  onClick="" type="button">
                         </a>
                     </td>
-                    <td class="Color">项目单位名称</td>
+                    <td class="Color">客户单位名称</td>
                     <td>
                         <input class="Eliminate-1" readonly required>
                         <input style="display: none" class="Eliminate-no-1" name="clientid">
@@ -230,30 +233,33 @@
                             <input value="清空" class="input1"  onClick="" type="button">
                         </a>
                     </td>
-
                 </tr>
                 <tr style="height: 45px ">
                     <td class="Color">区域负责人</td>
                     <td>
-                        <input class="Eliminate-3" readonly required>
-                        <input style="display: none" class="Eliminate-no-3" name="areaManager">
-                        <a target="_blank "  class="add-to3">添加</a>
-                        <a class="clear-to3" >
-                            <input value="清空" class="input3"  onClick="" type="button">
-                        </a>
+                        <select class="department" style="height: 35px;width: 200px;text-align: center  "  name="areaManager">
+                            <option value="">请选择</option>
+                        </select>
                     </td>
 
                     <td class="Color">所属机构</td>
                     <td>
-                        <select class="department" style="height: 25px " name="deptid">
-                            <option value="">请选择</option>
-                        </select>
+                        <input class="Eliminate-3" readonly required>
+                        <input style="display: none" class="Eliminate-no-3" name="deptid">
+                        <a target="_blank "  class="add-to3">添加</a>
+                        <a class="clear-to3" >
+                            <input value="清空" class="input3"  onClick="" type="button">
+                        </a>
+
+                        <%--<select class="department" style="height: 25px " name="deptid">--%>
+                            <%--<option value="">请选择</option>--%>
+                        <%--</select>--%>
                     </td>
 
                 </tr>
                 <tr style="height: 45px ">
                     <td class="Color">项目立项时间</td>
-                    <td ><input  type="text" class="demo-input" placeholder="请选择日期" id="test1"  name="createtime"></td>
+                    <td ><input  type="text" class="demo-input" placeholder="请选择日期" id="test1"  name="createtime" readonly></td>
 
                     <!--<input type="text" class="demo-input" placeholder="请选择日期" id="test1">-->
                     <td class="Color">预计项目投标时间</td>
@@ -262,34 +268,20 @@
                     </td>
 
                 </tr>
-                <!--<tr style="height: 45px ">-->
-
-                <!--<td>项目业务情况</td>-->
-                <!--<td colspan="3">-->
-                <!--<input style="width: 750px ">-->
-                <!--</td>-->
-                <!--</tr>-->
-
-                <!--<tr style="height: 45px ">-->
-                <!--<td>项目查看者</td>-->
-                <!--<td colspan="3" >-->
-                <!--<textarea class="eliminate-2"  readonly required  style="width: 400px "></textarea>-->
-                <!--<input style="display: none" class="eliminate-no-2"  name="examine">-->
-                <!--<a target="_blank "  class="add-to2">添加</a>-->
-                <!--<a class="clear-to2" >-->
-                <!--<input value="清空" class="input2"  onClick="" type="button">-->
-                <!--</a>-->
-                <!--</td>-->
-
-                <!--</tr>-->
                 <tr style="height: 45px ">
-                    <td class="Color">项目描述</td>
+                    <td class="Color">项目立项申请说明与分析</td>
                     <td colspan="3">
                         <textarea name="content" style="width: 750px;height: 43px"> </textarea>
                     </td>
                 </tr>
                 <tr style="height: 45px ">
-                    <td class="Color">添加附件</td>
+                    <td class="Color">项目月进度情况</td>
+                    <td colspan="3">
+                        <textarea name="" style="width: 750px;height: 43px"> </textarea>
+                    </td>
+                </tr>
+                <tr style="height: 45px ">
+                    <td class="Color">项目资料</td>
                     <td colspan="3">
                         <input type="file" name="file">
                     </td>
@@ -303,11 +295,12 @@
 
 </div>
 <script type="text/javascript">
-    laydate.render({
-        elem: '#test1', //指定元素
-        event: 'click',
-        format: 'yyyy-MM-dd'
-    });
+    
+    // laydate.render({
+    //     elem: '#test1', //指定元素
+    //     event: 'click',
+    //     format: 'yyyy-MM-dd'
+    // });
     laydate.render({
         elem: '#test2', //指定元素
         event: 'click',

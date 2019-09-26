@@ -4,7 +4,7 @@
 $.ajax({
     type:"post",
     dataType:"json",
-    url:"http://192.168.1.236:8080/sd/SdSalesContract/getProject",
+    url:"/sd/SdSalesContract/getProject",
     success:function (data) {
         $.each(data,function (index,obj) {
             var html="";
@@ -20,7 +20,7 @@ $(document).ready(function () {
     // $.ajax({
     //     type:"post",
     //     dataType:"json",
-    //     url:"http://192.168.1.236:8080/sd/Inventory/getSupplierTrademark",
+    //     url:"/sd/Inventory/getSupplierTrademark",
     //     success:function (data) {
     //         $.each(data,function (index,obj) {
     //             var html="";
@@ -32,7 +32,7 @@ $(document).ready(function () {
     $.ajax({
         type:"post",
         dataType:"json",
-        url:"http://192.168.1.236:8080/sd/Inventory/getallsystem",
+        url:"/sd/Inventory/getallsystem",
         success:function (data) {
             $.each(data,function (index,obj) {
                 var html="";
@@ -47,7 +47,7 @@ $(document).ready(function () {
     // $.ajax({
     //     type:"post",
     //     dataType:"json",
-    //     url:"http://192.168.1.236:8080/sd/Inventory/getContractByPid",
+    //     url:"/sd/Inventory/getContractByPid",
     //     success:function (data) {
     //         $.each(data,function (index,obj) {
     //             var html="";
@@ -66,7 +66,7 @@ $(document).ready(function () {
     // $.ajax({
     //     type:"post",
     //     dataType:"json",
-    //     url:"http://192.168.1.236:8080/sd/Inventory/Excelto",
+    //     url:"/sd/Inventory/Excelto",
     //     data:formData,
     //     cache: false,
     //     processData: false,
@@ -87,7 +87,7 @@ $(document).ready(function () {
     //     $.ajax({
     //         type:"post",
     //         dataType:"json",
-    //         url:"http://192.168.1.236:8080/sd/Inventory/addContractInventory",
+    //         url:"/sd/Inventory/addContractInventory",
     //         data:{"projectId":ap,"system":systemId,"type":typpe},
     //         cache: false,
     //         processData: false,
@@ -98,7 +98,7 @@ $(document).ready(function () {
     //                 // $.ajax({
     //                 //     type:"post",
     //                 //     dataType:"json",
-    //                 //     url:"http://192.168.1.236:8080/sd/Inventory/Excelto",
+    //                 //     url:"/sd/Inventory/Excelto",
     //                 //     data:{"file":File},
     //                 //     success:function (data1) {
     //                 //         console.log(2)
@@ -142,9 +142,10 @@ $(document).ready(function () {
 
     $("#upfile").click(function () {
         var formData = new FormData($('#on')[0]);
+
         $.ajax({
             type: 'post',
-            url: "http://192.168.1.236:8080/sd/Inventory/addContractInventory",
+            url: "/sd/Inventory/addContractInventory",
             data: formData,
             dataType:"json",
             cache: false,
@@ -152,11 +153,40 @@ $(document).ready(function () {
             contentType: false,
             success:function (data) {
                 $("#id").val(data.id)
-                $.each(data.List,function (index,obj) {
                 var html="";
+                // <tr class="huo" style="height: 40px;display:none; ">
+                //     <td style="width: 40px; ">serialnum</td>
+                //     <td style="width: 130px; ">code</td>
+                //     <td style="width: 131px;">name</td>
+                //     <td style="width: 100px; ">model</td>
+                //     <td style="width: 100px; ">parameter</td>
+                //     <td style="width: 150px;padding: 3px">trademark</td>
+                //     <td style="width: 100px; ">unit</td>
+                //     <td style="width: 100px ">num</td>
+                //     <td style="width: 100px; ">unitCost</td>
+                //     <td style="width: 100px; ">subtotal</td>
+                //     <td style="width: 150px; ">remarks</td>
+                //     </tr>
+                html+='<tr class="huo" style="height: 40px;display:none; ">';
+                html+=' <td style="width: 40px; ">serialnum</td>';
+                html+='<td style="width: 130px; ">code</td>';
+                html+='<td style="width: 131px;">name</td>';
+                html+='<td style="width: 100px; ">model</td>';
+                html+='<td style="width: 100px; ">parameter</td>';
+                html+='<td style="width:150px;padding:3px">trademark</td>';
+                html+='<td style="width: 100px; ">unit</td>';
+                html+='<td style="width: 100px ">num</td>';
+                html+='<td style="width: 100px; ">unitCost</td>';
+                html+='<td style="width: 100px; ">subtotal</td>';
+                html+='<td style="width: 150px; ">remarks</td>';
+                html+='</tr>';
+                $("#con").append(html);//append() 方法在被选元素的结尾插入指定内容。//prepend()方法在被选元素的开头插入指定内容
+                $.each(data.List,function (index,obj) {
+                    var html="";
                 html+='<tr class="huo" style="height: 40px;text-align: center">';
-                html+='<td style="width: 150px; ">'+obj.编号+'</td>';
-                html+='<td style="width: 151px;">'+obj.名称+'</td>';
+                    html+=' <td style="width: 40px; ">'+obj.序号+'</td>';
+                html+='<td style="width: 130px; ">'+obj.编号+'</td>';
+                html+='<td style="width: 131px;">'+obj.名称+'</td>';
                 html+='<td style="width: 100px; ">'+obj.规格型号+'</td>';
                 html+='<td style="width: 100px; ">'+obj.技术参数+'</td>';
                 html+='<td style="width: 150px;padding:3px">'+obj.品牌名称+'</td>';
@@ -167,31 +197,52 @@ $(document).ready(function () {
                 html+='<td style="width: 150px; ">'+obj.备注+'</td>';
                 html+='</tr>';
                 $("#con").append(html);//append() 方法在被选元素的结尾插入指定内容。//prepend()方法在被选元素的开头插入指定内容
-                })
+                });
+
             }
         })
     });
+
+    $("#dian").click(function () {
+        //计算总和
+        var vues =0;
+        var len=$('#con tr:not(:first)').length;
+        for(var i=1;i<len+1;i++){
+
+            var vue=$('#con tr').eq(i).find("td").eq(9).text();
+
+            vues += Number(vue);
+
+        }
+        $("#heji").val(vues)
+    })
     $(document).on("click","#ok",function () {
         var co=$("#id").val();
+        var total=$("#heji").val()
         var titles = $("#con").find("tr:first td");  //获得表头td数组
         //遍历非表头的，tr、td...拼装json
-        var json = "{" +
-            "\"" + "list" + "\"" + ":" + "[" + $("#con").find("tr:not(:first)").map(function(i, e) {
+        var json = "{" + "\"" + "list" + "\"" + ":" + "[" + $("#con").find("tr:not(:first)").map(function(i, e) {
                 return "{" + $(e).children("td").map(function(j, el) {
                         return "\""+$(titles[j]).html()+"\"" + ":" + "\"" + $(el).html() + "\"";
                     }).get().join(",") + "}";
-            }).get().join(",")+ "]" +","+ "\""+"contractid"+"\"" + ":" + co +"}";
+            }).get().join(",")+ "]" +","+ "\""+"contractid"+"\"" + ":" + co+","+ "\""+"total"+"\"" + ":" + total +"}";
 
-        console.log(json);
+        // console.log(json);
         $.ajax({
             type:"post",
-            dataType:"json",
+            dataType:"text",
             contentType:"application/json;charset=UTF-8",
-            url:"http://192.168.1.236:8080/sd/Inventory/addInvenbywight",
+            url:"/sd/Inventory/addInvenbywight",
             data:json,
             // "contractid":id,
-            success:function(data1){
-            console.log(data1)
+            success:function(data){
+
+           if(data=="yes"){
+               alert("添加成功！");
+               window.location.href="/sd/salesinventory/query";
+           }else{
+               alert("添加失败！")
+           }
 
             }
         });
